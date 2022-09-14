@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },
+  {
+    path: 'home-before-login',
+    loadChildren: () => import('./home-before-login/home-before-login.module').then( m => m.HomeBeforeLoginPageModule)
   }
 ];
 
