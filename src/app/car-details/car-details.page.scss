@@ -1,0 +1,67 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 16px 15px;
+}
+.bgtoolbar{
+    --background: #FCF6FF;
+}
+.title{
+    font-size: 20px;
+    font-weight: 700;
+    color: #0F172A;
+    font-family: 'Poppins', sans-serif;
+}
+.wrapper{
+    padding:5px 20px 20px;    
+}
+.name_price_box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FBFBFB;
+    margin-top: 10px;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+    padding: 11px 12px 10px;
+    border-radius: 5px;
+}
+.car_name{
+    font-size: 24px;
+    font-weight: 700;
+    color: #0F172A;
+    font-family: "Poppins", sans-serif;
+}
+.price_val{
+    color: #8000FF;
+    font-family: "Urbanist", sans-serif;
+    font-weight: 600;
+}
+.per_hour{
+    margin-left: 8px;
+    color: black;
+    font-family: "Urbanist", sans-serif;
+    font-weight: 500;
+}
+.description_box{
+    background: #FBFBFB;
+    margin-top: 10px;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+    padding: 11px 12px 10px;
+    border-radius: 5px;
+}
+.label_description{
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+    font-family: "Poppins", sans-serif;
+}
+.description{
+    font-size: 12px;
+    font-weight: 400;
+    color: black;
+    font-family: "Poppins", sans-serif;
+    height: auto;
+    max-height: 90px;
+    overflow: hidden;
+}

@@ -9,7 +9,7 @@
          <img src="assets/images/icons/bell.svg" alt="">
        </div>
        <div style="display: flex;">
-         <img src="assets/images/icons/filter.svg" alt="">
+         <img (click)="gotoFilter()" src="assets/images/icons/filter.svg" alt="">
        </div>
       </div>
     </div>
@@ -21,45 +21,61 @@
     
     <div class="search_box">
       <div style="width: 100%;">
-        <ion-input placeholder="Search for Cars"></ion-input>
+        <ion-input class="input_field" placeholder="Search for Cars"></ion-input>
       </div>
       <div style="display: flex;"><img src="assets/images/icons/search_input.svg" alt=""></div>
     </div>
-    
-    <div class="our_items" >
-      <div class="items_label">What are you looking for?</div>
-      <div class="items_box" >
-        <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem(1)">
-          <img src="assets/images/icons/car_grey.svg" alt="" *ngIf="item1 == false">
-          <img src="assets/images/icons/car_white.svg" alt="" *ngIf="item1 == true">
-          <div class="cars_label" [class.fontActive]="item1 == true">All Cars</div>
-        </div>
-        <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem(2)">
-          <img src="assets/images/icons/sports_car_grey.svg" alt="" *ngIf="item2 == false">
-          <img src="assets/images/icons/sports_car_white.svg" alt="" *ngIf="item2 == true">
-          <div class="cars_label" [class.fontActive]="item2 == true">Sports cars</div>
-        </div>
-        <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem(3)">
-          <img src="assets/images/icons/luxury_car_grey.svg" alt="" *ngIf="item3 == false">
-          <img src="assets/images/icons/luxury_car_white.svg" alt="" *ngIf="item3 == true">
-          <div class="cars_label" [class.fontActive]="item3 == true">Luxury cars</div>
-        </div>
-        <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem(4)">
-          <img src="assets/images/icons/taxi_grey.svg" alt="" *ngIf="item4 == false">
-          <img src="assets/images/icons/taxi_white.svg" alt="" *ngIf="item4 == true">
-          <div class="cars_label" [class.fontActive]="item4 == true">Pickup</div>
-        </div>
-        <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem(5)">
-          <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
-          <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">
-          <div class="cars_label" [class.fontActive]="item5 == true">Suv's</div>
-        </div>
-      </div>
-    </div>
 
-    <div class="items_label" style="margin-top: 14px;">Top Rented</div>
-    <ion-slides pager="true" [options]="slideOpts" [slidesPerView]="1.125">
-      <ion-slide *ngFor="let pickup of pickups;" >
+  </div>
+      <div class="items_label">What are you looking for?</div>
+      <div style="padding-left: 11px; margin-top:5px">
+        <ion-slides pager="false" [options]="slideOpts2">
+          <ion-slide class="categories">
+            <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem(1)">
+              <img src="assets/images/icons/car_grey.svg" alt="" *ngIf="item1 == false">
+              <img src="assets/images/icons/car_white.svg" alt="" *ngIf="item1 == true">
+              <div class="cars_label" [class.fontActive]="item1 == true">All Cars</div>
+            </div>
+          </ion-slide>
+          <ion-slide class="categories">
+            <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem(2)">
+              <img src="assets/images/icons/sports_car_grey.svg" alt="" *ngIf="item2 == false">
+              <img src="assets/images/icons/sports_car_white.svg" alt="" *ngIf="item2 == true">
+              <div class="cars_label" [class.fontActive]="item2 == true">Sports cars</div>
+            </div>
+          </ion-slide>
+          <ion-slide class="categories">
+            <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem(3)">
+              <img src="assets/images/icons/luxury_car_grey.svg" alt="" *ngIf="item3 == false">
+              <img src="assets/images/icons/luxury_car_white.svg" alt="" *ngIf="item3 == true">
+              <div class="cars_label" [class.fontActive]="item3 == true">Luxury cars</div>
+            </div>
+          </ion-slide>
+          <ion-slide class="categories">
+            <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem(4)">
+              <img src="assets/images/icons/taxi_grey.svg" alt="" *ngIf="item4 == false">
+              <img src="assets/images/icons/taxi_white.svg" alt="" *ngIf="item4 == true">
+              <div class="cars_label" [class.fontActive]="item4 == true">Pickup</div>
+            </div>
+          </ion-slide>
+          <ion-slide class="categories" style="padding-right: 9px;">
+            <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem(5)">
+              <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
+              <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">
+              <div class="cars_label" [class.fontActive]="item5 == true">Suv's</div>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+      
+      <!-- <div class="items_box">
+      </div> -->
+  
+
+  <div class="items_wrapper">
+    <div class="items_label" style="margin-top: 5px;padding-left: 3px;">Top Rented</div>
+    <ion-slides pager="false" [options]="slideOpts">
+      <ion-slide *ngFor="let pickup of pickups;" style="width: 48%; height: 100%;">
         <ion-card class="card">
           <img style="width: 100%;" src="{{pickup.img}}" alt="">
           <div style="padding: 5px 7px 7.5px 8px;">
@@ -87,23 +103,23 @@
         </ion-card>
       </ion-slide>
     </ion-slides>
-      
-
-    
-    
-
 
   </div>
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-toolbar class="bgtoolbar">
-    <div style="text-align: center;">
-      <div>Invite Friends</div>
-      <div>And spread the word</div>
+    <div style="margin: 15px 0px 15px;">
+      <div style="text-align: center;">
+        <div class="invite_label">Invite Friends</div>
+        <div class="invite_label" style="font-weight: 400;">And spread the word</div>
+      </div>
+      <div style="text-align: center;">
+        <ion-button class="invite_btn">
+          <span class="btn-text">Invite</span>
+        </ion-button>
+      </div>
     </div>
-    <div style="text-align: center;">
-      <ion-button>Invite</ion-button>
-    </div>
+    
     
   </ion-toolbar>
 </ion-footer>

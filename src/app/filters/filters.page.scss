@@ -1,0 +1,108 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 16px 15px;
+}
+.bgtoolbar{
+    --background: #FCF6FF;
+}
+.title{
+    font-size: 20px;
+    font-weight: 700;
+    color: #0F172A;
+    font-family: 'Poppins', sans-serif;
+}
+.apply_label{
+    font-size: 14px;
+    font-weight: 600;
+    color: #0F172A;
+    font-family: 'Poppins', sans-serif;
+    margin-right: 5px;
+}
+.wrapper{
+    padding:20px;
+}
+.date_alignment{
+    display: flex;
+    justify-content: center;
+}
+.date_box{
+    --background: #FBFBFB;
+    border-radius: 5px;
+    border: 1px solid white;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+}
+.price_box{
+    padding: 10px 12.5px;
+    background: #FBFBFB;
+    border-radius: 5px;
+    border: 1px solid white;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+    // width: 95%;
+    margin: 15px auto 5%;
+}
+.price_label{
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}
+.per_hour_span{
+    font-size: 10px;
+    font-weight: 500;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}
+hr{
+    border-bottom: 1px solid #EFEFEF;
+}
+.ion_range{
+    --bar-height: 4px;
+    --bar-border-radius: 5.5px;
+    --bar-background-active: #8000FF;
+}
+.md .ion_range{
+    --knob-background: #8000FF;
+}
+.prices_div{
+    display: flex;
+    justify-content: space-between;
+    width: 62%;
+    margin: 0px auto;
+}
+.price {
+    color: #8D8D8D;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+}
+
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 896px) { 
+    .price_box{
+        padding: 10px 12.5px;
+        background: #FBFBFB;
+        border-radius: 5px;
+        border: 1px solid white;
+        box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+        width: 95%;
+        margin: 15px auto 5%;
+    }
+
+}
+@media only screen 
+  and (min-device-width: 412px) 
+  and (max-device-width: 914px) { 
+    .price_box{
+        padding: 10px 12.5px;
+        background: #FBFBFB;
+        border-radius: 5px;
+        border: 1px solid white;
+        box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+        width: 95%;
+        margin: 15px auto 5%;
+    }
+
+}

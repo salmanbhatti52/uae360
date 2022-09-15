@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home-before-login',
   templateUrl: './home-before-login.page.html',
@@ -15,6 +15,14 @@ export class HomeBeforeLoginPage implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 400,
+    slidesPerView: 2.1,
+    spaceBetween : 5,
+  };
+  slideOpts2 = {
+    initialSlide: 0,
+    speed: 400,
+    slidesPerView: 4.4,
+    // spaceBetween : 9,
   };
   pickups = [
     {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
@@ -23,11 +31,13 @@ export class HomeBeforeLoginPage implements OnInit {
     {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
     {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
   ]
-  constructor() { }
+  constructor(public router:Router) { }
 
   ngOnInit() {
   }
-
+  gotoFilter(){
+    this.router.navigate(['/filters']);
+  }
   selectItem(itemVal){
     if(itemVal == 1){
       this.item1 = true;

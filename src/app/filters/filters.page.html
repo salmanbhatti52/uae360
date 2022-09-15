@@ -1,0 +1,32 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bgtoolbar">
+    <div class="header">
+      <img (click)="goBack()" style="padding-right: 47.3px;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="title">Filter</div>
+      <div style="display: flex">
+        <div class="apply_label" >Apply</div>
+        <img src="assets/images/icons/apply_mark.svg" alt="">
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <div class="date_alignment">
+      <ion-datetime class="date_box" presentation="date"></ion-datetime> 
+    </div>
+    <div class="price_box">
+      <div><span class="price_label">Price</span><span class="per_hour_span">/hour</span></div>
+      <hr>
+      <ion-range class="ion_range" 
+        min="0" max="100" [dualKnobs]="true" 
+        [value]="{ lower: 20, upper: 80 }">
+      </ion-range>
+      <div class="prices_div">
+        <div class="price">$10</div>
+        <div class="price">$250</div>
+      </div>
+    </div>
+  </div>
+</ion-content>
