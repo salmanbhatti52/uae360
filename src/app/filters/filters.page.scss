@@ -1,8 +1,20 @@
+ion-header{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FCF6FF !important;
+}
+ion-content{
+    font-family: 'Poppins', sans-serif;
+    --background:#FCF6FF !important;
+}
+ion-footer{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FCF6FF !important;
+}
 .header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 60px 16px 15px;
+    padding: 30px 16px 15px;
 }
 .bgtoolbar{
     --background: #FCF6FF;
@@ -21,7 +33,10 @@
     margin-right: 5px;
 }
 .wrapper{
-    padding:20px;
+    padding:16px;
+}
+ion-datetime {
+    color: #464646 !important;
 }
 .date_alignment{
     display: flex;
@@ -78,31 +93,31 @@ hr{
     font-family: 'Poppins', sans-serif;
 }
 
-@media only screen 
-  and (min-device-width: 414px) 
-  and (max-device-width: 896px) { 
-    .price_box{
-        padding: 10px 12.5px;
-        background: #FBFBFB;
-        border-radius: 5px;
-        border: 1px solid white;
-        box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
-        width: 95%;
-        margin: 15px auto 5%;
-    }
+// @media only screen 
+//   and (min-device-width: 414px) 
+//   and (max-device-width: 896px) { 
+//     .price_box{
+//         padding: 10px 12.5px;
+//         background: #FBFBFB;
+//         border-radius: 5px;
+//         border: 1px solid white;
+//         box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+//         width: 95%;
+//         margin: 15px auto 5%;
+//     }
 
-}
-@media only screen 
-  and (min-device-width: 412px) 
-  and (max-device-width: 914px) { 
-    .price_box{
-        padding: 10px 12.5px;
-        background: #FBFBFB;
-        border-radius: 5px;
-        border: 1px solid white;
-        box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
-        width: 95%;
-        margin: 15px auto 5%;
-    }
+// }
+// @media only screen 
+//   and (min-device-width: 412px) 
+//   and (max-device-width: 914px) { 
+//     .price_box{
+//         padding: 10px 12.5px;
+//         background: #FBFBFB;
+//         border-radius: 5px;
+//         border: 1px solid white;
+//         box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+//         width: 95%;
+//         margin: 15px auto 5%;
+//     }
 
-}
+// }

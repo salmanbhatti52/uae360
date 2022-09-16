@@ -15,8 +15,8 @@ export class HomeBeforeLoginPage implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 400,
-    slidesPerView: 2.1,
-    spaceBetween : 5,
+    slidesPerView: 2.17,
+    spaceBetween : 6,
   };
   slideOpts2 = {
     initialSlide: 0,
@@ -37,6 +37,9 @@ export class HomeBeforeLoginPage implements OnInit {
   }
   gotoFilter(){
     this.router.navigate(['/filters']);
+  }
+  gotoCarDetails(){
+    this.router.navigate(['/car-details']);
   }
   selectItem(itemVal){
     if(itemVal == 1){

@@ -1,8 +1,20 @@
+ion-header{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FCF6FF !important;
+}
+ion-content{
+    font-family: 'Poppins', sans-serif;
+    --background:#FCF6FF !important;
+}
+ion-footer{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FCF6FF !important;
+}
 .header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 60px 16px 15px;
+    padding: 30px 16px 15px;
 }
 .bgtoolbar{
     --background: #FCF6FF;
@@ -14,7 +26,7 @@
     font-family: 'Poppins', sans-serif;
 }
 .wrapper{
-    padding:5px 20px 20px;    
+    padding:5px 16px 20px;    
 }
 .name_price_box{
     display: flex;
@@ -43,20 +55,21 @@
     font-family: "Urbanist", sans-serif;
     font-weight: 500;
 }
-.description_box{
+.box_styling{
     background: #FBFBFB;
     margin-top: 10px;
     box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
     padding: 11px 12px 10px;
     border-radius: 5px;
 }
-.label_description{
+.box_heading{
     font-size: 14px;
     font-weight: 700;
     color: black;
     font-family: "Poppins", sans-serif;
 }
-.description{
+.box_description{
+    margin-top: 7px;
     font-size: 12px;
     font-weight: 400;
     color: black;
@@ -64,4 +77,38 @@
     height: auto;
     max-height: 90px;
     overflow: hidden;
+}
+.box_sub_heading{
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #8000FF;
+    font-family: "Poppins", sans-serif;
+}
+.inner_box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.star_margin{
+    margin-right: 3px;
+}
+.trips_label{
+    font-size: 12px;
+    font-weight: 600;
+    color: #0F172A;
+    font-family: "Poppins", sans-serif;
+}
+.invite_btn{
+    --background:#8000FF;
+    --border-radius:0px;
+    width:65%;
+    height: 44px;
+    margin-top: 9px;
+}
+.btn-text{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    font-family: 'Poppins', sans-serif;
 }

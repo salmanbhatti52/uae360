@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bgtoolbar">
+    <div class="header">
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="app_title">360UAE</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <div class="creat_account_msg">Create Your New Account</div>
+
+    <div class="profile_div">
+      <img src="assets/images/icons/profile_logo.svg" alt="">
+    </div>
+
+    <div>
+      <div class="inputs_label">Username</div>
+      <ion-input class="input_box" (ionInput)="activate('username')" [class.active_input_box]="activateUserNameField==true" placeholder="Username" type="text"></ion-input>
+      <div class="inputs_label">Mobile number</div>
+      <ion-input class="input_box" (ionInput)="activate('mobileNumber')" [class.active_input_box]="activateUserNameField==true" placeholder="Mobile number" type="number"></ion-input>
+      <div class="inputs_label">Email</div>
+      <ion-input class="input_box" (ionInput)="activate('email')" [class.active_input_box]="activateEmailField==true" placeholder="rose.matthews@gmail.com" type="email"></ion-input>
+      <div class="inputs_label" >Password</div>
+      <div class="password_box" [class.active_input_box]="activatePasswordField==true">
+        <ion-input class="password_input" (ionInput)="activate('pwd')"  placeholder="......." type="{{getType}}"></ion-input>
+        <ion-icon style="color: #B0B0B0;" name="eye" *ngIf="showPassword==false" (click)="toggleGetType()"></ion-icon>
+        <ion-icon style="color: #B0B0B0;" name="eye-off" *ngIf="showPassword==true" (click)="toggleGetType()"></ion-icon>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

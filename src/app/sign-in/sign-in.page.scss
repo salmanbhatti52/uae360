@@ -1,0 +1,153 @@
+ion-header{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+ion-content{
+    font-family: 'Poppins', sans-serif;
+    --background:#FBFBFB !important;
+}
+ion-footer{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+.header{
+    padding: 30px 16px 15px;
+}
+.bgtoolbar{
+    --background: #FBFBFB;
+}
+.wrapper{
+    padding:15px 16px 20px;
+}
+.app_title{
+    font-size: 35px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: #8000FF;
+}
+.welcome_msg{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: #0F172A;
+}
+.login_label{
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    color: #B0B0B0;
+}
+.inputs_label{
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    color: #7E7E7E;
+}
+.input_box{
+    margin-top: 3.8px;
+    border: 1px solid #EFEFEF;
+    --background: #FBFBFB;
+    --placeholder-color: #8D8D8D;
+    font-family: 'Poppins',sans-serif;
+    --placeholder-font-weight: 400;
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+    --padding-start: 15px;
+    --padding-end: 10px;
+    height: 48px;
+}
+.password_box{
+    display: flex;
+    align-items: center;
+    margin-top: 3.8px;
+    border: 1px solid #EFEFEF;
+    padding: 0px 16px 0px 8px;
+    height: 48px;
+}
+.password_input{
+    --background: #FBFBFB;
+    font-family: 'Poppins',sans-serif;
+    --placeholder-color: #8D8D8D;
+    --placeholder-font-weight: 400;
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+    --padding-start: 8px;
+}
+.active_input_box{
+    border: 1px solid #8000FF;
+}
+.remerber_forgot_labels{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+.checkbox{
+    margin-right: 5px;
+    --border-color: #8000FF;
+    height: 16px;
+    width: 16px;
+}
+.rem_fg_lablel{
+    font-family: 'Poppins',sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #7E7E7E;
+}
+.login_button{
+    --border-radius: 0px;
+    --background: #8000FF;
+    height: 48px;
+    width: 100%;
+    margin: 45px auto 0px;
+}
+.btn_text{
+    font-family: 'Poppins',sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    text-transform: capitalize !important;
+}
+.or_choice{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 23px auto 0px;
+}
+hr{
+    border-bottom: 1px solid #0F172A;
+    width: 35%;
+}
+.or_label{
+    font-family: 'Poppins',sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #0F172A;
+    text-transform: uppercase;
+}
+.fb_gmail_box{
+    display: flex;
+    width: 75%;
+    margin: 0px auto;
+    justify-content: space-between;
+    margin-top: 20px;
+    align-items: center;
+}
+.fb_gmail_btns{
+    --border-radius: 0px;
+    height: 48px;
+    margin-top: 0px;
+    width: 45%;
+}
+.last_div{
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Poppins',sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #0F172A;
+}
+
+

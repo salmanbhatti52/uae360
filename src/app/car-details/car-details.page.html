@@ -12,9 +12,12 @@
 
 <ion-content>
   <div class="wrapper">
-    <div style="display: flex;justify-content: center;width: 100%;">
+
+    <div style="display: flex;justify-content: center;width: 100%; position: relative;">
+      <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
       <img style="width:100%" src="assets/images/selectedCar.svg" alt="">
     </div>
+
     <div class="name_price_box">
       <div class="car_name">BMW 2 series</div>
       <div>
@@ -23,9 +26,10 @@
         <span class="per_hour" style="font-size: 10px;">/Hour</span>
       </div>
     </div>
-    <div class="description_box">
-      <div class="label_description">Description</div>
-      <div class="description">
+
+    <div class="box_styling">
+      <div class="box_heading">Description</div>
+      <div class="box_description">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         Lorem Ipsum has been the industry's standard dummy text ever since the 
         1500s, when an unknown printer took a galley of type and scrambled it to
@@ -35,9 +39,55 @@
         sheets containing Lorem Ipsum passages, and more recently with desktop 
         publishing software like Aldus PageMaker including versions of Lorem Ipsum.
       </div>
+    </div>
+
+    <div class="box_styling">
+      <div class="box_heading">Owner’s Details</div>
+      <div class="box_sub_heading">About</div>
+      <div class="box_description">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard dummy text ever since
+        the 1500s.
+      </div>
+    </div>
+
+    <div class="box_styling">
+      <div class="box_sub_heading" style="margin-top: 0px;">Location</div>
+      <div class="box_description" style="margin-top: 4px;">
+        Los Angeles, CA 90015
+      </div>
+    </div>
+
+    <div class="box_styling" style="padding: 14px 14px 15px;">
+      <div class="inner_box">
+        <div>
+          <span class="box_heading" style="margin-right: 10px;">Ratings</span>
+          <span style="margin-right: 6px;">
+            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+            <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+          </span>
+          <span class="trips_label">269 trips</span>
+        </div>
+        <div>
+          <img src="assets/images/icons/next.svg" alt="">
+        </div>
+      </div>
       
     </div>
 
   </div>
 
 </ion-content>
+
+<ion-footer class="ion-no-border">
+    <div style="margin: 10px 0px 15px;">
+      <div style="text-align: center;">
+        <ion-button class="invite_btn">
+          <span class="btn-text">Book Now</span>
+        </ion-button>
+      </div>
+    </div>
+</ion-footer>
