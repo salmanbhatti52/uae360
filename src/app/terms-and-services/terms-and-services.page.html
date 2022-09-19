@@ -1,0 +1,47 @@
+
+<ion-content>
+  <div class="wrapper">
+
+    <div class="header">
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div style="text-align: center;">
+        <img src="assets/images/privacy_policy.svg" alt="">
+      </div>
+    </div>
+
+    <div style="margin-top: 10px;">
+      <div class="heading">REVIEW TERMS</div>
+      <div class="heading">OF SERVICE</div>
+    </div>
+
+    <div class="terms_description">
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
+      voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+      Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor 
+      sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
+      diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+      sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+      <!-- Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor 
+      sit amet -->
+    </div>
+
+    <div class="sub_heading" style="margin-top: 8px;">Terms of service</div>
+    <div class="sub_heading" style="margin-top: 5px;">Privacy policy</div>
+    <div class="sub_heading" style="margin-top: 5px;">Non-discrimination policy</div>
+
+    <div style="text-align: center;">
+      <ion-button class="accept_button" (click)="gotoHomeBeforeLogin()">
+        <span class="accept_text">ACCEPT</span>
+      </ion-button>
+    </div>
+    <div style="text-align: center;">
+      <ion-button class="decline_button"  (click)="gotoSignUp()">
+        <span class="decline_text" >DECLINE</span>
+      </ion-button>
+    </div>
+      
+    
+
+  </div>
+</ion-content>

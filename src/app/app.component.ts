@@ -6,6 +6,7 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  
   public appPages = [
     { title: 'Browse', url: '/home-before-login', img: 'assets/images/icons/sm_search_icon.svg' },
     { title: 'Contact support', url: '/folder/Outbox', img: 'assets/images/icons/sm_telephone_icon.svg' },

@@ -30,6 +30,22 @@ const routes: Routes = [
   {
     path: 'sign-up',
     loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
+  },
+  {
+    path: 'verify-phone-by-otp',
+    loadChildren: () => import('./verify-phone-by-otp/verify-phone-by-otp.module').then( m => m.VerifyPhoneByOtpPageModule)
+  },
+  {
+    path: 'terms-and-services',
+    loadChildren: () => import('./terms-and-services/terms-and-services.module').then( m => m.TermsAndServicesPageModule)
+  },
+  {
+    path: 'forgot-password-by-email',
+    loadChildren: () => import('./forgot-password-by-email/forgot-password-by-email.module').then( m => m.ForgotPasswordByEmailPageModule)
+  },
+  {
+    path: 'otp-by-email',
+    loadChildren: () => import('./otp-by-email/otp-by-email.module').then( m => m.OtpByEmailPageModule)
   }
 ];
 

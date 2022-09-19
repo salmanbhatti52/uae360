@@ -17,9 +17,20 @@
 
     <div>
       <div class="inputs_label">Username</div>
-      <ion-input class="input_box" (ionInput)="activate('username')" [class.active_input_box]="activateUserNameField==true" placeholder="Username" type="text"></ion-input>
+      <ion-input class="input_box" (ionInput)="activate('userName')" [class.active_input_box]="activateUserNameField==true" placeholder="Username" type="text"></ion-input>
       <div class="inputs_label">Mobile number</div>
-      <ion-input class="input_box" (ionInput)="activate('mobileNumber')" [class.active_input_box]="activateUserNameField==true" placeholder="Mobile number" type="number"></ion-input>
+      <!-- <ion-input class="input_box" (ionInput)="activate('mobileNumber')" [class.active_input_box]="activateUserNameField==true" placeholder="Mobile number" type="number"></ion-input> -->
+      <!-- =====international phone input using angular =========== -->
+      <div style="margin-top: 4px;" (input)="activate('phoneNumber')" [class.get_focus]="getFocus==true">
+        <input type="text"
+        ng2TelInput
+        [ng2TelInputOptions]="{autoHideDialCode: false, initialCountry: 'in', separateDialCode:true}"
+        (hasError)="hasError($event)"
+        (ng2TelOutput)="getNumber($event)"
+        (intlTelInputObject)="telInputObject($event)"
+        (countryChange)="onCountryChange($event)" />
+      </div>
+      <!-- ========================done============================ -->
       <div class="inputs_label">Email</div>
       <ion-input class="input_box" (ionInput)="activate('email')" [class.active_input_box]="activateEmailField==true" placeholder="rose.matthews@gmail.com" type="email"></ion-input>
       <div class="inputs_label" >Password</div>
@@ -30,6 +41,19 @@
       </div>
     </div>
 
+    <div style="margin-top: 24px;">
+      <div style="display: flex;">
+        <ion-checkbox slot="start" class="checkbox"></ion-checkbox>
+        <span class="rem_fg_lablel" >I agree to the terms of service and privacy policy</span>
+      </div>
+      <div class="view_terms_link">View terms of service and privacy policy</div>
+    </div>
+
+    <ion-button class="login_button" (click)="gotoVerifyPhoneOtp()">
+      <span class="btn_text">Sign up</span>
+    </ion-button>
+
+    <div class="last_div"><span style="font-weight: 400;">Already have an account? </span> <span (click)="gotoSignIn()" style="font-weight: 700;text-decoration: underline;">Login</span> </div>
   </div>
 
 </ion-content>

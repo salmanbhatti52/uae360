@@ -16,10 +16,105 @@
   ion-input,ion-textarea,ion-label{
     font-family: 'Poppins', sans-serif;
   }
+
+  .otp-input{
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 0px !important;
+    border: solid 1px #EFEFEF !important;
+    text-align: center !important;
+    background: #FBFBFB !important;
+    margin-right: 16px !important;
+    font-family: 'Poppins',sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color: black !important;
+}
+  .inputClass{
+    border: solid 1px #8000FF !important;
+  }
+  // ================international phone input scss=======================
+  input:focus{
+    outline: none !important;
+}
+
+.iti--allow-dropdown input, .iti--allow-dropdown input[type=text], .iti--allow-dropdown input[type=tel], .iti--separate-dial-code input, .iti--separate-dial-code input[type=text], .iti--separate-dial-code input[type=tel] :focus{
+    padding-right: 0% !important;
+    padding-left: 100px !important;
+    margin-left: 0;
+    background: #FBFBFB !important;
+    height: 48px;
+    width: 100% !important;
+    border: 1px solid #EFEFEF;
+    border-radius: 0px !important;
+    touch-action: none !important;
+    color: black;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: 'Poppins',sans-serif;
+    font-size: 16px;
+    line-height: inherit;
+    /* color: black !important; */
+}
+.iti--separate-dial-code .iti__selected-dial-code {
+    margin-left: 6px;
+    font-family: 'Poppins',sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+}
+.iti {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    border-color: none;
+}
+.iti-mobile .iti__country-list {
+  max-height: 43% !important;
+  width: 85% !important;
+  height: auto;
+  left: 0px !important;
+  top: 45%;
+}
+.iti-mobile .iti--container {
+  top: 50%;
+  bottom: 30px;
+  left: 20px !important;
+  right: 20px !important;
+  position: fixed;
+}
+.iti__country-list {
+  position: absolute;
+  z-index: 2;
+  list-style: none;
+  text-align: left;
+  padding: 0;
+  margin: 0 0 0 -1px;
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 20%);
+  background-color: white;
+  border: 1px solid #CCC;
+  white-space: nowrap;
+  max-height: 200px;
+  overflow-y: scroll;
+  /* height: 40%; */
+  -webkit-overflow-scrolling: touch;
+  bottom: 50px;
+  /* height: 50%; */
+}
+.iti--separate-dial-code .iti__selected-flag {
+    background-color: #FBFBFB !important;
+    border-right: 1px solid #D4DCE1;
+}
+// .iti.iti--allow-dropdown.iti--separate-dial-code:focus {
+//     border: 1px solid blue;
+// }
+  // ============================done====================================
   // @font-face {
   //   font-family: 'BebasAR-Regular';
   //   src: url(assets/fonts/BebasAR-Regular.otf);
   // }
+  
 @import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */

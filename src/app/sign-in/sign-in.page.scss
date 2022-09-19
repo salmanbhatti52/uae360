@@ -89,6 +89,7 @@ ion-footer{
     --border-color: #8000FF;
     height: 16px;
     width: 16px;
+    --background: #FBFBFB;
 }
 .rem_fg_lablel{
     font-family: 'Poppins',sans-serif;
@@ -117,8 +118,11 @@ ion-footer{
     margin: 23px auto 0px;
 }
 hr{
-    border-bottom: 1px solid #0F172A;
-    width: 35%;
+    border-bottom: 1px solid #0F172A !important;
+    border-top: 0px !important;
+    margin: auto !important;
+    color: #0F172A !important;
+    opacity: 100% !important;
 }
 .or_label{
     font-family: 'Poppins',sans-serif;

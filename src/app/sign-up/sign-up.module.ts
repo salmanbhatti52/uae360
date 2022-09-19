@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { SignUpPageRoutingModule } from './sign-up-routing.module';
 
 import { SignUpPage } from './sign-up.page';
-
+import {Ng2TelInputModule} from 'ng2-tel-input';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SignUpPageRoutingModule
+    SignUpPageRoutingModule,
+    Ng2TelInputModule
   ],
   declarations: [SignUpPage]
 })

@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bgtoolbar">
+    <div class="header">
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="header_title">Verify Phone</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <div class="app_title">360UAE</div>
+    
+    <div style="text-align: center;margin-top: 12px;">
+      <img src="assets/images/otp_logo.svg" alt="">
+    </div>
+    
+    <div class="otp_info_label">Enter the 4 digit code that you received on your mobile number</div>
+    
+    <div style="text-align: center; margin-top: 11px;padding-left: 16px;">
+      <ng-otp-input  (onInputChange)="onOtpChange($event)"   [config]="{length:4,allowNumbersOnly:true,placeholder:'0'}"></ng-otp-input>
+    </div>
+    
+    <ion-button class="login_button" (click)="gotoTermsAndServices()">
+      <span class="btn_text">Next</span>
+    </ion-button>
+
+  </div>
+  
+</ion-content>

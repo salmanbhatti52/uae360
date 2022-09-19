@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.page.html',
@@ -10,7 +12,8 @@ export class SignInPage implements OnInit {
   getType='password';
   activateEmailField= false;
   activatePasswordField= false;
-  constructor(public  location:Location) {
+  constructor(public  location:Location,
+    public router:Router) {
     
    }
 
@@ -44,5 +47,12 @@ export class SignInPage implements OnInit {
   gotoHome(){
     this.activateEmailField = false;
     this.activatePasswordField = false;
+    this.router.navigate(['/home-before-login']);
+  }
+  gotoSignUp(){
+    this.router.navigate(['/sign-up']);
+  }
+  gotoForgotPasswordByEmail(){
+    this.router.navigate(['/forgot-password-by-email']);
   }
 }

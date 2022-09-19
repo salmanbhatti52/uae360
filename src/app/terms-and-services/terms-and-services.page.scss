@@ -1,0 +1,72 @@
+ion-content{
+    font-family: 'Poppins', sans-serif;
+    --background:#FBFBFB !important;
+}
+ion-footer{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+.header{
+    padding: 20px 0px 15px;
+    position: relative;
+}
+.bgtoolbar{
+    --background: #FBFBFB;
+}
+.wrapper{
+ padding:15px 16px 20px;
+}
+.heading{
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #0F172A;
+    text-align: center;
+}
+.terms_description{
+    margin-top: 6px;
+    color: #B0B0B0;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    height: auto;
+    max-height: 260px;
+    overflow: hidden;
+}
+.sub_heading{
+    font-family: 'Poppins',sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #8000FF;
+}
+.accept_button{
+    --border-radius: 0px;
+    --background: #8000FF;
+    height: 48px;
+    width: 65%;
+    margin: 15px auto 0px;
+}
+.decline_button{
+    --border-radius: 0px;
+    --background: #FBFBFB;
+    height: 48px;
+    width: 65%;
+    margin: 12px auto 0px;
+    --border-style:solid;
+    --border-color:#FF0000;
+    --border-width:1px;
+}
+.accept_text{
+    font-family: 'Poppins',sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    text-transform: uppercase !important;
+}
+.decline_text{
+    font-family: 'Poppins',sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #FF0000;
+    text-transform: uppercase !important;
+}
