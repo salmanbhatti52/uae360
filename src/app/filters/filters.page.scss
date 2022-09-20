@@ -13,7 +13,7 @@ ion-footer{
 .header{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    position: relative;
     padding: 30px 16px 15px;
 }
 .bgtoolbar{
@@ -24,6 +24,7 @@ ion-footer{
     font-weight: 700;
     color: #0F172A;
     font-family: 'Poppins', sans-serif;
+    margin: 0px auto;
 }
 .apply_label{
     font-size: 14px;
@@ -70,7 +71,11 @@ ion-datetime {
     font-family: 'Poppins', sans-serif;
 }
 hr{
-    border-bottom: 1px solid #EFEFEF;
+    border-bottom: 1px solid #EFEFEF !important;
+    border-top: 0px !important;
+    margin: 10px 0px 0px !important;
+    color: #EFEFEF !important;
+    opacity: 100% !important;
 }
 .ion_range{
     --bar-height: 4px;
@@ -92,7 +97,19 @@ hr{
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
 }
-
+.invite_btn{
+    --background:#8000FF;
+    --border-radius:0px;
+    width:60%;
+    height: 44px;
+    margin-top: 9px;
+}
+.btn-text{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
 // @media only screen 
 //   and (min-device-width: 414px) 
 //   and (max-device-width: 896px) { 

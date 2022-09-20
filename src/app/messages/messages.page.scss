@@ -1,0 +1,84 @@
+ion-header{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+ion-content{
+    font-family: 'Poppins', sans-serif;
+    --background:#FBFBFB !important;
+}
+ion-footer{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 16px 15px;
+}
+.bgtoolbar{
+    --background: #FBFBFB;
+}
+.menuicon{
+	color: var(--menu-icon);
+}
+.title{
+    font-size: 20px;
+    font-weight: 700;
+    color: #0F172A;
+    font-family: 'Poppins', sans-serif;
+}
+.notifications{
+    font-family: "Urbanist", sans-serif;
+    position: absolute;
+    background: #D93A3A;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    height: 14px;
+    width: 14px;
+    text-align: center;
+    border-radius: 50%;
+    bottom: 12px;
+    left: 10px;
+}
+.bell_div{
+    position: relative;
+    padding-right: 6.5px;
+    display: flex;
+}
+.wrapper{
+    padding:5px 16px 20px;    
+}
+.cover{
+    padding-top: 30px;
+    border-radius: 20px;
+    background: white;
+    padding-bottom: 10px;
+}
+.name{
+    font-family: 'Poppins',sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+}
+.last_message{
+    font-family: 'Poppins',sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    margin-top: 10.2px;
+}
+.message_time{
+    font-family: 'Poppins',sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: #B1A8B9;
+}
+hr{
+    border-bottom: 1px solid #EFEEEE !important;
+    border-top: 0px !important;
+    margin: 16px auto !important;
+    color: #EFEEEE !important;
+    opacity: 100% !important;
+}

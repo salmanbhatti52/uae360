@@ -1,0 +1,48 @@
+ion-header{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+ion-content{
+    font-family: 'Poppins', sans-serif;
+    --background:#FBFBFB !important;
+}
+ion-footer{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+.header{
+    display: flex;
+    align-items: center;
+    padding: 30px 16px 15px;
+    position: relative;
+}
+.header_title{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: #0F172A;
+    margin: 0px auto;
+}
+.bgtoolbar{
+    --background: #FBFBFB;
+}
+.wrapper{
+    padding:15px 0px 20px;
+}
+.notification_box{
+    display: flex;
+    align-items: center;
+    padding: 8.8px 8.9px 13px 16px;
+}
+.notification_text{
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    color: black;
+}
+.notification_time{
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    color: #B1A8B9;
+}

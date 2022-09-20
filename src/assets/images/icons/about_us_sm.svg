@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23">
+  <g id="_4781829_circle_customer_help_info_information_icon" data-name="4781829_circle_customer_help_info_information_icon" transform="translate(0.572 0.571)">
+    <g id="Layer_2" data-name="Layer 2" transform="translate(2.027 2.027)">
+      <path id="Path_1766" data-name="Path 1766" d="M15.4,10.8a1.4,1.4,0,1,1,1.4-1.4A1.4,1.4,0,0,1,15.4,10.8ZM15.4,9.4Z" transform="translate(-6.287 -4.494)" fill="#fff"/>
+      <path id="Path_1767" data-name="Path 1767" d="M12.116,21.231a9.116,9.116,0,1,1,9.116-9.116,9.116,9.116,0,0,1-9.116,9.116Zm0-16.829a7.713,7.713,0,1,0,7.713,7.713A7.713,7.713,0,0,0,12.116,4.4Z" transform="translate(-3 -3)" fill="#fff"/>
+      <path id="Path_1768" data-name="Path 1768" d="M15.4,21.012a1.4,1.4,0,0,1-1.4-1.4V15.4a1.4,1.4,0,0,1,2.8,0V19.61A1.4,1.4,0,0,1,15.4,21.012Zm0-5.61Z" transform="translate(-6.287 -6.287)" fill="#fff"/>
+    </g>
+    <g id="frame" transform="translate(-0.572 -0.571)">
+      <rect id="Rectangle_1263" data-name="Rectangle 1263" width="23" height="23" fill="none"/>
+    </g>
+  </g>
+</svg>

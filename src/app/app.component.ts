@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController,NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -8,13 +9,19 @@ import { MenuController } from '@ionic/angular';
 export class AppComponent {
   
   public appPages = [
-    { title: 'Browse', url: '/home-before-login', img: 'assets/images/icons/sm_search_icon.svg' },
-    { title: 'Contact support', url: '/folder/Outbox', img: 'assets/images/icons/sm_telephone_icon.svg' },
-    { title: 'Login or Signup', url: '/sign-in', img: 'assets/images/icons/sm_in_out.svg' },
+    { title: 'Browse', url: '/home-before-login', img: 'assets/images/icons/search_sm.svg' },
+    { title: 'Live Chat', url: '/live-chat', img: 'assets/images/icons/live_chat_sm.svg' },
+    { title: 'About Us', url: 'about-us', img: 'assets/images/icons/about_us_sm.svg' },
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(public menu:MenuController) {}
+  constructor(public menu:MenuController,
+    public router:Router,
+    public navCtrl:NavController) {}
   closeMenu(){
     this.menu.close();
+  }
+  gotoSignIn(){
+    this.menu.toggle();
+    this.navCtrl.navigateForward('sign-in');
   }
 }

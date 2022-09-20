@@ -46,11 +46,14 @@ ion-footer{
     font-size: 16px;
     font-weight: 500;
 }
-.timer_background{
+.timer_box{
+    background: rgba(255, 0, 0, 0.05);
+    width: 240px;
+    // width: 60%;
     height: 48px;
-    width:250px;
-    background: #FF0000;
-    opacity: 5%;
+    padding: 10px 27px;
+    display: flex;
+    justify-content: center;
     margin: 21px auto 0px;
 }
 .timer_icon{
@@ -59,8 +62,6 @@ ion-footer{
 .position_content{
     display: flex;
     align-items: center;
-    position: absolute;
-    bottom: 11px;
 }
 .timer_text{
     // position: absolute;

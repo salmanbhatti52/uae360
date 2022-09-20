@@ -4,12 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'home-before-login',
     pathMatch: 'full'
-  },
-  {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
     path: 'home-before-login',
@@ -46,6 +42,22 @@ const routes: Routes = [
   {
     path: 'otp-by-email',
     loadChildren: () => import('./otp-by-email/otp-by-email.module').then( m => m.OtpByEmailPageModule)
+  },
+  {
+    path: 'live-chat',
+    loadChildren: () => import('./live-chat/live-chat.module').then( m => m.LiveChatPageModule)
+  },
+  {
+    path: 'about-us',
+    loadChildren: () => import('./about-us/about-us.module').then( m => m.AboutUsPageModule)
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
+  {
+    path: 'messages',
+    loadChildren: () => import('./messages/messages.module').then( m => m.MessagesPageModule)
   }
 ];
 

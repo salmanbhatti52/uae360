@@ -11,7 +11,7 @@
           <div class="app_title">
             360UAE
           </div>
-          <div style="margin-top: 36px; text-align: center;">
+          <!-- <div style="margin-top: 36px; text-align: center;">
             <div class="select_language">Choose your language</div>
             <div class="language_btns">
               <ion-button style="--background: white; margin-right: 12px;">
@@ -27,13 +27,18 @@
                 </span> 
               </ion-button>
             </div>
-          </div>
-
+          </div> -->
+          <div style="height: 50px;"></div>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <div routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected" style="--background: black !important; text-align: center;">
               <!-- <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon> -->
-              <div style="margin-top: 54px;"><img class="sidemenu-icons" src="{{p.img}}"><br></div>
-              <div style="margin-top: 10px;"><ion-label class="item_label">{{ p.title }}</ion-label></div>
+              <div style="margin-top: 20px; text-align: left;">
+                <ion-row>
+                  <ion-col style="padding: 0px;" size="2"><img  src="{{p.img}}"></ion-col>
+                  <ion-col style="padding: 0px;" size="7"><ion-label class="item_label">{{ p.title }}</ion-label></ion-col>
+                  <ion-col style="padding: 0px;" size="3"></ion-col>
+                </ion-row>
+              </div>
             </div>
           </ion-menu-toggle>
         <!-- </ion-list> -->
@@ -47,6 +52,15 @@
           </ion-item>
         </ion-list> -->
       </ion-content>
+     
+      <div style="padding: 20px 23px 30px;">
+        <ion-row (click)="gotoSignIn()">
+          <ion-col style="padding: 0px;" size="2"><img src="assets/images/icons/log_in_out_sm.svg" alt=""></ion-col>
+          <ion-col style="padding: 0px;" size="7"><span class="item_label">Login or Signup</span></ion-col>
+          <ion-col style="padding: 0px;" size="3"></ion-col>
+        </ion-row>
+      </div>
+    
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.page.html',
@@ -13,12 +13,23 @@ export class SignInPage implements OnInit {
   activateEmailField= false;
   activatePasswordField= false;
   constructor(public  location:Location,
-    public router:Router) {
+    public router:Router,
+    public menuCtrl:MenuController) {
     
    }
 
   ngOnInit() {
   }
+  ionViewDidEnter(){
+    this.menuCtrl.enable(false);
+  }
+  ionViewWillLeave() {
+    // enable the root left menu when leaving this page
+    this.menuCtrl.enable(true);
+  }
+  // ionViewWillEnter(){
+  //   this.menuCtrl.close();
+  // }
   goBack(){
     this.location.back();
   }

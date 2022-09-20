@@ -1,0 +1,47 @@
+ion-header{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+ion-content{
+    font-family: 'Poppins', sans-serif;
+    --background:#FBFBFB !important;
+}
+ion-footer{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+.bgtoolbar{
+    --background: #FBFBFB;
+}
+.header{
+    position: relative;
+    padding: 30px 16px 15px;
+    display: flex;
+    align-items: center;
+}
+.menuicon{
+	color: var(--menu-icon);
+    position: absolute;
+}
+.title{
+    font-size: 20px;
+    font-weight: 700;
+    color: #0F172A;
+    font-family: 'Poppins', sans-serif;
+    margin: 0px auto;
+}
+.wrapper{
+    padding:15px 16px 20px;
+}
+.description_para{
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: black;
+}
+.description_points{
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: black;
+}
