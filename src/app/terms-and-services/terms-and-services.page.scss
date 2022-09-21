@@ -45,6 +45,7 @@ ion-footer{
     height: 48px;
     width: 65%;
     margin: 15px auto 0px;
+    --box-shadow:none;
 }
 .decline_button{
     --border-radius: 0px;
@@ -55,6 +56,7 @@ ion-footer{
     --border-style:solid;
     --border-color:#FF0000;
     --border-width:1px;
+    --box-shadow:none;
 }
 .accept_text{
     font-family: 'Poppins',sans-serif;

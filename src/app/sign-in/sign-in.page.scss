@@ -103,6 +103,7 @@ ion-footer{
     height: 48px;
     width: 100%;
     margin: 45px auto 0px;
+    --box-shadow:none;
 }
 .btn_text{
     font-family: 'Poppins',sans-serif;
@@ -144,6 +145,7 @@ hr{
     height: 48px;
     margin-top: 0px;
     width: 45%;
+    --box-shadow:none;
 }
 .last_div{
     margin-top: 20px;
