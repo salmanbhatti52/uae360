@@ -1,0 +1,149 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bgtoolbar">
+    <div class="header">
+      <ion-menu-button class="menuicon"></ion-menu-button>
+      <div class="title">Home</div>
+      <div style="display: flex">
+       <div class="bell_div" (click)="gotoNotifications()">
+         <div class="notifications" >{{totalNotifications}}</div>
+         <img src="assets/images/icons/bell.svg" alt="">
+       </div>
+       <div style="display: flex;padding-left: 13.5px;">
+         <img (click)="gotoFilter()" src="assets/images/icons/filter.svg" alt="">
+       </div>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    
+    <div class="search_box">
+      <div style="width: 100%;">
+        <ion-input class="input_field" placeholder="Search for Cars"></ion-input>
+      </div>
+      <div style="display: flex;"><img src="assets/images/icons/search_input.svg" alt=""></div>
+    </div>
+
+  </div>
+      <div class="items_label">What are you looking for?</div>
+      <div style="padding-left: 11px; margin-top:5px">
+        <ion-slides pager="false" [options]="slideOpts2">
+          <ion-slide class="categories">
+            <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem(1)">
+              <img src="assets/images/icons/car_grey.svg" alt="" *ngIf="item1 == false">
+              <img src="assets/images/icons/car_white.svg" alt="" *ngIf="item1 == true">
+              <div class="cars_label" [class.fontActive]="item1 == true">All Cars</div>
+            </div>
+          </ion-slide>
+          <ion-slide class="categories">
+            <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem(2)">
+              <img src="assets/images/icons/sports_car_grey.svg" alt="" *ngIf="item2 == false">
+              <img src="assets/images/icons/sports_car_white.svg" alt="" *ngIf="item2 == true">
+              <div class="cars_label" [class.fontActive]="item2 == true">Sports cars</div>
+            </div>
+          </ion-slide>
+          <ion-slide class="categories">
+            <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem(3)">
+              <img src="assets/images/icons/luxury_car_grey.svg" alt="" *ngIf="item3 == false">
+              <img src="assets/images/icons/luxury_car_white.svg" alt="" *ngIf="item3 == true">
+              <div class="cars_label" [class.fontActive]="item3 == true">Luxury cars</div>
+            </div>
+          </ion-slide>
+          <ion-slide class="categories">
+            <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem(4)">
+              <img src="assets/images/icons/taxi_grey.svg" alt="" *ngIf="item4 == false">
+              <img src="assets/images/icons/taxi_white.svg" alt="" *ngIf="item4 == true">
+              <div class="cars_label" [class.fontActive]="item4 == true">Pickup</div>
+            </div>
+          </ion-slide>
+          <ion-slide class="categories" style="padding-right: 9px;">
+            <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem(5)">
+              <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
+              <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">
+              <div class="cars_label" [class.fontActive]="item5 == true">Suv's</div>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+      
+      <!-- <div class="items_box">
+      </div> -->
+  
+
+  <div class="items_wrapper">
+    <div class="items_label" style="margin-top: 5px;padding-left: 3px;">Top Rented</div>
+    <ion-slides pager="false" [options]="slideOpts">
+      <ion-slide *ngFor="let pickup of pickups;" style="width: 48%; height: 100%;">
+        <ion-card class="card" (click)="gotoCarDetails()">
+          <img style="width: 100%;" src="{{pickup.img}}" alt="">
+          <div style="padding: 5px 7px 7.5px 8px;">
+            <div>
+              <div class="card_title">{{pickup.name}}</div>
+            </div>
+            <div class="card_content">
+              <div>
+                <div>
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                </div>
+                <div class="total_trips">{{pickup.total_trips}} trips</div>
+              </div>
+              <div>
+                <div style="line-height: 1.2;"><span class="price_span" style="font-size: 11px;">$</span><span class="price_span" style="font-size: 32px;">{{pickup.price}}</span> </div>
+                <div class="per_hour">Per Hour</div>
+              </div>
+            </div>
+          </div>
+          
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+    <div style="margin: 15px 0px 15px;">
+      <div style="text-align: center;">
+        <div class="invite_label">Invite Friends</div>
+        <div class="invite_label" style="font-weight: 400;">And spread the word</div>
+      </div>
+      <div style="text-align: center;">
+        <ion-button class="invite_btn">
+          <span class="btn-text">Invite</span>
+        </ion-button>
+      </div>
+    </div>
+    
+    <ion-tabs style="display:contents ;">
+
+      <ion-tab-bar class="ion_tab_bar" slot="bottom">
+
+        <ion-tab-button  style="background: white;" (click)="homeTab()">
+          <img src="assets/images/tab_icons/home_active.svg" alt="">
+          <ion-label class="btnActive_label">Home</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button  style="background: white;" (click)="messagesTab()">
+          <img style="height: 32px;width: 32px;"  src="assets/images/tab_icons/messages.svg" alt="">
+          <ion-label class="btn_label">Messages</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button  style="background: white;" (click)="bookingTab()">
+          <img src="assets/images/tab_icons/booking.svg" alt="">
+          <ion-label class="btn_label">Booking</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button  style="background: white;" (click)="favoriteTab()">
+          <img src="assets/images/tab_icons/favorite.svg" alt="">
+          <ion-label class="btn_label">Favorities</ion-label>
+        </ion-tab-button>
+
+      </ion-tab-bar>
+
+    </ion-tabs>
+</ion-footer>

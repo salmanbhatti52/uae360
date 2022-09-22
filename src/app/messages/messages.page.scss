@@ -82,3 +82,24 @@ hr{
     color: #EFEEEE !important;
     opacity: 100% !important;
 }
+.btn_label{
+    font-family: 'Poppins',sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #B1A8B9;
+    line-height: 1.6;
+}
+.btnActive_label{
+    font-family: 'Poppins',sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #8000FF;
+    line-height: 1.6;
+}
+.ion_tab_bar{
+    padding: 8px 8px 12px 0px;
+    border-radius: 20px 20px 0px 0px;
+    height: 52px;
+    box-shadow: 0px -3px 10px rgb(0 0 0 / 16%);
+    background: white;
+}

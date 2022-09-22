@@ -17,7 +17,7 @@ export class TermsAndServicesPage implements OnInit {
     this.location.back();
   }
   gotoHomeBeforeLogin(){
-    this.router.navigate(['/home-before-login']);
+    this.router.navigate(['/home-cars-after-login']);
   }
   gotoSignUp(){
     this.router.navigate(['/sign-up']);

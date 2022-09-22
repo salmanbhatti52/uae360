@@ -111,3 +111,33 @@
     
   </div>
 </ion-content>
+<ion-footer>
+  <ion-tabs style="display:contents ;">
+
+    <ion-tab-bar class="ion_tab_bar" slot="bottom">
+
+      <ion-tab-button  style="background: white;" (click)="homeTab()">
+        <img src="assets/images/tab_icons/home.svg" alt="">
+        <ion-label class="btn_label">Home</ion-label>
+        <!-- <ion-badge>6</ion-badge> -->
+      </ion-tab-button>
+  
+      <ion-tab-button  style="background: white;" (click)="messagesTab()">
+        <img style="height: 32px;width: 32px;"  src="assets/images/tab_icons/messages_active.svg" alt="">
+        <ion-label class="btnActive_label">Messages</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button  style="background: white;" (click)="bookingTab()">
+        <img src="assets/images/tab_icons/booking.svg" alt="">
+        <ion-label class="btn_label">Booking</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button  style="background: white;" (click)="favoriteTab()">
+        <img src="assets/images/tab_icons/favorite.svg" alt="">
+        <ion-label class="btn_label">Favorities</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+
+  </ion-tabs>
+</ion-footer>
