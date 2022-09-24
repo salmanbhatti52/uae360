@@ -1,0 +1,126 @@
+ion-header{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+ion-content{
+    font-family: 'Poppins', sans-serif;
+    --background:#FBFBFB !important;
+}
+ion-footer{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+.header{
+    display: flex;
+    align-items: center;
+    padding: 30px 16px 15px;
+    position: relative;
+}
+.header_title{
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: #0F172A;
+    // margin: 0px auto;
+}
+.show_status{
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    color: #12D804;
+}
+.bgtoolbar{
+    --background: #FBFBFB;
+}
+.wrapper{
+    padding:15px 16px 20px;
+}
+.owner_message_box{
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    background: #8000FF;
+    padding: 12px 8px 8px 15px;
+    border-radius: 0px 10px 10px 10px;
+}
+.owner_message_box::before {
+    content: '';
+    position: absolute;
+    visibility: visible;
+    top: -1px;
+    left: -10px;
+}
+  
+.owner_message_box::after {
+    content: '';
+    position: absolute;
+    visibility: visible;
+    top: 0px;
+    left: -10px;
+    border: 10px solid transparent;
+    border-top: 10px solid #8000FF;
+    clear: both;
+}
+.owner_message{
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+}
+.message_time{
+    margin-top: 6px;
+    font-family: 'Urbanist',sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: white;
+}
+.consumer_message_box{
+    position: relative;
+    display: inline-block;
+    // width: auto;
+    // max-width: fit-content;
+    background: #EFEEEE;
+    padding: 12px 8px 8px 15px;
+    border-radius: 10px 0px 10px 10px;
+}
+.consumer_message_box::before {
+    content: '';
+    position: absolute;
+    visibility: visible;
+    top: -1px;
+    right: -10px;
+}
+  
+.consumer_message_box::after {
+    content: '';
+    position: absolute;
+    visibility: visible;
+    top: 0px;
+    right: -10px;
+    border: 10px solid transparent;
+    border-top: 10px solid #EFEEEE;
+    clear: both;
+}
+.consumer_message{
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+}
+.textarea{
+    --background: #FBFBFB;
+    --color: black;
+    --placeholder-color: #8D8D8D;
+    font-family: "Poppins", sans-serif;
+    --placeholder-font-weight: 400;
+    font-size: 16px;
+    font-weight: 400;
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    height: auto;
+    max-height: 100px;
+    overflow: scroll;
+}
+
+  
+  

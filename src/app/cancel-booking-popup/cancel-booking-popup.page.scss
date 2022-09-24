@@ -1,0 +1,87 @@
+ion-content{
+    --background:white !important;
+}
+.wrapper{
+    padding: 20px 21px 25px 27px;
+}
+.heading{
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #8000FF;
+}
+.heading_description{
+    text-align: center;
+    width: 72.5%;
+    margin: 9.5px auto 0px;
+    color: #B0B0B0;
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+.cancelling_terms{
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #FF0000;
+    text-align: center;
+    width: 75%;
+    margin: 18.5px auto 0px;
+}
+.invite_btn{
+    --background:#8000FF;
+    --border-radius:0px;
+    width:60%;
+    height: 44px;
+    margin: 0px;
+    --box-shadow:none;
+}
+.cancel_btn{
+    --background:white;
+    --border-radius:0px;
+    width:60%;
+    height: 44px;
+    --box-shadow:none;
+    // margin: 0px;
+    --border-color:#D93A3A;
+    --border-style:solid;
+    --border-width:1.5px;
+}
+.btn-text{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-transform: capitalize;
+}
+.btn2-text{
+    font-size: 16px;
+    font-weight: 500;
+    color: #D93A3A;
+    font-family: 'Poppins', sans-serif;
+    text-transform: capitalize;
+}
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .cancelling_terms{
+        font-family: 'Poppins',sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #FF0000;
+        text-align: center;
+        width: 85%;
+        margin: 18.5px auto 0px;
+    }
+    .heading_description{
+        text-align: center;
+        width: 85%;
+        margin: 9.5px auto 0px;
+        color: #B0B0B0;
+        font-family: "Poppins", sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+    }
+}

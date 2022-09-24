@@ -1,0 +1,29 @@
+<ion-content>
+  <div class="wrapper">
+    <div style="text-align: right;">
+      <img (click)="closeModal()" src="assets/images/icons/close_modal.svg" alt="">
+    </div>
+    <div class="heading">Ratings</div>
+    <div class="heading_description">Give your Ratings and Feedback</div>
+    <div class="margin_row">
+      <img style="margin-right: 11px;" src="assets/images/icons/not_lighted_star.svg" alt="" *ngIf="rateStar1==false;" (click)="rateStar(1)">
+      <img style="margin-right: 11px;" src="assets/images/icons/lighted_star.svg" alt="" *ngIf="rateStar1==true;" (click)="rateStar(1)">
+      <img style="margin-right: 11px;" src="assets/images/icons/not_lighted_star.svg" alt="" *ngIf="rateStar2==false;" (click)="rateStar(2)">
+      <img style="margin-right: 11px;" src="assets/images/icons/lighted_star.svg" alt="" *ngIf="rateStar2==true;" (click)="rateStar(2)">
+      <img style="margin-right: 11px;" src="assets/images/icons/not_lighted_star.svg" alt="" *ngIf="rateStar3==false;" (click)="rateStar(3)">
+      <img style="margin-right: 11px;" src="assets/images/icons/lighted_star.svg" alt="" *ngIf="rateStar3==true;" (click)="rateStar(3)">
+      <img style="margin-right: 11px;" src="assets/images/icons/not_lighted_star.svg" alt="" *ngIf="rateStar4==false;" (click)="rateStar(4)">
+      <img style="margin-right: 11px;" src="assets/images/icons/lighted_star.svg" alt="" *ngIf="rateStar4==true;" (click)="rateStar(4)">
+      <img style="margin-right: 11px;" src="assets/images/icons/not_lighted_star.svg" alt="" *ngIf="rateStar5==false;" (click)="rateStar(5)">
+      <img style="margin-right: 11px;" src="assets/images/icons/lighted_star.svg" alt="" *ngIf="rateStar5==true;" (click)="rateStar(5)">
+      
+    </div>
+    <ion-textarea name="feedback"  type="text" maxlength="150" class="textarea" rows="4" cols="20" placeholder="Add your feedback" [(ngModel)]="feedback"></ion-textarea>
+    <div class="characters_limit">*Maximum 150 characters</div>
+    <div style="text-align: center;margin-top: 16px;">
+      <ion-button class="invite_btn" (click)="sendFeedback()">
+        <span class="btn-text">Okay</span>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

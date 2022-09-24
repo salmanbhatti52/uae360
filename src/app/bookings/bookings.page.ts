@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { GiveRatingsPopupPage } from '../give-ratings-popup/give-ratings-popup.page';
+import { CancelBookingPopupPage } from '../cancel-booking-popup/cancel-booking-popup.page';
 @Component({
   selector: 'app-bookings',
   templateUrl: './bookings.page.html',
@@ -8,7 +11,8 @@ import { NavController } from '@ionic/angular';
 export class BookingsPage implements OnInit {
   previous_tab = true;
   upcoming_tab = false;
-  constructor(public navCtrlr:NavController) { }
+  constructor(public navCtrlr:NavController,
+    public modalCtrlr:ModalController) { }
 
   ngOnInit() {
   }
@@ -30,7 +34,31 @@ export class BookingsPage implements OnInit {
       console.log(this.previous_tab);
     }
   }
+  async openModal() {
+    const modal = await this.modalCtrlr.create({
+      component: GiveRatingsPopupPage,
+      cssClass: 'give_ratings',
+      showBackdrop: true
+    });
+    modal.present();
 
+    const {data, role}= await modal.onWillDismiss();
+    if(role === 'sendFeedback'){
+      console.log(data);
+    }
+  }
+  async openCancelBookingModal(){
+    const modal = await this.modalCtrlr.create({
+      component:CancelBookingPopupPage,
+      cssClass: 'cancel_booking',
+      showBackdrop:true
+    });
+    modal.present();
+    const {data, role} = await modal.onWillDismiss();
+    if(role === 'cancelBooking'){
+      console.log(data);
+    }
+  }
   homeTab(){
     this.navCtrlr.navigateRoot('home-cars-after-login');
   }

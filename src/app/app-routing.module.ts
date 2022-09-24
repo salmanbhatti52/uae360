@@ -70,6 +70,18 @@ const routes: Routes = [
   {
     path: 'home-cars-after-login',
     loadChildren: () => import('./home-cars-after-login/home-cars-after-login.module').then( m => m.HomeCarsAfterLoginPageModule)
+  },
+  {
+    path: 'message-owner-side',
+    loadChildren: () => import('./message-owner-side/message-owner-side.module').then( m => m.MessageOwnerSidePageModule)
+  },
+  {
+    path: 'give-ratings-popup',
+    loadChildren: () => import('./give-ratings-popup/give-ratings-popup.module').then( m => m.GiveRatingsPopupPageModule)
+  },
+  {
+    path: 'cancel-booking-popup',
+    loadChildren: () => import('./cancel-booking-popup/cancel-booking-popup.module').then( m => m.CancelBookingPopupPageModule)
   }
 ];
 

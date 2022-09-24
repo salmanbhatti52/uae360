@@ -115,7 +115,7 @@
       <div style="text-align: center; margin-top: 16px; position: relative;">
         <img style="width: 100%;" src="assets/images/bookings_car.svg" alt="">
         <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="">
-        <div class="rebook_label urbanist" style="background: #E23C3C;color: white;">Cancel</div>
+        <div class="rebook_label urbanist" style="background: #E23C3C;color: white;" (click)="openCancelBookingModal()">Cancel</div>
         <div class="car_info_box" >
           <div>
             <div class="car_name urbanist">BMW 2 series</div>
@@ -187,7 +187,7 @@
       <div style="text-align: center; margin-top: 13px; position: relative; ">
         <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
         <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-        <div class="rebook_label urbanist" style="background: #E23C3C;color: white;">Cancel</div>
+        <div class="rebook_label urbanist" style="background: #E23C3C;color: white;" (click)="openCancelBookingModal()">Cancel</div>
         <div class="car_info_box" >
           <div>
             <div class="car_name urbanist">BMW 2 series</div>
@@ -217,7 +217,7 @@
 <ion-footer class="ion-no-border">
     <div style="margin: 10px 0px 12px;" *ngIf="previous_tab==true">
       <div style="text-align: center;">
-        <ion-button class="invite_btn" >
+        <ion-button class="invite_btn" (click)="openModal()">
           <span class="btn-text">Give Ratings</span>
         </ion-button>
       </div>

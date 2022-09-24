@@ -12,6 +12,9 @@ export class MessagesPage implements OnInit {
 
   ngOnInit() {
   }
+  gotoNotifications(){
+    this.navCtrlr.navigateRoot('notifications');
+  }
   homeTab(){
     this.navCtrlr.navigateRoot('home-cars-after-login');
   }
@@ -23,5 +26,8 @@ export class MessagesPage implements OnInit {
   }
   favoriteTab(){
     this.navCtrlr.navigateRoot('favorites');
+  }
+  gotoMessageOwnerSide(){
+    this.navCtrlr.navigateRoot('message-owner-side');
   }
 }

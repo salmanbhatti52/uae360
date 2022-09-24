@@ -1,0 +1,69 @@
+ion-content{
+    --background:white !important;
+}
+.wrapper{
+    padding: 20px 21px 25px 27px;
+}
+.invite_btn{
+    --background:#8000FF;
+    --border-radius:0px;
+    width:70%;
+    height: 44px;
+    margin-top: 9px;
+    --box-shadow:none;
+}
+.btn-text{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-transform: capitalize;
+}
+.heading{
+    text-align: center;
+    font-family: 'Urbanist',sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #8000FF;
+}
+.heading_description{
+    text-align: center;
+    width: 65%;
+    margin: 6.5px auto 0px;
+    color: #B0B0B0;
+    font-family: 'Urbanist',sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+}
+.margin_row{
+    text-align: center;
+    margin-top: 20px;
+    padding-left: 11px;
+}
+.textarea{
+    margin-top: 28px;
+    border: 1.5px solid #D4DCE1;
+    border-radius: 10px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    font-family: 'Urbanist',sans-serif;
+    font-size: 16px;
+    --placeholder-color: #B0B0B0;
+    font-weight: 400;
+    --placeholder-font-weight: 400;
+    --color: black;
+    overflow: scroll;
+    // height: auto;
+    // max-height: 116px;
+    // overflow: scroll;
+}
+.characters_limit{
+    text-align: right;
+    font-family: 'Urbanist',sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #8000FF;
+    margin-top: 5px;
+}
