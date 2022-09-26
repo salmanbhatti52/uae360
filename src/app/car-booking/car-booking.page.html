@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bgtoolbar">
+    <div class="header">
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="header_title">BMW 2 series</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <div style="text-align: center; margin-top: 13px; position: relative; ">
+      <img style="width: 100%;" src="assets/images/bookings_car.svg" alt="">
+      <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
+      <div class="car_info_box" >
+        <div>
+          <div class="car_name urbanist">BMW 2 series</div>
+          <div style="text-align: left;line-height: 1;">
+            <span>
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
+            </span>
+            <span class="rating_value urbanist">269 trips</span>
+          </div>
+        </div>
+        <div class="car2_info_subdiv">
+          <div style="margin-right: 17px;line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <ion-datetime id="datetime" presentation="date"></ion-datetime>
+
+    <div style="display: flex;justify-content: space-between;margin-top: 14px;">
+      <div style="width: 48%;">
+        <div class="date_time_label">Start Date</div>
+        <div></div>
+      </div>
+      <div style="width: 48%;">
+        <div class="date_time_label">Start Time</div>
+        <div></div>
+      </div>
+    </div>
+    <div style="display: flex;justify-content: space-between;margin-top: 14px;">
+      <div style="width: 48%;">
+        <div class="date_time_label">End Date</div>
+        <div></div>
+      </div>
+      <div style="width: 48%;">
+        <div class="date_time_label">End Time</div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

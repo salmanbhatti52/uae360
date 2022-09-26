@@ -13,7 +13,7 @@ ion-content{
 }
 .heading_description{
     text-align: center;
-    width: 72.5%;
+    width: 90%;
     margin: 9.5px auto 0px;
     color: #B0B0B0;
     font-family: "Poppins", sans-serif;
@@ -26,7 +26,7 @@ ion-content{
     font-weight: 500;
     color: #FF0000;
     text-align: center;
-    width: 75%;
+    width: 90%;
     margin: 18.5px auto 0px;
 }
 .invite_btn{
@@ -62,26 +62,26 @@ ion-content{
     font-family: 'Poppins', sans-serif;
     text-transform: capitalize;
 }
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
-    .cancelling_terms{
-        font-family: 'Poppins',sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        color: #FF0000;
-        text-align: center;
-        width: 85%;
-        margin: 18.5px auto 0px;
-    }
-    .heading_description{
-        text-align: center;
-        width: 85%;
-        margin: 9.5px auto 0px;
-        color: #B0B0B0;
-        font-family: "Poppins", sans-serif;
-        font-size: 20px;
-        font-weight: 500;
-    }
-}
+// @media only screen 
+//   and (min-device-width: 375px) 
+//   and (max-device-width: 667px) 
+//   and (-webkit-min-device-pixel-ratio: 2) { 
+//     .cancelling_terms{
+//         font-family: 'Poppins',sans-serif;
+//         font-size: 14px;
+//         font-weight: 500;
+//         color: #FF0000;
+//         text-align: center;
+//         width: 85%;
+//         margin: 18.5px auto 0px;
+//     }
+//     .heading_description{
+//         text-align: center;
+//         width: 85%;
+//         margin: 9.5px auto 0px;
+//         color: #B0B0B0;
+//         font-family: "Poppins", sans-serif;
+//         font-size: 20px;
+//         font-weight: 500;
+//     }
+// }

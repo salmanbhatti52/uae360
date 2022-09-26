@@ -1,0 +1,14 @@
+<ion-content>
+  <div class="wrapper">
+    <div class="date_time_title">Choose Start Time</div>
+    <!-- <div style="text-align: center;">{{selectedTime}}</div> -->
+    <div class="date_time_box">
+      <ion-datetime presentation="time" (ionChange)="starttime()" size="cover" 
+      [(ngModel)]="selectedTime"></ion-datetime>
+    </div>
+    
+    <ion-button class="login_button" (click)="gotoSignIn()">
+      <span class="btn_text">Done</span>
+    </ion-button>
+  </div>
+</ion-content>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-live-chat',
   templateUrl: './live-chat.page.html',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LiveChatPage implements OnInit {
 
-  constructor() { }
+  constructor(public navCtrlr:NavController) { }
 
   ngOnInit() {
   }
-
+  startLiveChat(){
+    this.navCtrlr.navigateRoot('live-chat-screen');
+  }
 }

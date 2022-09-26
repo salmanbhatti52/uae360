@@ -1,0 +1,84 @@
+ion-header{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+ion-content{
+    font-family: 'Poppins', sans-serif;
+    --background:#FBFBFB !important;
+}
+ion-footer{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+.urbanist{
+    font-family: "Urbanist", sans-serif;
+}
+.poppins{
+    font-family: 'Poppins', sans-serif;
+}
+.header{
+    display: flex;
+    align-items: center;
+    padding: 30px 16px 15px;
+    position: relative;
+}
+.header_title{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: #0F172A;
+    margin: 0px auto;
+}
+.show_status{
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    color: #12D804;
+}
+.bgtoolbar{
+    --background: #FBFBFB;
+}
+.wrapper{
+    padding:15px 16px 20px;
+}
+.car_info_box{
+    display: flex;
+    justify-content: space-between;
+    background: #0F172A;
+    border: 1px solid white;
+    border-radius: 0px 0px 10px 10px;
+    position: absolute;
+    bottom: 0;
+    padding: 9px 12px 8.5px 16px;
+    width: 100%;
+}
+.car_name{
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+    line-height: 1;
+    text-align: left;
+}
+.star_margin{
+    margin-right: 3px;
+}
+.rating_value{
+    font-size: 12px;
+    color: #D4DCE1;
+    font-weight: 400;
+}
+.car2_price{
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+}
+.car2_info_subdiv{
+    display: flex;
+    align-items: center;
+}
+.date_time_label{
+    color: #8000FF;
+    font-family: 'Urbanist',sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+}

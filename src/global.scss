@@ -41,16 +41,17 @@
     background: rgb(15, 23, 42, 0.5);
   }
   .cancel_booking{
-    --height: 51.5%;
+    --height: 56%;
     --max-height: 56%;
     --border-radius: 20px;
     --width: 90%;
     background: rgba(15, 23, 42, 0.5);
   }
+  
   @media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-height: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
+  and (min-device-height: 667px) 
+  // and (max-device-height: 736px) 
+   { 
     .cancel_booking{
       --height: 62%;
       --max-height: 62%;
@@ -58,40 +59,170 @@
       --width: 90%;
       background: rgba(15, 23, 42, 0.5);
     }
+    .give_ratings {
+      --height: 73.5%;
+      --max-height: 74%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+   }
   }
-  // @media only screen 
-  // and (min-device-width: 375px) 
-  // and (max-device-width: 812px) 
-  // and (-webkit-min-device-pixel-ratio: 3) { 
-    
-  // }
   @media only screen 
-  and (min-device-width: 414px) 
-  and (max-device-width: 736px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: portrait) { 
+  and (min-device-height: 720px) 
+  and (max-device-height: 742px) 
+   { 
     .cancel_booking{
-      --height: 57%;
-      --max-height: 57%;
+      --height: 57.5%;
+      --max-height: 62%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .give_ratings {
+      --height: 67%;
+      --max-height: 74%;
       --border-radius: 20px;
       --width: 90%;
       background: rgba(15, 23, 42, 0.5);
     }
   }
   @media only screen 
-  and (min-device-width: 414px) 
-  and (max-device-width: 896px) 
-  and (-webkit-min-device-pixel-ratio: 3) { 
+  and (min-device-height: 780px) 
+  and (max-device-height: 812px) 
+   { 
     .cancel_booking{
-      --height: 47.5%;
-      --max-height: 57%;
+      --height: 52%;
+      --max-height: 62%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .give_ratings {
+      --height: 61%;
+      --max-height: 74%;
       --border-radius: 20px;
       --width: 90%;
       background: rgba(15, 23, 42, 0.5);
     }
   }
+  @media only screen 
+  and (min-device-height: 830px) 
+  and (max-device-height: 852px) 
+   { 
+    .cancel_booking{
+      --height: 50%;
+      --max-height: 62%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .give_ratings {
+      --height: 58.5%;
+      --max-height: 74%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+  }
+  @media only screen 
+  and (min-device-height: 870px) 
+  and (max-device-height: 902px) 
+   { 
+    .cancel_booking{
+      --height: 48%;
+      --max-height: 62%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .give_ratings {
+      --height: 55.5%;
+      --max-height: 74%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+  }
+  @media only screen 
+  and (min-device-height: 903px) 
+  and (max-device-height: 916px) 
+   { 
+    .cancel_booking{
+      --height: 46.5%;
+      --max-height: 62%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .give_ratings {
+      --height: 54.5%;
+      --max-height: 74%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+  }
+  // ====================ipad media query===============
+  @media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .cancel_booking{
+      --height: 35%;
+      --max-height: 38%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .give_ratings {
+      --height: 45.5%;
+      --max-height: 74%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+}
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .cancel_booking{
+      --height: 27%;
+      --max-height: 38%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .give_ratings {
+      --height: 34.5%;
+      --max-height: 74%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
 
+}
+@media only screen 
+  and (min-device-width: 820px) 
+  and (max-device-width: 1180px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .cancel_booking{
+      --height: 31%;
+      --max-height: 38%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .give_ratings {
+      --height: 39%;
+      --max-height: 74%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
 
+}
+  
 // ================international phone input scss=======================
   input:focus{
     outline: none !important;

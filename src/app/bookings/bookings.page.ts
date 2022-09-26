@@ -72,4 +72,8 @@ export class BookingsPage implements OnInit {
     this.navCtrlr.navigateRoot('favorites');
   }
 
+
+  startCarBooking(){
+    this.navCtrlr.navigateRoot('car-booking');
+  }
 }

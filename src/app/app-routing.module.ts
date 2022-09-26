@@ -82,6 +82,22 @@ const routes: Routes = [
   {
     path: 'cancel-booking-popup',
     loadChildren: () => import('./cancel-booking-popup/cancel-booking-popup.module').then( m => m.CancelBookingPopupPageModule)
+  },
+  {
+    path: 'live-chat-screen',
+    loadChildren: () => import('./live-chat-screen/live-chat-screen.module').then( m => m.LiveChatScreenPageModule)
+  },
+  {
+    path: 'car-booking',
+    loadChildren: () => import('./car-booking/car-booking.module').then( m => m.CarBookingPageModule)
+  },
+  {
+    path: 'select-date',
+    loadChildren: () => import('./select-date/select-date.module').then( m => m.SelectDatePageModule)
+  },
+  {
+    path: 'select-time',
+    loadChildren: () => import('./select-time/select-time.module').then( m => m.SelectTimePageModule)
   }
 ];
 

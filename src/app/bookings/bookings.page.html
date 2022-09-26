@@ -17,11 +17,11 @@
       <div style="text-align: center; margin-top: 16px; position: relative;">
         <img style="width: 100%;" src="assets/images/bookings_car.svg" alt="">
         <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="">
-        <div class="rebook_label poppins">Rebook</div>
+        <div class="rebook_label poppins" (click)="startCarBooking()">Rebook</div>
         <div class="car_info_box" >
           <div>
             <div class="car_name poppins">BMW 2 series</div>
-            <div style="text-align: left;line-height: 1;">
+            <div style="text-align: left;line-height: 1;" (click)="openModal()">
               <span>
                 <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
@@ -88,7 +88,7 @@
       <div style="text-align: center; margin-top: 13px; position: relative; ">
         <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
         <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-        <div class="rebook_label urbanist">Rebook</div>
+        <div class="rebook_label urbanist" (click)="startCarBooking()">Rebook</div>
         <div class="car_info_box" >
           <div>
             <div class="car_name urbanist">BMW 2 series</div>
