@@ -32,29 +32,55 @@
         
       </div>
     </div>
-    
-    <ion-datetime id="datetime" presentation="date"></ion-datetime>
 
     <div style="display: flex;justify-content: space-between;margin-top: 14px;">
-      <div style="width: 48%;">
+      <div style="width: 48.5%;">
         <div class="date_time_label">Start Date</div>
-        <div></div>
+        <div class="bookings_field" (click)="openDateModal('startDate')">
+          <img style="margin-right: 10.4px;" src="assets/images/icons/calendar.svg" alt="">
+          <span class="field_text" *ngIf="startDate==undefined">05 Sep, 2022</span>
+          <span class="field_text" style="color: black;" *ngIf="startDate!=''">{{startDate}}</span>
+        </div>
       </div>
-      <div style="width: 48%;">
+      <div style="width: 48.5%;">
         <div class="date_time_label">Start Time</div>
-        <div></div>
+        <div class="bookings_field" (click)="openTimeModal('startTime')">
+          <img style="margin-right: 10.4px;" src="assets/images/icons/clock.svg" alt="">
+          <span class="field_text" *ngIf="startTime==undefined">06:00 am</span>
+          <span class="field_text" style="color: black;" *ngIf="startTime!=''">{{startTime}}</span>
+        </div>
       </div>
     </div>
     <div style="display: flex;justify-content: space-between;margin-top: 14px;">
-      <div style="width: 48%;">
+      <div style="width: 48.5%;">
         <div class="date_time_label">End Date</div>
-        <div></div>
+        <div class="bookings_field" (click)="openDateModal('endDate')">
+          <img style="margin-right: 10.4px;" src="assets/images/icons/calendar.svg" alt="">
+          <span class="field_text" *ngIf="endDate==undefined">05 Sep, 2022</span>
+          <span class="field_text" style="color: black;" *ngIf="endDate!=''">{{endDate}}</span>
+        </div>
       </div>
-      <div style="width: 48%;">
+      <div style="width: 48.5%;">
         <div class="date_time_label">End Time</div>
-        <div></div>
+        <div class="bookings_field" (click)="openTimeModal('endTime')">
+          <img style="margin-right: 10.4px;" src="assets/images/icons/clock.svg" alt="">
+          <span class="field_text" *ngIf="endTime==undefined">06:00 am</span>
+          <span class="field_text" style="color: black;" *ngIf="endTime!=''">{{endTime}}</span>
+        </div>
       </div>
     </div>
+    <div class="license_heading">Driving License</div>
+    <div style="text-align: center;">
+      <img style="margin-top: 7px;" src="assets/images/upload_license_img.svg" alt="">
+    </div>
+    
   </div>
 
 </ion-content>
+<ion-footer class="ion-no-border">
+  <div style="padding: 0px 16px 20px;">
+    <ion-button class="login_button" (click)="showSummary()">
+      <span class="btn_text">Next</span>
+    </ion-button>
+  </div>
+</ion-footer>

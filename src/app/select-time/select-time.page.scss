@@ -1,5 +1,5 @@
 .wrapper{
-    margin: 25px 16px 40px;
+    margin: 25px 16px 25px;
 }
 .date_time_title{
     text-align: center;
@@ -10,15 +10,31 @@
 }
 .date_time_box{
     // width: 80%;
-    margin: 33px auto 0px;
+    margin: 23px auto 0px;
 }
 .login_button{
     --border-radius: 0px;
     --background: #8000FF;
     height: 48px;
     width: 100%;
-    margin: 43px auto 0px;
+    margin: 25px auto 0px;
     --box-shadow:none;
+}
+.selected_time_box{
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    height: 48px;
+    border: 1px solid #8000FF;
+    width: 165px;
+    margin: 20px auto 0px;
+    // justify-content: center;
+}
+.selected_time{
+    font-family: 'Poppins',sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #8D8D8D;
 }
 .btn_text{
     font-family: 'Poppins',sans-serif;

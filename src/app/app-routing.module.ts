@@ -98,6 +98,10 @@ const routes: Routes = [
   {
     path: 'select-time',
     loadChildren: () => import('./select-time/select-time.module').then( m => m.SelectTimePageModule)
+  },
+  {
+    path: 'summary',
+    loadChildren: () => import('./summary/summary.module').then( m => m.SummaryPageModule)
   }
 ];
 

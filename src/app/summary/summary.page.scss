@@ -76,33 +76,32 @@ ion-footer{
     display: flex;
     align-items: center;
 }
-.date_time_label{
-    color: #8000FF;
-    font-family: 'Urbanist',sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-}
-.bookings_field{
-    height: 48px;
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    border:1px solid #EFEFEF;
-    padding: 12px 9px 16px;
-}
-.field_text{
-    font-family: 'Poppins',sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: #8D8D8D;
-}
-.license_heading{
+.cost_price_div{
     margin-top: 18px;
-    color: #000000;
-    font-family: 'Poppins',sans-serif;
+    display: flex;
+    justify-content: space-between;
+}
+.cost_label{
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+.rent_date_label{
     font-size: 14px;
     font-weight: bold;
+    color: black;
 }
+
+
+
+
+
+
+
+
+
+
+
 .login_button{
     --border-radius: 0px;
     --background: #8000FF;
