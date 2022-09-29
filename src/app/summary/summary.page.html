@@ -17,11 +17,11 @@
           <div class="car_name poppins">BMW 2 series</div>
           <div style="text-align: left;line-height: 1;">
             <span>
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="start_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span class="rating_value poppins">269 trips</span>
           </div>
@@ -38,63 +38,56 @@
       <div class="cost_label poppins" style="color: #8000FF;">$203</div>
     </div>
 
-    <div class="rent_date_label urbanist">Rent Dates</div>
-    <div style="display: flex;">
-      <div>
-        <div>
-          <span>Start Date</span> 
-          <!-- <span *ngIf="startDate!= ''">{{startDate}}</span> -->
-          <span *ngIf="startDate == undefined">22 Dec, 2020</span>
-        </div>
+    <div class="sub_heading_label urbanist" style="margin-top: 16px;">Rent Dates</div>
+    <div style="display: flex; margin-top: 7px; justify-content: space-between;">
+      <div class="date_time_box">
+        <span class="date_time_label">Start Date</span> 
+        <span class="date_time_data">{{startDate}}</span>
       </div>
-      <div>
-        <div>
-          <span>End Date</span>
-          <!-- <span *ngIf="endDate!= ''">{{endDate}}</span> -->
-          <span *ngIf="endDate == undefined">22 Dec, 2020</span>
-        </div>
+      <div class="date_time_box">
+        <span class="date_time_label">End Date</span>
+        <span class="date_time_data">{{endDate}}</span>
       </div>
     </div>
 
     
-    <div style="display: flex;">
-      <div>
-        <div>Rent Time</div>
-        <div>
-          <span>Start Time</span>
-          <!-- <span *ngIf="startTime!= ''">{{startTime}}</span> -->
-          <span *ngIf="startTime == undefined">06:00 am</span>
+    <div style="display: flex; margin-top: 14px;justify-content: space-between;">
+      <div style="width: 48.5%;">
+        <div class="sub_heading_label urbanist">Rent Time</div>
+        <div class="date_time_box" style="margin-top:7px; width: 100%;">
+          <span class="date_time_label">Start Time</span>
+          <span class="date_time_data">{{startTime}}</span>
+
         </div>
       </div>
-      <div>
-        <div>Rent Time</div>
-        <div>
-          <span>End Time</span>
-          <span *ngIf="endTime!=undefined">{{endTime}}</span>
-          <span *ngIf="endTime==undefined">06:00 am</span>
+      <div style="width: 48.5%;">
+        <div class="sub_heading_label urbanist">Rent Time</div>
+        <div class="date_time_box" style="margin-top:7px; width: 100%;">
+          <span class="date_time_label">End Time</span>
+          <span class="date_time_data">{{endTime}}</span>
         </div>
       </div>
     </div>
 
-    <div>Location</div>
-    <div style="display: flex;">
-      <div><img src="assets/images/icons/summary_location.svg" alt=""></div>
+    <div class="sub_heading_label urbanist" style="margin-top:14px">Location</div>
+    <div style="display: flex;margin-top:10px;">
+      <div style="margin-right: 10.9px;"><img src="assets/images/icons/summary_location.svg" alt=""></div>
       <div>
-        <div>Pickup</div>
-        <div>Lorium Ipsum, CA</div>
+        <div class="date_time_label">Pickup</div>
+        <div class="location_data">Lorium Ipsum, CA</div>
       </div>
     </div>
 
-    <div>Driving License</div>
-    <div>
-      <img src="assets/images/driving_license.svg" alt="">
+    <div class="sub_heading_label urbanist" style="margin-top:12px">Driving License</div>
+    <div style="text-align: center;">
+      <img style="margin-top: 16px;" src="assets/images/driving_license.svg" alt="">
     </div>
   </div>
 
 </ion-content>
 <ion-footer class="ion-no-border">
   <div style="padding: 0px 16px 20px;">
-    <ion-button class="login_button" (click)="showSummary()">
+    <ion-button class="login_button" (click)="startPaymentProcess()">
       <span class="btn_text">Done</span>
     </ion-button>
   </div>

@@ -102,6 +102,26 @@ const routes: Routes = [
   {
     path: 'summary',
     loadChildren: () => import('./summary/summary.module').then( m => m.SummaryPageModule)
+  },
+  {
+    path: 'payment-details',
+    loadChildren: () => import('./payment-details/payment-details.module').then( m => m.PaymentDetailsPageModule)
+  },
+  {
+    path: 'new-payment-method',
+    loadChildren: () => import('./new-payment-method/new-payment-method.module').then( m => m.NewPaymentMethodPageModule)
+  },
+  {
+    path: 'booked',
+    loadChildren: () => import('./booked/booked.module').then( m => m.BookedPageModule)
+  },
+  {
+    path: 'ratings',
+    loadChildren: () => import('./ratings/ratings.module').then( m => m.RatingsPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   }
 ];
 

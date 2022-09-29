@@ -57,6 +57,18 @@
     background: rgba(15, 23, 42, 0.5);
     --border-radius: 20px 20px 0px 0px;
   }
+  .booked_modal{
+    --height: 41.5%;
+    --max-height: 41.5%;
+    --border-radius: 20px;
+    --width: 90%;
+    background: rgba(15, 23, 42, 0.5);
+  }
+  .add_payment_method{
+    padding-top: 90%;
+    background: rgba(15, 23, 42, 0.5);
+    --border-radius: 20px 20px 0px 0px;
+  }
   @media only screen 
   and (min-device-height: 667px) 
   and (max-device-height: 700px) 
@@ -82,6 +94,18 @@
     }
     .time_modal{
       padding-top: 60%;
+      background: rgba(15, 23, 42, 0.5);
+      --border-radius: 20px 20px 0px 0px;
+    }
+    .booked_modal {
+      --height: 52.5%;
+      --max-height: 52.5%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .add_payment_method {
+      padding-top: 45.5%;
       background: rgba(15, 23, 42, 0.5);
       --border-radius: 20px 20px 0px 0px;
     }
@@ -114,6 +138,18 @@
       background: rgba(15, 23, 42, 0.5);
       --border-radius: 20px 20px 0px 0px;
     }
+    .booked_modal {
+      --height: 47.5%;
+      --max-height: 50.5%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .add_payment_method {
+      padding-top: 58%;
+      background: rgba(15, 23, 42, 0.5);
+      --border-radius: 20px 20px 0px 0px;
+    }
   }
   @media only screen 
   and (min-device-height: 737px) 
@@ -128,6 +164,18 @@
       background: rgba(15, 23, 42, 0.5);
       --border-radius: 20px 20px 0px 0px;
     }
+    .booked_modal {
+      --height: 47.3%;
+      --max-height: 50.5%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .add_payment_method {
+      padding-top: 67%;
+      background: rgba(15, 23, 42, 0.5);
+      --border-radius: 20px 20px 0px 0px;
+  }
   }
   @media only screen 
   and (min-device-height: 780px) 
@@ -154,6 +202,18 @@
       }
     .time_modal{
       padding-top: 97%;
+      background: rgba(15, 23, 42, 0.5);
+      --border-radius: 20px 20px 0px 0px;
+    }
+    .booked_modal {
+      --height: 43%;
+      --max-height: 43%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .add_payment_method {
+      padding-top: 84%;
       background: rgba(15, 23, 42, 0.5);
       --border-radius: 20px 20px 0px 0px;
     }
@@ -215,6 +275,18 @@
       background: rgba(15, 23, 42, 0.5);
       --border-radius: 20px 20px 0px 0px;
     }
+    .booked_modal {
+      --height: 39%;
+      --max-height: 39.5%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .add_payment_method {
+      padding-top: 95%;
+      background: rgba(15, 23, 42, 0.5);
+      --border-radius: 20px 20px 0px 0px;
+    }
   }
   @media only screen 
   and (min-device-height: 903px) 
@@ -241,6 +313,18 @@
       }
     .time_modal{
       padding-top: 110%;
+      background: rgba(15, 23, 42, 0.5);
+      --border-radius: 20px 20px 0px 0px;
+    }
+    .booked_modal {
+      --height: 38.3%;
+      --max-height: 41.5%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .add_payment_method {
+      padding-top: 98%;
       background: rgba(15, 23, 42, 0.5);
       --border-radius: 20px 20px 0px 0px;
     }
@@ -271,6 +355,18 @@
       }
     .time_modal{
       padding-top: 94%;
+      background: rgba(15, 23, 42, 0.5);
+      --border-radius: 20px 20px 0px 0px;
+    }
+    .booked_modal {
+      --height: 34.5%;
+      --max-height: 41.5%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .add_payment_method {
+      padding-top: 80%;
       background: rgba(15, 23, 42, 0.5);
       --border-radius: 20px 20px 0px 0px;
     }
@@ -333,7 +429,18 @@
       background: rgba(15, 23, 42, 0.5);
       --border-radius: 20px 20px 0px 0px;
     }
-
+    .booked_modal {
+      --height: 30.5%;
+      --max-height: 41.5%;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .add_payment_method {
+      padding-top: 93%;
+      background: rgba(15, 23, 42, 0.5);
+      --border-radius: 20px 20px 0px 0px;
+    }
 }
 
 @media only screen 
@@ -349,6 +456,18 @@ and (max-device-height: 1368px){
     background: rgba(15, 23, 42, 0.5);
     --border-radius: 20px 20px 0px 0px;
   }
+  .booked_modal {
+    --height: 25.5%;
+    --max-height: 41.5%;
+    --border-radius: 20px;
+    --width: 90%;
+    background: rgba(15, 23, 42, 0.5);
+  }
+  .add_payment_method {
+    padding-top: 105%;
+    background: rgba(15, 23, 42, 0.5);
+    --border-radius: 20px 20px 0px 0px;
+}
 }
 @media only screen 
 and (min-device-width: 540px)
@@ -363,6 +482,11 @@ and (max-device-height: 720px){
     background: rgba(15, 23, 42, 0.5);
     --border-radius: 20px 20px 0px 0px;
   }
+  .add_payment_method {
+    padding-top: 40%;
+    background: rgba(15, 23, 42, 0.5);
+    --border-radius: 20px 20px 0px 0px;
+}
 }
 // ================international phone input scss=======================
   input:focus{

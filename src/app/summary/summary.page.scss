@@ -86,21 +86,36 @@ ion-footer{
     font-weight: bold;
     color: black;
 }
-.rent_date_label{
+.sub_heading_label{
     font-size: 14px;
     font-weight: bold;
     color: black;
 }
-
-
-
-
-
-
-
-
-
-
+.date_time_label{
+    color: #8000FF;
+    font-family: 'Poppins',sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+}
+.date_time_data{
+    margin-left: 8px;
+    color: #0F172A;
+    font-family: 'Poppins',sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+}
+.location_data{
+    color: #8D8D8D;
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+.date_time_box{
+    width: 48.5%;
+    background: #EFEEEE;
+    border-radius: 10px;
+    padding: 9px 7px 9px 12px;
+}
 
 .login_button{
     --border-radius: 0px;

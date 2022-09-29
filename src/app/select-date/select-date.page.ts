@@ -16,6 +16,10 @@ export class SelectDatePage implements OnInit {
   }
   formattedString(){
     const formattedString = format(parseISO(this.date), 'dd MMM, yyyy');
+    // =====dashed date for summary page=====
+    const dashedDate = format(parseISO(this.date), 'dd-MM-yyyy');
+    console.log(dashedDate);
+    // ============done================
     this.date=formattedString;
     console.log(this.date);
   }

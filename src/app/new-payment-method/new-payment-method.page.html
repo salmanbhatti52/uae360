@@ -1,0 +1,45 @@
+<ion-content>
+  <div class="wrapper">
+    <div class="heading">New Payment Method</div>
+    <div style="margin-top: 20px;">
+      <div class="input_box" [class.active_box]="name_box_active==true">
+        <img class="placeholder_margin" src="../../assets/images/icons/user_icon.svg" alt="">
+        <ion-input (ionInput)="activate('name')" type="text" placeholder="Card holder name"></ion-input>
+      </div>
+      
+      <div class="input_box" style="justify-content: space-between;" [class.active_box]="card_box_active==true">
+        <div style="display: flex;align-items: center;">
+          <img class="placeholder_margin" src="../../assets/images/icons/card_active.svg" alt="">
+          <ion-input  (ionInput)="activate('card_number')" type="tel" placeholder="xxxx xxxx xxxx xxxx"></ion-input>
+        </div>
+        <div>
+          <img src="../../assets/images/icons/visa_icon.svg" alt="">
+        </div>
+      </div>
+      
+      <div style="display: flex;justify-content: space-between;">
+        <div class="input_box" style="width: 48%;" [class.active_box]="cvc_box_active==true">
+          <img class="placeholder_margin" src="../../assets/images/icons/card_not_active.svg" alt="">
+          <ion-input (ionInput)="activate('cvc')" type="tel" placeholder="CVC" ></ion-input>
+        </div>
+        <div class="input_box" style="width: 48%;" [class.active_box]="date_box_active==true">
+          <!-- <img class="placeholder_margin" src="../../assets/images/icons/calendar_icon.svg" alt=""> -->
+          <ion-input  (ionInput)="activate('date')" type="date" placeholder="Expire date"></ion-input>
+        </div>
+      </div>
+      
+      <div class="or_label heading">OR</div>
+      
+      <div style="margin-top: 13px;">
+        <div class="paypal_label">PayPal</div>
+        <div class="input_box" [class.active_box]="email_box_active==true">
+          <ion-input type="email" (ionInput)="activate('email')" placeholder="Enter PayPal email here"></ion-input>
+        </div>
+      </div>
+      
+    </div>
+    <ion-button class="login_button" (click)="savePaymentMethod()">
+      <span class="btn_text">Save</span>
+    </ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,83 @@
+ion-header{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+ion-content{
+    font-family: 'Poppins', sans-serif;
+    --background:#FBFBFB !important;
+}
+ion-footer{
+    font-family: 'Poppins', sans-serif;
+    background-color: #FBFBFB !important;
+}
+.urbanist{
+    font-family: "Urbanist", sans-serif;
+}
+.poppins{
+    font-family: 'Poppins', sans-serif;
+}
+.bgtoolbar{
+    --background: #FBFBFB;
+}
+.header{
+    position: relative;
+    padding: 30px 16px 15px;
+    display: flex;
+    align-items: center;
+}
+.menuicon{
+	color: var(--menu-icon);
+    position: absolute;
+}
+.title{
+    font-size: 20px;
+    font-weight: 700;
+    color: #0F172A;
+    font-family: 'Poppins', sans-serif;
+    margin: 0px auto;
+}
+.wrapper{
+    padding:20px 16px 20px;
+}
+.settings_item{
+    margin-top: 9px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 12px 11px 12px;
+    background: #FBFBFB;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+}
+.ion_toogle{
+    --background-checked: #8000FF;
+    --border-radius: 18.5px;
+    --handle-background-checked: white;
+    --handle-box-shadow: 0px 0px 10px rgb(0 0 0 / 14%);
+    --handle-height: 15px;
+    --handle-width: 15px;
+    --handle-spacing: 2px;
+    height: 19px;
+    width: 31px;
+    padding: 0px;
+}
+.heading{
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+}
+.heading_description{
+    font-family: 'Poppins',sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: #272727;
+}
+.language_label{
+    margin-top: 28px;
+    text-align: center;
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #B1A8B9;
+}

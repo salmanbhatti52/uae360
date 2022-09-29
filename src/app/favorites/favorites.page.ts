@@ -8,6 +8,7 @@ import { NavController } from '@ionic/angular';
 })
 export class FavoritesPage implements OnInit {
   totalNotifications = 6;
+  favorites = 2 ;
   constructor(public navCtrlr:NavController) { }
 
   ngOnInit() {

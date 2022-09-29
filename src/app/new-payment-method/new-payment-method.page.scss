@@ -1,0 +1,68 @@
+ion-content{
+    --background:#FBFBFB !important;
+}
+.urbanist{
+    font-family: "Urbanist", sans-serif;
+}
+.poppins{
+    font-family: 'Poppins', sans-serif;
+}
+.wrapper{
+    padding: 34px 16px 25px;
+}
+.login_button{
+    --border-radius: 0px;
+    --background: #8000FF;
+    height: 48px;
+    width: 100%;
+    margin: 24px auto 0px;
+    --box-shadow:none;
+}
+.btn_text{
+    font-family: 'Poppins',sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    text-transform: capitalize !important;
+}
+.heading{
+    font-family: 'Poppins',sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #0F172A;
+    text-align: center;
+}
+.input_box{
+    margin-top: 10px;
+    border: 1px solid #EFEFEF;
+    display: flex;
+    align-items: center;
+    padding: 0px 16px 0px;
+    height: 48px;
+}
+.active_box{
+    border: 1px solid #8000FF;
+}
+.placeholder_margin{
+    margin-right: 10px;
+}
+ion-input{
+    --background: #FBFBFB;
+    --color: black;
+    --placeholder-color: #B0B0B0;
+    --placeholder-font-weight: 400;
+    font-family: 'Urbanist',sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+.or_label{
+    margin-top: 25px;
+    text-align: center;
+}
+.paypal_label{
+    color: #7E7E7E;
+    font-family: 'Poppins',sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
