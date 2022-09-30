@@ -1,0 +1,85 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bgtoolbar">
+    <div class="header">
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="header_title">Payment</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <div style="text-align: center;">
+      <img src="assets/images/payment Info_img.svg" alt="">
+    </div>
+    <div class="content_heading">Saved Payment Methods</div>
+
+    <div>
+
+      <div class="payment_method_box" style="margin-top: 15.4px;">
+        <div style="display: flex;align-items: center;">
+          <div>
+            <div class="owner_name">Owner name</div>
+            <div class="owner_info">4162 **** **** ****</div>
+          </div>
+        </div>
+        <div style="position: relative;">
+          <span class="delete_btn">
+            <img style="margin-right: 4px;" src="assets/images/icons/recycle_bin.svg" alt="">
+            <span class="delete_label urbanist">Delete</span>
+          </span>
+          <img src="assets/images/icons/master_card.svg" alt="">
+        </div>
+      </div>
+      
+      <div class="payment_method_box" >
+        <div style="display: flex;align-items: center;">
+          <div>
+            <div class="owner_name">Owner name</div>
+            <div class="owner_info">4162 **** **** ****</div>
+          </div>
+        </div>
+        <div style="position: relative;">
+          <span class="delete_btn">
+            <img style="margin-right: 4px;" src="assets/images/icons/recycle_bin.svg" alt="">
+            <span class="delete_label urbanist">Delete</span>
+          </span>
+          <img src="assets/images/icons/visa_icon.svg" alt="">
+        </div>
+      </div>
+
+      <div class="payment_method_box" >
+        <div style="display: flex;align-items: center;">
+          <div>
+            <div class="owner_name">PayPal</div>
+            <div class="owner_info">Arslan********mail.com</div>
+          </div>
+        </div>
+        <div style="position: relative;">
+          <span class="delete_btn">
+            <img style="margin-right: 4px;" src="assets/images/icons/recycle_bin.svg" alt="">
+            <span class="delete_label urbanist">Delete</span>
+          </span>
+          <img src="assets/images/icons/paypal_icon.svg" alt="">
+        </div>
+      </div>
+
+      <!-- <div>
+        <ion-button class="login_button" (click)="startPaymentProcess()">
+          <span class="btn_text">Pay</span>
+        </ion-button>
+        <ion-button class="login_button btn_border" style="--background:#FBFBFB; margin-top: 16px;" (click)="startPaymentProcess()">
+          <span class="btn_text " style="color: #0F172A;">Add New Payment Method</span>
+        </ion-button>
+      </div> -->
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div style="padding: 0px 16px 25px;">
+    <ion-button class="login_button" (click)="addPaymentMethod()">
+      <span class="btn_text">Add New Payment Method</span>
+    </ion-button>
+  </div>
+</ion-footer>

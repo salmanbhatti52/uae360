@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="settings_item">
+    <div class="settings_item" (click)="goForPaymentDetails()">
         <div>
           <div class="heading">Payment Details</div>
           <div class="heading_description">Add your cards for quick payments</div>
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="settings_item">
+    <div class="settings_item" (click)="goForChangePassword()">
         <div>
           <div class="heading">Change Password</div>
           <div class="heading_description">Update your password</div>
@@ -61,16 +61,18 @@
 
     <div class="language_label">Choose your language</div>
     <div style="text-align: center;
-    width: 178px;
+    width: 175px;
     display: flex;
     justify-content: space-between;
     margin: 8px auto;">
-      <ion-button style="width: 80px;height: 32px;">
-        <img style="margin-right: 6.5px;" src="assets/images/icons/language_icon.svg" alt="">
+      <ion-button class="language_btn urbanist english" [class.active_language]="english_language==true" (click)="changeLanguage()" >
+        <!-- <img style="margin-right: 6.5px;" src="assets/images/icons/language_icon.svg" alt="" *ngIf="english_language==true"> -->
+        <!-- <img style="margin-right: 6.5px;" src="assets/images/icons/language_icon_dull.svg" alt="" *ngIf="english_language==false"> -->
         <span>English</span>
       </ion-button>
-      <ion-button disabled="true" style="width: 80px;height: 32px;">
-        <img style="margin-right: 6.5px;" src="assets/images/icons/language_icon.svg" alt="">
+      <ion-button class="language_btn noto_sans_arabic arabic" [class.active_language]="arabic_language==true" (click)="changeLanguage()">
+        <!-- <img style="margin-right: 6.5px;" src="assets/images/icons/language_icon.svg" alt="" *ngIf="arabic_language==true"> -->
+        <!-- <img style="margin-right: 6.5px;" src="assets/images/icons/language_icon_dull.svg" alt="" *ngIf="arabic_language==false"> -->
         <span>العربی</span>
       </ion-button>
     </div>

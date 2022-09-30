@@ -122,6 +122,14 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'change-password',
+    loadChildren: () => import('./change-password/change-password.module').then( m => m.ChangePasswordPageModule)
+  },
+  {
+    path: 'saved-payment-methods',
+    loadChildren: () => import('./saved-payment-methods/saved-payment-methods.module').then( m => m.SavedPaymentMethodsPageModule)
   }
 ];
 

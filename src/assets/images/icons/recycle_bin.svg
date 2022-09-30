@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="_4781812_bin_delete_file_garbage_recycle_icon" data-name="4781812_bin_delete_file_garbage_recycle_icon" transform="translate(0.018 0.018)">
+    <g id="Layer_2" data-name="Layer 2" transform="translate(2.443 1.436)">
+      <path id="Path_1657" data-name="Path 1657" d="M13.546,20.063H9.518A2.518,2.518,0,0,1,7,17.546V11.5a.5.5,0,0,1,1.007,0v6.042a1.511,1.511,0,0,0,1.511,1.511h4.028a1.511,1.511,0,0,0,1.511-1.511V11.5a.5.5,0,1,1,1.007,0v6.042A2.518,2.518,0,0,1,13.546,20.063Z" transform="translate(-5.993 -6.972)" fill="#d93a3a"/>
+      <path id="Path_1658" data-name="Path 1658" d="M15.574,8.007H5.5A.5.5,0,0,1,5.5,7h10.07a.5.5,0,1,1,0,1.007Z" transform="translate(-5 -4.986)" fill="#d93a3a"/>
+      <path id="Path_1659" data-name="Path 1659" d="M15.532,6.021H11.5a.5.5,0,0,1-.5-.5V4.511A1.511,1.511,0,0,1,12.511,3h2.014a1.511,1.511,0,0,1,1.511,1.511V5.518A.5.5,0,0,1,15.532,6.021ZM12.007,5.014h3.021v-.5a.5.5,0,0,0-.5-.5H12.511a.5.5,0,0,0-.5.5Z" transform="translate(-7.979 -3)" fill="#d93a3a"/>
+      <path id="Path_1660" data-name="Path 1660" d="M13.5,18.532a.5.5,0,0,1-.5-.5V14.5a.5.5,0,1,1,1.007,0v3.525A.5.5,0,0,1,13.5,18.532Z" transform="translate(-8.972 -8.461)" fill="#d93a3a"/>
+      <path id="Path_1661" data-name="Path 1661" d="M17.5,18.532a.5.5,0,0,1-.5-.5V14.5a.5.5,0,1,1,1.007,0v3.525A.5.5,0,0,1,17.5,18.532Z" transform="translate(-10.958 -8.461)" fill="#d93a3a"/>
+    </g>
+    <g id="frame" transform="translate(-0.302 -0.302)">
+      <rect id="Rectangle_1218" data-name="Rectangle 1218" width="16" height="16" transform="translate(0.284 0.284)" fill="none"/>
+    </g>
+  </g>
+</svg>
