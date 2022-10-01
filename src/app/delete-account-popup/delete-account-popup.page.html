@@ -1,0 +1,20 @@
+<ion-content>
+  <div class="wrapper">
+    <div style="text-align: right;">
+      <img (click)="justCloseModal()" src="assets/images/icons/close_modal.svg" alt="">
+    </div>
+    <div class="heading">Delete Account</div>
+    <div class="heading_description">Are you sure you want to delete your account?</div>
+    
+    <div style="text-align: center;margin-top: 21px;">
+      <ion-button class="invite_btn" (click)="deleteAccount()">
+        <span class="btn-text" >Yes</span>
+      </ion-button>
+    </div>
+    <div style="text-align: center;margin-top: 16px;">
+      <ion-button class="cancel_btn" (click)="justCloseModal()">
+        <span class="btn2-text" >No</span>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

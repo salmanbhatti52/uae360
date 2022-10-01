@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { DeleteAccountPopupPage } from '../delete-account-popup/delete-account-popup.page';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -8,7 +10,8 @@ import { NavController } from '@ionic/angular';
 export class SettingsPage implements OnInit {
   english_language = true;
   arabic_language = false;
-  constructor(public navCtrlr:NavController) { }
+  constructor(public navCtrlr:NavController,
+    public modalCtrlr:ModalController) { }
 
   ngOnInit() {
   }
@@ -28,5 +31,21 @@ export class SettingsPage implements OnInit {
   }
   goForPaymentDetails(){
     this.navCtrlr.navigateRoot('saved-payment-methods');
+  }
+  editProfile(){
+    this.navCtrlr.navigateRoot('edit-profile');
+  }
+  async deleteAccountModal(){
+    const modal = await this.modalCtrlr.create({
+      component:DeleteAccountPopupPage,
+      showBackdrop:true,
+      cssClass:'delete_account'
+    });
+    modal.present();
+    const {data, role} = await modal.onWillDismiss();
+    if(role == 'delete_account'){
+      const response = data;
+      console.log(response);      
+    }
   }
 }

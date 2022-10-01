@@ -54,10 +54,9 @@ ion-content{
     font-weight: 400;
     --placeholder-font-weight: 400;
     --color: black;
+    height: auto;
+    max-height: 95px;
     overflow: scroll;
-    // height: auto;
-    // max-height: 116px;
-    // overflow: scroll;
 }
 .characters_limit{
     text-align: right;

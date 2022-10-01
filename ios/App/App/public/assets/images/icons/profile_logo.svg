@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="89.413" height="89.413" viewBox="0 0 89.413 89.413">
+  <g id="Group_14153" data-name="Group 14153" transform="translate(-129 -169)">
+    <g id="Mask" transform="translate(129 169)" fill="rgba(255,255,255,0.53)" stroke="#efeeee" stroke-width="2">
+      <circle cx="44.707" cy="44.707" r="44.707" stroke="none"/>
+      <circle cx="44.707" cy="44.707" r="43.707" fill="none"/>
+    </g>
+    <g id="vuesax_bold_frame" data-name="vuesax/bold/frame" transform="translate(156.279 196.279)">
+      <g id="frame" transform="translate(0)">
+        <path id="Vector" d="M6.9,0a6.892,6.892,0,0,0-.174,13.783,1.172,1.172,0,0,1,.32,0h.1A6.893,6.893,0,0,0,6.9,0Z" transform="translate(10.529 2.905)" fill="#efeeee"/>
+        <path id="Vector-2" data-name="Vector" d="M17.6,2.026a14.42,14.42,0,0,0-14.741,0A5.733,5.733,0,0,0,0,6.717a5.684,5.684,0,0,0,2.847,4.662,13.419,13.419,0,0,0,7.378,2.048A13.419,13.419,0,0,0,17.6,11.379a5.73,5.73,0,0,0,2.847-4.691A5.719,5.719,0,0,0,17.6,2.026Z" transform="translate(7.204 18.524)" fill="#efeeee"/>
+        <path id="Vector-3" data-name="Vector" d="M0,0H34.856V34.856H0Z" transform="translate(34.856 34.856) rotate(180)" fill="none" opacity="0"/>
+      </g>
+    </g>
+  </g>
+</svg>

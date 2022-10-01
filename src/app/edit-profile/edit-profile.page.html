@@ -1,0 +1,47 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bgtoolbar">
+    <div class="header">
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="header_title">Edit Profile</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <div class="profile_div">
+      <img src="assets/images/dummy_profile.svg" alt="">
+      <img class="edit_icon" src="../../assets/images/icons/edit_profile.svg" alt="">
+    </div>
+
+    <div style="padding-top: 25px;">
+      <div class="input_label">First Name</div>
+      <ion-input type="text" placeholder="John" [class.active_input]="firstName == true" (ionInput)="activate('first_name')"></ion-input>
+    </div>
+    <div style="padding-top: 12.5px;">
+      <div class="input_label">Last Name</div>
+      <ion-input type="text" placeholder="Doe" [class.active_input]="lastName == true" (ionInput)="activate('last_name')"></ion-input>
+    </div>
+    <div style="padding-top: 12.5px;">
+      <div class="input_label">About</div>
+      <ion-textarea auto-grow="true" rows="2" cols="20" type="text" placeholder="Lorem ipsum" [class.active_input]="about == true" (ionInput)="activate('about')"></ion-textarea>
+    </div>
+    <div style="padding-top: 12.5px;">
+      <div class="input_label">Email</div>
+      <ion-input type="email" placeholder="rose.matthews@mail.com" [class.active_input]="email == true" (ionInput)="activate('email')"></ion-input>
+    </div>
+    <div style="padding-top: 12.5px;">
+      <div class="input_label">Location</div>
+      <ion-input type="text" placeholder="Enter your location here" [class.active_input]="address == true" (ionInput)="activate('address')"></ion-input>
+    </div>
+
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div style="padding: 0px 16px 25px;">
+    <ion-button class="login_button" (click)="updateProfile()">
+      <span class="btn_text">Update</span>
+    </ion-button>
+  </div>
+</ion-footer>

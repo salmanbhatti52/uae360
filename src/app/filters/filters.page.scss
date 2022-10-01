@@ -36,7 +36,11 @@ ion-footer{
 .wrapper{
     padding:16px;
 }
-ion-datetime {
+ion-datetime.md{
+    --background: #FBFBFB;
+    color: #464646 !important;
+}
+ion-datetime.ios{
     color: #464646 !important;
 }
 .date_alignment{
@@ -44,7 +48,6 @@ ion-datetime {
     justify-content: center;
 }
 .date_box{
-    --background: #FBFBFB;
     border-radius: 5px;
     border: 1px solid white;
     box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);

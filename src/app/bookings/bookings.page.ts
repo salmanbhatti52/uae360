@@ -11,6 +11,8 @@ import { CancelBookingPopupPage } from '../cancel-booking-popup/cancel-booking-p
 export class BookingsPage implements OnInit {
   previous_tab = true;
   upcoming_tab = false;
+  previousItemdetails = false;
+  upcomingItemdetails = false;
   constructor(public navCtrlr:NavController,
     public modalCtrlr:ModalController) { }
 
@@ -23,6 +25,8 @@ export class BookingsPage implements OnInit {
       this.upcoming_tab = false;
       console.log(this.previous_tab);
       console.log(this.upcoming_tab);
+      this.previousItemdetails = false;
+      this.upcomingItemdetails = false;
     }
   }
   upcomingTab(tabVal){
@@ -32,6 +36,8 @@ export class BookingsPage implements OnInit {
       this.previous_tab = false;
       console.log(this.upcoming_tab);
       console.log(this.previous_tab);
+      this.previousItemdetails = false;
+      this.upcomingItemdetails = false;
     }
   }
   async openModal() {
@@ -72,6 +78,18 @@ export class BookingsPage implements OnInit {
     this.navCtrlr.navigateRoot('favorites');
   }
 
+  showDetails(){
+    if(this.previousItemdetails == true || this.upcomingItemdetails == true){
+      this.previousItemdetails = false;
+      this.upcomingItemdetails = false;
+    }
+    else if(this.previousItemdetails == false || this.upcomingItemdetails == false){
+      this.previousItemdetails = true;
+      this.upcomingItemdetails = true;
+
+    }
+    
+  }
 
   startCarBooking(){
     this.navCtrlr.navigateRoot('car-booking');

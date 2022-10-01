@@ -15,6 +15,13 @@ ion-content{
     // width: 80%;
     margin: 22px auto 0px;
 }
+ion-datetime.md{
+    --background: #FBFBFB;
+    color: #464646;
+}
+ion-datetime.ios{
+    color: #464646;
+}
 .login_button{
     --border-radius: 0px;
     --background: #8000FF;

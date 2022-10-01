@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div class="settings_item">
+    <div class="settings_item" (click)="editProfile()">
         <div>
           <div class="heading">Profile</div>
           <div class="heading_description">Update your profile</div>
@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <div class="settings_item">
+    <div class="settings_item" (click)="deleteAccountModal()">
         <div>
           <div class="heading" style="color: #FF0000;">Delete Account</div>
           <div class="heading_description">Delete your account</div>
@@ -60,11 +60,7 @@
     </div>
 
     <div class="language_label">Choose your language</div>
-    <div style="text-align: center;
-    width: 175px;
-    display: flex;
-    justify-content: space-between;
-    margin: 8px auto;">
+    <div class="language_div" >
       <ion-button class="language_btn urbanist english" [class.active_language]="english_language==true" (click)="changeLanguage()" >
         <!-- <img style="margin-right: 6.5px;" src="assets/images/icons/language_icon.svg" alt="" *ngIf="english_language==true"> -->
         <!-- <img style="margin-right: 6.5px;" src="assets/images/icons/language_icon_dull.svg" alt="" *ngIf="english_language==false"> -->

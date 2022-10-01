@@ -19,4 +19,10 @@ export class CarDetailsPage implements OnInit {
   gotoRatings(){
     this.navCtrlr.navigateRoot('ratings');
   }
+  startCarBooking(){
+    this.navCtrlr.navigateRoot('car-booking');
+  }
+  startChatwithOwner(){
+    this.navCtrlr.navigateRoot('message-owner-side');
+  }
 }

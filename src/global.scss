@@ -15,6 +15,7 @@
 
   ion-input,ion-textarea,ion-label{
     font-family: 'Poppins', sans-serif;
+    --placeholder-opacity: 0px !important;
   }
 
   .otp-input{
@@ -34,460 +35,579 @@
     border: solid 1px #8000FF !important;
   }
   .give_ratings{
-    --height: 62%;
-    --max-height:62%;
+    --height: 470px;
     --border-radius: 20px;
     --width: 90%;
     background: rgb(15, 23, 42, 0.5);
   }
   .cancel_booking{
-    --height: 53%;
-    --max-height: 56%;
+    --height: 420px;
     --border-radius: 20px;
     --width: 90%;
     background: rgba(15, 23, 42, 0.5);
   }
   .date_modal{
-    padding-top: 80%;
+    // padding-top: 88%;
+    --width: 90%;
+    --height: 540px;
     background: rgba(15, 23, 42, 0.5);
-    --border-radius: 20px 20px 0px 0px;
+    --border-radius: 20px 20px 20px 20px;
   }
   .time_modal{
-    padding-top: 100%;
+    // padding-top: 100%;
+    --width: 90%;
+    --height: 455px;
     background: rgba(15, 23, 42, 0.5);
-    --border-radius: 20px 20px 0px 0px;
+    --border-radius: 20px 20px 20px 20px;
   }
   .booked_modal{
-    --height: 41.5%;
-    --max-height: 41.5%;
+    --height: 345px;
     --border-radius: 20px;
     --width: 90%;
     background: rgba(15, 23, 42, 0.5);
   }
   .add_payment_method{
-    padding-top: 90%;
+    --width: 90%;
+    --height: 505px;
     background: rgba(15, 23, 42, 0.5);
-    --border-radius: 20px 20px 0px 0px;
+    --border-radius: 20px 20px 20px 20px;
   }
-  @media only screen 
-  and (min-device-height: 667px) 
-  and (max-device-height: 700px) 
-   { 
-    .cancel_booking{
-      --height: 62%;
-      --max-height: 62%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .give_ratings {
-      --height: 73.5%;
-      --max-height: 74%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-   }
-   .date_modal{
-    padding-top: 37%;
-    background: rgba(15, 23, 42, 0.5);
-    --border-radius: 20px 20px 0px 0px;
-    }
-    .time_modal{
-      padding-top: 60%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-    .booked_modal {
-      --height: 52.5%;
-      --max-height: 52.5%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .add_payment_method {
-      padding-top: 45.5%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
+  .expiry_date{
+    --width: 90%;
+    --height: 505px;
+    // background: rgba(15, 23, 42, 0.5);
+    --border-radius: 20px 20px 20px 20px;
   }
-  @media only screen 
-  and (min-device-height: 720px) 
-  and (max-device-height: 736px) 
-   { 
-    .cancel_booking{
-      --height: 57.5%;
-      --max-height: 62%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .give_ratings {
-      --height: 67%;
-      --max-height: 74%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .date_modal{
-      padding-top: 50%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-      }
-    .time_modal{
-      padding-top: 70%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-    .booked_modal {
-      --height: 47.5%;
-      --max-height: 50.5%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .add_payment_method {
-      padding-top: 58%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-  }
-  @media only screen 
-  and (min-device-height: 737px) 
-  and (max-device-height: 742px) {
-    .date_modal{
-      padding-top: 60%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-      }
-    .time_modal{
-      padding-top: 80%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-    .booked_modal {
-      --height: 47.3%;
-      --max-height: 50.5%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .add_payment_method {
-      padding-top: 67%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-  }
-  }
-  @media only screen 
-  and (min-device-height: 780px) 
-  and (max-device-height: 812px) 
-   { 
-    .cancel_booking{
-      --height: 52%;
-      --max-height: 62%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .give_ratings {
-      --height: 61%;
-      --max-height: 74%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .date_modal{
-      padding-top: 75%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-      }
-    .time_modal{
-      padding-top: 97%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-    .booked_modal {
-      --height: 43%;
-      --max-height: 43%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .add_payment_method {
-      padding-top: 84%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-  }
-  @media only screen 
-  and (min-device-height: 830px) 
-  and (max-device-height: 852px) 
-   { 
-    .cancel_booking{
-      --height: 50%;
-      --max-height: 62%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .give_ratings {
-      --height: 58.5%;
-      --max-height: 74%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .date_modal{
-      padding-top: 80%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-      }
-    .time_modal{
-      padding-top: 100%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-  }
-  @media only screen 
-  and (min-device-height: 870px) 
-  and (max-device-height: 902px) 
-   { 
-    .cancel_booking{
-      --height: 48%;
-      --max-height: 62%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .give_ratings {
-      --height: 55.5%;
-      --max-height: 74%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .date_modal{
-      padding-top: 88%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-      }
-    .time_modal{
-      padding-top: 106%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-    .booked_modal {
-      --height: 39%;
-      --max-height: 39.5%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .add_payment_method {
-      padding-top: 95%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-  }
-  @media only screen 
-  and (min-device-height: 903px) 
-  and (max-device-height: 916px) 
-   { 
-    .cancel_booking{
-      --height: 46.5%;
-      --max-height: 62%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .give_ratings {
-      --height: 54.5%;
-      --max-height: 74%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .date_modal{
-      padding-top: 93%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-      }
-    .time_modal{
-      padding-top: 110%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-    .booked_modal {
-      --height: 38.3%;
-      --max-height: 41.5%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .add_payment_method {
-      padding-top: 98%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-  }
-  // ====================ipad media query===============
-  @media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 1) {
-    .cancel_booking{
-      --height: 35%;
-      --max-height: 38%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .give_ratings {
-      --height: 45.5%;
-      --max-height: 74%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .date_modal{
-      padding-top: 74%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-      }
-    .time_modal{
-      padding-top: 94%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-    .booked_modal {
-      --height: 34.5%;
-      --max-height: 41.5%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .add_payment_method {
-      padding-top: 80%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-}
-@media only screen 
-  and (min-device-width: 1024px) 
-  and (max-device-width: 1366px)
-  and (-webkit-min-device-pixel-ratio: 2) {
-    .cancel_booking{
-      --height: 27%;
-      --max-height: 38%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .give_ratings {
-      --height: 34.5%;
-      --max-height: 74%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .date_modal{
-      padding-top: 75%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-      }
-    .time_modal{
-      padding-top: 97%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-
-}
-@media only screen 
-  and (min-device-width: 820px) 
-  and (max-device-width: 1180px)
-  and (-webkit-min-device-pixel-ratio: 2) {
-    .cancel_booking{
-      --height: 31%;
-      --max-height: 38%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .give_ratings {
-      --height: 39%;
-      --max-height: 74%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .date_modal{
-      padding-top: 85%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-      }
-    .time_modal{
-      padding-top: 105%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-    .booked_modal {
-      --height: 30.5%;
-      --max-height: 41.5%;
-      --border-radius: 20px;
-      --width: 90%;
-      background: rgba(15, 23, 42, 0.5);
-    }
-    .add_payment_method {
-      padding-top: 93%;
-      background: rgba(15, 23, 42, 0.5);
-      --border-radius: 20px 20px 0px 0px;
-    }
-}
-
-@media only screen 
-and (min-device-width: 912px)
-and (max-device-height: 1368px){
-  .date_modal{
-    padding-top: 95%;
-    background: rgba(15, 23, 42, 0.5);
-    --border-radius: 20px 20px 0px 0px;
-    }
-  .time_modal{
-    padding-top: 115%;
-    background: rgba(15, 23, 42, 0.5);
-    --border-radius: 20px 20px 0px 0px;
-  }
-  .booked_modal {
-    --height: 25.5%;
-    --max-height: 41.5%;
+  // .expiry_date.ios{
+  //   --width: 90%;
+  //   --height: 420px;
+  //   // background: rgba(15, 23, 42, 0.5);
+  //   --border-radius: 20px 20px 20px 20px;
+  // }
+  .delete_account {
+    --height: 330px;
     --border-radius: 20px;
     --width: 90%;
     background: rgba(15, 23, 42, 0.5);
   }
-  .add_payment_method {
-    padding-top: 105%;
-    background: rgba(15, 23, 42, 0.5);
-    --border-radius: 20px 20px 0px 0px;
-}
-}
-@media only screen 
-and (min-device-width: 540px)
-and (max-device-height: 720px){
-  .date_modal{
-    padding-top: 36%;
-    background: rgba(15, 23, 42, 0.5);
-    --border-radius: 20px 20px 0px 0px;
-    }
-  .time_modal{
-    padding-top: 50%;
-    background: rgba(15, 23, 42, 0.5);
-    --border-radius: 20px 20px 0px 0px;
+  @media only screen and (min-width: 540px){
+    .give_ratings {
+      --height: 440px;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
   }
-  .add_payment_method {
-    padding-top: 40%;
-    background: rgba(15, 23, 42, 0.5);
-    --border-radius: 20px 20px 0px 0px;
-}
-}
+  }
+
+  @media only screen and (min-width: 632px){
+    .cancel_booking {
+      --height: 365px;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .give_ratings {
+      --height: 445px;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    .delete_account {
+      --height: 310px;
+      --border-radius: 20px;
+      --width: 90%;
+      background: rgba(15, 23, 42, 0.5);
+  }
+  }
+//   @media only screen 
+//   and (min-device-height: 667px) 
+//   and (max-device-height: 700px) 
+//    { 
+//     .cancel_booking{
+//       --height: 62%;
+//       --max-height: 62%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .give_ratings {
+//       --height: 73.5%;
+//       --max-height: 74%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//    }
+//     .date_modal{
+//       padding-top: 37%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .time_modal{
+//       padding-top: 60%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .booked_modal {
+//       --height: 52.5%;
+//       --max-height: 52.5%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .add_payment_method {
+//       padding-top: 45.5%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .delete_account{
+//       --height: 50%;
+//       --max-height: 50%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//   }
+//   @media only screen 
+//   and (min-device-height: 720px) 
+//   and (max-device-height: 736px) 
+//    { 
+//     .cancel_booking{
+//       --height: 57.5%;
+//       --max-height: 62%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .give_ratings {
+//       --height: 67%;
+//       --max-height: 74%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .date_modal{
+//       padding-top: 50%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .time_modal{
+//       padding-top: 70%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .booked_modal {
+//       --height: 47.5%;
+//       --max-height: 50.5%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .add_payment_method {
+//       padding-top: 58%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .delete_account{
+//       --height: 46%;
+//       --max-height: 46%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//   }
+//   @media only screen 
+//   and (min-device-height: 737px) 
+//   and (max-device-height: 742px) {
+//     .date_modal{
+//       padding-top: 60%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//       }
+//     .time_modal{
+//       padding-top: 80%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .booked_modal {
+//       --height: 47.3%;
+//       --max-height: 50.5%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .add_payment_method {
+//       padding-top: 67%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .delete_account{
+//       --height: 46%;
+//       --max-height: 46%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//   }
+//   @media only screen 
+//   and (min-device-height: 780px) 
+//   and (max-device-height: 812px) 
+//    { 
+//     .cancel_booking{
+//       --height: 52%;
+//       --max-height: 62%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .give_ratings {
+//       --height: 61%;
+//       --max-height: 74%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .date_modal{
+//       padding-top: 75%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//       }
+//     .time_modal{
+//       padding-top: 97%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .booked_modal {
+//       --height: 43%;
+//       --max-height: 43%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .add_payment_method {
+//       padding-top: 84%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .delete_account{
+//       --height: 42%;
+//       --max-height: 42%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//   }
+//   @media only screen 
+//   and (min-device-height: 830px) 
+//   and (max-device-height: 852px) 
+//    { 
+//     .cancel_booking{
+//       --height: 50%;
+//       --max-height: 62%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .give_ratings {
+//       --height: 58.5%;
+//       --max-height: 74%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .date_modal{
+//       padding-top: 80%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//       }
+//     .time_modal{
+//       padding-top: 100%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//   }
+//   @media only screen 
+//   and (min-device-height: 870px) 
+//   and (max-device-height: 902px) 
+//    { 
+//     .cancel_booking{
+//       --height: 48%;
+//       --max-height: 62%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .give_ratings {
+//       --height: 55.5%;
+//       --max-height: 74%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .date_modal{
+//       padding-top: 88%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//       }
+//     .time_modal{
+//       padding-top: 106%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .booked_modal {
+//       --height: 39%;
+//       --max-height: 39.5%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .add_payment_method {
+//       padding-top: 95%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .delete_account{
+//       --height: 38%;
+//       --max-height: 38%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//   }
+//   @media only screen 
+//   and (min-device-height: 903px) 
+//   and (max-device-height: 916px) 
+//    { 
+//     .cancel_booking{
+//       --height: 46.5%;
+//       --max-height: 62%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .give_ratings {
+//       --height: 54.5%;
+//       --max-height: 74%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .date_modal{
+//       padding-top: 93%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//       }
+//     .time_modal{
+//       padding-top: 110%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .booked_modal {
+//       --height: 38.3%;
+//       --max-height: 41.5%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .add_payment_method {
+//       padding-top: 98%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .delete_account{
+//       --height: 38%;
+//       --max-height: 38%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//   }
+//   // ====================ipad media query===============
+//   @media only screen 
+//   and (min-device-width: 768px) 
+//   and (max-device-width: 1024px) 
+//   and (-webkit-min-device-pixel-ratio: 1) {
+//     .cancel_booking{
+//       --height: 35%;
+//       --max-height: 38%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .give_ratings {
+//       --height: 45.5%;
+//       --max-height: 74%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .date_modal{
+//       padding-top: 74%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//       }
+//     .time_modal{
+//       padding-top: 94%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .booked_modal {
+//       --height: 34.5%;
+//       --max-height: 41.5%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .add_payment_method {
+//       padding-top: 80%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .delete_account{
+//       --height: 32%;
+//       --max-height: 32%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+// }
+// @media only screen 
+//   and (min-device-width: 1024px) 
+//   and (max-device-width: 1366px)
+//   and (-webkit-min-device-pixel-ratio: 2) {
+//     .cancel_booking{
+//       --height: 27%;
+//       --max-height: 38%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .give_ratings {
+//       --height: 34.5%;
+//       --max-height: 74%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .date_modal{
+//       padding-top: 75%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//       }
+//     .time_modal{
+//       padding-top: 97%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .delete_account{
+//       --height: 24%;
+//       --max-height: 24%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+
+// }
+// @media only screen 
+//   and (min-device-width: 820px) 
+//   and (max-device-width: 1180px)
+//   and (-webkit-min-device-pixel-ratio: 2) {
+//     .cancel_booking{
+//       --height: 31%;
+//       --max-height: 38%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .give_ratings {
+//       --height: 39%;
+//       --max-height: 74%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .date_modal{
+//       padding-top: 85%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//       }
+//     .time_modal{
+//       padding-top: 105%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .booked_modal {
+//       --height: 30.5%;
+//       --max-height: 41.5%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+//     .add_payment_method {
+//       padding-top: 93%;
+//       background: rgba(15, 23, 42, 0.5);
+//       --border-radius: 20px 20px 0px 0px;
+//     }
+//     .delete_account{
+//       --height: 28%;
+//       --max-height: 28%;
+//       --border-radius: 20px;
+//       --width: 90%;
+//       background: rgba(15, 23, 42, 0.5);
+//     }
+// }
+
+// @media only screen 
+// and (min-device-width: 912px)
+// and (max-device-height: 1368px){
+//   .date_modal{
+//     padding-top: 95%;
+//     background: rgba(15, 23, 42, 0.5);
+//     --border-radius: 20px 20px 0px 0px;
+//     }
+//   .time_modal{
+//     padding-top: 115%;
+//     background: rgba(15, 23, 42, 0.5);
+//     --border-radius: 20px 20px 0px 0px;
+//   }
+//   .booked_modal {
+//     --height: 25.5%;
+//     --max-height: 41.5%;
+//     --border-radius: 20px;
+//     --width: 90%;
+//     background: rgba(15, 23, 42, 0.5);
+//   }
+//   .add_payment_method {
+//     padding-top: 105%;
+//     background: rgba(15, 23, 42, 0.5);
+//     --border-radius: 20px 20px 0px 0px;
+//   }
+//   .delete_account{
+//     --height: 24%;
+//     --max-height: 24%;
+//     --border-radius: 20px;
+//     --width: 90%;
+//     background: rgba(15, 23, 42, 0.5);
+//   }
+// }
+// @media only screen 
+// and (min-device-width: 540px)
+// and (max-device-height: 720px){
+//   .date_modal{
+//     padding-top: 36%;
+//     background: rgba(15, 23, 42, 0.5);
+//     --border-radius: 20px 20px 0px 0px;
+//     }
+//   .time_modal{
+//     padding-top: 50%;
+//     background: rgba(15, 23, 42, 0.5);
+//     --border-radius: 20px 20px 0px 0px;
+//   }
+//   .add_payment_method {
+//     padding-top: 40%;
+//     background: rgba(15, 23, 42, 0.5);
+//     --border-radius: 20px 20px 0px 0px;
+// }
+// }
 // ================international phone input scss=======================
   input:focus{
     outline: none !important;

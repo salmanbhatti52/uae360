@@ -4,7 +4,7 @@
       <img (click)="goBack()" src="assets/images/icons/back_arrow.svg" alt="">
       <div class="title">BMW 2 series</div>
       <div>
-        <img src="assets/images/icons/chat.svg" alt="">
+        <img (click)="startChatwithOwner()" src="assets/images/icons/chat.svg" alt="">
       </div>
     </div>
   </ion-toolbar>
@@ -85,7 +85,7 @@
 <ion-footer class="ion-no-border">
     <div style="margin: 10px 0px 15px;">
       <div style="text-align: center;">
-        <ion-button class="invite_btn">
+        <ion-button class="invite_btn" (click)="startCarBooking()">
           <span class="btn-text">Book Now</span>
         </ion-button>
       </div>

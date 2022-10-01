@@ -130,6 +130,18 @@ const routes: Routes = [
   {
     path: 'saved-payment-methods',
     loadChildren: () => import('./saved-payment-methods/saved-payment-methods.module').then( m => m.SavedPaymentMethodsPageModule)
+  },
+  {
+    path: 'edit-profile',
+    loadChildren: () => import('./edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+  },
+  {
+    path: 'delete-account-popup',
+    loadChildren: () => import('./delete-account-popup/delete-account-popup.module').then( m => m.DeleteAccountPopupPageModule)
+  },
+  {
+    path: 'expiry-date-popup',
+    loadChildren: () => import('./expiry-date-popup/expiry-date-popup.module').then( m => m.ExpiryDatePopupPageModule)
   }
 ];
 

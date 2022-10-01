@@ -22,9 +22,10 @@
           <img class="placeholder_margin" src="../../assets/images/icons/card_not_active.svg" alt="">
           <ion-input (ionInput)="activate('cvc')" type="tel" placeholder="CVC" ></ion-input>
         </div>
-        <div class="input_box" style="width: 48%;" [class.active_box]="date_box_active==true">
-          <!-- <img class="placeholder_margin" src="../../assets/images/icons/calendar_icon.svg" alt=""> -->
-          <ion-input  (ionInput)="activate('date')" type="date" placeholder="Expire date"></ion-input>
+        <div class="input_box" style="width: 48%; padding: 0px 6px 0px 14px;" [class.active_box]="date_box_active==true">
+          <img class="placeholder_margin" src="../../assets/images/icons/calendar_icon.svg" alt="">
+          <div value="" (click)="openDateModal()" style="color: black;">{{expiryDate}}</div>
+          
         </div>
       </div>
       

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { format, parseISO } from 'date-fns';
+import { ExpiryDatePopupPage } from '../expiry-date-popup/expiry-date-popup.page';
+
+
 @Component({
   selector: 'app-new-payment-method',
   templateUrl: './new-payment-method.page.html',
@@ -12,9 +16,23 @@ export class NewPaymentMethodPage implements OnInit {
   date_box_active = false;
   email_box_active = false;
   data: any;
+  expiryDate = 'Expiry date';
   constructor(public modalCtrlr:ModalController) { }
 
   ngOnInit() {
+  }
+  async openDateModal(){
+    const modal = await this.modalCtrlr.create({
+      component: ExpiryDatePopupPage, 
+      showBackdrop: true,
+      cssClass: 'expiry_date'
+    })
+    modal.present();
+    const {data, role} = await modal.onWillDismiss();
+    if(role == 'expiry_date'){
+      this.expiryDate = data;
+    }
+    this.activate('date');
   }
   activate(box_val){
     if(box_val == 'name'){
