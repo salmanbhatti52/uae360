@@ -22,17 +22,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let BookedPage = class BookedPage {
-    constructor(modalCtrlr) {
+    constructor(modalCtrlr, navCtrlr) {
         this.modalCtrlr = modalCtrlr;
+        this.navCtrlr = navCtrlr;
     }
     ngOnInit() {
     }
     closeModal() {
         this.modalCtrlr.dismiss();
+        this.navCtrlr.navigateRoot('bookings');
     }
 };
 BookedPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ModalController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ModalController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.NavController }
 ];
 BookedPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({

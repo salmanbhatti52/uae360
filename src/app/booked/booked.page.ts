@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 @Component({
   selector: 'app-booked',
   templateUrl: './booked.page.html',
@@ -7,11 +7,13 @@ import { ModalController } from '@ionic/angular';
 })
 export class BookedPage implements OnInit {
 
-  constructor(public modalCtrlr:ModalController) { }
+  constructor(public modalCtrlr:ModalController,
+    public navCtrlr:NavController) { }
 
   ngOnInit() {
   }
   closeModal(){
     this.modalCtrlr.dismiss();
+    this.navCtrlr.navigateRoot('bookings');
   }
 }

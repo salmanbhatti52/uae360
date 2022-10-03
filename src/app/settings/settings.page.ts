@@ -10,10 +10,19 @@ import { DeleteAccountPopupPage } from '../delete-account-popup/delete-account-p
 export class SettingsPage implements OnInit {
   english_language = true;
   arabic_language = false;
+  toggleVal = true;
   constructor(public navCtrlr:NavController,
     public modalCtrlr:ModalController) { }
 
   ngOnInit() {
+  }
+  toggleNotifications(){
+    if(this.toggleVal == true){
+      this.toggleVal = false;
+    }
+    else{
+      this.toggleVal = true;
+    }
   }
   changeLanguage(){
     if(this.english_language == true){
