@@ -20,11 +20,23 @@
 
     <div class="name_price_box">
       <div class="car_name">BMW 2 series</div>
-      <div>
+      <div style="display: flex;align-items: baseline;">
         <span class="price_val" style="font-size:11px">$</span>
         <span class="price_val" style="font-size:32px">26</span>
-        <span class="per_hour" style="font-size: 10px;">/Hour</span>
+        <span class="per_hour" style="font-size: 10px;">/</span>
+        <div (click)="displayCategories()">
+          {{categoryVal}}
+          <img  src="assets/images/icons/dropdown_icon.svg" alt="">
+          <div *ngIf="showCategories==true">
+            <div *ngFor="let type of rentCategories" (click)="selectedCategory(type.category)">
+              {{type.category}}
+            </div> 
+          </div>
+          
+          
+        </div>
       </div>
+
     </div>
 
     <div class="box_styling">

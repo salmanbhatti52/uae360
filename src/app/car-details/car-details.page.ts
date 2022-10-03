@@ -7,7 +7,9 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./car-details.page.scss'],
 })
 export class CarDetailsPage implements OnInit {
-
+  showCategories = false;
+  rentCategories = [{category:'day'},{category:'Month'}]
+  categoryVal = 'day';
   constructor(public location:Location,
     public navCtrlr:NavController) { }
 
@@ -15,6 +17,18 @@ export class CarDetailsPage implements OnInit {
   }
   goBack(){
     this.location.back();
+  }
+  displayCategories(){
+    if(this.showCategories== false){
+      this.showCategories = true;
+    }
+    else{
+      this.showCategories = false;
+    }
+  }
+  selectedCategory(val){
+    console.log(val);
+    this.categoryVal = val;
   }
   gotoRatings(){
     this.navCtrlr.navigateRoot('ratings');

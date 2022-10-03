@@ -28,7 +28,7 @@
 
   </div>
       <div class="items_label">What are you looking for?</div>
-      <div style="padding-left: 11px; margin-top:5px">
+      <div style="padding-left: 11px; ">
         <ion-slides pager="false" [options]="slideOpts2">
           <ion-slide class="categories">
             <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem(1)">
@@ -103,7 +103,35 @@
         </ion-card>
       </ion-slide>
     </ion-slides>
-
+    <ion-slides pager="false" [options]="slideOpts">
+      <ion-slide *ngFor="let pickup of pickups;" style="width: 48%; height: 100%;">
+        <ion-card class="card" (click)="gotoCarDetails()">
+          <img style="width: 100%;" src="{{pickup.img}}" alt="">
+          <div style="padding: 5px 7px 7.5px 8px;">
+            <div>
+              <div class="card_title">{{pickup.name}}</div>
+            </div>
+            <div class="card_content">
+              <div>
+                <div>
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                </div>
+                <div class="total_trips">{{pickup.total_trips}} trips</div>
+              </div>
+              <div>
+                <div style="line-height: 1.2;"><span class="price_span" style="font-size: 11px;">$</span><span class="price_span" style="font-size: 32px;">{{pickup.price}}</span> </div>
+                <div class="per_hour">Per Hour</div>
+              </div>
+            </div>
+          </div>
+          
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
   </div>
 </ion-content>
 <ion-footer class="ion-no-border">
