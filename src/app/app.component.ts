@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MenuController,NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import {SplashScreen} from '@capacitor/splash-screen';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -17,7 +19,32 @@ export class AppComponent {
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(public menu:MenuController,
     public router:Router,
-    public navCtrl:NavController) {}
+    public navCtrl:NavController,public platform:Platform) {
+      // this.platform.ready().then(async () => {
+      //   setTimeout(()=>{
+      //      SplashScreen.hide({
+      //        fadeOutDuration: 1000
+      //      });
+      //    }, 2000)
+  //  });
+
+
+      // setTimeout(() => {
+      //   SplashScreen.hide();
+      // }, 3000);
+    }
+
+  ngOnInit() {
+
+    this.platform.ready().then(() => {
+      setTimeout(()=>{
+        SplashScreen.hide({
+          fadeOutDuration: 1000
+        });
+      },10000)
+      
+    })
+  }
   closeMenu(){
     this.menu.close();
   }
@@ -25,4 +52,5 @@ export class AppComponent {
     this.menu.toggle();
     this.navCtrl.navigateForward('sign-in');
   }
+  
 }

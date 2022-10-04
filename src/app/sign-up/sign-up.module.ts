@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { SignUpPageRoutingModule } from './sign-up-routing.module';
@@ -14,7 +14,8 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     FormsModule,
     IonicModule,
     SignUpPageRoutingModule,
-    Ng2TelInputModule
+    Ng2TelInputModule,
+    ReactiveFormsModule
   ],
   declarations: [SignUpPage]
 })

@@ -13,7 +13,7 @@ ion-footer{
 .header{
     display: flex;
     align-items: center;
-    padding: 30px 16px 15px;
+    padding: 30px 16px 0px;
     position: relative;
 }
 .header_title{
@@ -27,12 +27,12 @@ ion-footer{
     --background: #FBFBFB;
 }
 .wrapper{
-    padding:15px 0px 20px;
+    padding:13px 0px 20px;
 }
 .notification_box{
     display: flex;
     align-items: center;
-    padding: 8.8px 8.9px 13px 16px;
+    padding: 8.8px 8px 13px 12px;
 }
 .notification_text{
     font-size: 15px;

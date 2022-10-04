@@ -37,6 +37,7 @@ ion-footer{
     box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
     padding: 11px 12px 10px;
     border-radius: 5px;
+    height: 55px;
 }
 .car_name{
     font-size: 24px;
@@ -49,17 +50,33 @@ ion-footer{
     font-family: "Urbanist", sans-serif;
     font-weight: 600;
 }
-.per_hour{
+.category_label{
     // margin-left: 8px;
     color: black;
     font-family: "Urbanist", sans-serif;
+    font-size: 10px;
     font-weight: 500;
+}
+.categories{
+    width: 100px;
+    position: absolute;
+    z-index: 1;
+    background: #FBFBFB;
+    top: 20px;
+    right: 0px;
+    padding: 4px 8px;
+    // border: 1px solid #0F172A;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+}
+.rotate_icon{
+    transform: rotate(180deg);
 }
 .box_styling{
     background: #FBFBFB;
     margin-top: 10px;
     box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
-    padding: 11px 12px 10px;
+    padding: 8px 9px;
     border-radius: 5px;
 }
 .box_heading{
@@ -69,7 +86,7 @@ ion-footer{
     font-family: "Poppins", sans-serif;
 }
 .box_description{
-    margin-top: 7px;
+    margin-top: 5px;
     font-size: 12px;
     font-weight: 400;
     color: black;
@@ -79,7 +96,7 @@ ion-footer{
     overflow: hidden;
 }
 .box_sub_heading{
-    margin-top: 4px;
+    margin-top: 3px;
     font-size: 12px;
     font-weight: 600;
     color: #8000FF;

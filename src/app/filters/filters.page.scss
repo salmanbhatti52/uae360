@@ -14,7 +14,7 @@ ion-footer{
     display: flex;
     align-items: center;
     position: relative;
-    padding: 30px 16px 15px;
+    padding: 30px 16px 0px;
 }
 .bgtoolbar{
     --background: #FCF6FF;
@@ -34,7 +34,7 @@ ion-footer{
     margin-right: 5px;
 }
 .wrapper{
-    padding:16px;
+    padding:12px 16px 16px;
 }
 ion-datetime.md{
     --background: #FBFBFB;
@@ -53,13 +53,12 @@ ion-datetime.ios{
     box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
 }
 .price_box{
-    padding: 10px 12.5px;
+    padding: 8px 12.5px;
     background: #FBFBFB;
     border-radius: 5px;
     border: 1px solid white;
     box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
-    // width: 95%;
-    margin: 15px auto 5%;
+    margin: 12px auto 12px;
 }
 .price_label{
     font-size: 14px;
@@ -76,7 +75,7 @@ ion-datetime.ios{
 hr{
     border-bottom: 1px solid #EFEFEF !important;
     border-top: 0px !important;
-    margin: 10px 0px 0px !important;
+    margin: 8px 0px 0px !important;
     color: #EFEFEF !important;
     opacity: 100% !important;
 }
@@ -84,6 +83,7 @@ hr{
     --bar-height: 4px;
     --bar-border-radius: 5.5px;
     --bar-background-active: #8000FF;
+    padding: 0px;
 }
 .md .ion_range{
     --knob-background: #8000FF;
@@ -91,7 +91,7 @@ hr{
 .prices_div{
     display: flex;
     justify-content: space-between;
-    width: 62%;
+    width: 65%;
     margin: 0px auto;
 }
 .price {
