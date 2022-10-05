@@ -1,21 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormGroup,Validators,FormBuilder,FormControl } from '@angular/forms';
 import { MenuController } from '@ionic/angular';
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.page.html',
   styleUrls: ['./sign-in.page.scss'],
 })
 export class SignInPage implements OnInit {
+  angForm:FormGroup;
   showPassword=false;
   getType='password';
   activateEmailField= false;
   activatePasswordField= false;
   constructor(public  location:Location,
     public router:Router,
-    public menuCtrl:MenuController) {
+    public menuCtrl:MenuController,
+    private fb:FormBuilder,
+    public api:ApiService) {
+      this.createForm();
     
+   }
+   createForm(){
+    this.angForm = this.fb.group({
+      email:['',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      password:['',Validators.required]
+    });
    }
 
   ngOnInit() {
@@ -58,7 +70,33 @@ export class SignInPage implements OnInit {
   gotoHome(){
     this.activateEmailField = false;
     this.activatePasswordField = false;
-    this.router.navigate(['/home-cars-after-login']);
+    
+    console.log(this.angForm.value.email);
+    console.log(this.angForm.value.password);
+    
+    let data = {
+      email: this.angForm.value.email,
+      password: this.angForm.value.password,
+    }
+    this.api.sendRequest('loginHereNow',data).subscribe((res:any)=>{
+      console.log(res);
+      if(res.status == 'success'){
+        localStorage.setItem('appUserId',res.data.appUserId);
+        console.log('appUserId',res.data.appUserId);
+        this.api.appUserId = res.data.appUserId;
+        this.api.presentToast('Success! Welcome')
+        this.router.navigate(['/home-cars-after-login']);
+      }else if(res.status == 'error'){
+        this.api.presentToast(res.message);
+      }else{
+
+      }
+    },(error:any)=>{
+      console.log(error);
+      
+    })
+
+    
   }
   gotoSignUp(){
     this.router.navigate(['/sign-up']);

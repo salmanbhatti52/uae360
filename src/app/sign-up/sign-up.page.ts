@@ -10,11 +10,6 @@ import { ApiService } from '../services/api.service';
 })
 export class SignUpPage implements OnInit {
   angForm: FormGroup;
-  
-  userName = '';
-  userNumber = '';
-  email = '';
-  password = '';
   number:any;
   getFocus=false;
   showPassword=false;
@@ -37,7 +32,7 @@ export class SignUpPage implements OnInit {
     this.angForm = this.fb.group({
       name: ['',Validators.required],
       number: ['',Validators.required],
-      email: ['',Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")],
+      email: ['',[Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),Validators.required]],
       password: ['',Validators.required]
 
     });
@@ -127,16 +122,29 @@ export class SignUpPage implements OnInit {
     console.log(this.angForm.value.number);
     console.log(this.angForm.value.email);
     console.log(this.angForm.value.password);
+
+    // ==============api Call==================
     let data  = {
-      username:this.userName,
-      phone:this.userNumber,
-      email:this.email,
-      password:this.password
+      username:this.angForm.value.name,
+      phone:this.angForm.value.number,
+      email:this.angForm.value.email,
+      password:this.angForm.value.password
     }
     this.api.sendRequest('signupHereNow',data).subscribe((res:any)=>{
       console.log(res);
+      if(res.status == 'success'){
+        this.api.presentToast("Success!");
+        this.router.navigate(['/sign-in']);
+      }else if(res.status == 'error'){
+        this.api.presentToast(res.message);
+      }else{
+        
+      }
+    },(error:any)=>{
+      console.log(error);
       
     })
-    // this.router.navigate(['/verify-phone-by-otp']);
+    // =======================done===================
+    
   }
 }

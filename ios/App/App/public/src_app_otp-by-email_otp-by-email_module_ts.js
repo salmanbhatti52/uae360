@@ -64,6 +64,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let OtpByEmailPageModule = class OtpByEmailPageModule {
 };
 OtpByEmailPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
@@ -73,7 +74,8 @@ OtpByEmailPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
             _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormsModule,
             _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule,
             _otp_by_email_routing_module__WEBPACK_IMPORTED_MODULE_0__.OtpByEmailPageRoutingModule,
-            ng_otp_input__WEBPACK_IMPORTED_MODULE_7__.NgOtpInputModule
+            ng_otp_input__WEBPACK_IMPORTED_MODULE_7__.NgOtpInputModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_5__.ReactiveFormsModule
         ],
         declarations: [_otp_by_email_page__WEBPACK_IMPORTED_MODULE_1__.OtpByEmailPage]
     })
@@ -93,12 +95,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "OtpByEmailPage": () => (/* binding */ OtpByEmailPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _otp_by_email_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./otp-by-email.page.html?ngResource */ 4109);
 /* harmony import */ var _otp_by_email_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./otp-by-email.page.scss?ngResource */ 2402);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 4666);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ 5830);
+
 
 
 
@@ -106,25 +110,51 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let OtpByEmailPage = class OtpByEmailPage {
-    constructor(location, router) {
+    constructor(location, router, api) {
         this.location = location;
         this.router = router;
+        this.api = api;
     }
     ngOnInit() {
+        this.appUserId = localStorage.getItem('appUserId');
+        console.log(this.appUserId);
+    }
+    onOtpChange(otp) {
+        console.log(otp);
+        this.otpValue = otp;
     }
     goBack() {
         this.location.back();
     }
     gotoSignIn() {
-        this.router.navigate(['/sign-in']);
+        console.log(this.otpValue);
+        let data = {
+            appUserId: this.appUserId,
+            forgotPasswrodOtp: this.otpValue
+        };
+        this.api.sendRequest('verifyForgetPasswordOtp', data).subscribe((res) => {
+            console.log(res);
+            if (res.status == 'success') {
+                this.api.presentToast('Success!');
+                this.router.navigate(['/set-new-password']);
+            }
+            else if (res.status == 'error') {
+                this.api.presentToast(res.message);
+            }
+            else {
+            }
+        }, (err) => {
+            console.log(err);
+        });
     }
 };
 OtpByEmailPage.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__.Location },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.Router }
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__.Location },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__.ApiService }
 ];
-OtpByEmailPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+OtpByEmailPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-otp-by-email',
         template: _otp_by_email_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_otp_by_email_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]

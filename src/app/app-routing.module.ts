@@ -142,6 +142,10 @@ const routes: Routes = [
   {
     path: 'expiry-date-popup',
     loadChildren: () => import('./expiry-date-popup/expiry-date-popup.module').then( m => m.ExpiryDatePopupPageModule)
+  },
+  {
+    path: 'set-new-password',
+    loadChildren: () => import('./set-new-password/set-new-password.module').then( m => m.SetNewPasswordPageModule)
   }
 ];
 

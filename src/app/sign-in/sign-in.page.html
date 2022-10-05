@@ -14,29 +14,46 @@
       <div class="welcome_msg">welcome back</div>
       <div class="login_label" style="margin-top: 13px;">Please login your account.</div>
     </div>
-
-    <div style="margin-top: 28px;">
-      <div class="inputs_label">Email</div>
-      <ion-input class="input_box" (ionInput)="activate('email')" [class.active_input_box]="activateEmailField==true" placeholder="rose.matthews@gmail.com" type="email"></ion-input>
-      <div class="inputs_label" style="margin-top: 22px;">Password</div>
-      <div class="password_box" [class.active_input_box]="activatePasswordField==true">
-        <ion-input class="password_input" (ionInput)="activate('pwd')"  placeholder="......." type="{{getType}}"></ion-input>
-        <ion-icon style="color: #B0B0B0;" name="eye" *ngIf="showPassword==false" (click)="toggleGetType()"></ion-icon>
-        <ion-icon style="color: #B0B0B0;" name="eye-off" *ngIf="showPassword==true" (click)="toggleGetType()"></ion-icon>
+    <form [formGroup]="angForm" novalidate>
+      <div style="margin-top: 28px;">
+        <div class="inputs_label">Email</div>
+        <ion-input formControlName="email" class="input_box" (ionInput)="activate('email')" [class.active_input_box]="activateEmailField==true" placeholder="rose.matthews@gmail.com" type="email"></ion-input>
+        
+        <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)">
+          <div *ngIf="angForm.controls['email'].errors.required" class="alert">
+            Email is required
+          </div>
+          <div *ngIf="angForm.controls['email'].errors.pattern" class="alert">
+            Email is invalid
+          </div>
+        </div>
+  
+        <div class="inputs_label" style="margin-top: 22px;">Password</div>
+        <div class="password_box" [class.active_input_box]="activatePasswordField==true">
+          <ion-input formControlName="password" class="password_input" (ionInput)="activate('pwd')"  placeholder="......." type="{{getType}}"></ion-input>
+          <ion-icon style="color: #B0B0B0;" name="eye" *ngIf="showPassword==false" (click)="toggleGetType()"></ion-icon>
+          <ion-icon style="color: #B0B0B0;" name="eye-off" *ngIf="showPassword==true" (click)="toggleGetType()"></ion-icon>
+        </div>
+        <div *ngIf="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)">
+          <div *ngIf="angForm.controls['password'].errors.required" class="alert">
+            Password is required
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="remerber_forgot_labels" >
-      <div style="display: flex;">
-        <ion-checkbox slot="start" class="checkbox"></ion-checkbox>
-        <span class="rem_fg_lablel" >Remember my preference</span>
+  
+      <div class="remerber_forgot_labels" >
+        <div style="display: flex;">
+          <ion-checkbox slot="start" class="checkbox"></ion-checkbox>
+          <span class="rem_fg_lablel" >Remember my preference</span>
+        </div>
+        <div class="rem_fg_lablel" (click)="gotoForgotPasswordByEmail()">Forgot your password?</div>
       </div>
-      <div class="rem_fg_lablel" (click)="gotoForgotPasswordByEmail()">Forgot your password?</div>
-    </div>
+      
+      <ion-button type="submit" [disabled]="angForm.invalid || angForm.pristine" class="login_button" (click)="gotoHome()">
+        <span class="btn_text">Login</span>
+      </ion-button>
+    </form>
     
-    <ion-button class="login_button" (click)="gotoHome()">
-      <span class="btn_text">Login</span>
-    </ion-button>
 
     <div class="or_choice">
       <hr style="width: 35%;">

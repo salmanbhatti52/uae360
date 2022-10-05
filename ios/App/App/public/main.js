@@ -158,6 +158,10 @@ const routes = [
     {
         path: 'expiry-date-popup',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("src_app_expiry-date-popup_expiry-date-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./expiry-date-popup/expiry-date-popup.module */ 9093)).then(m => m.ExpiryDatePopupPageModule)
+    },
+    {
+        path: 'set-new-password',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_set-new-password_set-new-password_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./set-new-password/set-new-password.module */ 9695)).then(m => m.SetNewPasswordPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -186,13 +190,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component.html?ngResource */ 3383);
 /* harmony import */ var _app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss?ngResource */ 9259);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 124);
 /* harmony import */ var _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/splash-screen */ 2239);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/api.service */ 5830);
+
 
 
 
@@ -203,35 +209,41 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppComponent = class AppComponent {
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(menu, router, navCtrl, platform) {
-    // this.platform.ready().then(async () => {
+  constructor(menu, router, navCtrl, platform, api) {
+    this.menu = menu;
+    this.router = router;
+    this.navCtrl = navCtrl;
+    this.platform = platform;
+    this.api = api;
+    this.appPages = [{
+      title: 'Browse',
+      url: '/home-before-login',
+      img: 'assets/images/icons/search_sm.svg',
+      status: 'notLoggedIn'
+    }, {
+      title: 'Settings',
+      url: '/settings',
+      img: 'assets/images/icons/settings_sm.svg',
+      status: 'LoggedIn'
+    }, {
+      title: 'Live Chat',
+      url: '/live-chat',
+      img: 'assets/images/icons/live_chat_sm.svg',
+      status: 'notLoggedIn'
+    }, {
+      title: 'About Us',
+      url: 'about-us',
+      img: 'assets/images/icons/about_us_sm.svg',
+      status: 'notLoggedIn'
+    }];
+    this.appUserId = this.api.appUserId; // this.platform.ready().then(async () => {
     //   setTimeout(()=>{
     //      SplashScreen.hide({
     //        fadeOutDuration: 1000
     //      });
     //    }, 2000)
     //  });
-    this.menu = menu;
-    this.router = router;
-    this.navCtrl = navCtrl;
-    this.platform = platform;
-    this.appPages = [{
-      title: 'Browse',
-      url: '/home-before-login',
-      img: 'assets/images/icons/search_sm.svg'
-    }, {
-      title: 'Settings',
-      url: '/settings',
-      img: 'assets/images/icons/settings_sm.svg'
-    }, {
-      title: 'Live Chat',
-      url: '/live-chat',
-      img: 'assets/images/icons/live_chat_sm.svg'
-    }, {
-      title: 'About Us',
-      url: 'about-us',
-      img: 'assets/images/icons/about_us_sm.svg'
-    }]; // setTimeout(() => {
+    // setTimeout(() => {
     //   SplashScreen.hide();
     // }, 3000);
   }
@@ -244,6 +256,16 @@ let AppComponent = class AppComponent {
         });
       }, 10000);
     });
+    this.appUserId = localStorage.getItem('appUserId');
+    console.log(this.appUserId);
+  }
+
+  logout() {
+    this.api.appUserId = null;
+    localStorage.removeItem('appUserId');
+    console.log('appUserId removed');
+    this.router.navigate(['/home-before-login']);
+    this.closeMenu();
   }
 
   closeMenu() {
@@ -258,16 +280,18 @@ let AppComponent = class AppComponent {
 };
 
 AppComponent.ctorParameters = () => [{
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.MenuController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.MenuController
 }, {
-  type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router
+  type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.NavController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.NavController
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.Platform
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.Platform
+}, {
+  type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService
 }];
 
-AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
   selector: 'app-root',
   template: _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
   styles: [_app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -290,10 +314,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ 4497);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 124);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ 8987);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 5041);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 158);
+
 
 
 
@@ -306,12 +332,77 @@ let AppModule = class AppModule {
 AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.NgModule)({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__.BrowserModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonicModule.forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule],
-        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_6__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonicRouteStrategy }],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__.BrowserModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonicModule.forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_6__.HttpClientModule],
+        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_7__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonicRouteStrategy }],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
     })
 ], AppModule);
 
+
+
+/***/ }),
+
+/***/ 5830:
+/*!*****************************************!*\
+  !*** ./src/app/services/api.service.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApiService": () => (/* binding */ ApiService)
+/* harmony export */ });
+/* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 8987);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ 3819);
+
+
+
+
+
+let ApiService = class ApiService {
+  constructor(http, toastController) {
+    this.http = http;
+    this.toastController = toastController;
+    this.baseURL = 'https://360uae.eigix.net/api';
+  }
+
+  sendRequest(action, data) {
+    let header;
+    header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    return this.http.post(`${this.baseURL}/${action}`, JSON.stringify(data), {
+      headers: header
+    });
+  }
+
+  presentToast(toastMsg) {
+    var _this = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const toast = yield _this.toastController.create({
+        message: toastMsg,
+        duration: 2000
+      });
+      toast.present();
+    })();
+  }
+
+};
+
+ApiService.ctorParameters = () => [{
+  type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ToastController
+}];
+
+ApiService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
+  providedIn: 'root'
+})], ApiService);
 
 
 /***/ }),
@@ -635,7 +726,7 @@ module.exports = "ion-menu {\n  --background:black !important;\n}\n\nion-menu io
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-app>\n  <ion-split-pane contentId=\"main-content\">\n    <ion-menu contentId=\"main-content\" type=\"overlay\">\n      <ion-content style=\"--background: black !important; --padding: 60px 23px 40px;\">\n        <!-- <ion-list id=\"inbox-list\">\n          <ion-list-header>Inbox</ion-list-header>\n          <ion-note>hi@ionicframework.com</ion-note> -->\n          <div>\n            <img (click)=\"closeMenu()\" src=\"assets/images/icons/cancel.svg\" alt=\"\">\n          </div>\n          <div class=\"app_title\">\n            360UAE\n          </div>\n          <!-- <div style=\"margin-top: 36px; text-align: center;\">\n            <div class=\"select_language\">Choose your language</div>\n            <div class=\"language_btns\">\n              <ion-button style=\"--background: white; margin-right: 12px;\">\n                <img src=\"assets/images/icons/language_blue.svg\" alt=\"\">\n                <span class=\"english_text\">\n                  English\n                </span>\n              </ion-button>\n              <ion-button fill=\"outline\" style=\"--border-color: #D4DCE1;\">\n                <img src=\"assets/images/icons/language_white.svg\" alt=\"\">\n                <span class=\"arabic_text\" style=\"color: #D4DCE1; font-size: 12px; margin-left: 5.5px;\">\n                  العربی\n                </span> \n              </ion-button>\n            </div>\n          </div> -->\n          <div style=\"height: 50px;\"></div>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages; let i = index\">\n            <div routerDirection=\"root\" [routerLink]=\"[p.url]\" lines=\"none\" detail=\"false\" routerLinkActive=\"selected\" style=\"--background: black !important; text-align: center;\">\n              <!-- <ion-icon slot=\"start\" [ios]=\"p.icon + '-outline'\" [md]=\"p.icon + '-sharp'\"></ion-icon> -->\n              <div style=\"margin-top: 20px; text-align: left;\">\n                <ion-row>\n                  <ion-col style=\"padding: 0px;\" size=\"2\"><img  src=\"{{p.img}}\"></ion-col>\n                  <ion-col style=\"padding: 0px;\" size=\"7\"><ion-label class=\"item_label\">{{ p.title }}</ion-label></ion-col>\n                  <ion-col style=\"padding: 0px;\" size=\"3\"></ion-col>\n                </ion-row>\n              </div>\n            </div>\n          </ion-menu-toggle>\n        <!-- </ion-list> -->\n\n        <!-- <ion-list id=\"labels-list\">\n          <ion-list-header>Labels</ion-list-header>\n\n          <ion-item *ngFor=\"let label of labels\" lines=\"none\">\n            <ion-icon slot=\"start\" ios=\"bookmark-outline\" md=\"bookmark-sharp\"></ion-icon>\n            <ion-label>{{ label }}</ion-label>\n          </ion-item>\n        </ion-list> -->\n      </ion-content>\n     \n      <div style=\"padding: 20px 23px 30px;\">\n        <ion-row (click)=\"gotoSignIn()\">\n          <ion-col style=\"padding: 0px;\" size=\"2\"><img src=\"assets/images/icons/log_in_out_sm.svg\" alt=\"\"></ion-col>\n          <ion-col style=\"padding: 0px;\" size=\"7\"><span class=\"item_label\">Login or Signup</span></ion-col>\n          <ion-col style=\"padding: 0px;\" size=\"3\"></ion-col>\n        </ion-row>\n      </div>\n    \n    </ion-menu>\n    <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n";
+module.exports = "<ion-app>\n  <ion-split-pane contentId=\"main-content\">\n    <ion-menu contentId=\"main-content\" type=\"overlay\">\n      <ion-content style=\"--background: black !important; --padding: 60px 23px 40px;\">\n        <!-- <ion-list id=\"inbox-list\">\n          <ion-list-header>Inbox</ion-list-header>\n          <ion-note>hi@ionicframework.com</ion-note> -->\n          <div>\n            <img (click)=\"closeMenu()\" src=\"assets/images/icons/cancel.svg\" alt=\"\">\n          </div>\n          <div class=\"app_title\">\n            360UAE\n          </div>\n          <!-- <div style=\"margin-top: 36px; text-align: center;\">\n            <div class=\"select_language\">Choose your language</div>\n            <div class=\"language_btns\">\n              <ion-button style=\"--background: white; margin-right: 12px;\">\n                <img src=\"assets/images/icons/language_blue.svg\" alt=\"\">\n                <span class=\"english_text\">\n                  English\n                </span>\n              </ion-button>\n              <ion-button fill=\"outline\" style=\"--border-color: #D4DCE1;\">\n                <img src=\"assets/images/icons/language_white.svg\" alt=\"\">\n                <span class=\"arabic_text\" style=\"color: #D4DCE1; font-size: 12px; margin-left: 5.5px;\">\n                  العربی\n                </span> \n              </ion-button>\n            </div>\n          </div> -->\n          <div style=\"height: 50px;\"></div>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages; let i = index\">\n            <div routerDirection=\"root\" [routerLink]=\"[p.url]\" lines=\"none\" detail=\"false\" routerLinkActive=\"selected\" style=\"--background: black !important; text-align: center;\">\n              <!-- <ion-icon slot=\"start\" [ios]=\"p.icon + '-outline'\" [md]=\"p.icon + '-sharp'\"></ion-icon> -->\n              <div style=\"margin-top: 20px; text-align: left;\">\n                <ion-row>\n                  <ion-col style=\"padding: 0px;\" size=\"2\"><img  src=\"{{p.img}}\"></ion-col>\n                  <ion-col style=\"padding: 0px;\" size=\"7\"><ion-label class=\"item_label\">{{ p.title }}</ion-label></ion-col>\n                  <ion-col style=\"padding: 0px;\" size=\"3\"></ion-col>\n                </ion-row>\n              </div>\n            </div>\n          </ion-menu-toggle>\n        <!-- </ion-list> -->\n\n        <!-- <ion-list id=\"labels-list\">\n          <ion-list-header>Labels</ion-list-header>\n\n          <ion-item *ngFor=\"let label of labels\" lines=\"none\">\n            <ion-icon slot=\"start\" ios=\"bookmark-outline\" md=\"bookmark-sharp\"></ion-icon>\n            <ion-label>{{ label }}</ion-label>\n          </ion-item>\n        </ion-list> -->\n      </ion-content>\n     \n      <div style=\"padding: 20px 23px 30px;\">\n        <ion-row >\n          <ion-col style=\"padding: 0px;\" size=\"2\"><img src=\"assets/images/icons/log_in_out_sm.svg\" alt=\"\"></ion-col>\n          <ion-col style=\"padding: 0px;\" size=\"7\">\n            <span (click)=\"gotoSignIn()\" class=\"item_label\" *ngIf=\"api.appUserId==null\">Login or Signup</span>\n            <span (click)=\"logout()\" class=\"item_label\" *ngIf=\"api.appUserId!=null\">Logout</span>\n          </ion-col>\n          <ion-col style=\"padding: 0px;\" size=\"3\"></ion-col>\n        </ion-row>\n      </div>\n    \n    </ion-menu>\n    <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n";
 
 /***/ })
 

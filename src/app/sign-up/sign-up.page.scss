@@ -61,6 +61,7 @@ ion-footer{
     --padding-end: 10px;
     height: 48px;
 }
+
 .password_box{
     display: flex;
     align-items: center;
@@ -81,6 +82,14 @@ ion-footer{
 }
 .active_input_box{
     border: 1px solid #8000FF;
+}
+.alert{
+    color: #d93025;
+    font-size: 12px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 400;
+    padding: 4px 4px 0px;
+    margin: 0px;
 }
 .get_focus{
     border-bottom: none !important;

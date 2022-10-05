@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { OtpByEmailPageRoutingModule } from './otp-by-email-routing.module';
@@ -14,7 +14,8 @@ import { NgOtpInputModule } from  'ng-otp-input';
     FormsModule,
     IonicModule,
     OtpByEmailPageRoutingModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    ReactiveFormsModule
   ],
   declarations: [OtpByEmailPage]
 })

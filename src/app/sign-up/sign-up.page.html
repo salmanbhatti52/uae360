@@ -18,18 +18,18 @@
       <div>
         <div class="inputs_label">Username</div>
         <ion-input class="input_box" formControlName="name" (ionInput)="activate('userName')" [class.active_input_box]="activateUserNameField==true" placeholder="Username" type="text" ></ion-input>
-
+        
         <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)">
-          <div *ngIf="angForm.controls['name'].errors.required">
-            Name is required.
+          <div *ngIf="angForm.controls['name'].errors.required" class="alert">
+            Name is required
           </div>
         </div>
 
         <div class="inputs_label">Mobile number</div>
-        <ion-input class="input_box" formControlName="number" (ionInput)="activate('phoneNumber')" [class.active_input_box]="activateUserNumberField==true" placeholder="Mobile number" type="number" ></ion-input>
+        <ion-input class="input_box" formControlName="number" (ionInput)="activate('phoneNumber')" [class.active_input_box]="activateUserNumberField==true" placeholder="Mobile number" type="tel" ></ion-input>
 
         <div *ngIf="angForm.controls['number'].invalid && (angForm.controls['number'].dirty || angForm.controls['number'].touched)">
-          <div *ngIf="angForm.controls['number'].errors.required">
+          <div *ngIf="angForm.controls['number'].errors.required" class="alert">
             Number is required
           </div>
         </div>
@@ -49,11 +49,11 @@
         <ion-input class="input_box" formControlName="email" (ionInput)="activate('email')" [class.active_input_box]="activateEmailField==true" placeholder="rose.matthews@gmail.com" type="email" ></ion-input>
         
         <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)">
-          <div *ngIf="angForm.controls['email'].errors.required">
-            Email is required
-          </div>
-          <div *ngIf="angForm.controls['email'].errors.email">
+          <div *ngIf="angForm.controls['email'].errors.pattern" class="alert">
             Email is invalid
+          </div>
+          <div *ngIf="angForm.controls['email'].errors.required" class="alert">
+            Email is required
           </div>
         </div>
 
@@ -67,7 +67,7 @@
           <ion-icon style="color: #B0B0B0;" name="eye-off" *ngIf="showPassword==true" (click)="toggleGetType()"></ion-icon>
         </div>
         <div *ngIf="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)">
-          <div *ngIf="angForm.controls['password'].errors.required">
+          <div *ngIf="angForm.controls['password'].errors.required" class="alert">
             Password is required
           </div>            
         </div>

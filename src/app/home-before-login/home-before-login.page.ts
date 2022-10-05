@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-home-before-login',
   templateUrl: './home-before-login.page.html',
@@ -31,9 +32,11 @@ export class HomeBeforeLoginPage implements OnInit {
     {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
     {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
   ]
-  constructor(public router:Router) { }
+  constructor(public router:Router,
+    public api:ApiService) { }
 
   ngOnInit() {
+   this.api.appUserId = localStorage.getItem('appUserId');
   }
   gotoFilter(){
     this.router.navigate(['/filters']);
