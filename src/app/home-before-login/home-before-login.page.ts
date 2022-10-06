@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { CheckUserService } from '../check-user.service';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-home-before-login',
   templateUrl: './home-before-login.page.html',
@@ -8,10 +10,10 @@ import { ApiService } from '../services/api.service';
 })
 export class HomeBeforeLoginPage implements OnInit {
   totalNotifications = 6;
-  item1 = false;
+  item1 = true;
   item2 = false;
   item3 = false;
-  item4 = true;
+  item4 = false;
   item5 = false;
   slideOpts = {
     initialSlide: 0,
@@ -25,6 +27,11 @@ export class HomeBeforeLoginPage implements OnInit {
     slidesPerView: 4.4,
     // spaceBetween : 9,
   };
+
+  showCategories = false;
+  rentCategories = [{category:'day'},{category:'Month'}]
+  categoryVal = 'day';
+  
   pickups = [
     {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
     {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
@@ -33,10 +40,39 @@ export class HomeBeforeLoginPage implements OnInit {
     {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
   ]
   constructor(public router:Router,
-    public api:ApiService) { }
+    public api:ApiService,
+    public checkUser:CheckUserService,
+    public appComponent:AppComponent) { }
 
+  displayCategories(){
+    if(this.showCategories== false){
+      this.showCategories = true;
+    }
+    else{
+      this.showCategories = false;
+    }
+  }
+  selectedCategory(val){
+    console.log(val);
+    this.categoryVal = val;
+  }
   ngOnInit() {
-   this.api.appUserId = localStorage.getItem('appUserId');
+    console.log(this.checkUser.appUserId);
+    
+    this.checkUser.checkUser();
+    console.log(this.checkUser.appPages);
+    this.appComponent.appPages = this.checkUser.appPages; 
+
+    this.getCars();
+  }
+  getCars(){
+    this.api.getData('cars').subscribe((res:any)=>{
+      console.log(res);
+      
+    },(err)=>{
+      console.log(err);
+      
+    })
   }
   gotoFilter(){
     this.router.navigate(['/filters']);

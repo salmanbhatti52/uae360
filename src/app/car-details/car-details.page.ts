@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NavController } from '@ionic/angular';
+import { CheckUserService } from '../check-user.service';
 @Component({
   selector: 'app-car-details',
   templateUrl: './car-details.page.html',
@@ -11,7 +12,8 @@ export class CarDetailsPage implements OnInit {
   rentCategories = [{category:'day'},{category:'Month'}]
   categoryVal = 'day';
   constructor(public location:Location,
-    public navCtrlr:NavController) { }
+    public navCtrlr:NavController,
+    public checkUser:CheckUserService) { }
 
   ngOnInit() {
   }
@@ -31,12 +33,32 @@ export class CarDetailsPage implements OnInit {
     this.categoryVal = val;
   }
   gotoRatings(){
-    this.navCtrlr.navigateRoot('ratings');
+    if(this.checkUser.appUserId == null){
+      this.navCtrlr.navigateRoot('sign-in');
+    }else if(this.checkUser.appUserId != null){
+      this.navCtrlr.navigateRoot('ratings');
+    }else{
+
+    }
   }
   startCarBooking(){
-    this.navCtrlr.navigateRoot('car-booking');
+    if(this.checkUser.appUserId == null){
+      this.navCtrlr.navigateRoot('sign-in');
+    }else if(this.checkUser.appUserId != null){
+      this.navCtrlr.navigateRoot('car-booking');
+    }else{
+
+    }
+    
   }
   startChatwithOwner(){
-    this.navCtrlr.navigateRoot('message-owner-side');
+    if(this.checkUser.appUserId == null){
+      this.navCtrlr.navigateRoot('sign-in');
+    }else if(this.checkUser.appUserId != null){
+      this.navCtrlr.navigateRoot('message-owner-side');
+    }else{
+
+    }
+    
   }
 }

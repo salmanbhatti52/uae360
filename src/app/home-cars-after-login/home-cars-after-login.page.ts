@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { CheckUserService } from '../check-user.service';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-home-cars-after-login',
   templateUrl: './home-cars-after-login.page.html',
@@ -33,9 +35,17 @@ export class HomeCarsAfterLoginPage implements OnInit {
     {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
   ]
   constructor(public router:Router,
-    public navCtrlr:NavController) { }
+    public navCtrlr:NavController,
+    public checkUser:CheckUserService,
+    public appComponent:AppComponent) {}
 
   ngOnInit() {
+   // ===update appPages===========
+   console.log(this.checkUser.appUserId);
+   this.checkUser.checkUser();
+   console.log(this.checkUser.appPages);
+   this.appComponent.appPages = this.checkUser.appPages;
+   // =======done============
   }
   gotoFilter(){
     this.router.navigate(['/filters']);

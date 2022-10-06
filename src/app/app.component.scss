@@ -174,3 +174,33 @@ ion-button{
   font-weight: 400;
   color: white;
 }
+.user_name{
+  margin-top: 12px;
+  font-family: 'Poppins',sans-serif;
+  color: white;
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+}
+.location_box{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.location{
+  font-family: 'Poppins',sans-serif;
+  color: #B1A8B9;
+  font-size: 19px;
+  font-weight: 400;
+}
+.profile_div{
+  position: relative;
+  width: 85px;
+  margin: 0px auto;
+}
+.edit_icon{
+  position: absolute;
+  top: 65%;
+  right: 0px;
+}

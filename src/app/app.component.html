@@ -8,8 +8,19 @@
           <div>
             <img (click)="closeMenu()" src="assets/images/icons/cancel.svg" alt="">
           </div>
-          <div class="app_title">
+          <div class="app_title" *ngIf="checkUser.appUserId==null">
             360UAE
+          </div>
+          <div *ngIf="checkUser.appUserId!=null" (click)="goForEditProfile()">
+            <div class="profile_div">
+              <img src="assets/images/sm_dummy_profile.svg" alt="">
+              <img class="edit_icon" src="assets/images/icons/sm_edit_icon.svg" alt="">
+            </div>
+            <div class="user_name">Daniel Jefferson</div>
+            <div class="location_box">
+              <img style="margin-right: 6.3px;" src="assets/images/icons/sm_location_icon.svg" alt="">
+              <span class="location">Netherlands</span>
+            </div>
           </div>
           <!-- <div style="margin-top: 36px; text-align: center;">
             <div class="select_language">Choose your language</div>
@@ -57,8 +68,8 @@
         <ion-row >
           <ion-col style="padding: 0px;" size="2"><img src="assets/images/icons/log_in_out_sm.svg" alt=""></ion-col>
           <ion-col style="padding: 0px;" size="7">
-            <span (click)="gotoSignIn()" class="item_label" *ngIf="api.appUserId==null">Login or Signup</span>
-            <span (click)="logout()" class="item_label" *ngIf="api.appUserId!=null">Logout</span>
+            <span (click)="gotoSignIn()" class="item_label" *ngIf="checkUser.appUserId==null">Login or Signup</span>
+            <span (click)="logout()" class="item_label" *ngIf="checkUser.appUserId!=null">Logout</span>
           </ion-col>
           <ion-col style="padding: 0px;" size="3"></ion-col>
         </ion-row>

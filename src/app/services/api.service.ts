@@ -5,7 +5,7 @@ import { ToastController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class ApiService {
-  appUserId:any;
+  
   baseURL:any = 'https://360uae.eigix.net/api';
   constructor(private http:HttpClient, 
     public toastController:ToastController) { }
@@ -21,6 +21,18 @@ export class ApiService {
       headers:header,
     });
 
+  }
+
+  getData(action){
+    let header;
+    
+    header = new HttpHeaders({
+      "Content-Type" : "application/json"
+    });
+
+    return this.http.get(`${this.baseURL}/${action}`, {
+      headers:header,
+    });
   }
 
   async presentToast(toastMsg){

@@ -15,6 +15,7 @@ export class SettingsPage implements OnInit {
     public modalCtrlr:ModalController) { }
 
   ngOnInit() {
+    
   }
   toggleNotifications(){
     if(this.toggleVal == true){

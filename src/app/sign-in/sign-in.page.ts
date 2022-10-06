@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { FormGroup,Validators,FormBuilder,FormControl } from '@angular/forms';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
+import { CheckUserService } from '../check-user.service';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.page.html',
@@ -19,7 +21,9 @@ export class SignInPage implements OnInit {
     public router:Router,
     public menuCtrl:MenuController,
     private fb:FormBuilder,
-    public api:ApiService) {
+    public api:ApiService,
+    public checkUser:CheckUserService,
+    public appComponent:AppComponent) {
       this.createForm();
     
    }
@@ -83,8 +87,16 @@ export class SignInPage implements OnInit {
       if(res.status == 'success'){
         localStorage.setItem('appUserId',res.data.appUserId);
         console.log('appUserId',res.data.appUserId);
-        this.api.appUserId = res.data.appUserId;
+        this.checkUser.appUserId = res.data.appUserId;
         this.api.presentToast('Success! Welcome')
+        // ===update appPages===========
+        console.log(this.checkUser.appUserId);
+        this.checkUser.checkUser();
+        localStorage.setItem("appPagesAfterLogin", JSON.stringify(this.checkUser.appPages));
+        console.log(localStorage.getItem('appPagesAfterLogin'));
+        this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
+
+        // =======done============
         this.router.navigate(['/home-cars-after-login']);
       }else if(res.status == 'error'){
         this.api.presentToast(res.message);

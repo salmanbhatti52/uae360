@@ -117,7 +117,29 @@ ion-footer{
     white-space: nowrap;
     padding: 9.5px 0px 9px 9px;
 }
-
+.price_label{
+    // margin-left: 8px;
+    color: black;
+    font-family: "Urbanist", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+}
+.price_categories{
+    text-align: left;
+    width: 100px;
+    position: absolute;
+    z-index: 1;
+    background: #FBFBFB;
+    bottom: 20px;
+    right: 0px;
+    padding: 4px 8px;
+    // border: 1px solid #0F172A;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+}
+.rotate_icon{
+    transform: rotate(180deg);
+}
 .items_wrapper{
     padding-left: 16px;
 }
