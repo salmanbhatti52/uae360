@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { CheckUserService } from '../check-user.service';
 import { AppComponent } from '../app.component';
+
 @Component({
   selector: 'app-home-before-login',
   templateUrl: './home-before-login.page.html',
@@ -15,45 +16,54 @@ export class HomeBeforeLoginPage implements OnInit {
   item3 = false;
   item4 = false;
   item5 = false;
-  slideOpts = {
-    initialSlide: 0,
-    speed: 400,
-    slidesPerView: 2.17,
-    spaceBetween : 6,
-  };
+  
   slideOpts2 = {
     initialSlide: 0,
     speed: 400,
     slidesPerView: 4.4,
     // spaceBetween : 9,
   };
-
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    slidesPerView: 1.4,
+    spaceBetween : 9,
+  };
   showCategories = false;
-  rentCategories = [{category:'day'},{category:'Month'}]
-  categoryVal = 'day';
+  rentCategories = [{category:'Day'},{category:'Month'}]
+  categoryVal = 'Day';
+  // category
   
-  pickups = [
-    {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
-  ]
+  // pickups = [
+  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
+  //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
+  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
+  //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
+  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
+  // ]
+  pickups = [];
+  selectedCarID: any = 0;
   constructor(public router:Router,
     public api:ApiService,
     public checkUser:CheckUserService,
     public appComponent:AppComponent) { }
 
-  displayCategories(){
-    if(this.showCategories== false){
+  displayCategories(car_id){
+    if(car_id !=null){
+
+    }
+    if(car_id !=null){
       this.showCategories = true;
     }
     else{
       this.showCategories = false;
     }
   }
-  selectedCategory(val){
+  selectedCategory(val,id){
     console.log(val);
+    console.log('iiiii',id);
+    this.selectedCarID = id
+    console.log('fffff',this.selectedCarID);
     this.categoryVal = val;
   }
   ngOnInit() {
@@ -65,19 +75,38 @@ export class HomeBeforeLoginPage implements OnInit {
 
     this.getCars();
   }
+
   getCars(){
+    this.api.showLoading();
     this.api.getData('cars').subscribe((res:any)=>{
       console.log(res);
+      if(res.status == 'success'){
+        console.log(res.data);
+        this.api.hideLoading();
+        this.pickups = res.data;
+      }
       
     },(err)=>{
+      this.api.hideLoading();
       console.log(err);
       
     })
   }
+
   gotoFilter(){
     this.router.navigate(['/filters']);
   }
-  gotoCarDetails(){
+  gotoCarDetails(car_id){
+    // let data = {
+    //   car_id: car_id
+    // }
+    // this.api.sendData_GetData('getCarsById',JSON.stringify(data)).subscribe((res:any)=>{
+    //   console.log(res);
+      
+    // },(err)=>{
+    //   console.log(err);
+      
+    // })
     this.router.navigate(['/car-details']);
   }
   selectItem(itemVal){

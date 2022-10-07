@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { CheckUserService } from '../check-user.service';
 import { AppComponent } from '../app.component';
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-home-cars-after-login',
   templateUrl: './home-cars-after-login.page.html',
@@ -10,16 +11,16 @@ import { AppComponent } from '../app.component';
 })
 export class HomeCarsAfterLoginPage implements OnInit {
   totalNotifications = 6;
-  item1 = false;
+  item1 = true;
   item2 = false;
   item3 = false;
-  item4 = true;
+  item4 = false;
   item5 = false;
   slideOpts = {
     initialSlide: 0,
     speed: 400,
-    slidesPerView: 2.17,
-    spaceBetween : 6,
+    slidesPerView: 1.4,
+    spaceBetween : 9,
   };
   slideOpts2 = {
     initialSlide: 0,
@@ -27,17 +28,19 @@ export class HomeCarsAfterLoginPage implements OnInit {
     slidesPerView: 4.4,
     // spaceBetween : 9,
   };
-  pickups = [
-    {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
-  ]
+  // pickups = [
+  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
+  //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
+  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
+  //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
+  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
+  // ]
+  pickups = [];
   constructor(public router:Router,
     public navCtrlr:NavController,
     public checkUser:CheckUserService,
-    public appComponent:AppComponent) {}
+    public appComponent:AppComponent,
+    public api:ApiService) {}
 
   ngOnInit() {
    // ===update appPages===========
@@ -46,6 +49,22 @@ export class HomeCarsAfterLoginPage implements OnInit {
    console.log(this.checkUser.appPages);
    this.appComponent.appPages = this.checkUser.appPages;
    // =======done============
+   this.getCars();
+  }
+
+  getCars(){
+    this.api.showLoading();
+    this.api.getData('cars').subscribe((res:any)=>{
+      console.log(res);
+      if(res.status == 'success'){
+        this.api.hideLoading();
+        this.pickups = res.data;
+      }
+    },(err)=>{
+      this.api.hideLoading();
+      console.log(err);
+      
+    })
   }
   gotoFilter(){
     this.router.navigate(['/filters']);

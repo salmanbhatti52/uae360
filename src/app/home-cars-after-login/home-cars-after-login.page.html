@@ -28,7 +28,7 @@
 
   </div>
       <div class="items_label">What are you looking for?</div>
-      <div style="padding-left: 11px;">
+      <div style="padding-left: 11px;padding-right: 11px;">
         <ion-slides pager="false" [options]="slideOpts2">
           <ion-slide class="categories">
             <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem(1)">
@@ -74,83 +74,90 @@
 
   <div class="items_wrapper">
     <div class="items_label" style="margin-top: 5px;padding-left: 3px;">Top Rented</div>
-    <ion-slides pager="false" [options]="slideOpts">
-      <ion-slide *ngFor="let pickup of pickups;" style="width: 48%; height: 100%;">
-        <ion-card class="card" (click)="gotoCarDetails()">
-          <img style="width: 100%;" src="{{pickup.img}}" alt="">
-          <div style="padding: 5px 7px 7.5px 8px;">
-            <div>
-              <div class="card_title">{{pickup.name}}</div>
-            </div>
-            <div class="card_content">
+    <div *ngIf="item1==true">
+      <ion-slides pager="false" [options]="slideOpts">
+        <ion-slide *ngFor="let pickup of pickups;" style="width: 58%; height: 100%;">
+          <ion-card class="card" (click)="gotoCarDetails()">
+            <img class="car_img" src="{{pickup.image1}}" alt="">
+            <div style="padding: 5px 7px 7.5px 8px;">
               <div>
-                <div>
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <div class="card_title">{{pickup.vehical_name}}</div>
+              </div>
+              <div class="card_content">
+                <div class="row_div">
+                  <div>
+                    <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  </div>
+                  <div style="line-height: 1.2;">
+                    <span class="price_span" style="font-size: 11px;">$</span>
+                    <span class="price_span" style="font-size: 32px;line-height: 0.8;">{{pickup.rent_cost_day}}</span> 
+                  </div>
+                  
                 </div>
-                <div class="total_trips">{{pickup.total_trips}} trips</div>
-              </div>
-              <div>
-                <div style="line-height: 1.2;"><span class="price_span" style="font-size: 11px;">$</span><span class="price_span" style="font-size: 32px;">{{pickup.price}}</span> </div>
-                <div class="per_hour">Per Hour</div>
-              </div>
-            </div>
-          </div>
-          
-        </ion-card>
-      </ion-slide>
-      
-    </ion-slides>
-    <ion-slides pager="false" [options]="slideOpts" style="padding-bottom: 1px;">
-      <ion-slide *ngFor="let pickup of pickups;" style="width: 48%; height: 100%;">
-        <ion-card class="card" (click)="gotoCarDetails()">
-          <img style="width: 100%;" src="{{pickup.img}}" alt="">
-          <div style="padding: 5px 7px 7.5px 8px;">
-            <div>
-              <div class="card_title">{{pickup.name}}</div>
-            </div>
-            <div class="card_content">
-              <div>
-                <div>
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <div class="row_div">
+                  <div class="total_trips">{{pickup.total_trips}}269 trips</div>
+                  <div class="per_hour">Per Day</div>
                 </div>
-                <div class="total_trips">{{pickup.total_trips}} trips</div>
-              </div>
-              <div>
-                <div style="line-height: 1.2;"><span class="price_span" style="font-size: 11px;">$</span><span class="price_span" style="font-size: 32px;">{{pickup.price}}</span> </div>
-                <div class="per_hour">Per Hour</div>
               </div>
             </div>
-          </div>
-          
-        </ion-card>
-      </ion-slide>
-      
-    </ion-slides>
-
-    <div style="margin: 15px 0px 15px;">
-      <div style="text-align: center;">
-        <div class="invite_label">Invite Friends</div>
-        <div class="invite_label" style="font-weight: 400;">And spread the word</div>
-      </div>
-      <div style="text-align: center;">
-        <ion-button class="invite_btn">
-          <span class="btn-text">Invite</span>
-        </ion-button>
-      </div>
+            
+          </ion-card>
+        </ion-slide>
+        
+      </ion-slides>
     </div>
+    
+    <!-- <ion-slides pager="false" [options]="slideOpts" style="padding-bottom: 1px;">
+      <ion-slide *ngFor="let pickup of pickups;" style="width: 48%; height: 100%;">
+        <ion-card class="card" (click)="gotoCarDetails()">
+          <img style="width: 100%;" src="{{pickup.img}}" alt="">
+          <div style="padding: 5px 7px 7.5px 8px;">
+            <div>
+              <div class="card_title">{{pickup.name}}</div>
+            </div>
+            <div class="card_content">
+              <div>
+                <div>
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                </div>
+                <div class="total_trips">{{pickup.total_trips}} trips</div>
+              </div>
+              <div>
+                <div style="line-height: 1.2;"><span class="price_span" style="font-size: 11px;">$</span><span class="price_span" style="font-size: 32px;">{{pickup.price}}</span> </div>
+                <div class="per_hour">Per Hour</div>
+              </div>
+            </div>
+          </div>
+          
+        </ion-card>
+      </ion-slide>
+      
+    </ion-slides> -->
+
+    
   </div>
 </ion-content>
 <ion-footer class="ion-no-border">
    
-    
+  <div style="margin: 15px 0px 15px;">
+    <div style="text-align: center;">
+      <div class="invite_label">Invite Friends</div>
+      <div class="invite_label" style="font-weight: 400;">And spread the word</div>
+    </div>
+    <div style="text-align: center;">
+      <ion-button class="invite_btn">
+        <span class="btn-text">Invite</span>
+      </ion-button>
+    </div>
+  </div>
     <ion-tabs style="display:contents ;">
 
       <ion-tab-bar class="ion_tab_bar" slot="bottom">

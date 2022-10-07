@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +9,8 @@ export class ApiService {
   
   baseURL:any = 'https://360uae.eigix.net/api';
   constructor(private http:HttpClient, 
-    public toastController:ToastController) { }
+    public toastController:ToastController,
+    public loadingCtrl:LoadingController) { }
 
   sendRequest(action, data){
     let header;
@@ -35,11 +37,23 @@ export class ApiService {
     });
   }
 
+  
   async presentToast(toastMsg){
     const toast = await this.toastController.create({
       message:toastMsg,
       duration:2000,
     });
     toast.present();
+  }
+
+  async showLoading(){
+    const loading = await this.loadingCtrl.create({
+      duration:3000
+    });
+    loading.present();
+  }
+
+  hideLoading(){
+    this.loadingCtrl.dismiss();
   }
 }
