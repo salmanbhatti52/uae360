@@ -78,7 +78,7 @@
       <ion-slides pager="false" [options]="slideOpts">
         <ion-slide *ngFor="let pickup of pickups;" style="width: 58%; height: 100%;">
           <ion-card class="card" (click)="gotoCarDetails(pickup.car_id)">
-            <img class="car_img"  src="{{pickup.image1}}" alt="">
+            <img class="car_img" src="{{pickup.image1}}" alt="">
             <div style="padding: 5px 7px 7.5px 8px;">
               <div>
                 <div class="card_title">{{pickup.vehical_name}}</div>

@@ -92,15 +92,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignInPage": () => (/* binding */ SignInPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _sign_in_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sign-in.page.html?ngResource */ 521);
 /* harmony import */ var _sign_in_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-in.page.scss?ngResource */ 8345);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 4666);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 3819);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ 5830);
+/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../check-user.service */ 7852);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app.component */ 5041);
+
+
 
 
 
@@ -111,12 +115,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SignInPage = class SignInPage {
-    constructor(location, router, menuCtrl, fb, api) {
+    constructor(location, router, menuCtrl, fb, api, checkUser, appComponent) {
         this.location = location;
         this.router = router;
         this.menuCtrl = menuCtrl;
         this.fb = fb;
         this.api = api;
+        this.checkUser = checkUser;
+        this.appComponent = appComponent;
         this.showPassword = false;
         this.getType = 'password';
         this.activateEmailField = false;
@@ -125,8 +131,8 @@ let SignInPage = class SignInPage {
     }
     createForm() {
         this.angForm = this.fb.group({
-            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-            password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required]
+            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+            password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required]
         });
     }
     ngOnInit() {
@@ -180,8 +186,15 @@ let SignInPage = class SignInPage {
             if (res.status == 'success') {
                 localStorage.setItem('appUserId', res.data.appUserId);
                 console.log('appUserId', res.data.appUserId);
-                this.api.appUserId = res.data.appUserId;
+                this.checkUser.appUserId = res.data.appUserId;
                 this.api.presentToast('Success! Welcome');
+                // ===update appPages===========
+                console.log(this.checkUser.appUserId);
+                this.checkUser.checkUser();
+                localStorage.setItem("appPagesAfterLogin", JSON.stringify(this.checkUser.appPages));
+                console.log(localStorage.getItem('appPagesAfterLogin'));
+                this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin'));
+                // =======done============
                 this.router.navigate(['/home-cars-after-login']);
             }
             else if (res.status == 'error') {
@@ -201,14 +214,16 @@ let SignInPage = class SignInPage {
     }
 };
 SignInPage.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__.Location },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.MenuController },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormBuilder },
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__.ApiService }
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_6__.Location },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormBuilder },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__.ApiService },
+    { type: _check_user_service__WEBPACK_IMPORTED_MODULE_3__.CheckUserService },
+    { type: _app_component__WEBPACK_IMPORTED_MODULE_4__.AppComponent }
 ];
-SignInPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+SignInPage = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-sign-in',
         template: _sign_in_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_sign_in_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]

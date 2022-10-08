@@ -261,6 +261,99 @@ SelectTimePage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
+/***/ 5830:
+/*!*****************************************!*\
+  !*** ./src/app/services/api.service.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApiService": () => (/* binding */ ApiService)
+/* harmony export */ });
+/* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 8987);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ 3819);
+
+
+
+
+
+
+let ApiService = class ApiService {
+  constructor(http, toastController, loadingCtrl) {
+    this.http = http;
+    this.toastController = toastController;
+    this.loadingCtrl = loadingCtrl;
+    this.baseURL = 'https://360uae.eigix.net/api';
+  }
+
+  sendRequest(action, data) {
+    let header;
+    header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    return this.http.post(`${this.baseURL}/${action}`, JSON.stringify(data), {
+      headers: header
+    });
+  }
+
+  getData(action) {
+    let header;
+    header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    return this.http.get(`${this.baseURL}/${action}`, {
+      headers: header
+    });
+  }
+
+  presentToast(toastMsg) {
+    var _this = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const toast = yield _this.toastController.create({
+        message: toastMsg,
+        duration: 2000
+      });
+      toast.present();
+    })();
+  }
+
+  showLoading() {
+    var _this2 = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const loading = yield _this2.loadingCtrl.create({
+        duration: 3000
+      });
+      loading.present();
+    })();
+  }
+
+  hideLoading() {
+    this.loadingCtrl.dismiss();
+  }
+
+};
+
+ApiService.ctorParameters = () => [{
+  type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ToastController
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.LoadingController
+}];
+
+ApiService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
+  providedIn: 'root'
+})], ApiService);
+
+
+/***/ }),
+
 /***/ 2483:
 /*!*********************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/button-active-4975dbd0.js ***!

@@ -1,5 +1,5 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar class="bgtoolbar">
+<ion-header class="ion-no-border" [class.header_footer_bg]="this.checkUser.appUserId != null">
+  <ion-toolbar class="bgtoolbar" [class.content_background]="this.checkUser.appUserId != null">
     <div class="header">
       <img (click)="goBack()" src="assets/images/icons/back_arrow.svg" alt="">
       <div class="title">BMW 2 series</div>
@@ -10,49 +10,73 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [class.content_background]="this.checkUser.appUserId != null">
   <div class="wrapper">
-
-    <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-      <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
-      <img style="width:100%" src="assets/images/selectedCar.svg" alt="">
-    </div>
-
-    <div class="name_price_box">
-      <div class="car_name">BMW 2 series</div>
-      <div style="display: flex;align-items: baseline;">
-        <span class="price_val" style="font-size:11px">$</span>
-        <span class="price_val" style="font-size:32px">26</span>
-        <span class="category_label" style="font-size: 10px;">/</span>
-        
-        <div (click)="displayCategories()" style="display: flex;align-items: baseline;position: relative;">
-          <span class="category_label" style="margin-right: 5px;">{{categoryVal}}</span> 
-          <img [class.rotate_icon]="showCategories==true"  src="assets/images/icons/dropdown_icon.svg" alt="">
-          <div *ngIf="showCategories==true" class="categories">
-            <div *ngFor="let type of rentCategories" (click)="selectedCategory(type.category)">
-              <span class="category_label" style="font-size: 12px; font-family: 'Poppins',sans-serif;">{{type.category}}</span>
-            </div> 
+    <div *ngFor="let data of carData">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide>
+          <div style="display: flex;justify-content: center;width: 100%; position: relative;">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
+            <img class="car_image" src="{{data.image1}}" alt="">
           </div>
+        </ion-slide>
+        <ion-slide>
+          <div style="display: flex;justify-content: center;width: 100%; position: relative;">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
+            <img class="car_image" src="{{data.image2}}" alt="">
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div style="display: flex;justify-content: center;width: 100%; position: relative;">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
+            <img class="car_image" src="{{data.image3}}" alt="">
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div style="display: flex;justify-content: center;width: 100%; position: relative;">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
+            <img class="car_image" src="{{data.image4}}" alt="">
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div style="display: flex;justify-content: center;width: 100%; position: relative;">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
+            <img class="car_image" src="{{data.image5}}" alt="">
+          </div>
+        </ion-slide>
+      </ion-slides>
+        
+  
+      <div class="name_price_box">
+            <div class="car_name">{{data.vehical_name}}</div>
+        <div style="display: flex;align-items: baseline;">
+          <span class="price_val" style="font-size:11px">$</span>
+          <span class="price_val" style="font-size:32px" *ngIf="categoryVal=='Day'">{{data.rent_cost_day}}</span>
+          <span class="price_val" style="font-size:32px" *ngIf="categoryVal=='Month'">{{data.rent_cost_month}}</span>
+          <span class="price_val" style="font-size:32px">26</span>
+          <span class="category_label" style="font-size: 10px;">/</span>
           
-          
+          <div (click)="displayCategories()" style="display: flex;align-items: baseline;position: relative;">
+            <span class="category_label" style="margin-right: 5px;">{{categoryVal}}</span> 
+            <img [class.rotate_icon]="showCategories==true"  src="assets/images/icons/dropdown_icon.svg" alt="">
+            <div *ngIf="showCategories==true" class="categories">
+              <div *ngFor="let type of rentCategories" (click)="selectedCategory(type.category)">
+                <span class="category_label" style="font-size: 12px; font-family: 'Poppins',sans-serif;">{{type.category}}</span>
+              </div> 
+            </div>  
+          </div>
+        </div>
+  
+      </div>
+  
+      <div class="box_styling">
+        <div class="box_heading">Description</div>
+        <div class="box_description">
+          {{data.description}}
         </div>
       </div>
-
     </div>
-
-    <div class="box_styling">
-      <div class="box_heading">Description</div>
-      <div class="box_description">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 
-        1500s, when an unknown printer took a galley of type and scrambled it to
-        make a type specimen book.It has survived not only five centuries, but 
-        also the leap into electronic typesetting, remaining essentially 
-        unchanged. It was popularised in the 1960s with the release of Letraset 
-        sheets containing Lorem Ipsum passages, and more recently with desktop 
-        publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-      </div>
-    </div>
+    
 
     <div class="box_styling">
       <div class="box_heading">Owner's Details</div>
@@ -95,7 +119,7 @@
 
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<ion-footer class="ion-no-border" [class.header_footer_bg]="this.checkUser.appUserId != null">
     <div style="margin: 10px 0px 15px;">
       <div style="text-align: center;">
         <ion-button class="invite_btn" (click)="startCarBooking()">

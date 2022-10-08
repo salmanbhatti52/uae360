@@ -90,12 +90,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CarDetailsPage": () => (/* binding */ CarDetailsPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _car_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./car-details.page.html?ngResource */ 9684);
 /* harmony import */ var _car_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./car-details.page.scss?ngResource */ 4438);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 4666);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../check-user.service */ 7852);
+
 
 
 
@@ -103,9 +105,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CarDetailsPage = class CarDetailsPage {
-    constructor(location, navCtrlr) {
+    constructor(location, navCtrlr, checkUser) {
         this.location = location;
         this.navCtrlr = navCtrlr;
+        this.checkUser = checkUser;
         this.showCategories = false;
         this.rentCategories = [{ category: 'day' }, { category: 'Month' }];
         this.categoryVal = 'day';
@@ -128,21 +131,43 @@ let CarDetailsPage = class CarDetailsPage {
         this.categoryVal = val;
     }
     gotoRatings() {
-        this.navCtrlr.navigateRoot('ratings');
+        if (this.checkUser.appUserId == null) {
+            this.navCtrlr.navigateRoot('sign-in');
+        }
+        else if (this.checkUser.appUserId != null) {
+            this.navCtrlr.navigateRoot('ratings');
+        }
+        else {
+        }
     }
     startCarBooking() {
-        this.navCtrlr.navigateRoot('car-booking');
+        if (this.checkUser.appUserId == null) {
+            this.navCtrlr.navigateRoot('sign-in');
+        }
+        else if (this.checkUser.appUserId != null) {
+            this.navCtrlr.navigateRoot('car-booking');
+        }
+        else {
+        }
     }
     startChatwithOwner() {
-        this.navCtrlr.navigateRoot('message-owner-side');
+        if (this.checkUser.appUserId == null) {
+            this.navCtrlr.navigateRoot('sign-in');
+        }
+        else if (this.checkUser.appUserId != null) {
+            this.navCtrlr.navigateRoot('message-owner-side');
+        }
+        else {
+        }
     }
 };
 CarDetailsPage.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__.Location },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.NavController }
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__.Location },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.NavController },
+    { type: _check_user_service__WEBPACK_IMPORTED_MODULE_2__.CheckUserService }
 ];
-CarDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+CarDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-car-details',
         template: _car_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_car_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -169,7 +194,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \**************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"title\">BMW 2 series</div>\n      <div>\n        <img (click)=\"startChatwithOwner()\" src=\"assets/images/icons/chat.svg\" alt=\"\">\n      </div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n\n    <div style=\"display: flex;justify-content: center;width: 100%; position: relative;\">\n      <img style=\"position: absolute;right: 5%;top: 8%;\" src=\"assets/images/icons/heart.svg\" alt=\"\">\n      <img style=\"width:100%\" src=\"assets/images/selectedCar.svg\" alt=\"\">\n    </div>\n\n    <div class=\"name_price_box\">\n      <div class=\"car_name\">BMW 2 series</div>\n      <div style=\"display: flex;align-items: baseline;\">\n        <span class=\"price_val\" style=\"font-size:11px\">$</span>\n        <span class=\"price_val\" style=\"font-size:32px\">26</span>\n        <span class=\"category_label\" style=\"font-size: 10px;\">/</span>\n        <div (click)=\"displayCategories()\" style=\"display: flex;align-items: baseline;position: relative;\">\n          <span class=\"category_label\" style=\"margin-right: 5px;\">{{categoryVal}}</span> \n          <img [class.rotate_icon]=\"showCategories==true\"  src=\"assets/images/icons/dropdown_icon.svg\" alt=\"\">\n          <div *ngIf=\"showCategories==true\" class=\"categories\">\n            <div *ngFor=\"let type of rentCategories\" (click)=\"selectedCategory(type.category)\">\n              <span class=\"category_label\" style=\"font-size: 12px; font-family: 'Poppins',sans-serif;\">{{type.category}}</span>\n            </div> \n          </div>\n          \n          \n        </div>\n      </div>\n\n    </div>\n\n    <div class=\"box_styling\">\n      <div class=\"box_heading\">Description</div>\n      <div class=\"box_description\">\n        Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n        Lorem Ipsum has been the industry's standard dummy text ever since the \n        1500s, when an unknown printer took a galley of type and scrambled it to\n        make a type specimen book.It has survived not only five centuries, but \n        also the leap into electronic typesetting, remaining essentially \n        unchanged. It was popularised in the 1960s with the release of Letraset \n        sheets containing Lorem Ipsum passages, and more recently with desktop \n        publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n      </div>\n    </div>\n\n    <div class=\"box_styling\">\n      <div class=\"box_heading\">Owner's Details</div>\n      <div class=\"box_sub_heading\">About</div>\n      <div class=\"box_description\">\n        Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n        Lorem Ipsum has been the industry's standard dummy text ever since\n        the 1500s.\n      </div>\n    </div>\n\n    <div class=\"box_styling\">\n      <div class=\"box_sub_heading\" style=\"margin-top: 0px;\">Location</div>\n      <div class=\"box_description\" style=\"margin-top: 4px;\">\n        Los Angeles, CA 90015\n      </div>\n    </div>\n\n    <div class=\"box_styling\" style=\"padding: 14px 14px 15px;\" (click)=\"gotoRatings()\">\n      <div class=\"inner_box\">\n        <div>\n          <span class=\"box_heading\" style=\"margin-right: 10px;\">Ratings</span>\n          <span style=\"margin-right: 6px;\">\n            <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n            <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n            <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n            <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n            <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n          </span>\n          <span class=\"trips_label\">269 trips</span>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/next.svg\" alt=\"\">\n        </div>\n      </div>\n      \n    </div>\n\n  </div>\n\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n    <div style=\"margin: 10px 0px 15px;\">\n      <div style=\"text-align: center;\">\n        <ion-button class=\"invite_btn\" (click)=\"startCarBooking()\">\n          <span class=\"btn-text\">Book Now</span>\n        </ion-button>\n      </div>\n    </div>\n</ion-footer>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"title\">BMW 2 series</div>\n      <div>\n        <img (click)=\"startChatwithOwner()\" src=\"assets/images/icons/chat.svg\" alt=\"\">\n      </div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n\n    <div style=\"display: flex;justify-content: center;width: 100%; position: relative;\">\n      <img style=\"position: absolute;right: 5%;top: 8%;\" src=\"assets/images/icons/heart.svg\" alt=\"\">\n      <img style=\"width:100%\" src=\"assets/images/selectedCar.svg\" alt=\"\">\n    </div>\n\n    <div class=\"name_price_box\">\n      <div class=\"car_name\">BMW 2 series</div>\n      <div style=\"display: flex;align-items: baseline;\">\n        <span class=\"price_val\" style=\"font-size:11px\">$</span>\n        <span class=\"price_val\" style=\"font-size:32px\">26</span>\n        <span class=\"category_label\" style=\"font-size: 10px;\">/</span>\n        \n        <div (click)=\"displayCategories()\" style=\"display: flex;align-items: baseline;position: relative;\">\n          <span class=\"category_label\" style=\"margin-right: 5px;\">{{categoryVal}}</span> \n          <img [class.rotate_icon]=\"showCategories==true\"  src=\"assets/images/icons/dropdown_icon.svg\" alt=\"\">\n          <div *ngIf=\"showCategories==true\" class=\"categories\">\n            <div *ngFor=\"let type of rentCategories\" (click)=\"selectedCategory(type.category)\">\n              <span class=\"category_label\" style=\"font-size: 12px; font-family: 'Poppins',sans-serif;\">{{type.category}}</span>\n            </div> \n          </div>\n          \n          \n        </div>\n      </div>\n\n    </div>\n\n    <div class=\"box_styling\">\n      <div class=\"box_heading\">Description</div>\n      <div class=\"box_description\">\n        Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n        Lorem Ipsum has been the industry's standard dummy text ever since the \n        1500s, when an unknown printer took a galley of type and scrambled it to\n        make a type specimen book.It has survived not only five centuries, but \n        also the leap into electronic typesetting, remaining essentially \n        unchanged. It was popularised in the 1960s with the release of Letraset \n        sheets containing Lorem Ipsum passages, and more recently with desktop \n        publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n      </div>\n    </div>\n\n    <div class=\"box_styling\">\n      <div class=\"box_heading\">Owner's Details</div>\n      <div class=\"box_sub_heading\">About</div>\n      <div class=\"box_description\">\n        Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n        Lorem Ipsum has been the industry's standard dummy text ever since\n        the 1500s.\n      </div>\n    </div>\n\n    <div class=\"box_styling\">\n      <div class=\"box_sub_heading\" style=\"margin-top: 0px;\">Location</div>\n      <div class=\"box_description\" style=\"margin-top: 4px;\">\n        Los Angeles, CA 90015\n      </div>\n    </div>\n\n    <div class=\"box_styling\" style=\"padding: 14px 14px 15px;\" (click)=\"gotoRatings()\">\n      <div class=\"inner_box\">\n        <div>\n          <span class=\"box_heading\" style=\"margin-right: 10px;\">Ratings</span>\n          <span style=\"margin-right: 6px;\">\n            <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n            <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n            <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n            <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n            <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n          </span>\n          <span class=\"trips_label\">269 trips</span>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/next.svg\" alt=\"\">\n        </div>\n      </div>\n      \n    </div>\n\n  </div>\n\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n    <div style=\"margin: 10px 0px 15px;\">\n      <div style=\"text-align: center;\">\n        <ion-button class=\"invite_btn\" (click)=\"startCarBooking()\">\n          <span class=\"btn-text\">Book Now</span>\n        </ion-button>\n      </div>\n    </div>\n</ion-footer>\n";
 
 /***/ })
 

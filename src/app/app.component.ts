@@ -42,7 +42,13 @@ export class AppComponent {
     this.checkUser.appUserId = null;
     localStorage.removeItem('appUserId');
     console.log('appUserId removed');
-    // this.router.navigate(['/home-before-login']);
+    // ===========to update sidemenu pages after logout==============
+    console.log(this.checkUser.appUserId);
+        
+    this.checkUser.checkUser();
+    console.log(this.checkUser.appPages);
+    this.appPages = this.checkUser.appPages;
+    // ===================done==================================
     this.navCtrl.navigateForward('home-before-login');
     this.closeMenu();
   }

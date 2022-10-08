@@ -69,8 +69,25 @@ export class HomeCarsAfterLoginPage implements OnInit {
   gotoFilter(){
     this.router.navigate(['/filters']);
   }
-  gotoCarDetails(){
-    this.router.navigate(['/car-details']);
+  gotoCarDetails(car_id){
+    this.api.showLoading();
+    let data = {
+      car_id: car_id
+    }
+    this.api.sendRequest('getCarsById',data).subscribe((res:any)=>{
+      this.api.hideLoading();
+      console.log('api response:',res);
+      if(res.status == 'success'){
+        this.api.carDataById = res.data;
+        console.log('carDataById:',this.api.carDataById);
+        this.router.navigate(['/car-details']);
+      }
+      
+    },(err)=>{
+      this.api.hideLoading();
+      console.log(err);
+      
+    })
   }
   selectItem(itemVal){
     if(itemVal == 1){

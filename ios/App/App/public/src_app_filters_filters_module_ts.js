@@ -90,12 +90,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FiltersPage": () => (/* binding */ FiltersPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _filters_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./filters.page.html?ngResource */ 1513);
 /* harmony import */ var _filters_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filters.page.scss?ngResource */ 42);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 4666);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
+/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../check-user.service */ 7852);
+
 
 
 
@@ -103,9 +105,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let FiltersPage = class FiltersPage {
-    constructor(location, navCtrlr) {
+    constructor(location, navCtrlr, checkUser) {
         this.location = location;
         this.navCtrlr = navCtrlr;
+        this.checkUser = checkUser;
     }
     ngOnInit() {
     }
@@ -113,15 +116,23 @@ let FiltersPage = class FiltersPage {
         this.location.back();
     }
     gotoHomeAfterLogin() {
-        this.navCtrlr.navigateRoot('home-cars-after-login');
+        if (this.checkUser.appUserId == null) {
+            this.navCtrlr.navigateRoot('home-before-login');
+        }
+        else if (this.checkUser.appUserId != null) {
+            this.navCtrlr.navigateRoot('home-cars-after-login');
+        }
+        else {
+        }
     }
 };
 FiltersPage.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__.Location },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.NavController }
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__.Location },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.NavController },
+    { type: _check_user_service__WEBPACK_IMPORTED_MODULE_2__.CheckUserService }
 ];
-FiltersPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+FiltersPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-filters',
         template: _filters_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_filters_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]

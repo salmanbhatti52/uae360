@@ -17,7 +17,31 @@
     font-family: 'Poppins', sans-serif;
     --placeholder-opacity: 0px !important;
   }
-
+  .swiper-pagination-bullet {
+    margin: 0 4px;
+    width: 24px;
+    height: 2px;
+    border-radius: 0px;
+   opacity: 0.5;
+    --bullet-background:rgb(255, 255, 255) !important;
+    // note: A color having opacity makes problem
+  }
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    --bullet-background-active:white !important;
+    width: 24px !important;
+  }
+  .swiper-pagination {
+    position: absolute;
+    text-align: center;
+    bottom: 3px !important;
+    -webkit-transition: 300ms opacity;
+    -o-transition: 300ms opacity;
+    transition: 300ms opacity;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    z-index: 10;
+  }
   .otp-input{
     width: 48px !important;
     height: 48px !important;
@@ -30,7 +54,7 @@
     font-size: 16px !important;
     font-weight: 400 !important;
     color: black !important;
-}
+  }
   .inputClass{
     border: solid 1px #8000FF !important;
   }
@@ -96,7 +120,7 @@
       --border-radius: 20px;
       --width: 90%;
       background: rgba(15, 23, 42, 0.5);
-  }
+    }
   }
 
   @media only screen and (min-width: 632px){
@@ -117,7 +141,7 @@
       --border-radius: 20px;
       --width: 90%;
       background: rgba(15, 23, 42, 0.5);
-  }
+    }
   }
 //   @media only screen 
 //   and (min-device-height: 667px) 

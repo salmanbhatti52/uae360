@@ -6,7 +6,7 @@ import { LoadingController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class ApiService {
-  
+  carDataById:any;
   baseURL:any = 'https://360uae.eigix.net/api';
   constructor(private http:HttpClient, 
     public toastController:ToastController,

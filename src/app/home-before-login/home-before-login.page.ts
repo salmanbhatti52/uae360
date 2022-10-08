@@ -79,10 +79,10 @@ export class HomeBeforeLoginPage implements OnInit {
   getCars(){
     this.api.showLoading();
     this.api.getData('cars').subscribe((res:any)=>{
+      this.api.hideLoading();
       console.log(res);
       if(res.status == 'success'){
         console.log(res.data);
-        this.api.hideLoading();
         this.pickups = res.data;
       }
       
@@ -97,17 +97,26 @@ export class HomeBeforeLoginPage implements OnInit {
     this.router.navigate(['/filters']);
   }
   gotoCarDetails(car_id){
-    // let data = {
-    //   car_id: car_id
-    // }
-    // this.api.sendData_GetData('getCarsById',JSON.stringify(data)).subscribe((res:any)=>{
-    //   console.log(res);
+    this.api.showLoading();
+    let data = {
+      car_id: car_id
+    }
+    this.api.sendRequest('getCarsById',data).subscribe((res:any)=>{
+      this.api.hideLoading();
+      console.log('api response:',res);
+      if(res.status == 'success'){
+        this.api.presentToast('Success!')
+        this.api.carDataById = res.data;
+        console.log('carDataById:',this.api.carDataById);
+        this.router.navigate(['/car-details']);
+      }
       
-    // },(err)=>{
-    //   console.log(err);
+    },(err)=>{
+      this.api.hideLoading();
+      console.log(err);
       
-    // })
-    this.router.navigate(['/car-details']);
+    })
+    
   }
   selectItem(itemVal){
     if(itemVal == 1){
