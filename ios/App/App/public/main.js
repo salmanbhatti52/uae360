@@ -33,7 +33,7 @@ const routes = [
     },
     {
         path: 'car-details',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_car-details_car-details_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./car-details/car-details.module */ 2901)).then(m => m.CarDetailsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_car-details_car-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./car-details/car-details.module */ 2901)).then(m => m.CarDetailsPageModule)
     },
     {
         path: 'sign-in',
@@ -232,7 +232,12 @@ let AppComponent = class AppComponent {
         this.checkUser.appUserId = null;
         localStorage.removeItem('appUserId');
         console.log('appUserId removed');
-        // this.router.navigate(['/home-before-login']);
+        // ===========to update sidemenu pages after logout==============
+        console.log(this.checkUser.appUserId);
+        this.checkUser.checkUser();
+        console.log(this.checkUser.appPages);
+        this.appPages = this.checkUser.appPages;
+        // ===================done==================================
         this.navCtrl.navigateForward('home-before-login');
         this.closeMenu();
     }
