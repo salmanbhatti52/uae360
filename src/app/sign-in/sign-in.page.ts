@@ -47,7 +47,7 @@ export class SignInPage implements OnInit {
   //   this.menuCtrl.close();
   // }
   goBack(){
-    this.location.back();
+    this.router.navigate(['/home-before-login']);
   }
   toggleGetType(){
     if(this.getType == 'password'){

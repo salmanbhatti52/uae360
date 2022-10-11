@@ -27,14 +27,14 @@ export class AppComponent {
      
   ngOnInit() {
 
-    this.platform.ready().then(() => {
-      setTimeout(()=>{
-        SplashScreen.hide({
-          fadeOutDuration: 1000
-        });
-      },10000)
+    // this.platform.ready().then(() => {
+    //   setTimeout(()=>{
+    //     SplashScreen.hide({
+    //       fadeOutDuration: 1000
+    //     });
+    //   },10000)
       
-    })
+    // })
     
   }
 

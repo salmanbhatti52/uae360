@@ -13,38 +13,38 @@
 <ion-content [class.content_background]="this.checkUser.appUserId != null">
   <div class="wrapper">
     <div *ngFor="let data of carData">
-      <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide>
+      <swiper [pagination]="true" [config]="{ intialSlide: 0, speed: 400, slidesPerView:1 }">
+        <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
             <img class="car_image" src="{{data.image1}}" alt="">
           </div>
-        </ion-slide>
-        <ion-slide>
+        </ng-template>
+        <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
             <img class="car_image" src="{{data.image2}}" alt="">
           </div>
-        </ion-slide>
-        <ion-slide>
+        </ng-template>
+        <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
             <img class="car_image" src="{{data.image3}}" alt="">
           </div>
-        </ion-slide>
-        <ion-slide>
+        </ng-template>
+        <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
             <img class="car_image" src="{{data.image4}}" alt="">
           </div>
-        </ion-slide>
-        <ion-slide>
+        </ng-template>
+        <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
             <img class="car_image" src="{{data.image5}}" alt="">
           </div>
-        </ion-slide>
-      </ion-slides>
+        </ng-template>
+      </swiper>
         
   
       <div class="name_price_box">
@@ -53,7 +53,7 @@
           <span class="price_val" style="font-size:11px">$</span>
           <span class="price_val" style="font-size:32px" *ngIf="categoryVal=='Day'">{{data.rent_cost_day}}</span>
           <span class="price_val" style="font-size:32px" *ngIf="categoryVal=='Month'">{{data.rent_cost_month}}</span>
-          <span class="price_val" style="font-size:32px">26</span>
+          <!-- <span class="price_val" style="font-size:32px">26</span> -->
           <span class="category_label" style="font-size: 10px;">/</span>
           
           <div (click)="displayCategories()" style="display: flex;align-items: baseline;position: relative;">

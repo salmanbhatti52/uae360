@@ -1,12 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 import { NavController } from '@ionic/angular';
 import { CheckUserService } from '../check-user.service';
 import { ApiService } from '../services/api.service';
+import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
+import { IonicSlides } from '@ionic/angular';
+
+SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
+
 @Component({
   selector: 'app-car-details',
   templateUrl: './car-details.page.html',
   styleUrls: ['./car-details.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CarDetailsPage implements OnInit {
 
@@ -15,11 +21,7 @@ export class CarDetailsPage implements OnInit {
   categoryVal = 'Day';
   carData = [];
   
-  slideOpts = {
-    intialSlide: 0,
-    speed: 400,
-    slidesPerView:1
-  };
+  
   constructor(public location:Location,
     public navCtrlr:NavController,
     public checkUser:CheckUserService,

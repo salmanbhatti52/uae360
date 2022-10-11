@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation  } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { CheckUserService } from '../check-user.service';
 import { AppComponent } from '../app.component';
+import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
+import { IonicSlides } from '@ionic/angular';
 
+SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 @Component({
   selector: 'app-home-before-login',
   templateUrl: './home-before-login.page.html',
   styleUrls: ['./home-before-login.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HomeBeforeLoginPage implements OnInit {
   totalNotifications = 6;
@@ -17,22 +21,10 @@ export class HomeBeforeLoginPage implements OnInit {
   item4 = false;
   item5 = false;
   
-  slideOpts2 = {
-    initialSlide: 0,
-    speed: 400,
-    slidesPerView: 4.4,
-    // spaceBetween : 9,
-  };
-  slideOpts = {
-    initialSlide: 0,
-    speed: 400,
-    slidesPerView: 1.4,
-    spaceBetween : 9,
-  };
+  
   showCategories = false;
   rentCategories = [{category:'Day'},{category:'Month'}]
   categoryVal = 'Day';
-  // category
   
   // pickups = [
   //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
@@ -48,24 +40,24 @@ export class HomeBeforeLoginPage implements OnInit {
     public checkUser:CheckUserService,
     public appComponent:AppComponent) { }
 
-  displayCategories(car_id){
-    if(car_id !=null){
+  // displayCategories(car_id){
+  //   if(car_id !=null){
 
-    }
-    if(car_id !=null){
-      this.showCategories = true;
-    }
-    else{
-      this.showCategories = false;
-    }
-  }
-  selectedCategory(val,id){
-    console.log(val);
-    console.log('iiiii',id);
-    this.selectedCarID = id
-    console.log('fffff',this.selectedCarID);
-    this.categoryVal = val;
-  }
+  //   }
+  //   if(car_id !=null){
+  //     this.showCategories = true;
+  //   }
+  //   else{
+  //     this.showCategories = false;
+  //   }
+  // }
+  // selectedCategory(val,id){
+  //   console.log(val);
+  //   console.log('iiiii',id);
+  //   this.selectedCarID = id
+  //   console.log('fffff',this.selectedCarID);
+  //   this.categoryVal = val;
+  // }
   ngOnInit() {
     console.log(this.checkUser.appUserId);
     
@@ -119,36 +111,101 @@ export class HomeBeforeLoginPage implements OnInit {
     
   }
   selectItem(itemVal){
-    if(itemVal == 1){
+    if(itemVal == 'all'){
       this.item1 = true;
       this.item2 = false;
       this.item3 = false;
       this.item4 = false;
       this.item5 = false;
-    }else if(itemVal == 2){
+      this.getCars();
+    }else if(itemVal == 'hatchback'){
       this.item1 = false;
       this.item2 = true;
       this.item3 = false;
       this.item4 = false;
       this.item5 = false;
-    }else if(itemVal == 3){
+
+      this.api.showLoading();
+        let data = {
+          car_type: 'Hatchback'
+        }
+        this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
+          console.log(res);
+          if(res.status == 'success'){
+            this.api.hideLoading();
+            this.pickups = res.data;
+          }
+        },(err)=>{
+          this.api.hideLoading();
+          console.log(err);
+          
+        })
+    }else if(itemVal == 'sedan'){
       this.item1 = false;
       this.item2 = false;
       this.item3 = true;
       this.item4 = false;
       this.item5 = false;
-    }else if(itemVal == 4){
+
+      this.api.showLoading();
+        let data = {
+          car_type: 'Sedan'
+        }
+        this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
+          console.log(res);
+          if(res.status == 'success'){
+            this.api.hideLoading();
+            this.pickups = res.data;
+          }
+        },(err)=>{
+          this.api.hideLoading();
+          console.log(err);
+          
+        })
+    }else if(itemVal == 'bus'){
       this.item1 = false;
       this.item2 = false;
       this.item3 = false;
       this.item4 = true;
       this.item5 = false;
-    }else if(itemVal == 5){
+
+      this.api.showLoading();
+        let data = {
+          car_type: 'Bus'
+        }
+        this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
+          console.log(res);
+          if(res.status == 'success'){
+            this.api.hideLoading();
+            this.pickups = res.data;
+          }
+        },(err)=>{
+          this.api.hideLoading();
+          console.log(err);
+          
+        })
+    }else if(itemVal == 'suv'){
       this.item1 = false;
       this.item2 = false;
       this.item3 = false;
       this.item4 = false;
       this.item5 = true;
+
+      this.api.showLoading();
+        let data = {
+          car_type: 'SUV'
+        }
+        this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
+          console.log(res);
+          if(res.status == 'success'){
+            this.api.hideLoading();
+            this.pickups = res.data;
+          }
+        },(err)=>{
+          this.api.hideLoading();
+          console.log(err);
+          
+        })
     }else{
       
     }

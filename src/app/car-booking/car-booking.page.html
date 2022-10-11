@@ -9,12 +9,12 @@
 
 <ion-content>
   <div class="wrapper">
-    <div style="text-align: center; position: relative; ">
-      <img style="width: 100%;" src="assets/images/bookings_car.svg" alt="">
+    <div style="text-align: center; position: relative;"  *ngFor="let data of carData">
+      <img style="width: 100%;height: 200px; border-radius: 10px 10px 0px 0px;" src="{{data.image1}}" alt="">
       <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
       <div class="car_info_box" >
         <div>
-          <div class="car_name urbanist">BMW 2 series</div>
+          <div class="car_name urbanist">{{data.vehical_name}}</div>
           <div style="text-align: left;line-height: 1;">
             <span>
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="car2_info_subdiv">
-          <div style="margin-right: 17px;line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+          <div style="line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">{{data.rent_cost_day}}</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
         </div>
         
       </div>

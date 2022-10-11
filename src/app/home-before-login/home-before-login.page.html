@@ -29,43 +29,43 @@
   </div>
       <div class="items_label">What are you looking for?</div>
       <div style="padding-left: 11px;padding-right: 11px; ">
-        <ion-slides pager="false" [options]="slideOpts2">
-          <ion-slide class="categories">
-            <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem(1)">
+        <swiper [config]="{slidesPerView:4.4, initialSlide:0, speed:400}" [pagination]="false">
+          <ng-template swiperSlide class="categories">
+            <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem('all')">
               <img src="assets/images/icons/car_grey.svg" alt="" *ngIf="item1 == false">
               <img src="assets/images/icons/car_white.svg" alt="" *ngIf="item1 == true">
               <div class="cars_label" [class.fontActive]="item1 == true">All Cars</div>
             </div>
-          </ion-slide>
-          <ion-slide class="categories">
-            <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem(2)">
+          </ng-template>
+          <ng-template swiperSlide class="categories">
+            <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem('hatchback')">
               <img src="assets/images/icons/sports_car_grey.svg" alt="" *ngIf="item2 == false">
               <img src="assets/images/icons/sports_car_white.svg" alt="" *ngIf="item2 == true">
               <div class="cars_label" [class.fontActive]="item2 == true">Sports cars</div>
             </div>
-          </ion-slide>
-          <ion-slide class="categories">
-            <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem(3)">
+          </ng-template>
+          <ng-template swiperSlide class="categories">
+            <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem('sedan')">
               <img src="assets/images/icons/luxury_car_grey.svg" alt="" *ngIf="item3 == false">
               <img src="assets/images/icons/luxury_car_white.svg" alt="" *ngIf="item3 == true">
               <div class="cars_label" [class.fontActive]="item3 == true">Luxury cars</div>
             </div>
-          </ion-slide>
-          <ion-slide class="categories">
-            <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem(4)">
+          </ng-template>
+          <ng-template swiperSlide class="categories">
+            <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem('bus')">
               <img src="assets/images/icons/taxi_grey.svg" alt="" *ngIf="item4 == false">
               <img src="assets/images/icons/taxi_white.svg" alt="" *ngIf="item4 == true">
               <div class="cars_label" [class.fontActive]="item4 == true">Pickup</div>
             </div>
-          </ion-slide>
-          <ion-slide class="categories" style="padding-right: 9px;">
-            <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem(5)">
+          </ng-template>
+          <ng-template swiperSlide class="categories" style="padding-right: 9px;">
+            <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem('suv')">
               <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
               <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">
               <div class="cars_label" [class.fontActive]="item5 == true">Suv's</div>
             </div>
-          </ion-slide>
-        </ion-slides>
+          </ng-template>
+        </swiper>
       </div>
       
       <!-- <div class="items_box">
@@ -74,9 +74,9 @@
 
   <div class="items_wrapper">
     <div class="items_label" style="margin-top: 5px;padding-left: 3px;">Top Rented</div>
-    <div *ngIf="item1==true">
-      <ion-slides pager="false" [options]="slideOpts">
-        <ion-slide *ngFor="let pickup of pickups;" style="width: 58%; height: 100%;">
+    <!-- <div *ngIf="item1==true"> -->
+      <swiper pager="false" [config]="{slidesPerView:1.4 ,spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false">
+        <ng-template swiperSlide *ngFor="let pickup of pickups;" style="width: 58%; height: 100%;">
           <ion-card class="card" (click)="gotoCarDetails(pickup.car_id)">
             <img class="car_img" src="{{pickup.image1}}" alt="">
             <div style="padding: 5px 7px 7.5px 8px;">
@@ -120,8 +120,8 @@
             </div>
             
           </ion-card>
-        </ion-slide>
-      </ion-slides>
+        </ng-template>
+      </swiper>
       <!-- <ion-slides pager="false" [options]="slideOpts">
         <ion-slide *ngFor="let pickup of pickups;" style="width: 48%; height: 100%;">
           <ion-card class="card" >
@@ -202,7 +202,7 @@
           </ion-card>
         </ion-slide>
       </ion-slides> -->
-    </div>
+    <!-- </div> -->
     
   </div>
 </ion-content>

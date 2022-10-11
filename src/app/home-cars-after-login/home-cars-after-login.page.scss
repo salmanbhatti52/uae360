@@ -1,3 +1,5 @@
+@import 'swiper/scss';
+@import '@ionic/angular/css/ionic-swiper';
 ion-header{
     font-family: 'Poppins', sans-serif;
     background-color: #FBFBFB !important;
@@ -138,7 +140,8 @@ ion-footer{
     box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
 }
 .car_img{
-    width: 100%;height: 160px;
+    width: 100% !important;
+    height: 160px !important;
 }
 .row_div{
     display: flex;
@@ -225,6 +228,7 @@ ion-footer{
   and (max-device-width: 1024px) 
   and (-webkit-min-device-pixel-ratio: 1) {
     .car_img{
-        width: 100%;height: 250px;
+        width: 100% !important;
+        height: 250px !important;
     }
 }

@@ -3,7 +3,7 @@ import { ModalController, NavController } from '@ionic/angular';
 import { SelectDatePage } from '../select-date/select-date.page';
 import { SelectTimePage } from '../select-time/select-time.page';
 import { Location } from '@angular/common';
-
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-car-booking',
   templateUrl: './car-booking.page.html',
@@ -14,13 +14,17 @@ startDate:any;
 endDate:any;
 startTime:any; 
 endTime:any;
-
+carData = [];
   constructor(public modalCtrlr:ModalController,
     public location:Location,
-    public navCtrlr:NavController) { }
+    public navCtrlr:NavController,
+    public api:ApiService) { }
 
   ngOnInit() {
     console.log(this.startDate);
+    let carData = this.api.carDataById;
+    console.log('Car Data:',carData);
+    this.carData = carData;
   }
   goBack(){
     this.location.back();
