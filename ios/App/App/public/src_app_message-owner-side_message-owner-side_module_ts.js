@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_message-owner-side_message-owner-side_module_ts"],{
 
-/***/ 5500:
+/***/ 25500:
 /*!*************************************************************************!*\
   !*** ./src/app/message-owner-side/message-owner-side-routing.module.ts ***!
   \*************************************************************************/
@@ -11,10 +11,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MessageOwnerSidePageRoutingModule": () => (/* binding */ MessageOwnerSidePageRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _message_owner_side_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message-owner-side.page */ 8934);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _message_owner_side_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message-owner-side.page */ 58934);
 
 
 
@@ -38,7 +38,7 @@ MessageOwnerSidePageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__deco
 
 /***/ }),
 
-/***/ 9747:
+/***/ 79747:
 /*!*****************************************************************!*\
   !*** ./src/app/message-owner-side/message-owner-side.module.ts ***!
   \*****************************************************************/
@@ -48,13 +48,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MessageOwnerSidePageModule": () => (/* binding */ MessageOwnerSidePageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 94666);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var _message_owner_side_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message-owner-side-routing.module */ 5500);
-/* harmony import */ var _message_owner_side_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message-owner-side.page */ 8934);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _message_owner_side_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message-owner-side-routing.module */ 25500);
+/* harmony import */ var _message_owner_side_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message-owner-side.page */ 58934);
 
 
 
@@ -80,7 +80,7 @@ MessageOwnerSidePageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
 
 /***/ }),
 
-/***/ 8934:
+/***/ 58934:
 /*!***************************************************************!*\
   !*** ./src/app/message-owner-side/message-owner-side.page.ts ***!
   \***************************************************************/
@@ -90,11 +90,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "MessageOwnerSidePage": () => (/* binding */ MessageOwnerSidePage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _message_owner_side_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message-owner-side.page.html?ngResource */ 8489);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _message_owner_side_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message-owner-side.page.html?ngResource */ 58489);
 /* harmony import */ var _message_owner_side_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message-owner-side.page.scss?ngResource */ 1811);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 94666);
 
 
 
@@ -135,7 +135,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
 
 /***/ }),
 
-/***/ 8489:
+/***/ 58489:
 /*!****************************************************************************!*\
   !*** ./src/app/message-owner-side/message-owner-side.page.html?ngResource ***!
   \****************************************************************************/

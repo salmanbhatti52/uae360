@@ -8,17 +8,19 @@ import { ModalController } from '@ionic/angular';
 })
 export class SelectDatePage implements OnInit {
   date:any;
-  
-
+  minDate = format(parseISO(new Date().toISOString()),'yyyy-MM-dd');
   constructor(public modalCtrlr:ModalController) { }
 
   ngOnInit() {
+    console.log(this.minDate);
+    
   }
-  formattedString(){
-    const formattedString = format(parseISO(this.date), 'dd MMM, yyyy');
-    // const formattedString = format(parseISO(this.date), 'dd MMM, yyyy');
+  formattedString(dateVal){
+    console.log('date parameter:',dateVal);
+    
+    const formattedString = format(parseISO(dateVal), 'dd MMM, yyyy');
     // =====dashed date for summary page=====
-    const dashedDate = format(parseISO(this.date), 'dd-MM-yyyy');
+    const dashedDate = format(parseISO(dateVal), 'dd-MM-yyyy');
     console.log(dashedDate);
     // ============done================
     this.date=formattedString;

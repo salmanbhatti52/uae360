@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NavController } from '@ionic/angular';
 import { CheckUserService } from '../check-user.service';
 import { ApiService } from '../services/api.service';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
 import { IonicSlides } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 
@@ -12,7 +13,6 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
   selector: 'app-car-details',
   templateUrl: './car-details.page.html',
   styleUrls: ['./car-details.page.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class CarDetailsPage implements OnInit {
 
@@ -25,7 +25,8 @@ export class CarDetailsPage implements OnInit {
   constructor(public location:Location,
     public navCtrlr:NavController,
     public checkUser:CheckUserService,
-    public api:ApiService) { }
+    public api:ApiService,
+    public router:Router) { }
 
   ngOnInit() {
     this.carData = this.api.carDataById;
@@ -58,9 +59,9 @@ export class CarDetailsPage implements OnInit {
   }
   startCarBooking(){
     if(this.checkUser.appUserId == null){
-      this.navCtrlr.navigateRoot('sign-in');
+      this.router.navigate(['/sign-in']);
     }else if(this.checkUser.appUserId != null){
-      this.navCtrlr.navigateRoot('car-booking');
+      this.router.navigate(['/car-booking']);
     }else{
 
     }

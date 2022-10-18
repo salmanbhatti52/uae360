@@ -4,27 +4,87 @@ import { SelectDatePage } from '../select-date/select-date.page';
 import { SelectTimePage } from '../select-time/select-time.page';
 import { Location } from '@angular/common';
 import { ApiService } from '../services/api.service';
+import { AlertController } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+// import { format,parseISO} from 'date-fns';
+const IMAGE_DIR = 'stored-image'
+interface LocalFile {
+  name : string;
+  path : string;
+  data : string;
+}
+
 @Component({
   selector: 'app-car-booking',
   templateUrl: './car-booking.page.html',
   styleUrls: ['./car-booking.page.scss'],
 })
 export class CarBookingPage implements OnInit {
+image: LocalFile [] = [];
 startDate:any; 
 endDate:any;
 startTime:any; 
 endTime:any;
 carData = [];
+
+base64Image = '';
+imageURL:any = 'assets/images/upload_license_img.svg';
+  
   constructor(public modalCtrlr:ModalController,
     public location:Location,
     public navCtrlr:NavController,
-    public api:ApiService) { }
+    public api:ApiService,
+    public alertCtrlr:AlertController) { }
 
   ngOnInit() {
     console.log(this.startDate);
     let carData = this.api.carDataById;
     console.log('Car Data:',carData);
     this.carData = carData;
+    console.log('licenseImage',this.imageURL);  
+    this.loadFiles();
+  }
+
+  async loadFiles(){
+    // this.image = [];
+    this.api.showLoading();
+    await Filesystem.readdir({
+      directory: Directory.Data,
+      path:IMAGE_DIR
+    }).then(result =>{
+      console.log('Files on load: ',result);
+      this.readFile(result.files);
+    },(err)=>{
+      console.log(err);
+      Filesystem.mkdir({
+        directory: Directory.Data,
+        path: IMAGE_DIR
+      });
+      console.log("New Folder Created");
+      
+
+    }).then(_=>{
+      this.api.hideLoading();
+    })
+  }
+
+  async readFile(files){
+    console.log('Files Detail: ',files);
+    for(let f of files){
+      const filePath = `${IMAGE_DIR}/${f.name}`
+      const fileData = await Filesystem.readFile({
+        directory: Directory.Data,
+        path: filePath
+      });
+      console.log('File Read :', fileData);
+      this.imageURL = `data:image/jpeg;base64,${fileData.data}`;
+      // this.image.push({
+      //   name: f.name,
+      //   path: filePath,
+      //   data: `data:image/jpeg;base64,${fileData.data}`
+      // });
+    }
   }
   goBack(){
     this.location.back();
@@ -80,7 +140,97 @@ carData = [];
     }
   }
 
+  async addLicense(){
+    // const alert  = await this.alertCtrlr.create({
+    //   header: 'Choose From',
+    //   buttons: [
+    //     {
+    //       text: 'Camera',
+    //       role: 'camera',
+    //       handler: ()=>{
+            
+    //       },
+    //     },
+    //     {
+    //       text: 'Gallery',
+    //       role: 'upload',
+    //       handler: ()=>{
+           
+    //      },
+    //     },
+    //   ],
+    // });
+    // await alert.present();
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source:CameraSource.Prompt
+    });
+    console.log(image);
+    // if(image.format == 'jpeg'){
+      this.imageURL = image.dataUrl;
+      this.readDir();
+    // }else{
+    //   this.api.presentToast("Please add image in 'JPEG' format.");
+    // }
+  }
+  async readDir(){
+    await Filesystem.readdir({
+      directory: Directory.Data,
+      path: IMAGE_DIR
+    }).then(result =>{
+      if(result.files.length==0){
+        this.saveImage(this.imageURL);
+        // this.loadFiles();
+      }
+      else if(result.files.length > 0){
+        let fileName = ''
+        for( let f of result.files){
+          fileName = `${IMAGE_DIR}/${f.name}`;
+        } 
+        console.log('fileName: ',fileName);
+        
+          Filesystem.deleteFile({
+            directory: Directory.Data,
+            path: fileName
+          });
+        this.saveImage(this.imageURL);
+        // this.loadFiles()
+      }else{
+
+      }
+      
+    });
+  }
+  async saveImage(base64Image){
+    
+    const fileName = new Date().getTime() + '.jpeg';
+    const savedFile = await Filesystem.writeFile({
+      directory: Directory.Data,
+      path: `${IMAGE_DIR}/${fileName}`,
+      data: base64Image
+    });
+    console.log('File Saved: ',savedFile);
+    
+  }
+  
+  // async deleteFiles(files){
+  //   .then(result => {
+  //       console.log(result);
+        
+  //     });
+    
+      
+    
+  //   console.log('files deleted');
+    
+    
+  //   // console.log(files);
+  // }
+
   showSummary(){
+    
     localStorage.setItem('startDate',this.startDate);
     localStorage.setItem('endDate',this.endDate);
     localStorage.setItem('startTime',this.startTime);

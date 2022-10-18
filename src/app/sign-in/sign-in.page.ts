@@ -88,7 +88,7 @@ export class SignInPage implements OnInit {
         localStorage.setItem('appUserId',res.data.appUserId);
         console.log('appUserId',res.data.appUserId);
         this.checkUser.appUserId = res.data.appUserId;
-        this.api.presentToast('Success! Welcome')
+        // this.api.presentToast('Success! Welcome')
         // ===update appPages===========
         console.log(this.checkUser.appUserId);
         this.checkUser.checkUser();
@@ -105,7 +105,7 @@ export class SignInPage implements OnInit {
       }
     },(error:any)=>{
       console.log(error);
-      
+      this.api.presentToast(error);
     })
 
     

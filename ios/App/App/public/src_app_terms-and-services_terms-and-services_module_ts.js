@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_terms-and-services_terms-and-services_module_ts"],{
 
-/***/ 513:
+/***/ 30513:
 /*!*************************************************************************!*\
   !*** ./src/app/terms-and-services/terms-and-services-routing.module.ts ***!
   \*************************************************************************/
@@ -11,10 +11,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TermsAndServicesPageRoutingModule": () => (/* binding */ TermsAndServicesPageRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _terms_and_services_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./terms-and-services.page */ 7149);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _terms_and_services_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./terms-and-services.page */ 17149);
 
 
 
@@ -38,7 +38,7 @@ TermsAndServicesPageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__deco
 
 /***/ }),
 
-/***/ 5629:
+/***/ 95629:
 /*!*****************************************************************!*\
   !*** ./src/app/terms-and-services/terms-and-services.module.ts ***!
   \*****************************************************************/
@@ -48,13 +48,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TermsAndServicesPageModule": () => (/* binding */ TermsAndServicesPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 94666);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var _terms_and_services_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./terms-and-services-routing.module */ 513);
-/* harmony import */ var _terms_and_services_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./terms-and-services.page */ 7149);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _terms_and_services_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./terms-and-services-routing.module */ 30513);
+/* harmony import */ var _terms_and_services_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./terms-and-services.page */ 17149);
 
 
 
@@ -80,7 +80,7 @@ TermsAndServicesPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
 
 /***/ }),
 
-/***/ 7149:
+/***/ 17149:
 /*!***************************************************************!*\
   !*** ./src/app/terms-and-services/terms-and-services.page.ts ***!
   \***************************************************************/
@@ -90,12 +90,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TermsAndServicesPage": () => (/* binding */ TermsAndServicesPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _terms_and_services_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./terms-and-services.page.html?ngResource */ 1358);
-/* harmony import */ var _terms_and_services_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./terms-and-services.page.scss?ngResource */ 2990);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 4666);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _terms_and_services_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./terms-and-services.page.html?ngResource */ 31358);
+/* harmony import */ var _terms_and_services_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./terms-and-services.page.scss?ngResource */ 52990);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 94666);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 60124);
 
 
 
@@ -135,7 +135,7 @@ TermsAndServicesPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 2990:
+/***/ 52990:
 /*!****************************************************************************!*\
   !*** ./src/app/terms-and-services/terms-and-services.page.scss?ngResource ***!
   \****************************************************************************/
@@ -145,7 +145,7 @@ module.exports = "ion-content {\n  font-family: \"Poppins\", sans-serif;\n  --ba
 
 /***/ }),
 
-/***/ 1358:
+/***/ 31358:
 /*!****************************************************************************!*\
   !*** ./src/app/terms-and-services/terms-and-services.page.html?ngResource ***!
   \****************************************************************************/

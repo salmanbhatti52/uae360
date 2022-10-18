@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_live-chat-screen_live-chat-screen_module_ts"],{
 
-/***/ 8383:
+/***/ 58383:
 /*!*********************************************************************!*\
   !*** ./src/app/live-chat-screen/live-chat-screen-routing.module.ts ***!
   \*********************************************************************/
@@ -11,10 +11,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LiveChatScreenPageRoutingModule": () => (/* binding */ LiveChatScreenPageRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _live_chat_screen_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./live-chat-screen.page */ 4845);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _live_chat_screen_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./live-chat-screen.page */ 14845);
 
 
 
@@ -38,7 +38,7 @@ LiveChatScreenPageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decora
 
 /***/ }),
 
-/***/ 2273:
+/***/ 12273:
 /*!*************************************************************!*\
   !*** ./src/app/live-chat-screen/live-chat-screen.module.ts ***!
   \*************************************************************/
@@ -48,13 +48,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LiveChatScreenPageModule": () => (/* binding */ LiveChatScreenPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 94666);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var _live_chat_screen_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./live-chat-screen-routing.module */ 8383);
-/* harmony import */ var _live_chat_screen_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./live-chat-screen.page */ 4845);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _live_chat_screen_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./live-chat-screen-routing.module */ 58383);
+/* harmony import */ var _live_chat_screen_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./live-chat-screen.page */ 14845);
 
 
 
@@ -80,7 +80,7 @@ LiveChatScreenPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
 
 /***/ }),
 
-/***/ 4845:
+/***/ 14845:
 /*!***********************************************************!*\
   !*** ./src/app/live-chat-screen/live-chat-screen.page.ts ***!
   \***********************************************************/
@@ -90,11 +90,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LiveChatScreenPage": () => (/* binding */ LiveChatScreenPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _live_chat_screen_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./live-chat-screen.page.html?ngResource */ 2245);
-/* harmony import */ var _live_chat_screen_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./live-chat-screen.page.scss?ngResource */ 2048);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _live_chat_screen_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./live-chat-screen.page.html?ngResource */ 12245);
+/* harmony import */ var _live_chat_screen_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./live-chat-screen.page.scss?ngResource */ 62048);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 94666);
 
 
 
@@ -125,7 +125,7 @@ LiveChatScreenPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
 
 /***/ }),
 
-/***/ 2048:
+/***/ 62048:
 /*!************************************************************************!*\
   !*** ./src/app/live-chat-screen/live-chat-screen.page.scss?ngResource ***!
   \************************************************************************/
@@ -135,7 +135,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
 
 /***/ }),
 
-/***/ 2245:
+/***/ 12245:
 /*!************************************************************************!*\
   !*** ./src/app/live-chat-screen/live-chat-screen.page.html?ngResource ***!
   \************************************************************************/

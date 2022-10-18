@@ -29,7 +29,7 @@
   </div>
       <div class="items_label">What are you looking for?</div>
       <div style="padding-left: 11px;padding-right: 11px;">
-        <swiper [config]="{slidesPerView:4.4, initialSlide:0, speed:400}" [pagination]="false">
+        <swiper [config]="{slidesPerView:4.4, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false" style="padding: 8px;">
           <ng-template swiperSlide class="categories">
             <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem('all')">
               <img src="assets/images/icons/car_grey.svg" alt="" *ngIf="item1 == false">
@@ -58,7 +58,7 @@
               <div class="cars_label" [class.fontActive]="item4 == true">Pickup</div>
             </div>
           </ng-template>
-          <ng-template swiperSlide class="categories" style="padding-right: 9px;">
+          <ng-template swiperSlide class="categories" >
             <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem('suv')">
               <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
               <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">

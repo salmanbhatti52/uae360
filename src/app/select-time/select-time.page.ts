@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { format, parseISO } from 'date-fns';
+import { format, getTime, parseISO } from 'date-fns';
 import { ModalController } from '@ionic/angular';
 import parse from 'date-fns/parse';
 @Component({
@@ -9,14 +9,17 @@ import parse from 'date-fns/parse';
 })
 export class SelectTimePage implements OnInit {
   selectedTime:any;
+  // minTime = format(parseISO(new getTime().toISOString()),'')
   constructor(public modalCtrlr:ModalController) { }
 
   ngOnInit() {
     console.log(this.selectedTime);
     
   }
-  formattedString(){
-    this.selectedTime = format(parseISO(this.selectedTime), "hh:mm aaa");
+  formattedString(timeVal){
+    console.log('parameter time:',timeVal);
+    
+    this.selectedTime = format(parseISO(timeVal), "hh:mm aaa");
     console.log(this.selectedTime);
   }
   done(){

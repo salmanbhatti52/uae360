@@ -1,6 +1,6 @@
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["main"],{
 
-/***/ 158:
+/***/ 90158:
 /*!***************************************!*\
   !*** ./src/app/app-routing.module.ts ***!
   \***************************************/
@@ -11,9 +11,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppRoutingModule": () => (/* binding */ AppRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 60124);
 
 
 
@@ -25,59 +25,59 @@ const routes = [
     },
     {
         path: 'home-before-login',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_home-before-login_home-before-login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home-before-login/home-before-login.module */ 803)).then(m => m.HomeBeforeLoginPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_api_service_ts-node_modules_swiper_angular_fesm2015_swiper_angular_mjs"), __webpack_require__.e("src_app_home-before-login_home-before-login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home-before-login/home-before-login.module */ 80803)).then(m => m.HomeBeforeLoginPageModule)
     },
     {
         path: 'filters',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_filters_filters_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./filters/filters.module */ 6076)).then(m => m.FiltersPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_filters_filters_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./filters/filters.module */ 46076)).then(m => m.FiltersPageModule)
     },
     {
         path: 'car-details',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_car-details_car-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./car-details/car-details.module */ 2901)).then(m => m.CarDetailsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_api_service_ts-node_modules_swiper_angular_fesm2015_swiper_angular_mjs"), __webpack_require__.e("src_app_car-details_car-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./car-details/car-details.module */ 32901)).then(m => m.CarDetailsPageModule)
     },
     {
         path: 'sign-in',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_sign-in_sign-in_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./sign-in/sign-in.module */ 5391)).then(m => m.SignInPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_sign-in_sign-in_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./sign-in/sign-in.module */ 22831)).then(m => m.SignInPageModule)
     },
     {
         path: 'sign-up',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_sign-up_sign-up_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./sign-up/sign-up.module */ 3982)).then(m => m.SignUpPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_sign-up_sign-up_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./sign-up/sign-up.module */ 73982)).then(m => m.SignUpPageModule)
     },
     {
         path: 'verify-phone-by-otp',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_ng-otp-input_fesm2015_ng-otp-input_js"), __webpack_require__.e("src_app_verify-phone-by-otp_verify-phone-by-otp_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./verify-phone-by-otp/verify-phone-by-otp.module */ 2876)).then(m => m.VerifyPhoneByOtpPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_ng-otp-input_fesm2015_ng-otp-input_js"), __webpack_require__.e("src_app_verify-phone-by-otp_verify-phone-by-otp_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./verify-phone-by-otp/verify-phone-by-otp.module */ 22876)).then(m => m.VerifyPhoneByOtpPageModule)
     },
     {
         path: 'terms-and-services',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_terms-and-services_terms-and-services_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./terms-and-services/terms-and-services.module */ 5629)).then(m => m.TermsAndServicesPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_terms-and-services_terms-and-services_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./terms-and-services/terms-and-services.module */ 95629)).then(m => m.TermsAndServicesPageModule)
     },
     {
         path: 'forgot-password-by-email',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_forgot-password-by-email_forgot-password-by-email_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./forgot-password-by-email/forgot-password-by-email.module */ 6734)).then(m => m.ForgotPasswordByEmailPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_forgot-password-by-email_forgot-password-by-email_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./forgot-password-by-email/forgot-password-by-email.module */ 36734)).then(m => m.ForgotPasswordByEmailPageModule)
     },
     {
         path: 'otp-by-email',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_ng-otp-input_fesm2015_ng-otp-input_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_otp-by-email_otp-by-email_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./otp-by-email/otp-by-email.module */ 7560)).then(m => m.OtpByEmailPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_ng-otp-input_fesm2015_ng-otp-input_js"), __webpack_require__.e("src_app_otp-by-email_otp-by-email_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./otp-by-email/otp-by-email.module */ 17560)).then(m => m.OtpByEmailPageModule)
     },
     {
         path: 'live-chat',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_live-chat_live-chat_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./live-chat/live-chat.module */ 7642)).then(m => m.LiveChatPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_live-chat_live-chat_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./live-chat/live-chat.module */ 27642)).then(m => m.LiveChatPageModule)
     },
     {
         path: 'about-us',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_about-us_about-us_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./about-us/about-us.module */ 8310)).then(m => m.AboutUsPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_about-us_about-us_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./about-us/about-us.module */ 58310)).then(m => m.AboutUsPageModule)
     },
     {
         path: 'notifications',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_notifications_notifications_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./notifications/notifications.module */ 9182)).then(m => m.NotificationsPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_notifications_notifications_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./notifications/notifications.module */ 89182)).then(m => m.NotificationsPageModule)
     },
     {
         path: 'messages',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_messages_messages_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./messages/messages.module */ 6889)).then(m => m.MessagesPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_messages_messages_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./messages/messages.module */ 84812)).then(m => m.MessagesPageModule)
     },
     {
         path: 'favorites',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_favorites_favorites_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./favorites/favorites.module */ 5407)).then(m => m.FavoritesPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_favorites_favorites_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./favorites/favorites.module */ 75407)).then(m => m.FavoritesPageModule)
     },
     {
         path: 'bookings',
@@ -85,47 +85,47 @@ const routes = [
     },
     {
         path: 'home-cars-after-login',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_home-cars-after-login_home-cars-after-login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home-cars-after-login/home-cars-after-login.module */ 3034)).then(m => m.HomeCarsAfterLoginPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_api_service_ts-node_modules_swiper_angular_fesm2015_swiper_angular_mjs"), __webpack_require__.e("src_app_home-cars-after-login_home-cars-after-login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home-cars-after-login/home-cars-after-login.module */ 53034)).then(m => m.HomeCarsAfterLoginPageModule)
     },
     {
         path: 'message-owner-side',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_message-owner-side_message-owner-side_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./message-owner-side/message-owner-side.module */ 9747)).then(m => m.MessageOwnerSidePageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_message-owner-side_message-owner-side_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./message-owner-side/message-owner-side.module */ 79747)).then(m => m.MessageOwnerSidePageModule)
     },
     {
         path: 'give-ratings-popup',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_give-ratings-popup_give-ratings-popup_page_ts"), __webpack_require__.e("src_app_give-ratings-popup_give-ratings-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./give-ratings-popup/give-ratings-popup.module */ 4524)).then(m => m.GiveRatingsPopupPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_give-ratings-popup_give-ratings-popup_page_ts"), __webpack_require__.e("src_app_give-ratings-popup_give-ratings-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./give-ratings-popup/give-ratings-popup.module */ 64524)).then(m => m.GiveRatingsPopupPageModule)
     },
     {
         path: 'cancel-booking-popup',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_cancel-booking-popup_cancel-booking-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./cancel-booking-popup/cancel-booking-popup.module */ 5638)).then(m => m.CancelBookingPopupPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_cancel-booking-popup_cancel-booking-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./cancel-booking-popup/cancel-booking-popup.module */ 35638)).then(m => m.CancelBookingPopupPageModule)
     },
     {
         path: 'live-chat-screen',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_live-chat-screen_live-chat-screen_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./live-chat-screen/live-chat-screen.module */ 2273)).then(m => m.LiveChatScreenPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_live-chat-screen_live-chat-screen_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./live-chat-screen/live-chat-screen.module */ 12273)).then(m => m.LiveChatScreenPageModule)
     },
     {
         path: 'car-booking',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_car-booking_car-booking_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./car-booking/car-booking.module */ 5333)).then(m => m.CarBookingPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_car-booking_car-booking_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./car-booking/car-booking.module */ 45333)).then(m => m.CarBookingPageModule)
     },
     {
         path: 'select-date',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_select-date_select-date_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./select-date/select-date.module */ 5693)).then(m => m.SelectDatePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_select-date_select-date_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./select-date/select-date.module */ 95693)).then(m => m.SelectDatePageModule)
     },
     {
         path: 'select-time',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_select-time_select-time_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./select-time/select-time.module */ 4775)).then(m => m.SelectTimePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_select-time_select-time_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./select-time/select-time.module */ 64775)).then(m => m.SelectTimePageModule)
     },
     {
         path: 'summary',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_summary_summary_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./summary/summary.module */ 7001)).then(m => m.SummaryPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_summary_summary_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./summary/summary.module */ 87001)).then(m => m.SummaryPageModule)
     },
     {
         path: 'payment-details',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_payment-details_payment-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./payment-details/payment-details.module */ 6472)).then(m => m.PaymentDetailsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_payment-details_payment-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./payment-details/payment-details.module */ 76472)).then(m => m.PaymentDetailsPageModule)
     },
     {
         path: 'new-payment-method',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("src_app_new-payment-method_new-payment-method_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./new-payment-method/new-payment-method.module */ 1795)).then(m => m.NewPaymentMethodPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("src_app_new-payment-method_new-payment-method_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./new-payment-method/new-payment-method.module */ 31795)).then(m => m.NewPaymentMethodPageModule)
     },
     {
         path: 'booked',
@@ -133,35 +133,35 @@ const routes = [
     },
     {
         path: 'ratings',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_ratings_ratings_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./ratings/ratings.module */ 1136)).then(m => m.RatingsPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_ratings_ratings_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./ratings/ratings.module */ 71136)).then(m => m.RatingsPageModule)
     },
     {
         path: 'settings',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_settings_settings_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./settings/settings.module */ 7075)).then(m => m.SettingsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_settings_settings_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./settings/settings.module */ 27075)).then(m => m.SettingsPageModule)
     },
     {
         path: 'change-password',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_change-password_change-password_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./change-password/change-password.module */ 8232)).then(m => m.ChangePasswordPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_change-password_change-password_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./change-password/change-password.module */ 68232)).then(m => m.ChangePasswordPageModule)
     },
     {
         path: 'saved-payment-methods',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("src_app_saved-payment-methods_saved-payment-methods_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./saved-payment-methods/saved-payment-methods.module */ 7135)).then(m => m.SavedPaymentMethodsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("src_app_saved-payment-methods_saved-payment-methods_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./saved-payment-methods/saved-payment-methods.module */ 27135)).then(m => m.SavedPaymentMethodsPageModule)
     },
     {
         path: 'edit-profile',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_edit-profile_edit-profile_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./edit-profile/edit-profile.module */ 1241)).then(m => m.EditProfilePageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_edit-profile_edit-profile_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./edit-profile/edit-profile.module */ 71241)).then(m => m.EditProfilePageModule)
     },
     {
         path: 'delete-account-popup',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_delete-account-popup_delete-account-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./delete-account-popup/delete-account-popup.module */ 5010)).then(m => m.DeleteAccountPopupPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_delete-account-popup_delete-account-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./delete-account-popup/delete-account-popup.module */ 85010)).then(m => m.DeleteAccountPopupPageModule)
     },
     {
         path: 'expiry-date-popup',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("src_app_expiry-date-popup_expiry-date-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./expiry-date-popup/expiry-date-popup.module */ 9093)).then(m => m.ExpiryDatePopupPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("src_app_expiry-date-popup_expiry-date-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./expiry-date-popup/expiry-date-popup.module */ 19093)).then(m => m.ExpiryDatePopupPageModule)
     },
     {
         path: 'set-new-password',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_set-new-password_set-new-password_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./set-new-password/set-new-password.module */ 9695)).then(m => m.SetNewPasswordPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_set-new-password_set-new-password_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./set-new-password/set-new-password.module */ 99695)).then(m => m.SetNewPasswordPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -179,7 +179,7 @@ AppRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
 
 /***/ }),
 
-/***/ 5041:
+/***/ 55041:
 /*!**********************************!*\
   !*** ./src/app/app.component.ts ***!
   \**********************************/
@@ -190,15 +190,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component.html?ngResource */ 3383);
-/* harmony import */ var _app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss?ngResource */ 9259);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/splash-screen */ 2239);
-/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./check-user.service */ 7852);
-
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component.html?ngResource */ 33383);
+/* harmony import */ var _app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss?ngResource */ 79259);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./check-user.service */ 47852);
 
 
 
@@ -220,13 +218,13 @@ let AppComponent = class AppComponent {
         this.appPages = [];
     }
     ngOnInit() {
-        this.platform.ready().then(() => {
-            setTimeout(() => {
-                _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_2__.SplashScreen.hide({
-                    fadeOutDuration: 1000
-                });
-            }, 10000);
-        });
+        // this.platform.ready().then(() => {
+        //   setTimeout(()=>{
+        //     SplashScreen.hide({
+        //       fadeOutDuration: 1000
+        //     });
+        //   },10000)
+        // })
     }
     logout() {
         this.checkUser.appUserId = null;
@@ -254,14 +252,14 @@ let AppComponent = class AppComponent {
     }
 };
 AppComponent.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.MenuController },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.NavController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.Platform },
-    { type: _check_user_service__WEBPACK_IMPORTED_MODULE_3__.CheckUserService }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.MenuController },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.NavController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.Platform },
+    { type: _check_user_service__WEBPACK_IMPORTED_MODULE_2__.CheckUserService }
 ];
-AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-root',
         template: _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -272,7 +270,7 @@ AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
 
 /***/ }),
 
-/***/ 6747:
+/***/ 36747:
 /*!*******************************!*\
   !*** ./src/app/app.module.ts ***!
   \*******************************/
@@ -283,14 +281,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ 4497);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ 8987);
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 5041);
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 158);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ 34497);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ 58987);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 55041);
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 90158);
 
 
 
@@ -314,7 +312,7 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
 
 /***/ }),
 
-/***/ 7852:
+/***/ 47852:
 /*!***************************************!*\
   !*** ./src/app/check-user.service.ts ***!
   \***************************************/
@@ -325,8 +323,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CheckUserService": () => (/* binding */ CheckUserService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 22560);
 
 
 let CheckUserService = class CheckUserService {
@@ -366,7 +364,7 @@ CheckUserService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
 
 /***/ }),
 
-/***/ 2340:
+/***/ 92340:
 /*!*****************************************!*\
   !*** ./src/environments/environment.ts ***!
   \*****************************************/
@@ -395,7 +393,7 @@ const environment = {
 
 /***/ }),
 
-/***/ 4431:
+/***/ 14431:
 /*!*********************!*\
   !*** ./src/main.ts ***!
   \*********************/
@@ -403,10 +401,10 @@ const environment = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ 6057);
-/* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/app.module */ 6747);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./environments/environment */ 2340);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ 76057);
+/* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/app.module */ 36747);
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./environments/environment */ 92340);
 
 
 
@@ -420,7 +418,7 @@ if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.productio
 
 /***/ }),
 
-/***/ 863:
+/***/ 50863:
 /*!******************************************************************************************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/ lazy ^\.\/.*\.entry\.js$ include: \.entry\.js$ exclude: \.system\.entry\.js$ namespace object ***!
   \******************************************************************************************************************************************/
@@ -428,17 +426,17 @@ if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.productio
 
 var map = {
 	"./ion-accordion_2.entry.js": [
-		79,
+		70079,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-accordion_2_entry_js"
 	],
 	"./ion-action-sheet.entry.js": [
-		5593,
+		25593,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-action-sheet_entry_js"
 	],
 	"./ion-alert.entry.js": [
-		3225,
+		13225,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-alert_entry_js"
 	],
@@ -448,84 +446,84 @@ var map = {
 		"node_modules_ionic_core_dist_esm_ion-app_8_entry_js"
 	],
 	"./ion-avatar_3.entry.js": [
-		6655,
+		86655,
 		"node_modules_ionic_core_dist_esm_ion-avatar_3_entry_js"
 	],
 	"./ion-back-button.entry.js": [
-		4856,
+		44856,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-back-button_entry_js"
 	],
 	"./ion-backdrop.entry.js": [
-		3059,
+		13059,
 		"node_modules_ionic_core_dist_esm_ion-backdrop_entry_js"
 	],
 	"./ion-breadcrumb_2.entry.js": [
-		8648,
+		58648,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-breadcrumb_2_entry_js"
 	],
 	"./ion-button_2.entry.js": [
-		8308,
+		98308,
 		"node_modules_ionic_core_dist_esm_ion-button_2_entry_js"
 	],
 	"./ion-card_5.entry.js": [
-		4690,
+		44690,
 		"node_modules_ionic_core_dist_esm_ion-card_5_entry_js"
 	],
 	"./ion-checkbox.entry.js": [
-		4090,
+		64090,
 		"node_modules_ionic_core_dist_esm_ion-checkbox_entry_js"
 	],
 	"./ion-chip.entry.js": [
-		6214,
+		36214,
 		"node_modules_ionic_core_dist_esm_ion-chip_entry_js"
 	],
 	"./ion-col_3.entry.js": [
-		9447,
+		69447,
 		"node_modules_ionic_core_dist_esm_ion-col_3_entry_js"
 	],
 	"./ion-datetime-button.entry.js": [
-		7950,
-		"default-node_modules_ionic_core_dist_esm_parse-9a48ce79_js-node_modules_ionic_core_dist_esm_t-36d8fd",
+		17950,
+		"default-node_modules_ionic_core_dist_esm_parse-decd0f85_js-node_modules_ionic_core_dist_esm_t-a92c48",
 		"node_modules_ionic_core_dist_esm_ion-datetime-button_entry_js"
 	],
 	"./ion-datetime_3.entry.js": [
-		9689,
-		"default-node_modules_ionic_core_dist_esm_parse-9a48ce79_js-node_modules_ionic_core_dist_esm_t-36d8fd",
+		79689,
+		"default-node_modules_ionic_core_dist_esm_parse-decd0f85_js-node_modules_ionic_core_dist_esm_t-a92c48",
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-datetime_3_entry_js"
 	],
 	"./ion-fab_3.entry.js": [
-		8840,
+		18840,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-fab_3_entry_js"
 	],
 	"./ion-img.entry.js": [
-		749,
+		40749,
 		"node_modules_ionic_core_dist_esm_ion-img_entry_js"
 	],
 	"./ion-infinite-scroll_2.entry.js": [
-		9667,
+		69667,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-infinite-scroll_2_entry_js"
 	],
 	"./ion-input.entry.js": [
-		3288,
+		83288,
 		"node_modules_ionic_core_dist_esm_ion-input_entry_js"
 	],
 	"./ion-item-option_3.entry.js": [
-		5473,
+		35473,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-item-option_3_entry_js"
 	],
 	"./ion-item_8.entry.js": [
-		3634,
+		53634,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-item_8_entry_js"
 	],
 	"./ion-loading.entry.js": [
-		2855,
+		22855,
 		"node_modules_ionic_core_dist_esm_ion-loading_entry_js"
 	],
 	"./ion-menu_3.entry.js": [
@@ -534,39 +532,39 @@ var map = {
 		"node_modules_ionic_core_dist_esm_ion-menu_3_entry_js"
 	],
 	"./ion-modal.entry.js": [
-		8737,
+		58737,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-modal_entry_js"
 	],
 	"./ion-nav_2.entry.js": [
-		9632,
+		99632,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-nav_2_entry_js"
 	],
 	"./ion-picker-column-internal.entry.js": [
-		4446,
+		54446,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-picker-column-internal_entry_js"
 	],
 	"./ion-picker-internal.entry.js": [
-		2275,
+		32275,
 		"node_modules_ionic_core_dist_esm_ion-picker-internal_entry_js"
 	],
 	"./ion-popover.entry.js": [
-		8050,
+		48050,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-popover_entry_js"
 	],
 	"./ion-progress-bar.entry.js": [
-		8994,
+		18994,
 		"node_modules_ionic_core_dist_esm_ion-progress-bar_entry_js"
 	],
 	"./ion-radio_2.entry.js": [
-		3592,
+		23592,
 		"node_modules_ionic_core_dist_esm_ion-radio_2_entry_js"
 	],
 	"./ion-range.entry.js": [
-		5454,
+		35454,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-range_entry_js"
 	],
@@ -576,74 +574,74 @@ var map = {
 		"node_modules_ionic_core_dist_esm_ion-refresher_2_entry_js"
 	],
 	"./ion-reorder_2.entry.js": [
-		2666,
+		92666,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-reorder_2_entry_js"
 	],
 	"./ion-ripple-effect.entry.js": [
-		4816,
+		64816,
 		"node_modules_ionic_core_dist_esm_ion-ripple-effect_entry_js"
 	],
 	"./ion-route_4.entry.js": [
-		5534,
+		45534,
 		"node_modules_ionic_core_dist_esm_ion-route_4_entry_js"
 	],
 	"./ion-searchbar.entry.js": [
-		4902,
+		94902,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-searchbar_entry_js"
 	],
 	"./ion-segment_2.entry.js": [
-		1938,
+		91938,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-segment_2_entry_js"
 	],
 	"./ion-select_3.entry.js": [
-		8179,
+		78179,
 		"node_modules_ionic_core_dist_esm_ion-select_3_entry_js"
 	],
 	"./ion-slide_2.entry.js": [
-		668,
+		90668,
 		"node_modules_ionic_core_dist_esm_ion-slide_2_entry_js"
 	],
 	"./ion-spinner.entry.js": [
-		1624,
+		61624,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-spinner_entry_js"
 	],
 	"./ion-split-pane.entry.js": [
-		9989,
+		19989,
 		"node_modules_ionic_core_dist_esm_ion-split-pane_entry_js"
 	],
 	"./ion-tab-bar_2.entry.js": [
-		8902,
+		28902,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-tab-bar_2_entry_js"
 	],
 	"./ion-tab_2.entry.js": [
-		199,
+		70199,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-tab_2_entry_js"
 	],
 	"./ion-text.entry.js": [
-		8395,
+		48395,
 		"node_modules_ionic_core_dist_esm_ion-text_entry_js"
 	],
 	"./ion-textarea.entry.js": [
-		6357,
+		96357,
 		"node_modules_ionic_core_dist_esm_ion-textarea_entry_js"
 	],
 	"./ion-toast.entry.js": [
-		8268,
+		38268,
 		"node_modules_ionic_core_dist_esm_ion-toast_entry_js"
 	],
 	"./ion-toggle.entry.js": [
-		5269,
+		15269,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-toggle_entry_js"
 	],
 	"./ion-virtual-scroll.entry.js": [
-		2875,
+		32875,
 		"node_modules_ionic_core_dist_esm_ion-virtual-scroll_entry_js"
 	]
 };
@@ -662,12 +660,12 @@ function webpackAsyncContext(req) {
 	});
 }
 webpackAsyncContext.keys = () => (Object.keys(map));
-webpackAsyncContext.id = 863;
+webpackAsyncContext.id = 50863;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 9259:
+/***/ 79259:
 /*!***********************************************!*\
   !*** ./src/app/app.component.scss?ngResource ***!
   \***********************************************/
@@ -678,7 +676,7 @@ module.exports = "ion-menu {\n  --background:black !important;\n}\n\nion-menu io
 
 /***/ }),
 
-/***/ 3383:
+/***/ 33383:
 /*!***********************************************!*\
   !*** ./src/app/app.component.html?ngResource ***!
   \***********************************************/
@@ -692,7 +690,7 @@ module.exports = "<ion-app>\n  <ion-split-pane contentId=\"main-content\">\n    
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["vendor"], () => (__webpack_exec__(4431)));
+/******/ __webpack_require__.O(0, ["vendor"], () => (__webpack_exec__(14431)));
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_verify-phone-by-otp_verify-phone-by-otp_module_ts"],{
 
-/***/ 8615:
+/***/ 78615:
 /*!***************************************************************************!*\
   !*** ./src/app/verify-phone-by-otp/verify-phone-by-otp-routing.module.ts ***!
   \***************************************************************************/
@@ -11,10 +11,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "VerifyPhoneByOtpPageRoutingModule": () => (/* binding */ VerifyPhoneByOtpPageRoutingModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _verify_phone_by_otp_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./verify-phone-by-otp.page */ 3413);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _verify_phone_by_otp_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./verify-phone-by-otp.page */ 43413);
 
 
 
@@ -38,7 +38,7 @@ VerifyPhoneByOtpPageRoutingModule = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__deco
 
 /***/ }),
 
-/***/ 2876:
+/***/ 22876:
 /*!*******************************************************************!*\
   !*** ./src/app/verify-phone-by-otp/verify-phone-by-otp.module.ts ***!
   \*******************************************************************/
@@ -48,13 +48,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "VerifyPhoneByOtpPageModule": () => (/* binding */ VerifyPhoneByOtpPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 94666);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 3819);
-/* harmony import */ var _verify_phone_by_otp_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./verify-phone-by-otp-routing.module */ 8615);
-/* harmony import */ var _verify_phone_by_otp_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./verify-phone-by-otp.page */ 3413);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _verify_phone_by_otp_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./verify-phone-by-otp-routing.module */ 78615);
+/* harmony import */ var _verify_phone_by_otp_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./verify-phone-by-otp.page */ 43413);
 /* harmony import */ var ng_otp_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ng-otp-input */ 2981);
 
 
@@ -83,7 +83,7 @@ VerifyPhoneByOtpPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
 
 /***/ }),
 
-/***/ 3413:
+/***/ 43413:
 /*!*****************************************************************!*\
   !*** ./src/app/verify-phone-by-otp/verify-phone-by-otp.page.ts ***!
   \*****************************************************************/
@@ -93,12 +93,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "VerifyPhoneByOtpPage": () => (/* binding */ VerifyPhoneByOtpPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 4929);
-/* harmony import */ var _verify_phone_by_otp_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./verify-phone-by-otp.page.html?ngResource */ 5907);
-/* harmony import */ var _verify_phone_by_otp_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./verify-phone-by-otp.page.scss?ngResource */ 996);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 4666);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _verify_phone_by_otp_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./verify-phone-by-otp.page.html?ngResource */ 45907);
+/* harmony import */ var _verify_phone_by_otp_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./verify-phone-by-otp.page.scss?ngResource */ 10996);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 94666);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 60124);
 
 
 
@@ -141,7 +141,7 @@ VerifyPhoneByOtpPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 996:
+/***/ 10996:
 /*!******************************************************************************!*\
   !*** ./src/app/verify-phone-by-otp/verify-phone-by-otp.page.scss?ngResource ***!
   \******************************************************************************/
@@ -151,7 +151,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
 
 /***/ }),
 
-/***/ 5907:
+/***/ 45907:
 /*!******************************************************************************!*\
   !*** ./src/app/verify-phone-by-otp/verify-phone-by-otp.page.html?ngResource ***!
   \******************************************************************************/

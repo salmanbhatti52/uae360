@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { CheckUserService } from '../check-user.service';
@@ -11,7 +11,6 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
   selector: 'app-home-before-login',
   templateUrl: './home-before-login.page.html',
   styleUrls: ['./home-before-login.page.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class HomeBeforeLoginPage implements OnInit {
   totalNotifications = 6;
@@ -59,6 +58,7 @@ export class HomeBeforeLoginPage implements OnInit {
   //   this.categoryVal = val;
   // }
   ngOnInit() {
+    this.checkUser.appUserId = null;
     console.log(this.checkUser.appUserId);
     
     this.checkUser.checkUser();
@@ -97,7 +97,7 @@ export class HomeBeforeLoginPage implements OnInit {
       this.api.hideLoading();
       console.log('api response:',res);
       if(res.status == 'success'){
-        this.api.presentToast('Success!')
+        // this.api.presentToast('Success!')
         this.api.carDataById = res.data;
         console.log('carDataById:',this.api.carDataById);
         this.router.navigate(['/car-details']);

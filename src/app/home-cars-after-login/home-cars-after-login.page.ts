@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { CheckUserService } from '../check-user.service';
@@ -13,7 +13,6 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
   selector: 'app-home-cars-after-login',
   templateUrl: './home-cars-after-login.page.html',
   styleUrls: ['./home-cars-after-login.page.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class HomeCarsAfterLoginPage implements OnInit {
   totalNotifications = 6;
