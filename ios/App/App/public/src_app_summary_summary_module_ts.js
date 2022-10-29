@@ -90,12 +90,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SummaryPage": () => (/* binding */ SummaryPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _summary_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./summary.page.html?ngResource */ 30090);
-/* harmony import */ var _summary_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./summary.page.scss?ngResource */ 99445);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 94666);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _summary_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./summary.page.html?ngResource */ 30090);
+/* harmony import */ var _summary_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./summary.page.scss?ngResource */ 99445);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 94666);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _capacitor_geolocation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor/geolocation */ 7621);
+/* harmony import */ var _awesome_cordova_plugins_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @awesome-cordova-plugins/native-geocoder/ngx */ 86675);
+
+
+
 
 
 
@@ -103,38 +109,109 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SummaryPage = class SummaryPage {
-    constructor(location, navCtrlr) {
-        this.location = location;
-        this.navCtrlr = navCtrlr;
-        this.startDate = '22-12-2020';
-        this.endDate = '22-12-2020';
-        this.startTime = '06:30 pm';
-        this.endTime = '09:00 am';
-    }
-    ngOnInit() {
-        console.log(this.startDate);
-        console.log(this.endDate);
-        console.log(this.startDate);
-        console.log(this.endTime);
-    }
-    goBack() {
-        this.location.back();
-    }
-    startPaymentProcess() {
-        this.navCtrlr.navigateRoot('payment-details');
-    }
+  constructor(location, navCtrlr, nativeGeoCoder) {
+    this.location = location;
+    this.navCtrlr = navCtrlr;
+    this.nativeGeoCoder = nativeGeoCoder;
+    this.startDate = '22-12-2020';
+    this.endDate = '22-12-2020';
+    this.startTime = '06:30 pm';
+    this.endTime = '09:00 am';
+    this.options = {
+      useLocale: true,
+      maxResults: 5
+    };
+  }
+
+  ngOnInit() {
+    console.log(this.startDate);
+    console.log(this.endDate);
+    console.log(this.startDate);
+    console.log(this.endTime);
+    this.fetchLocation();
+  }
+
+  fetchLocation() {
+    var _this = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const getCurrentLocation = yield _capacitor_geolocation__WEBPACK_IMPORTED_MODULE_3__.Geolocation.getCurrentPosition({
+        enableHighAccuracy: true
+      });
+      console.log('Current Location: ', getCurrentLocation);
+      _this.latitude = getCurrentLocation.coords.latitude;
+      _this.longitude = getCurrentLocation.coords.longitude;
+      console.log('Latitude: ', _this.latitude);
+      console.log('Longitude: ', _this.longitude);
+
+      _this.fetchAddress();
+    })();
+  }
+
+  fetchAddress() {
+    this.nativeGeoCoder.reverseGeocode(this.latitude, this.longitude, this.options).then(result => {
+      console.log('Result: ', result);
+      console.log('Result 0: ', result[0]);
+      this.firstResult = result[0].subAdministrativeArea + ', ' + result[0].administrativeArea + ', ' + result[0].countryCode;
+    }, err => {
+      console.log('Error:', err);
+    });
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  startPaymentProcess() {
+    this.navCtrlr.navigateRoot('payment-details');
+  }
+
 };
-SummaryPage.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__.Location },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.NavController }
-];
-SummaryPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
-        selector: 'app-summary',
-        template: _summary_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
-        styles: [_summary_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], SummaryPage);
+
+SummaryPage.ctorParameters = () => [{
+  type: _angular_common__WEBPACK_IMPORTED_MODULE_5__.Location
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.NavController
+}, {
+  type: _awesome_cordova_plugins_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_4__.NativeGeocoder
+}];
+
+SummaryPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+  selector: 'app-summary',
+  template: _summary_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_summary_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], SummaryPage);
+
+
+/***/ }),
+
+/***/ 40591:
+/*!*********************************************************************!*\
+  !*** ./node_modules/@capacitor/geolocation/dist/esm/definitions.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+/***/ }),
+
+/***/ 7621:
+/*!***************************************************************!*\
+  !*** ./node_modules/@capacitor/geolocation/dist/esm/index.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Geolocation": () => (/* binding */ Geolocation)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 26549);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 40591);
+
+const Geolocation = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('Geolocation', {
+  web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor_geolocation_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 58391)).then(m => new m.GeolocationWeb())
+});
 
 
 
@@ -156,7 +233,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">BMW 2 series</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center; position: relative; \">\n      <img style=\"width: 100%;\" src=\"assets/images/bookings_car.svg\" alt=\"\">\n      <img style=\"position: absolute;right: 5%;top: 5%;\" src=\"assets/images/icons/red_heart.svg\" alt=\"\">\n      <div class=\"car_info_box\" >\n        <div>\n          <div class=\"car_name poppins\">BMW 2 series</div>\n          <div style=\"text-align: left;line-height: 1;\">\n            <span>\n              <img class=\"start_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"start_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"start_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"start_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"start_margin\" style=\"margin-right: 6.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span class=\"rating_value poppins\">269 trips</span>\n          </div>\n        </div>\n        <div class=\"car2_info_subdiv\">\n          <div style=\"margin-right: 17px;line-height: 1;\"><span class=\"car2_price poppins\" >$</span><span class=\"car2_price poppins\" style=\"font-size: 32px;margin-right: 8px;\">26</span><span class=\"car2_price poppins\" style=\"font-size: 10px;font-weight: 500;\">/Day</span></div>\n        </div>\n        \n      </div>\n    </div>\n\n    <div class=\"cost_price_div\">\n      <div class=\"cost_label poppins\">Total Cost</div>\n      <div class=\"cost_label poppins\" style=\"color: #8000FF;\">$203</div>\n    </div>\n\n    <div class=\"sub_heading_label urbanist\" style=\"margin-top: 10px;\">Rent Dates</div>\n    <div style=\"display: flex; margin-top: 7px; justify-content: space-between;\">\n      <div class=\"date_time_box\">\n        <span class=\"date_time_label\">Start Date</span> \n        <span class=\"date_time_data\">{{startDate}}</span>\n      </div>\n      <div class=\"date_time_box\">\n        <span class=\"date_time_label\">End Date</span>\n        <span class=\"date_time_data\">{{endDate}}</span>\n      </div>\n    </div>\n\n    \n    <div style=\"display: flex; margin-top: 12px;justify-content: space-between;\">\n      <div style=\"width: 48.5%;\">\n        <div class=\"sub_heading_label urbanist\">Rent Time</div>\n        <div class=\"date_time_box\" style=\"margin-top:7px; width: 100%;\">\n          <span class=\"date_time_label\">Start Time</span>\n          <span class=\"date_time_data\">{{startTime}}</span>\n\n        </div>\n      </div>\n      <div style=\"width: 48.5%;\">\n        <div class=\"sub_heading_label urbanist\">Rent Time</div>\n        <div class=\"date_time_box\" style=\"margin-top:7px; width: 100%;\">\n          <span class=\"date_time_label\">End Time</span>\n          <span class=\"date_time_data\">{{endTime}}</span>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"sub_heading_label urbanist\" style=\"margin-top:12px\">Location</div>\n    <div style=\"display: flex;margin-top:10px;\">\n      <div style=\"margin-right: 10.9px;\"><img src=\"assets/images/icons/summary_location.svg\" alt=\"\"></div>\n      <div>\n        <div class=\"date_time_label\">Pickup</div>\n        <div class=\"location_data\">Lorium Ipsum, CA</div>\n      </div>\n    </div>\n\n    <div class=\"sub_heading_label urbanist\" style=\"margin-top:12px\">Driving License</div>\n    <div style=\"text-align: center;\">\n      <img style=\"margin-top: 16px;\" src=\"assets/images/driving_license.svg\" alt=\"\">\n    </div>\n  </div>\n\n</ion-content>\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 20px;\">\n    <ion-button class=\"login_button\" (click)=\"startPaymentProcess()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button>\n  </div>\n</ion-footer>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">BMW 2 series</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center; position: relative; \">\n      <img style=\"width: 100%;\" src=\"assets/images/bookings_car.svg\" alt=\"\">\n      <img style=\"position: absolute;right: 5%;top: 5%;\" src=\"assets/images/icons/red_heart.svg\" alt=\"\">\n      <div class=\"car_info_box\" >\n        <div>\n          <div class=\"car_name poppins\">BMW 2 series</div>\n          <div style=\"text-align: left;line-height: 1;\">\n            <span>\n              <img class=\"start_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"start_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"start_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"start_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"start_margin\" style=\"margin-right: 6.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span class=\"rating_value poppins\">269 trips</span>\n          </div>\n        </div>\n        <div class=\"car2_info_subdiv\">\n          <div style=\"line-height: 1;\"><span class=\"car2_price poppins\" >$</span><span class=\"car2_price poppins\" style=\"font-size: 32px;margin-right: 8px;\">26</span><span class=\"car2_price poppins\" style=\"font-size: 10px;font-weight: 500;\">/Day</span></div>\n        </div>\n        \n      </div>\n    </div>\n\n    <div class=\"cost_price_div\">\n      <div class=\"cost_label poppins\">Total Cost</div>\n      <div class=\"cost_label poppins\" style=\"color: #8000FF;\">$203</div>\n    </div>\n\n    <div class=\"sub_heading_label urbanist\" style=\"margin-top: 10px;\">Rent Dates</div>\n    <div style=\"display: flex; margin-top: 7px; justify-content: space-between;\">\n      <div class=\"date_time_box\">\n        <span class=\"date_time_label\">Start Date</span> \n        <span class=\"date_time_data\">{{startDate}}</span>\n      </div>\n      <div class=\"date_time_box\">\n        <span class=\"date_time_label\">End Date</span>\n        <span class=\"date_time_data\">{{endDate}}</span>\n      </div>\n    </div>\n\n    \n    <div style=\"display: flex; margin-top: 12px;justify-content: space-between;\">\n      <div style=\"width: 48.5%;\">\n        <div class=\"sub_heading_label urbanist\">Rent Time</div>\n        <div class=\"date_time_box\" style=\"margin-top:7px; width: 100%;\">\n          <span class=\"date_time_label\">Start Time</span>\n          <span class=\"date_time_data\">{{startTime}}</span>\n\n        </div>\n      </div>\n      <div style=\"width: 48.5%;\">\n        <div class=\"sub_heading_label urbanist\">Rent Time</div>\n        <div class=\"date_time_box\" style=\"margin-top:7px; width: 100%;\">\n          <span class=\"date_time_label\">End Time</span>\n          <span class=\"date_time_data\">{{endTime}}</span>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"sub_heading_label urbanist\" style=\"margin-top:12px\">Location</div>\n    <div style=\"display: flex;margin-top:10px;\">\n      <div style=\"margin-right: 10.9px;\"><img src=\"assets/images/icons/summary_location.svg\" alt=\"\"></div>\n      <div>\n        <div class=\"date_time_label\">Pickup</div>\n        <div class=\"location_data\">{{firstResult}}</div>\n      </div>\n    </div>\n\n    <div class=\"sub_heading_label urbanist\" style=\"margin-top:12px\">Driving License</div>\n    <div style=\"text-align: center;\">\n      <img style=\"margin-top: 16px;\" src=\"assets/images/driving_license.svg\" alt=\"\">\n    </div>\n  </div>\n\n</ion-content>\n<ion-footer class=\"ion-no-border\">\n  <ion-toolbar style=\"--background: #FBFBFB;\">\n    <div style=\"padding: 0px 16px 20px;\">\n      <ion-button class=\"login_button\" (click)=\"startPaymentProcess()\">\n        <span class=\"btn_text\">Done</span>\n      </ion-button>\n    </div>\n  </ion-toolbar>\n  \n</ion-footer>\n";
 
 /***/ })
 

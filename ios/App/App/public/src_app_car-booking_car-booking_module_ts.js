@@ -91,15 +91,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CarBookingPage": () => (/* binding */ CarBookingPage)
 /* harmony export */ });
 /* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _car_booking_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./car-booking.page.html?ngResource */ 3387);
 /* harmony import */ var _car_booking_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./car-booking.page.scss?ngResource */ 14915);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 93819);
 /* harmony import */ var _select_date_select_date_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../select-date/select-date.page */ 10959);
 /* harmony import */ var _select_time_select_time_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../select-time/select-time.page */ 79226);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ 94666);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ 94666);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/api.service */ 5830);
+/* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @capacitor/camera */ 4241);
+/* harmony import */ var _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @capacitor/filesystem */ 91662);
+/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../check-user.service */ 47852);
 
 
 
@@ -110,13 +113,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+ // import { format,parseISO} from 'date-fns';
+
+const IMAGE_DIR = 'stored-image';
 let CarBookingPage = class CarBookingPage {
-  constructor(modalCtrlr, location, navCtrlr, api) {
+  constructor(modalCtrlr, location, navCtrlr, api, alertCtrlr, checkUser) {
     this.modalCtrlr = modalCtrlr;
     this.location = location;
     this.navCtrlr = navCtrlr;
     this.api = api;
+    this.alertCtrlr = alertCtrlr;
+    this.checkUser = checkUser;
+    this.image = [];
     this.carData = [];
+    this.datesArray = [];
+    this.base64Image = '';
+    this.imageURL = 'assets/images/upload_license_img.svg';
   }
 
   ngOnInit() {
@@ -124,6 +139,99 @@ let CarBookingPage = class CarBookingPage {
     let carData = this.api.carDataById;
     console.log('Car Data:', carData);
     this.carData = carData;
+    console.log('licenseImage', this.imageURL);
+    this.loadFiles();
+
+    if (carData != undefined) {
+      for (let data of carData) {
+        this.carId = data.car_id;
+      }
+    }
+
+    console.log('car_id', this.carId);
+    this.checkBooking();
+  }
+
+  checkBooking() {
+    let data = {
+      appuser_id: this.checkUser.appUserId,
+      car_id: this.carId
+    };
+    console.log('Data: ', data);
+    this.api.sendRequest('getCarsBooking', data).subscribe(res => {
+      if (res.status == 'success') {
+        console.log('Api Response: ', res);
+        let booked = res.data;
+        console.log('Booked Array: ', booked);
+
+        for (let rec of booked) {
+          // let startDate = rec.start_date;
+          // let endDate = rec.end_date;
+          // let stDate = format(parseISO(new Date(startDate).toISOString()),'yyyy-MM-dd');
+          // let ndDate = format(parseISO(new Date(endDate).toISOString()),'yyyy-MM-dd');
+          // console.log('Booked Car start_Date: ',stDate);
+          // console.log('Booked Car end_Date: ',ndDate);
+          this.datesArray.push(rec.start_date);
+          this.datesArray.push(rec.end_date);
+        }
+
+        console.log('DatesArray: ', this.datesArray);
+        this.api.datesToDisable = this.datesArray;
+      } else if (res.status == 'error') {
+        console.log('Error: ', res);
+      } else {}
+    }, err => {
+      console.log('error: ', err);
+    });
+  }
+
+  loadFiles() {
+    var _this = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      // this.image = [];
+      _this.api.showLoading();
+
+      yield _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Filesystem.readdir({
+        directory: _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Directory.Data,
+        path: IMAGE_DIR
+      }).then(result => {
+        console.log('Files on load: ', result);
+
+        _this.readFile(result.files);
+      }, err => {
+        console.log(err);
+        _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Filesystem.mkdir({
+          directory: _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Directory.Data,
+          path: IMAGE_DIR
+        });
+        console.log("New Folder Created");
+      }).then(_ => {
+        _this.api.hideLoading();
+      });
+    })();
+  }
+
+  readFile(files) {
+    var _this2 = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      console.log('Files Detail: ', files);
+
+      for (let f of files) {
+        const filePath = `${IMAGE_DIR}/${f.name}`;
+        const fileData = yield _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Filesystem.readFile({
+          directory: _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Directory.Data,
+          path: filePath
+        });
+        console.log('File Read :', fileData);
+        _this2.imageURL = `data:image/jpeg;base64,${fileData.data}`; // this.image.push({
+        //   name: f.name,
+        //   path: filePath,
+        //   data: `data:image/jpeg;base64,${fileData.data}`
+        // });
+      }
+    })();
   }
 
   goBack() {
@@ -131,10 +239,10 @@ let CarBookingPage = class CarBookingPage {
   }
 
   openDateModal(dateVal) {
-    var _this = this;
+    var _this3 = this;
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const modal = yield _this.modalCtrlr.create({
+      const modal = yield _this3.modalCtrlr.create({
         component: _select_date_select_date_page__WEBPACK_IMPORTED_MODULE_3__.SelectDatePage,
         showBackdrop: true,
         cssClass: 'date_modal'
@@ -149,21 +257,21 @@ let CarBookingPage = class CarBookingPage {
         console.log(data);
 
         if (dateVal == 'startDate') {
-          _this.startDate = data;
-          console.log('startDate==', _this.startDate);
+          _this3.startDate = data;
+          console.log('startDate==', _this3.startDate);
         } else if (dateVal == 'endDate') {
-          _this.endDate = data;
-          console.log('endDate==', _this.endDate);
+          _this3.endDate = data;
+          console.log('endDate==', _this3.endDate);
         } else {}
       }
     })();
   }
 
   openTimeModal(timeVal) {
-    var _this2 = this;
+    var _this4 = this;
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const modal = yield _this2.modalCtrlr.create({
+      const modal = yield _this4.modalCtrlr.create({
         component: _select_time_select_time_page__WEBPACK_IMPORTED_MODULE_4__.SelectTimePage,
         showBackdrop: true,
         cssClass: 'time_modal'
@@ -178,15 +286,104 @@ let CarBookingPage = class CarBookingPage {
         console.log(data);
 
         if (timeVal == 'startTime') {
-          _this2.startTime = data;
-          console.log('startTime==', _this2.startTime);
+          _this4.startTime = data;
+          console.log('startTime==', _this4.startTime);
         } else if (timeVal == 'endTime') {
-          _this2.endTime = data;
-          console.log('endTime==', _this2.endTime);
+          _this4.endTime = data;
+          console.log('endTime==', _this4.endTime);
         } else {}
       }
     })();
   }
+
+  addLicense() {
+    var _this5 = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      // const alert  = await this.alertCtrlr.create({
+      //   header: 'Choose From',
+      //   buttons: [
+      //     {
+      //       text: 'Camera',
+      //       role: 'camera',
+      //       handler: ()=>{
+      //       },
+      //     },
+      //     {
+      //       text: 'Gallery',
+      //       role: 'upload',
+      //       handler: ()=>{
+      //      },
+      //     },
+      //   ],
+      // });
+      // await alert.present();
+      const image = yield _capacitor_camera__WEBPACK_IMPORTED_MODULE_6__.Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: _capacitor_camera__WEBPACK_IMPORTED_MODULE_6__.CameraResultType.DataUrl,
+        source: _capacitor_camera__WEBPACK_IMPORTED_MODULE_6__.CameraSource.Prompt
+      });
+      console.log(image); // if(image.format == 'jpeg'){
+
+      _this5.imageURL = image.dataUrl;
+
+      _this5.readDir(); // }else{
+      //   this.api.presentToast("Please add image in 'JPEG' format.");
+      // }
+
+    })();
+  }
+
+  readDir() {
+    var _this6 = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      yield _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Filesystem.readdir({
+        directory: _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Directory.Data,
+        path: IMAGE_DIR
+      }).then(result => {
+        if (result.files.length == 0) {
+          _this6.saveImage(_this6.imageURL); // this.loadFiles();
+
+        } else if (result.files.length > 0) {
+          let fileName = '';
+
+          for (let f of result.files) {
+            fileName = `${IMAGE_DIR}/${f.name}`;
+          }
+
+          console.log('fileName: ', fileName);
+          _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Filesystem.deleteFile({
+            directory: _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Directory.Data,
+            path: fileName
+          });
+
+          _this6.saveImage(_this6.imageURL); // this.loadFiles()
+
+        } else {}
+      });
+    })();
+  }
+
+  saveImage(base64Image) {
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const fileName = new Date().getTime() + '.jpeg';
+      const savedFile = yield _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Filesystem.writeFile({
+        directory: _capacitor_filesystem__WEBPACK_IMPORTED_MODULE_7__.Directory.Data,
+        path: `${IMAGE_DIR}/${fileName}`,
+        data: base64Image
+      });
+      console.log('File Saved: ', savedFile);
+    })();
+  } // async deleteFiles(files){
+  //   .then(result => {
+  //       console.log(result);
+  //     });
+  //   console.log('files deleted');
+  //   // console.log(files);
+  // }
+
 
   showSummary() {
     localStorage.setItem('startDate', this.startDate);
@@ -203,16 +400,20 @@ let CarBookingPage = class CarBookingPage {
 };
 
 CarBookingPage.ctorParameters = () => [{
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.ModalController
 }, {
-  type: _angular_common__WEBPACK_IMPORTED_MODULE_7__.Location
+  type: _angular_common__WEBPACK_IMPORTED_MODULE_10__.Location
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.NavController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.NavController
 }, {
   type: _services_api_service__WEBPACK_IMPORTED_MODULE_5__.ApiService
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.AlertController
+}, {
+  type: _check_user_service__WEBPACK_IMPORTED_MODULE_8__.CheckUserService
 }];
 
-CarBookingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+CarBookingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
   selector: 'app-car-booking',
   template: _car_booking_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_car_booking_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -248,6 +449,7 @@ let ApiService = class ApiService {
     this.toastController = toastController;
     this.loadingCtrl = loadingCtrl;
     this.baseURL = 'https://360uae.eigix.net/api';
+    this.datesToDisable = [];
   }
 
   sendRequest(action, data) {
@@ -314,6 +516,233 @@ ApiService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([(0,_angular_core
 
 /***/ }),
 
+/***/ 34830:
+/*!****************************************************************!*\
+  !*** ./node_modules/@capacitor/camera/dist/esm/definitions.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CameraDirection": () => (/* binding */ CameraDirection),
+/* harmony export */   "CameraResultType": () => (/* binding */ CameraResultType),
+/* harmony export */   "CameraSource": () => (/* binding */ CameraSource)
+/* harmony export */ });
+var CameraSource;
+
+(function (CameraSource) {
+  /**
+   * Prompts the user to select either the photo album or take a photo.
+   */
+  CameraSource["Prompt"] = "PROMPT";
+  /**
+   * Take a new photo using the camera.
+   */
+
+  CameraSource["Camera"] = "CAMERA";
+  /**
+   * Pick an existing photo from the gallery or photo album.
+   */
+
+  CameraSource["Photos"] = "PHOTOS";
+})(CameraSource || (CameraSource = {}));
+
+var CameraDirection;
+
+(function (CameraDirection) {
+  CameraDirection["Rear"] = "REAR";
+  CameraDirection["Front"] = "FRONT";
+})(CameraDirection || (CameraDirection = {}));
+
+var CameraResultType;
+
+(function (CameraResultType) {
+  CameraResultType["Uri"] = "uri";
+  CameraResultType["Base64"] = "base64";
+  CameraResultType["DataUrl"] = "dataUrl";
+})(CameraResultType || (CameraResultType = {}));
+
+/***/ }),
+
+/***/ 4241:
+/*!**********************************************************!*\
+  !*** ./node_modules/@capacitor/camera/dist/esm/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Camera": () => (/* binding */ Camera),
+/* harmony export */   "CameraDirection": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraDirection),
+/* harmony export */   "CameraResultType": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraResultType),
+/* harmony export */   "CameraSource": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraSource)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 26549);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 34830);
+
+const Camera = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('Camera', {
+  web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor_camera_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 71327)).then(m => new m.CameraWeb())
+});
+
+
+
+/***/ }),
+
+/***/ 93568:
+/*!********************************************************************!*\
+  !*** ./node_modules/@capacitor/filesystem/dist/esm/definitions.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Directory": () => (/* binding */ Directory),
+/* harmony export */   "Encoding": () => (/* binding */ Encoding),
+/* harmony export */   "FilesystemDirectory": () => (/* binding */ FilesystemDirectory),
+/* harmony export */   "FilesystemEncoding": () => (/* binding */ FilesystemEncoding)
+/* harmony export */ });
+var Directory;
+
+(function (Directory) {
+  /**
+   * The Documents directory
+   * On iOS it's the app's documents directory.
+   * Use this directory to store user-generated content.
+   * On Android it's the Public Documents folder, so it's accessible from other apps.
+   * It's not accesible on Android 10 unless the app enables legacy External Storage
+   * by adding `android:requestLegacyExternalStorage="true"` in the `application` tag
+   * in the `AndroidManifest.xml`.
+   * It's not accesible on Android 11 or newer.
+   *
+   * @since 1.0.0
+   */
+  Directory["Documents"] = "DOCUMENTS";
+  /**
+   * The Data directory
+   * On iOS it will use the Documents directory.
+   * On Android it's the directory holding application files.
+   * Files will be deleted when the application is uninstalled.
+   *
+   * @since 1.0.0
+   */
+
+  Directory["Data"] = "DATA";
+  /**
+   * The Library directory
+   * On iOS it will use the Library directory.
+   * On Android it's the directory holding application files.
+   * Files will be deleted when the application is uninstalled.
+   *
+   * @since 1.1.0
+   */
+
+  Directory["Library"] = "LIBRARY";
+  /**
+   * The Cache directory
+   * Can be deleted in cases of low memory, so use this directory to write app-specific files
+   * that your app can re-create easily.
+   *
+   * @since 1.0.0
+   */
+
+  Directory["Cache"] = "CACHE";
+  /**
+   * The external directory
+   * On iOS it will use the Documents directory
+   * On Android it's the directory on the primary shared/external
+   * storage device where the application can place persistent files it owns.
+   * These files are internal to the applications, and not typically visible
+   * to the user as media.
+   * Files will be deleted when the application is uninstalled.
+   *
+   * @since 1.0.0
+   */
+
+  Directory["External"] = "EXTERNAL";
+  /**
+   * The external storage directory
+   * On iOS it will use the Documents directory
+   * On Android it's the primary shared/external storage directory.
+   * It's not accesible on Android 10 unless the app enables legacy External Storage
+   * by adding `android:requestLegacyExternalStorage="true"` in the `application` tag
+   * in the `AndroidManifest.xml`.
+   * It's not accesible on Android 11 or newer.
+   *
+   * @since 1.0.0
+   */
+
+  Directory["ExternalStorage"] = "EXTERNAL_STORAGE";
+})(Directory || (Directory = {}));
+
+var Encoding;
+
+(function (Encoding) {
+  /**
+   * Eight-bit UCS Transformation Format
+   *
+   * @since 1.0.0
+   */
+  Encoding["UTF8"] = "utf8";
+  /**
+   * Seven-bit ASCII, a.k.a. ISO646-US, a.k.a. the Basic Latin block of the
+   * Unicode character set
+   * This encoding is only supported on Android.
+   *
+   * @since 1.0.0
+   */
+
+  Encoding["ASCII"] = "ascii";
+  /**
+   * Sixteen-bit UCS Transformation Format, byte order identified by an
+   * optional byte-order mark
+   * This encoding is only supported on Android.
+   *
+   * @since 1.0.0
+   */
+
+  Encoding["UTF16"] = "utf16";
+})(Encoding || (Encoding = {}));
+/**
+ * @deprecated Use `Directory`.
+ * @since 1.0.0
+ */
+
+
+const FilesystemDirectory = Directory;
+/**
+ * @deprecated Use `Encoding`.
+ * @since 1.0.0
+ */
+
+const FilesystemEncoding = Encoding;
+
+/***/ }),
+
+/***/ 91662:
+/*!**************************************************************!*\
+  !*** ./node_modules/@capacitor/filesystem/dist/esm/index.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Directory": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.Directory),
+/* harmony export */   "Encoding": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.Encoding),
+/* harmony export */   "Filesystem": () => (/* binding */ Filesystem),
+/* harmony export */   "FilesystemDirectory": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.FilesystemDirectory),
+/* harmony export */   "FilesystemEncoding": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.FilesystemEncoding)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 26549);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 93568);
+
+const Filesystem = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('Filesystem', {
+  web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor_filesystem_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 64046)).then(m => new m.FilesystemWeb())
+});
+
+
+
+/***/ }),
+
 /***/ 14915:
 /*!**************************************************************!*\
   !*** ./src/app/car-booking/car-booking.page.scss?ngResource ***!
@@ -330,7 +759,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \**************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">BMW 2 series</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center; position: relative;\"  *ngFor=\"let data of carData\">\n      <img style=\"width: 100%;height: 200px; border-radius: 10px 10px 0px 0px;\" src=\"{{data.image1}}\" alt=\"\">\n      <img style=\"position: absolute;right: 5%;top: 5%;\" src=\"assets/images/icons/red_heart.svg\" alt=\"\">\n      <div class=\"car_info_box\" >\n        <div>\n          <div class=\"car_name urbanist\">{{data.vehical_name}}</div>\n          <div style=\"text-align: left;line-height: 1;\">\n            <span>\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" style=\"margin-right: 6.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span class=\"rating_value urbanist\">269 trips</span>\n          </div>\n        </div>\n        <div class=\"car2_info_subdiv\">\n          <div style=\"line-height: 1;\"><span class=\"car2_price urbanist\" >$</span><span class=\"car2_price urbanist\" style=\"font-size: 32px;margin-right: 8px;\">{{data.rent_cost_day}}</span><span class=\"car2_price urbanist\" style=\"font-size: 10px;font-weight: 500;\">/Day</span></div>\n        </div>\n        \n      </div>\n    </div>\n\n    <div style=\"display: flex;justify-content: space-between;margin-top: 14px;\">\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">Start Date</div>\n        <div class=\"bookings_field\" (click)=\"openDateModal('startDate')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/calendar.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"startDate==undefined\">05 Sep, 2022</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"startDate!=''\">{{startDate}}</span>\n        </div>\n      </div>\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">Start Time</div>\n        <div class=\"bookings_field\" (click)=\"openTimeModal('startTime')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/clock.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"startTime==undefined\">06:00 am</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"startTime!=''\">{{startTime}}</span>\n        </div>\n      </div>\n    </div>\n    <div style=\"display: flex;justify-content: space-between;margin-top: 14px;\">\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">End Date</div>\n        <div class=\"bookings_field\" (click)=\"openDateModal('endDate')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/calendar.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"endDate==undefined\">05 Sep, 2022</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"endDate!=''\">{{endDate}}</span>\n        </div>\n      </div>\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">End Time</div>\n        <div class=\"bookings_field\" (click)=\"openTimeModal('endTime')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/clock.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"endTime==undefined\">06:00 am</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"endTime!=''\">{{endTime}}</span>\n        </div>\n      </div>\n    </div>\n    <div class=\"license_heading\">Driving License</div>\n    <div style=\"text-align: center;\">\n      <img style=\"margin-top: 7px;\" src=\"assets/images/upload_license_img.svg\" alt=\"\">\n    </div>\n    \n  </div>\n\n</ion-content>\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 27px;\">\n    <ion-button class=\"login_button\" (click)=\"showSummary()\">\n      <span class=\"btn_text\">Next</span>\n    </ion-button>\n  </div>\n</ion-footer>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">BMW 2 series</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center; position: relative;\"  *ngFor=\"let data of carData\">\n      <img style=\"width: 100%;height: 200px; border-radius: 10px 10px 0px 0px;\" src=\"{{data.image1}}\" alt=\"\">\n      <img style=\"position: absolute;right: 5%;top: 5%;\" src=\"assets/images/icons/red_heart.svg\" alt=\"\">\n      <div class=\"car_info_box\" >\n        <div>\n          <div class=\"car_name urbanist\">{{data.vehical_name}}</div>\n          <div style=\"text-align: left;line-height: 1;\">\n            <span>\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" style=\"margin-right: 6.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span class=\"rating_value urbanist\">269 trips</span>\n          </div>\n        </div>\n        <div class=\"car2_info_subdiv\">\n          <div style=\"line-height: 1;\"><span class=\"car2_price urbanist\" >$</span><span class=\"car2_price urbanist\" style=\"font-size: 32px;margin-right: 8px;\">{{data.rent_cost_day}}</span><span class=\"car2_price urbanist\" style=\"font-size: 10px;font-weight: 500;\">/Day</span></div>\n        </div>\n        \n      </div>\n    </div>\n\n    <div style=\"display: flex;justify-content: space-between;margin-top: 14px;\">\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">Start Date</div>\n        <div class=\"bookings_field\" (click)=\"openDateModal('startDate')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/calendar.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"startDate==undefined\">05 Sep, 2022</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"startDate!=''\">{{startDate}}</span>\n        </div>\n      </div>\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">Start Time</div>\n        <div class=\"bookings_field\" (click)=\"openTimeModal('startTime')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/clock.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"startTime==undefined\">06:00 am</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"startTime!=''\">{{startTime}}</span>\n        </div>\n      </div>\n    </div>\n    <div style=\"display: flex;justify-content: space-between;margin-top: 14px;\">\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">End Date</div>\n        <div class=\"bookings_field\" (click)=\"openDateModal('endDate')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/calendar.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"endDate==undefined\">05 Sep, 2022</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"endDate!=''\">{{endDate}}</span>\n        </div>\n      </div>\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">End Time</div>\n        <div class=\"bookings_field\" (click)=\"openTimeModal('endTime')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/clock.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"endTime==undefined\">06:00 am</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"endTime!=''\">{{endTime}}</span>\n        </div>\n      </div>\n    </div>\n    <div class=\"license_heading\">Driving License</div>\n    <div style=\"text-align: center;margin: 7px auto 10px;\" >\n      <img (click)=\"addLicense()\" style=\"height: 160px;width: 250px;border-radius: 10px;\"  src=\"{{imageURL}}\" alt=\"\">\n      <!-- <div >\n        <img  src=\"{{imageURL}}\" alt=\"\">\n      </div> -->\n      \n     \n    </div>\n    \n  </div>\n\n</ion-content>\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 27px;\">\n    <ion-button class=\"login_button\" (click)=\"showSummary()\">\n      <span class=\"btn_text\">Next</span>\n    </ion-button>\n  </div>\n</ion-footer>\n";
 
 /***/ })
 

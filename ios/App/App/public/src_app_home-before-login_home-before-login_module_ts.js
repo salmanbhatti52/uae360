@@ -157,6 +157,7 @@ let HomeBeforeLoginPage = class HomeBeforeLoginPage {
     //   this.categoryVal = val;
     // }
     ngOnInit() {
+        this.checkUser.appUserId = null;
         console.log(this.checkUser.appUserId);
         this.checkUser.checkUser();
         console.log(this.checkUser.appPages);
@@ -189,7 +190,7 @@ let HomeBeforeLoginPage = class HomeBeforeLoginPage {
             this.api.hideLoading();
             console.log('api response:', res);
             if (res.status == 'success') {
-                this.api.presentToast('Success!');
+                // this.api.presentToast('Success!')
                 this.api.carDataById = res.data;
                 console.log('carDataById:', this.api.carDataById);
                 this.router.navigate(['/car-details']);

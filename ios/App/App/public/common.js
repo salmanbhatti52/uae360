@@ -167,13 +167,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SelectDatePage": () => (/* binding */ SelectDatePage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _select_date_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./select-date.page.html?ngResource */ 54905);
 /* harmony import */ var _select_date_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./select-date.page.scss?ngResource */ 80966);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ 86712);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ 86527);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ 86712);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ 86527);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ 5830);
+
 
 
 
@@ -181,18 +183,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SelectDatePage = class SelectDatePage {
-    constructor(modalCtrlr) {
+    // isWeekday = (dateString: string) => {
+    //   const date = new Date(dateString);
+    //   const utcDay = date.getUTCDay();
+    //   /**
+    //    * Date will be enabled if it is not
+    //    * Sunday or Saturday
+    //    */
+    //   return utcDay !== 0 && utcDay !== 6;
+    // };
+    constructor(modalCtrlr, api) {
         this.modalCtrlr = modalCtrlr;
-        this.minDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(new Date().toISOString()), 'yyy-MM-dd');
+        this.api = api;
+        this.datesArray = [];
+        this.minDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(new Date().toISOString()), 'yyyy-MM-dd');
     }
     ngOnInit() {
         console.log(this.minDate);
+        this.datesArray = this.api.datesToDisable;
+        console.log('DatesArray: ', this.datesArray);
+        // ===============dates==================
+        for (let d of this.datesArray) {
+            const date = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(new Date(d).toISOString()), 'yyyy-MM-dd');
+            console.log('Day: ', date);
+        }
     }
     formattedString(dateVal) {
         console.log('date parameter:', dateVal);
-        const formattedString = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(dateVal), 'dd MMM, yyyy');
+        const formattedString = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(dateVal), 'dd MMM, yyyy');
         // =====dashed date for summary page=====
-        const dashedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(dateVal), 'dd-MM-yyyy');
+        const dashedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(dateVal), 'dd-MM-yyyy');
         console.log(dashedDate);
         // ============done================
         this.date = formattedString;
@@ -206,10 +226,11 @@ let SelectDatePage = class SelectDatePage {
     }
 };
 SelectDatePage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__.ApiService }
 ];
-SelectDatePage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+SelectDatePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-select-date',
         template: _select_date_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_select_date_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -1641,7 +1662,7 @@ module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"tex
   \**************************************************************/
 /***/ ((module) => {
 
-module.exports = "\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"date_time_title\">Pick Start/End Dates</div>\n    <div class=\"date_time_box\">\n      <!-- <ion-datetime presentation=\"date\" (ionChange)=\"formattedString()\" size=\"cover\" [(ngModel)]=\"date\"></ion-datetime> -->\n      <ion-datetime #datetime min=\"{{minDate}}\" (ionChange)=\"formattedString(datetime.value)\" presentation=\"date\" size=\"cover\" ></ion-datetime>\n    </div>\n    <!-- <div>{{date}}</div> -->\n    <ion-button class=\"login_button\" (click)=\"done()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button>\n  </div>\n</ion-content>\n";
+module.exports = "\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"date_time_title\">Pick Start/End Dates</div>\n    <div class=\"date_time_box\">\n      <!-- <ion-datetime presentation=\"date\" (ionChange)=\"formattedString()\" size=\"cover\" [(ngModel)]=\"date\"></ion-datetime> -->\n      <ion-datetime #datetime [isDateEnabled]=\"isWeekday\" min=\"{{minDate}}\" (ionChange)=\"formattedString(datetime.value)\" presentation=\"date\" size=\"cover\" ></ion-datetime>\n    </div>\n    <!-- <div>{{date}}</div> -->\n    <ion-button class=\"login_button\" (click)=\"done()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button>\n  </div>\n</ion-content>\n";
 
 /***/ }),
 

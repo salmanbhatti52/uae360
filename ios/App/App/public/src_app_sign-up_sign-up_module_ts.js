@@ -28,6 +28,7 @@ let ApiService = class ApiService {
     this.toastController = toastController;
     this.loadingCtrl = loadingCtrl;
     this.baseURL = 'https://360uae.eigix.net/api';
+    this.datesToDisable = [];
   }
 
   sendRequest(action, data) {

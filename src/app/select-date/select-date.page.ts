@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { format, parseISO } from 'date-fns';
+import { differenceInBusinessDays, format, parseISO} from 'date-fns';
 import { ModalController } from '@ionic/angular';
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-select-date',
   templateUrl: './select-date.page.html',
@@ -8,12 +9,32 @@ import { ModalController } from '@ionic/angular';
 })
 export class SelectDatePage implements OnInit {
   date:any;
+  datesArray = [];
   minDate = format(parseISO(new Date().toISOString()),'yyyy-MM-dd');
-  constructor(public modalCtrlr:ModalController) { }
+
+  // isWeekday = (dateString: string) => {
+  //   const date = new Date(dateString);
+  //   const utcDay = date.getUTCDay();
+    
+  //   /**
+  //    * Date will be enabled if it is not
+  //    * Sunday or Saturday
+  //    */
+  //   return utcDay !== 0 && utcDay !== 6;
+  // };
+  constructor(public modalCtrlr:ModalController,
+    public api:ApiService) { }
 
   ngOnInit() {
     console.log(this.minDate);
-    
+    this.datesArray = this.api.datesToDisable;
+    console.log('DatesArray: ',this.datesArray);
+    // ===============dates==================
+    for(let d of this.datesArray){
+      const date = format(parseISO(new Date(d).toISOString()),'yyyy-MM-dd');
+      console.log('Day: ',date);
+      
+    }
   }
   formattedString(dateVal){
     console.log('date parameter:',dateVal);

@@ -93,16 +93,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CarDetailsPage": () => (/* binding */ CarDetailsPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _car_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./car-details.page.html?ngResource */ 69684);
 /* harmony import */ var _car_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./car-details.page.scss?ngResource */ 94438);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 22560);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 94666);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 93819);
 /* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../check-user.service */ 47852);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/api.service */ 5830);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! swiper */ 63587);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 26710);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 60124);
+
 
 
 
@@ -115,11 +117,12 @@ __webpack_require__.r(__webpack_exports__);
 
 swiper__WEBPACK_IMPORTED_MODULE_4__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_4__.Autoplay, swiper__WEBPACK_IMPORTED_MODULE_4__.Keyboard, swiper__WEBPACK_IMPORTED_MODULE_4__.Pagination, swiper__WEBPACK_IMPORTED_MODULE_4__.Scrollbar, swiper__WEBPACK_IMPORTED_MODULE_4__.Zoom, _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonicSlides]);
 let CarDetailsPage = class CarDetailsPage {
-    constructor(location, navCtrlr, checkUser, api) {
+    constructor(location, navCtrlr, checkUser, api, router) {
         this.location = location;
         this.navCtrlr = navCtrlr;
         this.checkUser = checkUser;
         this.api = api;
+        this.router = router;
         this.showCategories = false;
         this.rentCategories = [{ category: 'Day' }, { category: 'Month' }];
         this.categoryVal = 'Day';
@@ -156,10 +159,10 @@ let CarDetailsPage = class CarDetailsPage {
     }
     startCarBooking() {
         if (this.checkUser.appUserId == null) {
-            this.navCtrlr.navigateRoot('sign-in');
+            this.router.navigate(['/sign-in']);
         }
         else if (this.checkUser.appUserId != null) {
-            this.navCtrlr.navigateRoot('car-booking');
+            this.router.navigate(['/car-booking']);
         }
         else {
         }
@@ -179,10 +182,11 @@ CarDetailsPage.ctorParameters = () => [
     { type: _angular_common__WEBPACK_IMPORTED_MODULE_6__.Location },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.NavController },
     { type: _check_user_service__WEBPACK_IMPORTED_MODULE_2__.CheckUserService },
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService }
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router }
 ];
-CarDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+CarDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-car-details',
         template: _car_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_car_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]

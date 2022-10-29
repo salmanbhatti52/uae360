@@ -28,6 +28,7 @@ let ApiService = class ApiService {
     this.toastController = toastController;
     this.loadingCtrl = loadingCtrl;
     this.baseURL = 'https://360uae.eigix.net/api';
+    this.datesToDisable = [];
   }
 
   sendRequest(action, data) {
@@ -280,7 +281,7 @@ let SignInPage = class SignInPage {
                 localStorage.setItem('appUserId', res.data.appUserId);
                 console.log('appUserId', res.data.appUserId);
                 this.checkUser.appUserId = res.data.appUserId;
-                this.api.presentToast('Success! Welcome');
+                // this.api.presentToast('Success! Welcome')
                 // ===update appPages===========
                 console.log(this.checkUser.appUserId);
                 this.checkUser.checkUser();
@@ -297,6 +298,7 @@ let SignInPage = class SignInPage {
             }
         }, (error) => {
             console.log(error);
+            this.api.presentToast(error);
         });
     }
     gotoSignUp() {

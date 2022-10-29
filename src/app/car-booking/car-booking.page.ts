@@ -7,6 +7,8 @@ import { ApiService } from '../services/api.service';
 import { AlertController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { CheckUserService } from '../check-user.service';
+import { format, parseISO} from 'date-fns';
 // import { format,parseISO} from 'date-fns';
 const IMAGE_DIR = 'stored-image'
 interface LocalFile {
@@ -27,15 +29,18 @@ endDate:any;
 startTime:any; 
 endTime:any;
 carData = [];
-
+datesArray = [];
 base64Image = '';
 imageURL:any = 'assets/images/upload_license_img.svg';
+
+carId: any;
   
   constructor(public modalCtrlr:ModalController,
     public location:Location,
     public navCtrlr:NavController,
     public api:ApiService,
-    public alertCtrlr:AlertController) { }
+    public alertCtrlr:AlertController,
+    public checkUser:CheckUserService) { }
 
   ngOnInit() {
     console.log(this.startDate);
@@ -44,6 +49,56 @@ imageURL:any = 'assets/images/upload_license_img.svg';
     this.carData = carData;
     console.log('licenseImage',this.imageURL);  
     this.loadFiles();
+    if(carData != undefined){
+      for(let data of carData){
+        this.carId = data.car_id 
+      }
+    }
+    console.log('car_id',this.carId);
+    
+    this.checkBooking();
+  }
+
+  checkBooking(){
+    let data = {
+      appuser_id:this.checkUser.appUserId,
+      car_id:this.carId,
+    };
+    console.log('Data: ',data);
+    
+    this.api.sendRequest('getCarsBooking',data).subscribe((res:any)=>{
+      
+      if(res.status=='success'){
+        console.log('Api Response: ',res);
+        let booked = res.data;
+        console.log('Booked Array: ',booked);
+        
+        for(let rec of booked){
+          
+          // let startDate = rec.start_date;
+          // let endDate = rec.end_date;
+          // let stDate = format(parseISO(new Date(startDate).toISOString()),'yyyy-MM-dd');
+          // let ndDate = format(parseISO(new Date(endDate).toISOString()),'yyyy-MM-dd');
+          // console.log('Booked Car start_Date: ',stDate);
+          // console.log('Booked Car end_Date: ',ndDate);
+          this.datesArray.push(rec.start_date);
+          this.datesArray.push(rec.end_date);
+          
+        }
+        console.log('DatesArray: ',this.datesArray);
+        this.api.datesToDisable = this.datesArray;
+        
+      }else if(res.status=='error'){
+        console.log('Error: ',res);
+      }else{
+
+      }
+      
+    },(err)=>{
+      console.log('error: ',err);
+      
+    });
+    
   }
 
   async loadFiles(){

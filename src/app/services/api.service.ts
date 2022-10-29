@@ -8,6 +8,7 @@ import { LoadingController } from '@ionic/angular';
 export class ApiService {
   carDataById:any;
   baseURL:any = 'https://360uae.eigix.net/api';
+  datesToDisable = [];
   constructor(private http:HttpClient, 
     public toastController:ToastController,
     public loadingCtrl:LoadingController) { }
