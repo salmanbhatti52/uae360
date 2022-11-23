@@ -19,7 +19,15 @@ export class HomeBeforeLoginPage implements OnInit {
   item3 = false;
   item4 = false;
   item5 = false;
-  
+  carTypes = [];
+  carTypeOne = '';
+  carTypeTwo = '';
+  carTypeThree = '';
+  carTypeFour = '';
+  carTypeOneId= '';
+  carTypeTwoId = '';
+  carTypeThreeId = '';
+  carTypeFourId = '';
   
   showCategories = false;
   rentCategories = [{category:'Day'},{category:'Month'}]
@@ -64,8 +72,10 @@ export class HomeBeforeLoginPage implements OnInit {
     this.checkUser.checkUser();
     console.log(this.checkUser.appPages);
     this.appComponent.appPages = this.checkUser.appPages; 
-
+    
+    this.getCarTypes();
     this.getCars();
+
   }
 
   getCars(){
@@ -82,6 +92,30 @@ export class HomeBeforeLoginPage implements OnInit {
       this.api.hideLoading();
       console.log(err);
       
+    })
+  }
+
+  getCarTypes(){
+    this.api.showLoading();
+    this.api.sendRequest('carType').subscribe((res:any)=>{
+      console.log('getCarTypes: ',res);
+      if(res.status=='success'){
+        this.carTypes = res.data;
+        this.carTypeOne = this.carTypes[0].car_type;
+        this.carTypeTwo = this.carTypes[1].car_type;
+        this.carTypeThree = this.carTypes[2].car_type;
+        this.carTypeFour = this.carTypes[3].car_type;
+
+        this.carTypeOneId = this.carTypes[0].car_type_id;
+        this.carTypeTwoId = this.carTypes[1].car_type_id;
+        this.carTypeThreeId = this.carTypes[2].car_type_id;
+        this.carTypeFourId = this.carTypes[3].car_type_id;
+        this.api.hideLoading();
+      }
+      
+    },(err:any)=>{
+      console.log('Error',err);
+      this.api.hideLoading();
     })
   }
 
@@ -118,7 +152,8 @@ export class HomeBeforeLoginPage implements OnInit {
       this.item4 = false;
       this.item5 = false;
       this.getCars();
-    }else if(itemVal == 'hatchback'){
+    }else if(itemVal == 'Sports'){
+      this.pickups = [];
       this.item1 = false;
       this.item2 = true;
       this.item3 = false;
@@ -127,7 +162,7 @@ export class HomeBeforeLoginPage implements OnInit {
 
       this.api.showLoading();
         let data = {
-          car_type: 'Hatchback'
+          car_type_id: this.carTypeOneId
         }
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
           console.log(res);
@@ -140,7 +175,8 @@ export class HomeBeforeLoginPage implements OnInit {
           console.log(err);
           
         })
-    }else if(itemVal == 'sedan'){
+    }else if(itemVal == 'Luxury'){
+      this.pickups = [];
       this.item1 = false;
       this.item2 = false;
       this.item3 = true;
@@ -149,7 +185,7 @@ export class HomeBeforeLoginPage implements OnInit {
 
       this.api.showLoading();
         let data = {
-          car_type: 'Sedan'
+          car_type_id: this.carTypeTwoId
         }
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
           console.log(res);
@@ -162,7 +198,8 @@ export class HomeBeforeLoginPage implements OnInit {
           console.log(err);
           
         })
-    }else if(itemVal == 'bus'){
+    }else if(itemVal == 'Pickup'){
+      this.pickups = [];
       this.item1 = false;
       this.item2 = false;
       this.item3 = false;
@@ -171,7 +208,7 @@ export class HomeBeforeLoginPage implements OnInit {
 
       this.api.showLoading();
         let data = {
-          car_type: 'Bus'
+          car_type_id: this.carTypeThreeId
         }
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
           console.log(res);
@@ -184,7 +221,8 @@ export class HomeBeforeLoginPage implements OnInit {
           console.log(err);
           
         })
-    }else if(itemVal == 'suv'){
+    }else if(itemVal == 'SUV'){
+      this.pickups = [];
       this.item1 = false;
       this.item2 = false;
       this.item3 = false;
@@ -193,7 +231,7 @@ export class HomeBeforeLoginPage implements OnInit {
 
       this.api.showLoading();
         let data = {
-          car_type: 'SUV'
+          car_type_id: this.carTypeFourId
         }
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
           console.log(res);

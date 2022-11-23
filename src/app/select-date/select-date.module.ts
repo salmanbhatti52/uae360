@@ -7,9 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { SelectDatePageRoutingModule } from './select-date-routing.module';
 
 import { SelectDatePage } from './select-date.page';
+// import { CalendarModule } from 'ion2-calendar';
 
 @NgModule({
   imports: [
+    // CalendarModule.forRoot({
+    //   doneLabel: 'Save',
+    //   closeIcon: true
+    // }),
     CommonModule,
     FormsModule,
     IonicModule,

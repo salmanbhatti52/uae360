@@ -11,59 +11,61 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="background" [class.background]="favorites == ''">
+<ion-content padding  [class.background]="favorites == 0">
   <div class="wrapper">
-    <div *ngIf="favorites == ''">
+    <div *ngIf="favorites == 0">
       <div class="no_favorite">
         <img src="assets/images/no_favorites.svg" alt="">
       </div>
       <div class="heading">No Favorites yet</div>
     </div>
-    <div style="text-align: center; margin-top: 13px; position: relative; ">
-      <img style="width: 100%;" src="assets/images/bookings_car.svg" alt="">
-      <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-      <div class="car_info_box" >
-        <div>
-          <div class="car_name poppins">BMW 2 series</div>
-          <div style="text-align: left;line-height: 1;">
-            <span>
-              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="start_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
-            </span>
-            <span class="rating_value poppins">269 trips</span>
+    <div *ngIf="favorites !== 0">
+      <div style="text-align: center; margin-top: 13px; position: relative; ">
+        <img style="width: 100%;" src="assets/images/bookings_car.svg" alt="">
+        <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
+        <div class="car_info_box" >
+          <div>
+            <div class="car_name poppins">BMW 2 series</div>
+            <div style="text-align: left;line-height: 1;">
+              <span>
+                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="start_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span class="rating_value poppins">269 trips</span>
+            </div>
           </div>
+          <div class="car2_info_subdiv">
+            <div style="margin-right: 17px;line-height: 1;"><span class="car2_price poppins" >$</span><span class="car2_price poppins" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price poppins" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+          </div>
+          
         </div>
-        <div class="car2_info_subdiv">
-          <div style="margin-right: 17px;line-height: 1;"><span class="car2_price poppins" >$</span><span class="car2_price poppins" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price poppins" style="font-size: 10px;font-weight: 500;">/Day</span></div>
-        </div>
-        
       </div>
-    </div>
-    <!-- ==================================================================== -->
-    <div style="text-align: center; margin-top: 13px; position: relative; ">
-      <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
-      <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-      <div class="car_info_box" >
-        <div>
-          <div class="car_name poppins">BMW 2 series</div>
-          <div style="text-align: left;line-height: 1;">
-            <span>
-              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="start_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
-            </span>
-            <span class="rating_value poppins">269 trips</span>
+      <!-- ==================================================================== -->
+      <div style="text-align: center; margin-top: 13px; position: relative; ">
+        <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
+        <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
+        <div class="car_info_box" >
+          <div>
+            <div class="car_name poppins">BMW 2 series</div>
+            <div style="text-align: left;line-height: 1;">
+              <span>
+                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="start_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span class="rating_value poppins">269 trips</span>
+            </div>
           </div>
+          <div class="car2_info_subdiv">
+            <div style="margin-right: 17px;line-height: 1;"><span class="car2_price poppins" >$</span><span class="car2_price poppins" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price poppins" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+          </div>
+          
         </div>
-        <div class="car2_info_subdiv">
-          <div style="margin-right: 17px;line-height: 1;"><span class="car2_price poppins" >$</span><span class="car2_price poppins" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price poppins" style="font-size: 10px;font-weight: 500;">/Day</span></div>
-        </div>
-        
       </div>
     </div>
   </div>

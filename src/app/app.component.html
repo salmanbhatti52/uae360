@@ -11,15 +11,18 @@
           <div class="app_title" *ngIf="checkUser.appUserId==null">
             360UAE
           </div>
-          <div *ngIf="checkUser.appUserId!=null" (click)="goForEditProfile()">
+          <div *ngIf="checkUser.appUserId !== null && api.localUserData !== undefined " (click)="goForEditProfile()">
             <div class="profile_div">
-              <img src="assets/images/sm_dummy_profile.svg" alt="">
+              <img src="assets/images/sm_dummy_profile.svg" alt="" *ngIf="api.localUserData.profile_pic === '' ">
+              <img style="border-radius: 50px;" src="{{api.localUserData.profile_pic}}" alt="" *ngIf="api.localUserData.profile_pic !== '' ">
               <img class="edit_icon" src="assets/images/icons/sm_edit_icon.svg" alt="">
             </div>
-            <div class="user_name">Daniel Jefferson</div>
+            <!-- <div class="user_name" *ngIf="api.googleSignInResponse">{{api.googleSignInResponse.displayName}}</div> -->
+            <div class="user_name" >{{api.localUserData.username}}</div>
             <div class="location_box">
               <img style="margin-right: 6.3px;" src="assets/images/icons/sm_location_icon.svg" alt="">
-              <span class="location">Netherlands</span>
+              <span class="location" *ngIf="api.localUserData.location !== null">{{api.localUserData.location}}</span>
+              <span class="location" *ngIf="api.localUserData.location === null">{{api.fetchLocation}}</span>
             </div>
           </div>
           <!-- <div style="margin-top: 36px; text-align: center;">

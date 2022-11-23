@@ -28,7 +28,7 @@
     
   </div>
       <div class="items_label">What are you looking for?</div>
-      <div style="padding-left: 11px;padding-right: 11px;">
+      <div style="padding-left: 11px;padding-right: 11px;" >
         <swiper [config]="{slidesPerView:4.4, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false" style="padding: 8px;">
           <ng-template swiperSlide class="categories">
             <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem('all')">
@@ -38,31 +38,31 @@
             </div>
           </ng-template>
           <ng-template swiperSlide class="categories">
-            <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem('hatchback')">
+            <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem('Sports')">
               <img src="assets/images/icons/sports_car_grey.svg" alt="" *ngIf="item2 == false">
               <img src="assets/images/icons/sports_car_white.svg" alt="" *ngIf="item2 == true">
-              <div class="cars_label" [class.fontActive]="item2 == true">Sports cars</div>
+              <div class="cars_label" [class.fontActive]="item2 == true">{{carTypeOne}}</div>
             </div>
           </ng-template>
           <ng-template swiperSlide class="categories">
-            <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem('sedan')">
+            <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem('Luxury')">
               <img src="assets/images/icons/luxury_car_grey.svg" alt="" *ngIf="item3 == false">
               <img src="assets/images/icons/luxury_car_white.svg" alt="" *ngIf="item3 == true">
-              <div class="cars_label" [class.fontActive]="item3 == true">Luxury cars</div>
+              <div class="cars_label" [class.fontActive]="item3 == true">{{carTypeTwo}}</div>
             </div>
           </ng-template>
           <ng-template swiperSlide class="categories">
-            <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem('bus')">
+            <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem('Pickup')">
               <img src="assets/images/icons/taxi_grey.svg" alt="" *ngIf="item4 == false">
               <img src="assets/images/icons/taxi_white.svg" alt="" *ngIf="item4 == true">
-              <div class="cars_label" [class.fontActive]="item4 == true">Pickup</div>
+              <div class="cars_label" [class.fontActive]="item4 == true">{{carTypeThree}}</div>
             </div>
           </ng-template>
           <ng-template swiperSlide class="categories" >
-            <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem('suv')">
+            <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem('SUV')">
               <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
               <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">
-              <div class="cars_label" [class.fontActive]="item5 == true">Suv's</div>
+              <div class="cars_label" [class.fontActive]="item5 == true">{{carTypeFour}}</div>
             </div>
           </ng-template>
         </swiper>
@@ -169,7 +169,7 @@
     
         <ion-tab-button  style="background: white;" (click)="messagesTab()">
           <img style="height: 32px;width: 32px;"  src="assets/images/tab_icons/messages.svg" alt="">
-          <ion-label class="btn_label">Messages</ion-label>
+          <ion-label class="btn_label" >Messages</ion-label>
         </ion-tab-button>
     
         <ion-tab-button  style="background: white;" (click)="bookingTab()">

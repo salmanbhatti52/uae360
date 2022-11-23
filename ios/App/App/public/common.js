@@ -157,90 +157,6 @@ DeleteAccountPopupPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 10959:
-/*!*************************************************!*\
-  !*** ./src/app/select-date/select-date.page.ts ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SelectDatePage": () => (/* binding */ SelectDatePage)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _select_date_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./select-date.page.html?ngResource */ 54905);
-/* harmony import */ var _select_date_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./select-date.page.scss?ngResource */ 80966);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ 86712);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ 86527);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 93819);
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ 5830);
-
-
-
-
-
-
-
-let SelectDatePage = class SelectDatePage {
-    // isWeekday = (dateString: string) => {
-    //   const date = new Date(dateString);
-    //   const utcDay = date.getUTCDay();
-    //   /**
-    //    * Date will be enabled if it is not
-    //    * Sunday or Saturday
-    //    */
-    //   return utcDay !== 0 && utcDay !== 6;
-    // };
-    constructor(modalCtrlr, api) {
-        this.modalCtrlr = modalCtrlr;
-        this.api = api;
-        this.datesArray = [];
-        this.minDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(new Date().toISOString()), 'yyyy-MM-dd');
-    }
-    ngOnInit() {
-        console.log(this.minDate);
-        this.datesArray = this.api.datesToDisable;
-        console.log('DatesArray: ', this.datesArray);
-        // ===============dates==================
-        for (let d of this.datesArray) {
-            const date = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(new Date(d).toISOString()), 'yyyy-MM-dd');
-            console.log('Day: ', date);
-        }
-    }
-    formattedString(dateVal) {
-        console.log('date parameter:', dateVal);
-        const formattedString = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(dateVal), 'dd MMM, yyyy');
-        // =====dashed date for summary page=====
-        const dashedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(dateVal), 'dd-MM-yyyy');
-        console.log(dashedDate);
-        // ============done================
-        this.date = formattedString;
-        console.log(this.date);
-    }
-    done() {
-        console.log(this.date);
-        if (this.date != undefined) {
-            return this.modalCtrlr.dismiss(this.date, 'dateSelected');
-        }
-    }
-};
-SelectDatePage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController },
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__.ApiService }
-];
-SelectDatePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
-        selector: 'app-select-date',
-        template: _select_date_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
-        styles: [_select_date_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], SelectDatePage);
-
-
-
-/***/ }),
-
 /***/ 79226:
 /*!*************************************************!*\
   !*** ./src/app/select-time/select-time.page.ts ***!
@@ -268,19 +184,27 @@ let SelectTimePage = class SelectTimePage {
     // minTime = format(parseISO(new getTime().toISOString()),'')
     constructor(modalCtrlr) {
         this.modalCtrlr = modalCtrlr;
+        this.dates = {
+            timeForUser: '',
+            timeForDB: '',
+            calendarDateTimeString: ''
+        };
     }
     ngOnInit() {
         console.log(this.selectedTime);
     }
     formattedString(timeVal) {
-        console.log('parameter time:', timeVal);
+        this.dates.calendarDateTimeString = timeVal;
+        // console.log('calendarDateTimeString',this.dates.calendarDateTimeString);
         this.selectedTime = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(timeVal), "hh:mm aaa");
-        console.log(this.selectedTime);
+        this.selectedTimeForDb = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(timeVal), "HH:mm:ss");
+        this.dates.timeForUser = this.selectedTime;
+        this.dates.timeForDB = this.selectedTimeForDb;
     }
     done() {
         console.log(this.selectedTime);
         if (this.selectedTime != undefined) {
-            return this.modalCtrlr.dismiss(this.selectedTime, 'timeSelected');
+            return this.modalCtrlr.dismiss(this.dates, 'timeSelected');
         }
     }
 };
@@ -294,6 +218,78 @@ SelectTimePage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
         styles: [_select_time_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], SelectTimePage);
+
+
+
+/***/ }),
+
+/***/ 34830:
+/*!****************************************************************!*\
+  !*** ./node_modules/@capacitor/camera/dist/esm/definitions.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CameraDirection": () => (/* binding */ CameraDirection),
+/* harmony export */   "CameraResultType": () => (/* binding */ CameraResultType),
+/* harmony export */   "CameraSource": () => (/* binding */ CameraSource)
+/* harmony export */ });
+var CameraSource;
+
+(function (CameraSource) {
+  /**
+   * Prompts the user to select either the photo album or take a photo.
+   */
+  CameraSource["Prompt"] = "PROMPT";
+  /**
+   * Take a new photo using the camera.
+   */
+
+  CameraSource["Camera"] = "CAMERA";
+  /**
+   * Pick an existing photo from the gallery or photo album.
+   */
+
+  CameraSource["Photos"] = "PHOTOS";
+})(CameraSource || (CameraSource = {}));
+
+var CameraDirection;
+
+(function (CameraDirection) {
+  CameraDirection["Rear"] = "REAR";
+  CameraDirection["Front"] = "FRONT";
+})(CameraDirection || (CameraDirection = {}));
+
+var CameraResultType;
+
+(function (CameraResultType) {
+  CameraResultType["Uri"] = "uri";
+  CameraResultType["Base64"] = "base64";
+  CameraResultType["DataUrl"] = "dataUrl";
+})(CameraResultType || (CameraResultType = {}));
+
+/***/ }),
+
+/***/ 4241:
+/*!**********************************************************!*\
+  !*** ./node_modules/@capacitor/camera/dist/esm/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Camera": () => (/* binding */ Camera),
+/* harmony export */   "CameraDirection": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraDirection),
+/* harmony export */   "CameraResultType": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraResultType),
+/* harmony export */   "CameraSource": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraSource)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 26549);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 34830);
+
+const Camera = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('Camera', {
+  web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor_camera_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 71327)).then(m => new m.CameraWeb())
+});
 
 
 
@@ -1576,6 +1572,182 @@ const createSwipeBackGesture = (el, canStartHandler, onStartHandler, onMoveHandl
 
 /***/ }),
 
+/***/ 20312:
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/esm/addDays/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ addDays)
+/* harmony export */ });
+/* harmony import */ var _lib_toInteger_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../_lib/toInteger/index.js */ 67367);
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ 18325);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ 31170);
+
+
+
+/**
+ * @name addDays
+ * @category Day Helpers
+ * @summary Add the specified number of days to the given date.
+ *
+ * @description
+ * Add the specified number of days to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of days to be added. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} - the new date with the days added
+ * @throws {TypeError} - 2 arguments required
+ *
+ * @example
+ * // Add 10 days to 1 September 2014:
+ * const result = addDays(new Date(2014, 8, 1), 10)
+ * //=> Thu Sep 11 2014 00:00:00
+ */
+
+function addDays(dirtyDate, dirtyAmount) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(2, arguments);
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate);
+  var amount = (0,_lib_toInteger_index_js__WEBPACK_IMPORTED_MODULE_2__["default"])(dirtyAmount);
+
+  if (isNaN(amount)) {
+    return new Date(NaN);
+  }
+
+  if (!amount) {
+    // If 0 days, no-op to avoid changing times in the hour before end of DST
+    return date;
+  }
+
+  date.setDate(date.getDate() + amount);
+  return date;
+}
+
+/***/ }),
+
+/***/ 28920:
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/esm/getDate/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getDate)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ 18325);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ 31170);
+
+
+/**
+ * @name getDate
+ * @category Day Helpers
+ * @summary Get the day of the month of the given date.
+ *
+ * @description
+ * Get the day of the month of the given date.
+ *
+ * @param {Date|Number} date - the given date
+ * @returns {Number} the day of month
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which day of the month is 29 February 2012?
+ * const result = getDate(new Date(2012, 1, 29))
+ * //=> 29
+ */
+
+function getDate(dirtyDate) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate);
+  var dayOfMonth = date.getDate();
+  return dayOfMonth;
+}
+
+/***/ }),
+
+/***/ 97064:
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/esm/getMonth/index.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getMonth)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ 18325);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ 31170);
+
+
+/**
+ * @name getMonth
+ * @category Month Helpers
+ * @summary Get the month of the given date.
+ *
+ * @description
+ * Get the month of the given date.
+ *
+ * @param {Date|Number} date - the given date
+ * @returns {Number} the month
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which month is 29 February 2012?
+ * const result = getMonth(new Date(2012, 1, 29))
+ * //=> 1
+ */
+
+function getMonth(dirtyDate) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  var date = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate);
+  var month = date.getMonth();
+  return month;
+}
+
+/***/ }),
+
+/***/ 14190:
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/esm/getYear/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getYear)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ 18325);
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ 31170);
+
+
+/**
+ * @name getYear
+ * @category Year Helpers
+ * @summary Get the year of the given date.
+ *
+ * @description
+ * Get the year of the given date.
+ *
+ * @param {Date|Number} date - the given date
+ * @returns {Number} the year
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which year is 2 July 2014?
+ * const result = getYear(new Date(2014, 6, 2))
+ * //=> 2014
+ */
+
+function getYear(dirtyDate) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  return (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate).getFullYear();
+}
+
+/***/ }),
+
 /***/ 48525:
 /*!****************************************************!*\
   !*** ./src/app/booked/booked.page.scss?ngResource ***!
@@ -1603,16 +1775,6 @@ module.exports = "ion-content {\n  --background:white !important;\n}\n\n.wrapper
 /***/ ((module) => {
 
 module.exports = "ion-content {\n  --background:white !important;\n}\n\n.wrapper {\n  padding: 20px 21px 25px 27px;\n}\n\n.heading {\n  text-align: center;\n  font-family: \"Urbanist\", sans-serif;\n  font-size: 32px;\n  font-weight: 600;\n  color: #FF0000;\n}\n\n.heading_description {\n  text-align: center;\n  width: 80%;\n  margin: 9.5px auto 0px;\n  color: #B0B0B0;\n  font-family: \"Urbanist\", sans-serif;\n  font-size: 20px;\n  font-weight: 500;\n}\n\n.invite_btn {\n  --background:#FF0000;\n  --border-radius:0px;\n  width: 60%;\n  height: 44px;\n  margin: 0px;\n  --box-shadow:none;\n}\n\n.cancel_btn {\n  --background:white;\n  --border-radius:0px;\n  width: 60%;\n  height: 44px;\n  --box-shadow:none;\n  --border-color:#8000FF;\n  --border-style:solid;\n  --border-width:1.5px;\n}\n\n.btn-text {\n  font-size: 16px;\n  font-weight: 400;\n  color: white;\n  font-family: \"Poppins\", sans-serif;\n  text-transform: capitalize;\n}\n\n.btn2-text {\n  font-size: 16px;\n  font-weight: 500;\n  color: #8000FF;\n  font-family: \"Poppins\", sans-serif;\n  text-transform: capitalize;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRlbGV0ZS1hY2NvdW50LXBvcHVwLnBhZ2Uuc2NzcyIsIi4uXFwuLlxcLi5cXC4uXFwuLlxcR2l0aHViJTIwUHJvamVjdHNcXDM2MFVBRVxcc3JjXFxhcHBcXGRlbGV0ZS1hY2NvdW50LXBvcHVwXFxkZWxldGUtYWNjb3VudC1wb3B1cC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSw2QkFBQTtBQ0NKOztBRENBO0VBQ0ksNEJBQUE7QUNFSjs7QURBQTtFQUNJLGtCQUFBO0VBQ0EsbUNBQUE7RUFDQSxlQUFBO0VBQ0EsZ0JBQUE7RUFDQSxjQUFBO0FDR0o7O0FEREE7RUFDSSxrQkFBQTtFQUNBLFVBQUE7RUFDQSxzQkFBQTtFQUNBLGNBQUE7RUFDQSxtQ0FBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtBQ0lKOztBREZBO0VBQ0ksb0JBQUE7RUFDQSxtQkFBQTtFQUNBLFVBQUE7RUFDQSxZQUFBO0VBQ0EsV0FBQTtFQUNBLGlCQUFBO0FDS0o7O0FESEE7RUFDSSxrQkFBQTtFQUNBLG1CQUFBO0VBQ0EsVUFBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtFQUVBLHNCQUFBO0VBQ0Esb0JBQUE7RUFDQSxvQkFBQTtBQ0tKOztBREhBO0VBQ0ksZUFBQTtFQUNBLGdCQUFBO0VBQ0EsWUFBQTtFQUNBLGtDQUFBO0VBQ0EsMEJBQUE7QUNNSjs7QURKQTtFQUNJLGVBQUE7RUFDQSxnQkFBQTtFQUNBLGNBQUE7RUFDQSxrQ0FBQTtFQUNBLDBCQUFBO0FDT0oiLCJmaWxlIjoiZGVsZXRlLWFjY291bnQtcG9wdXAucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWNvbnRlbnR7XHJcbiAgICAtLWJhY2tncm91bmQ6d2hpdGUgIWltcG9ydGFudDtcclxufVxyXG4ud3JhcHBlcntcclxuICAgIHBhZGRpbmc6IDIwcHggMjFweCAyNXB4IDI3cHg7XHJcbn1cclxuLmhlYWRpbmd7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBmb250LWZhbWlseTogXCJVcmJhbmlzdFwiLCBzYW5zLXNlcmlmO1xyXG4gICAgZm9udC1zaXplOiAzMnB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IDYwMDtcclxuICAgIGNvbG9yOiAjRkYwMDAwO1xyXG59XHJcbi5oZWFkaW5nX2Rlc2NyaXB0aW9ue1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgd2lkdGg6IDgwJTtcclxuICAgIG1hcmdpbjogOS41cHggYXV0byAwcHg7XHJcbiAgICBjb2xvcjogI0IwQjBCMDtcclxuICAgIGZvbnQtZmFtaWx5OiBcIlVyYmFuaXN0XCIsIHNhbnMtc2VyaWY7XHJcbiAgICBmb250LXNpemU6IDIwcHg7XHJcbiAgICBmb250LXdlaWdodDogNTAwO1xyXG59ICAgXHJcbi5pbnZpdGVfYnRue1xyXG4gICAgLS1iYWNrZ3JvdW5kOiNGRjAwMDA7XHJcbiAgICAtLWJvcmRlci1yYWRpdXM6MHB4O1xyXG4gICAgd2lkdGg6NjAlO1xyXG4gICAgaGVpZ2h0OiA0NHB4O1xyXG4gICAgbWFyZ2luOiAwcHg7XHJcbiAgICAtLWJveC1zaGFkb3c6bm9uZTtcclxufVxyXG4uY2FuY2VsX2J0bntcclxuICAgIC0tYmFja2dyb3VuZDp3aGl0ZTtcclxuICAgIC0tYm9yZGVyLXJhZGl1czowcHg7XHJcbiAgICB3aWR0aDo2MCU7XHJcbiAgICBoZWlnaHQ6IDQ0cHg7XHJcbiAgICAtLWJveC1zaGFkb3c6bm9uZTtcclxuICAgIC8vIG1hcmdpbjogMHB4O1xyXG4gICAgLS1ib3JkZXItY29sb3I6IzgwMDBGRjtcclxuICAgIC0tYm9yZGVyLXN0eWxlOnNvbGlkO1xyXG4gICAgLS1ib3JkZXItd2lkdGg6MS41cHg7XHJcbn1cclxuLmJ0bi10ZXh0e1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IDQwMDtcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIGZvbnQtZmFtaWx5OiAnUG9wcGlucycsIHNhbnMtc2VyaWY7XHJcbiAgICB0ZXh0LXRyYW5zZm9ybTogY2FwaXRhbGl6ZTtcclxufVxyXG4uYnRuMi10ZXh0e1xyXG4gICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IDUwMDtcclxuICAgIGNvbG9yOiAjODAwMEZGO1xyXG4gICAgZm9udC1mYW1pbHk6ICdQb3BwaW5zJywgc2Fucy1zZXJpZjtcclxuICAgIHRleHQtdHJhbnNmb3JtOiBjYXBpdGFsaXplO1xyXG59XHJcbi8vIEBtZWRpYSBvbmx5IHNjcmVlbiBcclxuLy8gICBhbmQgKG1pbi1kZXZpY2Utd2lkdGg6IDM3NXB4KSBcclxuLy8gICBhbmQgKG1heC1kZXZpY2Utd2lkdGg6IDY2N3B4KSBcclxuLy8gICBhbmQgKC13ZWJraXQtbWluLWRldmljZS1waXhlbC1yYXRpbzogMikgeyBcclxuLy8gICAgIC5jYW5jZWxsaW5nX3Rlcm1ze1xyXG4vLyAgICAgICAgIGZvbnQtZmFtaWx5OiAnUG9wcGlucycsc2Fucy1zZXJpZjtcclxuLy8gICAgICAgICBmb250LXNpemU6IDE0cHg7XHJcbi8vICAgICAgICAgZm9udC13ZWlnaHQ6IDUwMDtcclxuLy8gICAgICAgICBjb2xvcjogI0ZGMDAwMDtcclxuLy8gICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbi8vICAgICAgICAgd2lkdGg6IDg1JTtcclxuLy8gICAgICAgICBtYXJnaW46IDE4LjVweCBhdXRvIDBweDtcclxuLy8gICAgIH1cclxuLy8gICAgIC5oZWFkaW5nX2Rlc2NyaXB0aW9ue1xyXG4vLyAgICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuLy8gICAgICAgICB3aWR0aDogODUlO1xyXG4vLyAgICAgICAgIG1hcmdpbjogOS41cHggYXV0byAwcHg7XHJcbi8vICAgICAgICAgY29sb3I6ICNCMEIwQjA7XHJcbi8vICAgICAgICAgZm9udC1mYW1pbHk6IFwiUG9wcGluc1wiLCBzYW5zLXNlcmlmO1xyXG4vLyAgICAgICAgIGZvbnQtc2l6ZTogMjBweDtcclxuLy8gICAgICAgICBmb250LXdlaWdodDogNTAwO1xyXG4vLyAgICAgfVxyXG4vLyB9IiwiaW9uLWNvbnRlbnQge1xuICAtLWJhY2tncm91bmQ6d2hpdGUgIWltcG9ydGFudDtcbn1cblxuLndyYXBwZXIge1xuICBwYWRkaW5nOiAyMHB4IDIxcHggMjVweCAyN3B4O1xufVxuXG4uaGVhZGluZyB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1mYW1pbHk6IFwiVXJiYW5pc3RcIiwgc2Fucy1zZXJpZjtcbiAgZm9udC1zaXplOiAzMnB4O1xuICBmb250LXdlaWdodDogNjAwO1xuICBjb2xvcjogI0ZGMDAwMDtcbn1cblxuLmhlYWRpbmdfZGVzY3JpcHRpb24ge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHdpZHRoOiA4MCU7XG4gIG1hcmdpbjogOS41cHggYXV0byAwcHg7XG4gIGNvbG9yOiAjQjBCMEIwO1xuICBmb250LWZhbWlseTogXCJVcmJhbmlzdFwiLCBzYW5zLXNlcmlmO1xuICBmb250LXNpemU6IDIwcHg7XG4gIGZvbnQtd2VpZ2h0OiA1MDA7XG59XG5cbi5pbnZpdGVfYnRuIHtcbiAgLS1iYWNrZ3JvdW5kOiNGRjAwMDA7XG4gIC0tYm9yZGVyLXJhZGl1czowcHg7XG4gIHdpZHRoOiA2MCU7XG4gIGhlaWdodDogNDRweDtcbiAgbWFyZ2luOiAwcHg7XG4gIC0tYm94LXNoYWRvdzpub25lO1xufVxuXG4uY2FuY2VsX2J0biB7XG4gIC0tYmFja2dyb3VuZDp3aGl0ZTtcbiAgLS1ib3JkZXItcmFkaXVzOjBweDtcbiAgd2lkdGg6IDYwJTtcbiAgaGVpZ2h0OiA0NHB4O1xuICAtLWJveC1zaGFkb3c6bm9uZTtcbiAgLS1ib3JkZXItY29sb3I6IzgwMDBGRjtcbiAgLS1ib3JkZXItc3R5bGU6c29saWQ7XG4gIC0tYm9yZGVyLXdpZHRoOjEuNXB4O1xufVxuXG4uYnRuLXRleHQge1xuICBmb250LXNpemU6IDE2cHg7XG4gIGZvbnQtd2VpZ2h0OiA0MDA7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZm9udC1mYW1pbHk6IFwiUG9wcGluc1wiLCBzYW5zLXNlcmlmO1xuICB0ZXh0LXRyYW5zZm9ybTogY2FwaXRhbGl6ZTtcbn1cblxuLmJ0bjItdGV4dCB7XG4gIGZvbnQtc2l6ZTogMTZweDtcbiAgZm9udC13ZWlnaHQ6IDUwMDtcbiAgY29sb3I6ICM4MDAwRkY7XG4gIGZvbnQtZmFtaWx5OiBcIlBvcHBpbnNcIiwgc2Fucy1zZXJpZjtcbiAgdGV4dC10cmFuc2Zvcm06IGNhcGl0YWxpemU7XG59Il19 */";
-
-/***/ }),
-
-/***/ 80966:
-/*!**************************************************************!*\
-  !*** ./src/app/select-date/select-date.page.scss?ngResource ***!
-  \**************************************************************/
-/***/ ((module) => {
-
-module.exports = "ion-content {\n  --background:#FBFBFB !important;\n}\n\n.wrapper {\n  margin: 25px 16px 25px;\n}\n\n.date_time_title {\n  text-align: center;\n  font-family: \"Poppins\", sans-serif;\n  font-size: 20px;\n  font-weight: bold;\n  color: #0F172A;\n}\n\n.date_time_box {\n  margin: 22px auto 0px;\n}\n\nion-datetime.md {\n  --background: #FBFBFB;\n  color: #464646;\n}\n\nion-datetime.ios {\n  color: #464646;\n}\n\n.login_button {\n  --border-radius: 0px;\n  --background: #8000FF;\n  height: 48px;\n  width: 100%;\n  margin: 25px auto 0px;\n  --box-shadow:none;\n}\n\n.btn_text {\n  font-family: \"Poppins\", sans-serif;\n  font-size: 18px;\n  font-weight: 400;\n  color: white;\n  text-transform: capitalize !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlbGVjdC1kYXRlLnBhZ2Uuc2NzcyIsIi4uXFwuLlxcLi5cXC4uXFwuLlxcR2l0aHViJTIwUHJvamVjdHNcXDM2MFVBRVxcc3JjXFxhcHBcXHNlbGVjdC1kYXRlXFxzZWxlY3QtZGF0ZS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSwrQkFBQTtBQ0NKOztBRENBO0VBQ0ksc0JBQUE7QUNFSjs7QURBQTtFQUNJLGtCQUFBO0VBQ0Esa0NBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxjQUFBO0FDR0o7O0FEREE7RUFFSSxxQkFBQTtBQ0dKOztBRERBO0VBQ0kscUJBQUE7RUFDQSxjQUFBO0FDSUo7O0FERkE7RUFDSSxjQUFBO0FDS0o7O0FESEE7RUFDSSxvQkFBQTtFQUNBLHFCQUFBO0VBQ0EsWUFBQTtFQUNBLFdBQUE7RUFDQSxxQkFBQTtFQUNBLGlCQUFBO0FDTUo7O0FESkE7RUFDSSxrQ0FBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtFQUNBLFlBQUE7RUFDQSxxQ0FBQTtBQ09KIiwiZmlsZSI6InNlbGVjdC1kYXRlLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb250ZW50e1xyXG4gICAgLS1iYWNrZ3JvdW5kOiNGQkZCRkIgIWltcG9ydGFudDtcclxufVxyXG4ud3JhcHBlcntcclxuICAgIG1hcmdpbjogMjVweCAxNnB4IDI1cHg7XHJcbn1cclxuLmRhdGVfdGltZV90aXRsZXtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIGZvbnQtZmFtaWx5OiAnUG9wcGlucycsc2Fucy1zZXJpZjtcclxuICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgY29sb3I6ICMwRjE3MkE7XHJcbn1cclxuLmRhdGVfdGltZV9ib3h7XHJcbiAgICAvLyB3aWR0aDogODAlO1xyXG4gICAgbWFyZ2luOiAyMnB4IGF1dG8gMHB4O1xyXG59XHJcbmlvbi1kYXRldGltZS5tZHtcclxuICAgIC0tYmFja2dyb3VuZDogI0ZCRkJGQjtcclxuICAgIGNvbG9yOiAjNDY0NjQ2O1xyXG59XHJcbmlvbi1kYXRldGltZS5pb3N7XHJcbiAgICBjb2xvcjogIzQ2NDY0NjtcclxufVxyXG4ubG9naW5fYnV0dG9ue1xyXG4gICAgLS1ib3JkZXItcmFkaXVzOiAwcHg7XHJcbiAgICAtLWJhY2tncm91bmQ6ICM4MDAwRkY7XHJcbiAgICBoZWlnaHQ6IDQ4cHg7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIG1hcmdpbjogMjVweCBhdXRvIDBweDtcclxuICAgIC0tYm94LXNoYWRvdzpub25lO1xyXG59XHJcbi5idG5fdGV4dHtcclxuICAgIGZvbnQtZmFtaWx5OiAnUG9wcGlucycsc2Fucy1zZXJpZjtcclxuICAgIGZvbnQtc2l6ZTogMThweDtcclxuICAgIGZvbnQtd2VpZ2h0OiA0MDA7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB0ZXh0LXRyYW5zZm9ybTogY2FwaXRhbGl6ZSAhaW1wb3J0YW50O1xyXG59IiwiaW9uLWNvbnRlbnQge1xuICAtLWJhY2tncm91bmQ6I0ZCRkJGQiAhaW1wb3J0YW50O1xufVxuXG4ud3JhcHBlciB7XG4gIG1hcmdpbjogMjVweCAxNnB4IDI1cHg7XG59XG5cbi5kYXRlX3RpbWVfdGl0bGUge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGZvbnQtZmFtaWx5OiBcIlBvcHBpbnNcIiwgc2Fucy1zZXJpZjtcbiAgZm9udC1zaXplOiAyMHB4O1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgY29sb3I6ICMwRjE3MkE7XG59XG5cbi5kYXRlX3RpbWVfYm94IHtcbiAgbWFyZ2luOiAyMnB4IGF1dG8gMHB4O1xufVxuXG5pb24tZGF0ZXRpbWUubWQge1xuICAtLWJhY2tncm91bmQ6ICNGQkZCRkI7XG4gIGNvbG9yOiAjNDY0NjQ2O1xufVxuXG5pb24tZGF0ZXRpbWUuaW9zIHtcbiAgY29sb3I6ICM0NjQ2NDY7XG59XG5cbi5sb2dpbl9idXR0b24ge1xuICAtLWJvcmRlci1yYWRpdXM6IDBweDtcbiAgLS1iYWNrZ3JvdW5kOiAjODAwMEZGO1xuICBoZWlnaHQ6IDQ4cHg7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW46IDI1cHggYXV0byAwcHg7XG4gIC0tYm94LXNoYWRvdzpub25lO1xufVxuXG4uYnRuX3RleHQge1xuICBmb250LWZhbWlseTogXCJQb3BwaW5zXCIsIHNhbnMtc2VyaWY7XG4gIGZvbnQtc2l6ZTogMThweDtcbiAgZm9udC13ZWlnaHQ6IDQwMDtcbiAgY29sb3I6IHdoaXRlO1xuICB0ZXh0LXRyYW5zZm9ybTogY2FwaXRhbGl6ZSAhaW1wb3J0YW50O1xufSJdfQ== */";
 
 /***/ }),
 
@@ -1653,16 +1815,6 @@ module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"tex
 /***/ ((module) => {
 
 module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: right;\">\n      <img (click)=\"justCloseModal()\" src=\"assets/images/icons/close_modal.svg\" alt=\"\">\n    </div>\n    <div class=\"heading\">Delete Account</div>\n    <div class=\"heading_description\">Are you sure you want to delete your account?</div>\n    \n    <div style=\"text-align: center;margin-top: 21px;\">\n      <ion-button class=\"invite_btn\" (click)=\"deleteAccount()\">\n        <span class=\"btn-text\" >Yes</span>\n      </ion-button>\n    </div>\n    <div style=\"text-align: center;margin-top: 16px;\">\n      <ion-button class=\"cancel_btn\" (click)=\"justCloseModal()\">\n        <span class=\"btn2-text\" >No</span>\n      </ion-button>\n    </div>\n  </div>\n</ion-content>\n";
-
-/***/ }),
-
-/***/ 54905:
-/*!**************************************************************!*\
-  !*** ./src/app/select-date/select-date.page.html?ngResource ***!
-  \**************************************************************/
-/***/ ((module) => {
-
-module.exports = "\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"date_time_title\">Pick Start/End Dates</div>\n    <div class=\"date_time_box\">\n      <!-- <ion-datetime presentation=\"date\" (ionChange)=\"formattedString()\" size=\"cover\" [(ngModel)]=\"date\"></ion-datetime> -->\n      <ion-datetime #datetime [isDateEnabled]=\"isWeekday\" min=\"{{minDate}}\" (ionChange)=\"formattedString(datetime.value)\" presentation=\"date\" size=\"cover\" ></ion-datetime>\n    </div>\n    <!-- <div>{{date}}</div> -->\n    <ion-button class=\"login_button\" (click)=\"done()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button>\n  </div>\n</ion-content>\n";
 
 /***/ }),
 

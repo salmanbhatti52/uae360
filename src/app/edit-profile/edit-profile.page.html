@@ -10,7 +10,8 @@
 <ion-content>
   <div class="wrapper">
     <div class="profile_div">
-      <img src="assets/images/dummy_profile.svg" alt="">
+      <img (click)="addNewProfile()"  src="assets/images/dummy_profile.svg" alt="" *ngIf="profileImg === ''">
+      <img (click)="addNewProfile()" style="height: 160px;width: 160px; border-radius: 50%;" src="{{profileImg}}" alt="" *ngIf="profileImg !== ''">
       <img class="edit_icon" src="../../assets/images/icons/edit_profile.svg" alt="">
     </div>
 

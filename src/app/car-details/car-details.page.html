@@ -2,7 +2,7 @@
   <ion-toolbar class="bgtoolbar" [class.content_background]="this.checkUser.appUserId != null">
     <div class="header">
       <img (click)="goBack()" src="assets/images/icons/back_arrow.svg" alt="">
-      <div class="title">BMW 2 series</div>
+      <div class="title">{{vehicleName}}</div>
       <div>
         <img (click)="startChatwithOwner()" src="assets/images/icons/chat.svg" alt="">
       </div>
@@ -16,31 +16,36 @@
       <swiper [pagination]="true" [config]="{ intialSlide: 0, speed: 400, slidesPerView:1 }">
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
+            <img (click)="makefavorite()" style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+            <img (click)="makefavorite()" style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{data.image1}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{data.image2}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{data.image3}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{data.image4}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{data.image5}}" alt="">
           </div>
         </ng-template>
@@ -75,25 +80,27 @@
           {{data.description}}
         </div>
       </div>
+      
+      <div class="box_styling">
+        <div class="box_heading">Owner's Details</div>
+        <div class="box_sub_heading">About</div>
+        <div class="box_description">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum has been the industry's standard dummy text ever since
+          the 1500s.
+        </div>
+      </div>
+  
+      <div class="box_styling">
+        <div class="box_sub_heading" style="margin-top: 0px;">Location</div>
+        <div class="box_description" style="margin-top: 4px;">
+          {{data.company_location}}
+        </div>
+      </div>
     </div>
     
 
-    <div class="box_styling">
-      <div class="box_heading">Owner's Details</div>
-      <div class="box_sub_heading">About</div>
-      <div class="box_description">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since
-        the 1500s.
-      </div>
-    </div>
-
-    <div class="box_styling">
-      <div class="box_sub_heading" style="margin-top: 0px;">Location</div>
-      <div class="box_description" style="margin-top: 4px;">
-        Los Angeles, CA 90015
-      </div>
-    </div>
+    
 
     <div class="box_styling" style="padding: 14px 14px 15px;" (click)="gotoRatings()">
       <div class="inner_box">

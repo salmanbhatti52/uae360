@@ -38,31 +38,31 @@
             </div>
           </ng-template>
           <ng-template swiperSlide class="categories">
-            <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem('hatchback')">
+            <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem('Sports')">
               <img src="assets/images/icons/sports_car_grey.svg" alt="" *ngIf="item2 == false">
               <img src="assets/images/icons/sports_car_white.svg" alt="" *ngIf="item2 == true">
-              <div class="cars_label" [class.fontActive]="item2 == true">Sports cars</div>
+              <div class="cars_label" [class.fontActive]="item2 == true">{{carTypeOne}}</div>
             </div>
           </ng-template>
           <ng-template swiperSlide class="categories">
-            <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem('sedan')">
+            <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem('Luxury')">
               <img src="assets/images/icons/luxury_car_grey.svg" alt="" *ngIf="item3 == false">
               <img src="assets/images/icons/luxury_car_white.svg" alt="" *ngIf="item3 == true">
-              <div class="cars_label" [class.fontActive]="item3 == true">Luxury cars</div>
+              <div class="cars_label" [class.fontActive]="item3 == true">{{carTypeTwo}}</div>
             </div>
           </ng-template>
           <ng-template swiperSlide class="categories">
-            <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem('bus')">
+            <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem('Pickup')">
               <img src="assets/images/icons/taxi_grey.svg" alt="" *ngIf="item4 == false">
               <img src="assets/images/icons/taxi_white.svg" alt="" *ngIf="item4 == true">
-              <div class="cars_label" [class.fontActive]="item4 == true">Pickup</div>
+              <div class="cars_label" [class.fontActive]="item4 == true">{{carTypeThree}}</div>
             </div>
           </ng-template>
           <ng-template swiperSlide class="categories" >
-            <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem('suv')">
+            <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem('SUV')">
               <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
               <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">
-              <div class="cars_label" [class.fontActive]="item5 == true">Suv's</div>
+              <div class="cars_label" [class.fontActive]="item5 == true">{{carTypeFour}}</div>
             </div>
           </ng-template>
         </swiper>

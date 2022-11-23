@@ -4,4 +4,5 @@
     <string name="title_activity_main">360UAE</string>
     <string name="package_name">io.ionic.starter</string>
     <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="server_client_id">598717051286-96hgbo1769ha8f8fdfh7q7uk3qbe9h9h.apps.googleusercontent.com</string>
 </resources>

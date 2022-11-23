@@ -22,12 +22,24 @@ ion-datetime.md{
 ion-datetime.ios{
     color: #464646;
 }
+.booked_dates{
+    font-family: 'Poppins',sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: black;
+    padding: 5px 10px 0px;
+    text-align: center;
+}
+.date_value{
+    font-weight: bold;
+    color: red;
+}
 .login_button{
     --border-radius: 0px;
     --background: #8000FF;
     height: 48px;
     width: 100%;
-    margin: 25px auto 0px;
+    margin: 15px auto 0px;
     --box-shadow:none;
 }
 .btn_text{

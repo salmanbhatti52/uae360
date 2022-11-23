@@ -1,100 +1,6 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_sign-up_sign-up_module_ts"],{
 
-/***/ 5830:
-/*!*****************************************!*\
-  !*** ./src/app/services/api.service.ts ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApiService": () => (/* binding */ ApiService)
-/* harmony export */ });
-/* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 58987);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ 93819);
-
-
-
-
-
-
-let ApiService = class ApiService {
-  constructor(http, toastController, loadingCtrl) {
-    this.http = http;
-    this.toastController = toastController;
-    this.loadingCtrl = loadingCtrl;
-    this.baseURL = 'https://360uae.eigix.net/api';
-    this.datesToDisable = [];
-  }
-
-  sendRequest(action, data) {
-    let header;
-    header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
-      "Content-Type": "application/json"
-    });
-    return this.http.post(`${this.baseURL}/${action}`, JSON.stringify(data), {
-      headers: header
-    });
-  }
-
-  getData(action) {
-    let header;
-    header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
-      "Content-Type": "application/json"
-    });
-    return this.http.get(`${this.baseURL}/${action}`, {
-      headers: header
-    });
-  }
-
-  presentToast(toastMsg) {
-    var _this = this;
-
-    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const toast = yield _this.toastController.create({
-        message: toastMsg,
-        duration: 2000
-      });
-      toast.present();
-    })();
-  }
-
-  showLoading() {
-    var _this2 = this;
-
-    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const loading = yield _this2.loadingCtrl.create({
-        duration: 3000
-      });
-      loading.present();
-    })();
-  }
-
-  hideLoading() {
-    this.loadingCtrl.dismiss();
-  }
-
-};
-
-ApiService.ctorParameters = () => [{
-  type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient
-}, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ToastController
-}, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.LoadingController
-}];
-
-ApiService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
-  providedIn: 'root'
-})], ApiService);
-
-
-/***/ }),
-
 /***/ 59204:
 /*!***************************************************!*\
   !*** ./src/app/sign-up/sign-up-routing.module.ts ***!
@@ -189,14 +95,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignUpPage": () => (/* binding */ SignUpPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _sign_up_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sign-up.page.html?ngResource */ 98796);
-/* harmony import */ var _sign_up_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-up.page.scss?ngResource */ 55585);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 94666);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 60124);
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ 5830);
+/* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _sign_up_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-up.page.html?ngResource */ 98796);
+/* harmony import */ var _sign_up_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sign-up.page.scss?ngResource */ 55585);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 94666);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/api.service */ 5830);
+/* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @capacitor/camera */ 4241);
+
+
 
 
 
@@ -206,148 +116,173 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SignUpPage = class SignUpPage {
-    constructor(location, router, api, fb) {
-        this.location = location;
-        this.router = router;
-        this.api = api;
-        this.fb = fb;
-        this.getFocus = false;
-        this.showPassword = false;
-        this.getType = 'password';
-        this.activateUserNameField = false;
-        this.activateUserNumberField = false;
-        this.activateEmailField = false;
-        this.activatePasswordField = false;
-        this.createForm();
-    }
-    ngOnInit() {
-    }
-    createForm() {
-        this.angForm = this.fb.group({
-            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required],
-            number: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required],
-            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"), _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required]],
-            password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__.Validators.required]
-        });
-    }
-    // =======================international phone input code =====================
-    // onCountryChange(event){
-    //   console.log(event.dialCode);
-    //   console.log(event.name);
-    //   console.log(event.iso2);
-    //   }
-    //   telInputObject(obj) {
-    //     console.log('testing')
-    //     console.log(obj);
-    //     obj.setCountry('ae');
-    //     console.log(obj.s.dialCode);
-    //   }
-    //   hasError(err){
-    //     console.log(err);
-    //   }
-    //   getNumber(number){
-    //     console.log(number);
-    //     this.number = number;
-    //   }
-    //   focus(){
-    //     this.getFocus=true;
-    //   }
-    // ===========================done========================================
-    goBack() {
-        this.location.back();
-    }
-    toggleGetType() {
-        if (this.getType == 'password') {
-            this.getType = 'text';
-            this.showPassword = true;
-        }
-        else {
-            this.getType = 'password';
-            this.showPassword = false;
-        }
-    }
-    activate(val) {
-        if (val == 'userName') {
-            this.activateUserNameField = true;
-            this.activateEmailField = false;
-            this.activatePasswordField = false;
-            this.activateUserNumberField = false;
-            // this.getFocus = false;
-        }
-        else if (val == 'phoneNumber') {
-            // this.getFocus = true;
-            this.activateEmailField = false;
-            this.activateUserNameField = false;
-            this.activatePasswordField = false;
-            this.activateUserNumberField = true;
-        }
-        else if (val == 'email') {
-            this.activateEmailField = true;
-            this.activateUserNameField = false;
-            this.activatePasswordField = false;
-            this.activateUserNumberField = false;
-            // this.getFocus = false;
-        }
-        else if (val == 'pwd') {
-            this.activatePasswordField = true;
-            this.activateEmailField = false;
-            this.activateUserNameField = false;
-            this.activateUserNumberField = false;
-            // this.getFocus = false;
-        }
-        else {
-        }
-    }
-    gotoSignIn() {
-        this.router.navigate(['/sign-in']);
-    }
-    gotoVerifyPhoneOtp() {
-        this.activateUserNameField = false;
-        this.activateUserNumberField = false;
-        this.activateEmailField = false;
-        this.activatePasswordField = false;
-        console.log(this.angForm.value.name);
-        console.log(this.angForm.value.number);
-        console.log(this.angForm.value.email);
-        console.log(this.angForm.value.password);
-        // ==============api Call==================
-        let data = {
-            username: this.angForm.value.name,
-            phone: this.angForm.value.number,
-            email: this.angForm.value.email,
-            password: this.angForm.value.password
-        };
-        this.api.sendRequest('signupHereNow', data).subscribe((res) => {
-            console.log(res);
-            if (res.status == 'success') {
-                this.api.presentToast("Success!");
-                this.router.navigate(['/sign-in']);
-            }
-            else if (res.status == 'error') {
-                this.api.presentToast(res.message);
-            }
-            else {
-            }
-        }, (error) => {
-            console.log(error);
-        });
-        // =======================done===================
-    }
-};
-SignUpPage.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__.Location },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__.ApiService },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormBuilder }
-];
-SignUpPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
-        selector: 'app-sign-up',
-        template: _sign_up_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
-        styles: [_sign_up_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], SignUpPage);
+  constructor(location, router, api, fb) {
+    this.location = location;
+    this.router = router;
+    this.api = api;
+    this.fb = fb;
+    this.getFocus = false;
+    this.showPassword = false;
+    this.getType = 'password';
+    this.activateUserNameField = false;
+    this.activateUserNumberField = false;
+    this.activateEmailField = false;
+    this.activatePasswordField = false;
+    this.profileImg = '';
+    this.base64String = '';
+    this.createForm();
+  }
 
+  ngOnInit() {}
+
+  createForm() {
+    this.angForm = this.fb.group({
+      name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required],
+      number: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required],
+      email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"), _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required]],
+      password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required]
+    });
+  } // =======================international phone input code =====================
+  // onCountryChange(event){
+  //   console.log(event.dialCode);
+  //   console.log(event.name);
+  //   console.log(event.iso2);
+  //   }
+  //   telInputObject(obj) {
+  //     console.log('testing')
+  //     console.log(obj);
+  //     obj.setCountry('ae');
+  //     console.log(obj.s.dialCode);
+  //   }
+  //   hasError(err){
+  //     console.log(err);
+  //   }
+  //   getNumber(number){
+  //     console.log(number);
+  //     this.number = number;
+  //   }
+  //   focus(){
+  //     this.getFocus=true;
+  //   }
+  // ===========================done========================================
+
+
+  goBack() {
+    this.location.back();
+  }
+
+  toggleGetType() {
+    if (this.getType == 'password') {
+      this.getType = 'text';
+      this.showPassword = true;
+    } else {
+      this.getType = 'password';
+      this.showPassword = false;
+    }
+  }
+
+  activate(val) {
+    if (val == 'userName') {
+      this.activateUserNameField = true;
+      this.activateEmailField = false;
+      this.activatePasswordField = false;
+      this.activateUserNumberField = false; // this.getFocus = false;
+    } else if (val == 'phoneNumber') {
+      // this.getFocus = true;
+      this.activateEmailField = false;
+      this.activateUserNameField = false;
+      this.activatePasswordField = false;
+      this.activateUserNumberField = true;
+    } else if (val == 'email') {
+      this.activateEmailField = true;
+      this.activateUserNameField = false;
+      this.activatePasswordField = false;
+      this.activateUserNumberField = false; // this.getFocus = false;
+    } else if (val == 'pwd') {
+      this.activatePasswordField = true;
+      this.activateEmailField = false;
+      this.activateUserNameField = false;
+      this.activateUserNumberField = false; // this.getFocus = false;
+    } else {}
+  }
+
+  gotoSignIn() {
+    this.router.navigate(['/sign-in']);
+  }
+
+  addProfile() {
+    var _this = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const image = yield _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__.Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__.CameraResultType.Base64,
+        source: _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__.CameraSource.Prompt
+      });
+      console.log(image.base64String);
+      _this.profileImg = `data:image/jpeg;base64,${image.base64String}`;
+      _this.base64String = image.base64String;
+    })();
+  }
+
+  gotoVerifyPhoneOtp() {
+    this.activateUserNameField = false;
+    this.activateUserNumberField = false;
+    this.activateEmailField = false;
+    this.activatePasswordField = false;
+    console.log(this.angForm.value.name);
+    console.log(this.angForm.value.number);
+    console.log(this.angForm.value.email);
+    console.log(this.angForm.value.password);
+
+    if (this.base64String !== '') {
+      this.api.showLoading(); // ==============api Call==================
+
+      let data = {
+        username: this.angForm.value.name,
+        phone: this.angForm.value.number,
+        email: this.angForm.value.email,
+        password: this.angForm.value.password,
+        profile_pic: this.base64String
+      };
+      this.api.sendRequest('signupHereNow', data).subscribe(res => {
+        this.api.hideLoading();
+        console.log(res);
+
+        if (res.status == 'success') {
+          this.api.presentToast("Success!");
+          this.router.navigate(['/sign-in']);
+        } else if (res.status == 'error') {
+          this.api.presentToast(res.message);
+          this.api.hideLoading();
+        } else {}
+      }, error => {
+        console.log(error);
+        this.api.hideLoading();
+      }); // =======================done===================
+    } else {
+      this.api.presentToast('Plz add image');
+    }
+  }
+
+};
+
+SignUpPage.ctorParameters = () => [{
+  type: _angular_common__WEBPACK_IMPORTED_MODULE_6__.Location
+}, {
+  type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router
+}, {
+  type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService
+}, {
+  type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormBuilder
+}];
+
+SignUpPage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+  selector: 'app-sign-up',
+  template: _sign_up_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_sign_up_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], SignUpPage);
 
 
 /***/ }),
@@ -636,7 +571,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"app_title\">360UAE</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"creat_account_msg\">Create Your New Account</div>\n\n    <div class=\"profile_div\">\n      <img src=\"assets/images/icons/profile_logo.svg\" alt=\"\">\n    </div>\n    <form [formGroup]=\"angForm\" novalidate>\n      <div>\n        <div class=\"inputs_label\">Username</div>\n        <ion-input class=\"input_box\" formControlName=\"name\" (ionInput)=\"activate('userName')\" [class.active_input_box]=\"activateUserNameField==true\" placeholder=\"Username\" type=\"text\" ></ion-input>\n        \n        <div *ngIf=\"angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)\">\n          <div *ngIf=\"angForm.controls['name'].errors.required\" class=\"alert\">\n            Name is required\n          </div>\n        </div>\n\n        <div class=\"inputs_label\">Mobile number</div>\n        <ion-input class=\"input_box\" formControlName=\"number\" (ionInput)=\"activate('phoneNumber')\" [class.active_input_box]=\"activateUserNumberField==true\" placeholder=\"Mobile number\" type=\"tel\" ></ion-input>\n\n        <div *ngIf=\"angForm.controls['number'].invalid && (angForm.controls['number'].dirty || angForm.controls['number'].touched)\">\n          <div *ngIf=\"angForm.controls['number'].errors.required\" class=\"alert\">\n            Number is required\n          </div>\n        </div>\n        <!-- =====international phone input using angular =========== -->\n        <!-- <div style=\"margin-top: 4px;\" (input)=\"activate('phoneNumber')\" [class.get_focus]=\"getFocus==true\">\n          <input type=\"text\"\n          ng2TelInput\n          \n          [ng2TelInputOptions]=\"{autoHideDialCode: false, initialCountry: 'ae', separateDialCode:true}\"\n          (hasError)=\"hasError($event)\"\n          (ng2TelOutput)=\"getNumber($event)\"\n          (intlTelInputObject)=\"telInputObject($event)\"\n          (countryChange)=\"onCountryChange($event)\" />\n        </div> -->\n        <!-- ========================done============================ -->\n        <div class=\"inputs_label\">Email</div>\n        <ion-input class=\"input_box\" formControlName=\"email\" (ionInput)=\"activate('email')\" [class.active_input_box]=\"activateEmailField==true\" placeholder=\"rose.matthews@gmail.com\" type=\"email\" ></ion-input>\n        \n        <div *ngIf=\"angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)\">\n          <div *ngIf=\"angForm.controls['email'].errors.pattern\" class=\"alert\">\n            Email is invalid\n          </div>\n          <div *ngIf=\"angForm.controls['email'].errors.required\" class=\"alert\">\n            Email is required\n          </div>\n        </div>\n\n        <div class=\"inputs_label\" >Password</div>\n        <div class=\"password_box\" [class.active_input_box]=\"activatePasswordField==true\">\n          <ion-input class=\"password_input\" formControlName=\"password\" (ionInput)=\"activate('pwd')\"  placeholder=\".......\" type=\"{{getType}}\"  ></ion-input>\n          \n          \n          \n          <ion-icon style=\"color: #B0B0B0;\" name=\"eye\" *ngIf=\"showPassword==false\" (click)=\"toggleGetType()\"></ion-icon>\n          <ion-icon style=\"color: #B0B0B0;\" name=\"eye-off\" *ngIf=\"showPassword==true\" (click)=\"toggleGetType()\"></ion-icon>\n        </div>\n        <div *ngIf=\"angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)\">\n          <div *ngIf=\"angForm.controls['password'].errors.required\" class=\"alert\">\n            Password is required\n          </div>            \n        </div>\n      </div>\n  \n      <div style=\"margin-top: 24px;\">\n        <div style=\"display: flex;\">\n          <ion-checkbox slot=\"start\" class=\"checkbox\"></ion-checkbox>\n          <span class=\"rem_fg_lablel\" >I agree to the terms of service and privacy policy</span>\n        </div>\n        <div class=\"view_terms_link\">View terms of service and privacy policy</div>\n      </div>\n  \n      <ion-button type=\"submit\" [disabled]=\"angForm.pristine || angForm.invalid\" class=\"login_button\" (click)=\"gotoVerifyPhoneOtp()\">\n        <span class=\"btn_text\">Sign up</span>\n      </ion-button>\n    </form>\n    \n\n    <div class=\"last_div\"><span style=\"font-weight: 400;\">Already have an account? </span> <span (click)=\"gotoSignIn()\" style=\"font-weight: 700;text-decoration: underline;\">Login</span> </div>\n  </div>\n\n</ion-content>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"app_title\">360UAE</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"creat_account_msg\">Create Your New Account</div>\n\n    <div class=\"profile_div\">\n      <img (click)=\"addProfile()\" src=\"assets/images/icons/profile_logo.svg\" alt=\"\" *ngIf=\"profileImg === ''\">\n      <img (click)=\"addProfile()\" style=\"height: 100px;width: 100px; border-radius: 50%;\" src=\"{{profileImg}}\" alt=\"\" *ngIf=\"profileImg !== ''\">\n    </div>\n    <form [formGroup]=\"angForm\" novalidate>\n      <div>\n        <div class=\"inputs_label\">Username</div>\n        <ion-input class=\"input_box\" formControlName=\"name\" (ionInput)=\"activate('userName')\" [class.active_input_box]=\"activateUserNameField==true\" placeholder=\"Username\" type=\"text\" ></ion-input>\n        \n        <div *ngIf=\"angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)\">\n          <div *ngIf=\"angForm.controls['name'].errors.required\" class=\"alert\">\n            Name is required\n          </div>\n        </div>\n\n        <div class=\"inputs_label\">Mobile number</div>\n        <ion-input class=\"input_box\" formControlName=\"number\" (ionInput)=\"activate('phoneNumber')\" [class.active_input_box]=\"activateUserNumberField==true\" placeholder=\"Mobile number\" type=\"tel\" ></ion-input>\n\n        <div *ngIf=\"angForm.controls['number'].invalid && (angForm.controls['number'].dirty || angForm.controls['number'].touched)\">\n          <div *ngIf=\"angForm.controls['number'].errors.required\" class=\"alert\">\n            Number is required\n          </div>\n        </div>\n        <!-- =====international phone input using angular =========== -->\n        <!-- <div style=\"margin-top: 4px;\" (input)=\"activate('phoneNumber')\" [class.get_focus]=\"getFocus==true\">\n          <input type=\"text\"\n          ng2TelInput\n          \n          [ng2TelInputOptions]=\"{autoHideDialCode: false, initialCountry: 'ae', separateDialCode:true}\"\n          (hasError)=\"hasError($event)\"\n          (ng2TelOutput)=\"getNumber($event)\"\n          (intlTelInputObject)=\"telInputObject($event)\"\n          (countryChange)=\"onCountryChange($event)\" />\n        </div> -->\n        <!-- ========================done============================ -->\n        <div class=\"inputs_label\">Email</div>\n        <ion-input class=\"input_box\" formControlName=\"email\" (ionInput)=\"activate('email')\" [class.active_input_box]=\"activateEmailField==true\" placeholder=\"rose.matthews@gmail.com\" type=\"email\" ></ion-input>\n        \n        <div *ngIf=\"angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)\">\n          <div *ngIf=\"angForm.controls['email'].errors.pattern\" class=\"alert\">\n            Email is invalid\n          </div>\n          <div *ngIf=\"angForm.controls['email'].errors.required\" class=\"alert\">\n            Email is required\n          </div>\n        </div>\n\n        <div class=\"inputs_label\" >Password</div>\n        <div class=\"password_box\" [class.active_input_box]=\"activatePasswordField==true\">\n          <ion-input class=\"password_input\" formControlName=\"password\" (ionInput)=\"activate('pwd')\"  placeholder=\".......\" type=\"{{getType}}\"  ></ion-input>\n          \n          \n          \n          <ion-icon style=\"color: #B0B0B0;\" name=\"eye\" *ngIf=\"showPassword==false\" (click)=\"toggleGetType()\"></ion-icon>\n          <ion-icon style=\"color: #B0B0B0;\" name=\"eye-off\" *ngIf=\"showPassword==true\" (click)=\"toggleGetType()\"></ion-icon>\n        </div>\n        <div *ngIf=\"angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)\">\n          <div *ngIf=\"angForm.controls['password'].errors.required\" class=\"alert\">\n            Password is required\n          </div>            \n        </div>\n      </div>\n  \n      <div style=\"margin-top: 24px;\">\n        <div style=\"display: flex;\">\n          <ion-checkbox slot=\"start\" class=\"checkbox\"></ion-checkbox>\n          <span class=\"rem_fg_lablel\" >I agree to the terms of service and privacy policy</span>\n        </div>\n        <div class=\"view_terms_link\">View terms of service and privacy policy</div>\n      </div>\n  \n      <ion-button type=\"submit\" [disabled]=\"angForm.pristine || angForm.invalid\" class=\"login_button\" (click)=\"gotoVerifyPhoneOtp()\">\n        <span class=\"btn_text\">Sign up</span>\n      </ion-button>\n    </form>\n    \n\n    <div class=\"last_div\"><span style=\"font-weight: 400;\">Already have an account? </span> <span (click)=\"gotoSignIn()\" style=\"font-weight: 700;text-decoration: underline;\">Login</span> </div>\n  </div>\n\n</ion-content>\n";
 
 /***/ })
 

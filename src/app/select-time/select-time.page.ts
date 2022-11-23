@@ -9,6 +9,12 @@ import parse from 'date-fns/parse';
 })
 export class SelectTimePage implements OnInit {
   selectedTime:any;
+  selectedTimeForDb:any;
+  dates = {
+    timeForUser: '',
+    timeForDB: '',
+    calendarDateTimeString: ''
+  }
   // minTime = format(parseISO(new getTime().toISOString()),'')
   constructor(public modalCtrlr:ModalController) { }
 
@@ -17,15 +23,18 @@ export class SelectTimePage implements OnInit {
     
   }
   formattedString(timeVal){
-    console.log('parameter time:',timeVal);
+    this.dates.calendarDateTimeString = timeVal
+    // console.log('calendarDateTimeString',this.dates.calendarDateTimeString);
     
     this.selectedTime = format(parseISO(timeVal), "hh:mm aaa");
-    console.log(this.selectedTime);
+    this.selectedTimeForDb = format(parseISO(timeVal), "HH:mm:ss");
+    this.dates.timeForUser = this.selectedTime;
+    this.dates.timeForDB = this.selectedTimeForDb;
   }
   done(){
     console.log(this.selectedTime);
     if(this.selectedTime != undefined){
-      return this.modalCtrlr.dismiss(this.selectedTime, 'timeSelected')
+      return this.modalCtrlr.dismiss(this.dates, 'timeSelected')
     }
   }
 }

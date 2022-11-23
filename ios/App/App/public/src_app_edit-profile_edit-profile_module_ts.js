@@ -90,12 +90,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "EditProfilePage": () => (/* binding */ EditProfilePage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _edit_profile_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit-profile.page.html?ngResource */ 31481);
-/* harmony import */ var _edit_profile_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-profile.page.scss?ngResource */ 38481);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 94666);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _edit_profile_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-profile.page.html?ngResource */ 31481);
+/* harmony import */ var _edit_profile_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit-profile.page.scss?ngResource */ 38481);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 94666);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor/camera */ 4241);
+
+
 
 
 
@@ -103,80 +107,95 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let EditProfilePage = class EditProfilePage {
-    constructor(location, navCtrlr) {
-        this.location = location;
-        this.navCtrlr = navCtrlr;
-        this.firstName = false;
-        this.lastName = false;
-        this.about = false;
-        this.email = false;
-        this.address = false;
-    }
-    ngOnInit() {
-    }
-    goBack() {
-        this.location.back();
-    }
-    activate(val) {
-        if (val == 'first_name') {
-            this.firstName = true;
-            this.lastName = false;
-            this.about = false;
-            this.email = false;
-            this.address = false;
-        }
-        else if (val == 'last_name') {
-            this.firstName = false;
-            this.lastName = true;
-            this.about = false;
-            this.email = false;
-            this.address = false;
-        }
-        else if (val == 'about') {
-            this.firstName = false;
-            this.lastName = false;
-            this.about = true;
-            this.email = false;
-            this.address = false;
-        }
-        else if (val == 'email') {
-            this.firstName = false;
-            this.lastName = false;
-            this.about = false;
-            this.email = true;
-            this.address = false;
-        }
-        else if (val == 'address') {
-            this.firstName = false;
-            this.lastName = false;
-            this.about = false;
-            this.email = false;
-            this.address = true;
-        }
-        else {
-        }
-    }
-    updateProfile() {
-        this.firstName = false;
-        this.lastName = false;
-        this.about = false;
-        this.email = false;
-        this.address = false;
-        this.navCtrlr.navigateRoot('settings');
-    }
-};
-EditProfilePage.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__.Location },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.NavController }
-];
-EditProfilePage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
-        selector: 'app-edit-profile',
-        template: _edit_profile_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
-        styles: [_edit_profile_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], EditProfilePage);
+  constructor(location, navCtrlr) {
+    this.location = location;
+    this.navCtrlr = navCtrlr;
+    this.firstName = false;
+    this.lastName = false;
+    this.about = false;
+    this.email = false;
+    this.address = false;
+    this.profileImg = '';
+  }
 
+  ngOnInit() {}
+
+  goBack() {
+    this.location.back();
+  }
+
+  activate(val) {
+    if (val == 'first_name') {
+      this.firstName = true;
+      this.lastName = false;
+      this.about = false;
+      this.email = false;
+      this.address = false;
+    } else if (val == 'last_name') {
+      this.firstName = false;
+      this.lastName = true;
+      this.about = false;
+      this.email = false;
+      this.address = false;
+    } else if (val == 'about') {
+      this.firstName = false;
+      this.lastName = false;
+      this.about = true;
+      this.email = false;
+      this.address = false;
+    } else if (val == 'email') {
+      this.firstName = false;
+      this.lastName = false;
+      this.about = false;
+      this.email = true;
+      this.address = false;
+    } else if (val == 'address') {
+      this.firstName = false;
+      this.lastName = false;
+      this.about = false;
+      this.email = false;
+      this.address = true;
+    } else {}
+  }
+
+  updateProfile() {
+    this.firstName = false;
+    this.lastName = false;
+    this.about = false;
+    this.email = false;
+    this.address = false;
+    this.navCtrlr.navigateRoot('settings');
+  }
+
+  addNewProfile() {
+    var _this = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const image = yield _capacitor_camera__WEBPACK_IMPORTED_MODULE_3__.Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: _capacitor_camera__WEBPACK_IMPORTED_MODULE_3__.CameraResultType.Base64,
+        source: _capacitor_camera__WEBPACK_IMPORTED_MODULE_3__.CameraSource.Prompt
+      });
+      console.log(image.base64String);
+      _this.profileImg = `data:image/jpeg;base64,${image.base64String}`;
+      _this.base64String = image.base64String;
+    })();
+  }
+
+};
+
+EditProfilePage.ctorParameters = () => [{
+  type: _angular_common__WEBPACK_IMPORTED_MODULE_4__.Location
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.NavController
+}];
+
+EditProfilePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+  selector: 'app-edit-profile',
+  template: _edit_profile_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_edit_profile_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], EditProfilePage);
 
 
 /***/ }),
@@ -197,7 +216,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \****************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">Edit Profile</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"profile_div\">\n      <img src=\"assets/images/dummy_profile.svg\" alt=\"\">\n      <img class=\"edit_icon\" src=\"../../assets/images/icons/edit_profile.svg\" alt=\"\">\n    </div>\n\n    <div style=\"padding-top: 25px;\">\n      <div class=\"input_label\">First Name</div>\n      <ion-input type=\"text\" placeholder=\"John\" [class.active_input]=\"firstName == true\" (ionInput)=\"activate('first_name')\"></ion-input>\n    </div>\n    <div style=\"padding-top: 12.5px;\">\n      <div class=\"input_label\">Last Name</div>\n      <ion-input type=\"text\" placeholder=\"Doe\" [class.active_input]=\"lastName == true\" (ionInput)=\"activate('last_name')\"></ion-input>\n    </div>\n    <div style=\"padding-top: 12.5px;\">\n      <div class=\"input_label\">About</div>\n      <ion-textarea auto-grow=\"true\" rows=\"2\" cols=\"20\" type=\"text\" placeholder=\"Lorem ipsum\" [class.active_input]=\"about == true\" (ionInput)=\"activate('about')\"></ion-textarea>\n    </div>\n    <div style=\"padding-top: 12.5px;\">\n      <div class=\"input_label\">Email</div>\n      <ion-input type=\"email\" placeholder=\"rose.matthews@mail.com\" [class.active_input]=\"email == true\" (ionInput)=\"activate('email')\"></ion-input>\n    </div>\n    <div style=\"padding-top: 12.5px;\">\n      <div class=\"input_label\">Location</div>\n      <ion-input type=\"text\" placeholder=\"Enter your location here\" [class.active_input]=\"address == true\" (ionInput)=\"activate('address')\"></ion-input>\n    </div>\n\n  </div>\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 25px;\">\n    <ion-button class=\"login_button\" (click)=\"updateProfile()\">\n      <span class=\"btn_text\">Update</span>\n    </ion-button>\n  </div>\n</ion-footer>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">Edit Profile</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"profile_div\">\n      <img (click)=\"addNewProfile()\"  src=\"assets/images/dummy_profile.svg\" alt=\"\" *ngIf=\"profileImg === ''\">\n      <img (click)=\"addNewProfile()\" style=\"height: 160px;width: 160px; border-radius: 50%;\" src=\"{{profileImg}}\" alt=\"\" *ngIf=\"profileImg !== ''\">\n      <img class=\"edit_icon\" src=\"../../assets/images/icons/edit_profile.svg\" alt=\"\">\n    </div>\n\n    <div style=\"padding-top: 25px;\">\n      <div class=\"input_label\">First Name</div>\n      <ion-input type=\"text\" placeholder=\"John\" [class.active_input]=\"firstName == true\" (ionInput)=\"activate('first_name')\"></ion-input>\n    </div>\n    <div style=\"padding-top: 12.5px;\">\n      <div class=\"input_label\">Last Name</div>\n      <ion-input type=\"text\" placeholder=\"Doe\" [class.active_input]=\"lastName == true\" (ionInput)=\"activate('last_name')\"></ion-input>\n    </div>\n    <div style=\"padding-top: 12.5px;\">\n      <div class=\"input_label\">About</div>\n      <ion-textarea auto-grow=\"true\" rows=\"2\" cols=\"20\" type=\"text\" placeholder=\"Lorem ipsum\" [class.active_input]=\"about == true\" (ionInput)=\"activate('about')\"></ion-textarea>\n    </div>\n    <div style=\"padding-top: 12.5px;\">\n      <div class=\"input_label\">Email</div>\n      <ion-input type=\"email\" placeholder=\"rose.matthews@mail.com\" [class.active_input]=\"email == true\" (ionInput)=\"activate('email')\"></ion-input>\n    </div>\n    <div style=\"padding-top: 12.5px;\">\n      <div class=\"input_label\">Location</div>\n      <ion-input type=\"text\" placeholder=\"Enter your location here\" [class.active_input]=\"address == true\" (ionInput)=\"activate('address')\"></ion-input>\n    </div>\n\n  </div>\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 25px;\">\n    <ion-button class=\"login_button\" (click)=\"updateProfile()\">\n      <span class=\"btn_text\">Update</span>\n    </ion-button>\n  </div>\n</ion-footer>\n";
 
 /***/ })
 

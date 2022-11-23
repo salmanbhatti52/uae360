@@ -12,6 +12,7 @@ export class FavoritesPage implements OnInit {
   constructor(public navCtrlr:NavController) { }
 
   ngOnInit() {
+    // this.favorites = 0
   }
   gotoNotifications(){
     this.navCtrlr.navigateRoot('notifications');

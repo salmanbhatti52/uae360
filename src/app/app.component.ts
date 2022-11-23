@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { MenuController,NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import {SplashScreen} from '@capacitor/splash-screen';
+import { SplashScreen } from '@capacitor/splash-screen';
 import { Platform } from '@ionic/angular';
 import { CheckUserService } from './check-user.service';
+import { ApiService } from './services/api.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -12,35 +13,28 @@ import { CheckUserService } from './check-user.service';
 export class AppComponent {
   appUserId:any;
   appPages = [];
+  appUserData: any;
   constructor(public menu:MenuController,
     public router:Router,
     public navCtrl:NavController,
     public platform:Platform,
-    public checkUser:CheckUserService) {
+    public checkUser:CheckUserService,
+    public api:ApiService){}
+
+    async ngOnInit() {
+      let userId =  localStorage.getItem('appUserId')
+      console.log('userId: ',userId);
       
-    // this.appUserId = this.checkUser.appUserId;
-    // this.checkUser.checkUser();
-    // this.appPages = this.checkUser.appPages;
-     
+      if(userId !== null){
+        this.router.navigate(['/home-cars-after-login']);
+      }
     }
     
-     
-  ngOnInit() {
-
-    // this.platform.ready().then(() => {
-    //   setTimeout(()=>{
-    //     SplashScreen.hide({
-    //       fadeOutDuration: 1000
-    //     });
-    //   },10000)
-      
-    // })
-    
-  }
-
   logout(){
     this.checkUser.appUserId = null;
     localStorage.removeItem('appUserId');
+    this.api.localUserData = undefined;
+    localStorage.removeItem('localUserData');
     console.log('appUserId removed');
     // ===========to update sidemenu pages after logout==============
     console.log(this.checkUser.appUserId);

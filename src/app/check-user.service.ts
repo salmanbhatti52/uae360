@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class CheckUserService {
   appUserId = localStorage.getItem('appUserId');
-  appPages= [];
+  appPages = [];
   constructor() { }
 
   checkUser(){
-    this.appUserId
+    // this.appUserId
     if(this.appUserId == null){
       this.appPages = [
         { title: 'Browse', url: '/home-before-login', img: 'assets/images/icons/search_sm.svg'  },

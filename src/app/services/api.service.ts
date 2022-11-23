@@ -9,15 +9,20 @@ export class ApiService {
   carDataById:any;
   baseURL:any = 'https://360uae.eigix.net/api';
   datesToDisable = [];
+  bookedDates = [];
+  bookingResponse:any;
+  googleSignInResponse:any;
+  localUserData:any;
+  fetchLocation:any;
   constructor(private http:HttpClient, 
     public toastController:ToastController,
     public loadingCtrl:LoadingController) { }
 
-  sendRequest(action, data){
+  sendRequest(action, data?){
     let header;
     
     header = new HttpHeaders({
-      "Content-Type" : "application/json"
+      "Content-Type" : "application/json",
     });
 
     return this.http.post(`${this.baseURL}/${action}`,JSON.stringify(data), {
@@ -57,4 +62,6 @@ export class ApiService {
   hideLoading(){
     this.loadingCtrl.dismiss();
   }
+
+  
 }

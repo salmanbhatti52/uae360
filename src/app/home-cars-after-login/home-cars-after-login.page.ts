@@ -7,6 +7,9 @@ import { ApiService } from '../services/api.service';
 import { MenuController } from '@ionic/angular';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
 import { IonicSlides } from '@ionic/angular';
+import { Geolocation } from '@capacitor/geolocation';
+import { AwesomeCordovaNativePlugin } from '@awesome-cordova-plugins/core';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 @Component({
@@ -21,7 +24,23 @@ export class HomeCarsAfterLoginPage implements OnInit {
   item3 = false;
   item4 = false;
   item5 = false;
-  
+  carTypes = [];
+  carTypeOne = '';
+  carTypeTwo = '';
+  carTypeThree = '';
+  carTypeFour = '';
+  carTypeOneId= '';
+  carTypeTwoId = '';
+  carTypeThreeId = '';
+  carTypeFourId = '';
+
+  latitude: number;
+  longitude: number;
+  userLocation: string = '';
+  options: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+  };
   // pickups = [
   //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
   //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
@@ -35,18 +54,79 @@ export class HomeCarsAfterLoginPage implements OnInit {
     public checkUser:CheckUserService,
     public appComponent:AppComponent,
     public api:ApiService,
-    public menuCtrlr:MenuController) {}
+    public menuCtrlr:MenuController,
+    public nativeGeoCoder: NativeGeocoder) {}
 
   ngOnInit() {
-   // ===update appPages===========
-   console.log(this.checkUser.appUserId);
+   // =======update appPages===========
+   console.log('AppUserId: ',this.checkUser.appUserId);
    this.checkUser.checkUser();
-   console.log(this.checkUser.appPages);
+   console.log("AppPages: ",this.checkUser.appPages);
    this.appComponent.appPages = this.checkUser.appPages;
    // =======done============
-   this.getCars();
-  }
 
+  // ==============localUserData====================
+  // this.api.localUserData = undefined;
+   this.api.localUserData = JSON.parse(localStorage.getItem('localUserData'));
+  //  JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
+    // this.api.localUserData.profile_pic = userData.profile_pic;
+    // this.api.localUserData.username = userData.username;
+    // this.api.localUserData.location = userData.location;
+
+    console.log('localUserData: ',this.api.localUserData);
+    
+  // ================================================
+   this.getCarTypes();
+   this.getCars();
+   this.fetchLocation();
+  }
+  async fetchLocation(){
+    const getCurrentLocation = await Geolocation.getCurrentPosition({
+      enableHighAccuracy:true
+    });
+    console.log('Current Location: ',getCurrentLocation);
+    this.latitude = getCurrentLocation.coords.latitude;
+    this.longitude = getCurrentLocation.coords.longitude;
+    console.log('Latitude: ',this.latitude);
+    console.log('Longitude: ',this.longitude);
+    this.fetchAddress();
+    
+  }
+  fetchAddress(){
+    this.nativeGeoCoder.reverseGeocode(this.latitude,this.longitude,this.options)
+    .then((result:NativeGeocoderResult[])=>{
+      console.log('Result: ', result);
+      console.log('Result 0: ', result[0]);
+      
+      this.api.fetchLocation= result[0].countryName;
+    },(err)=>{
+      console.log('Error:', err);
+      
+    });
+  }
+  getCarTypes(){
+    this.api.showLoading();
+    this.api.sendRequest('carType').subscribe((res:any)=>{
+      console.log('getCarTypes: ',res);
+      if(res.status=='success'){
+        this.carTypes = res.data;
+        this.carTypeOne = this.carTypes[0].car_type;
+        this.carTypeTwo = this.carTypes[1].car_type;
+        this.carTypeThree = this.carTypes[2].car_type;
+        this.carTypeFour = this.carTypes[3].car_type;
+
+        this.carTypeOneId = this.carTypes[0].car_type_id;
+        this.carTypeTwoId = this.carTypes[1].car_type_id;
+        this.carTypeThreeId = this.carTypes[2].car_type_id;
+        this.carTypeFourId = this.carTypes[3].car_type_id;
+        this.api.hideLoading();
+      }
+      
+    },(err:any)=>{
+      console.log('Error',err);
+      this.api.hideLoading();
+    })
+  }
   getCars(){
     this.api.showLoading();
     this.api.getData('cars').subscribe((res:any)=>{
@@ -67,13 +147,18 @@ export class HomeCarsAfterLoginPage implements OnInit {
   gotoCarDetails(car_id){
     this.api.showLoading();
     let data = {
-      car_id: car_id
+      car_id: car_id,
+      user_id: this.checkUser.appUserId
     }
     this.api.sendRequest('getCarsById',data).subscribe((res:any)=>{
       this.api.hideLoading();
       console.log('api response:',res);
       if(res.status == 'success'){
         this.api.carDataById = res.data;
+        // if(!res.data.favourite_status){
+        //   console.log("Favorite status not found");
+        //   this.api.favorite_status = false;
+        // }
         console.log('carDataById:',this.api.carDataById);
         this.router.navigate(['/car-details']);
       }
@@ -92,7 +177,8 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item4 = false;
       this.item5 = false; 
       this.getCars();
-    }else if(itemVal == 'hatchback'){
+    }else if(itemVal == 'Sports'){
+      this.pickups = [];
       this.item1 = false;
       this.item2 = true;
       this.item3 = false;
@@ -101,7 +187,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
       
       this.api.showLoading();
         let data = {
-          car_type: 'Hatchback'
+          car_type_id: this.carTypeOneId
         }
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
           console.log(res);
@@ -114,7 +200,8 @@ export class HomeCarsAfterLoginPage implements OnInit {
           console.log(err);
           
         })
-    }else if(itemVal == 'sedan'){
+    }else if(itemVal == 'Luxury'){
+      this.pickups = [];
       this.item1 = false;
       this.item2 = false;
       this.item3 = true;
@@ -123,7 +210,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
 
       this.api.showLoading();
         let data = {
-          car_type: 'Sedan'
+          car_type_id: this.carTypeTwoId
         }
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
           console.log(res);
@@ -136,7 +223,8 @@ export class HomeCarsAfterLoginPage implements OnInit {
           console.log(err);
           
         })
-    }else if(itemVal == 'bus'){
+    }else if(itemVal == 'Pickup'){
+      this.pickups = [];
       this.item1 = false;
       this.item2 = false;
       this.item3 = false;
@@ -145,7 +233,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
 
       this.api.showLoading();
         let data = {
-          car_type: 'Bus'
+          car_type_id: this.carTypeThreeId
         }
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
           console.log(res);
@@ -158,7 +246,8 @@ export class HomeCarsAfterLoginPage implements OnInit {
           console.log(err);
           
         })
-    }else if(itemVal == 'suv'){
+    }else if(itemVal == 'SUV'){
+      this.pickups = [];
       this.item1 = false;
       this.item2 = false;
       this.item3 = false;
@@ -167,7 +256,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
 
       this.api.showLoading();
         let data = {
-          car_type: 'SUV'
+          car_type_id: this.carTypeFourId
         }
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
           console.log(res);

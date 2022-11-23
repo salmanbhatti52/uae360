@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder ,FormControl, Validators } from '@angular/forms'
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
@@ -18,7 +19,8 @@ export class SignUpPage implements OnInit {
   activateUserNumberField = false;
   activateEmailField= false;
   activatePasswordField= false;
-
+  profileImg = '';
+  base64String: string = '';
   constructor(public  location:Location,
     public router:Router,
     public api:ApiService,
@@ -109,10 +111,20 @@ export class SignUpPage implements OnInit {
     }
   }
   gotoSignIn(){
-   
-    
     this.router.navigate(['/sign-in']);
   }
+  async addProfile(){
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Prompt
+    });
+    console.log(image.base64String);
+    this.profileImg = `data:image/jpeg;base64,${image.base64String}`
+    this.base64String = image.base64String;
+  }
+
   gotoVerifyPhoneOtp(){
     this.activateUserNameField = false;
     this.activateUserNumberField = false;
@@ -122,29 +134,41 @@ export class SignUpPage implements OnInit {
     console.log(this.angForm.value.number);
     console.log(this.angForm.value.email);
     console.log(this.angForm.value.password);
-
-    // ==============api Call==================
-    let data  = {
-      username:this.angForm.value.name,
-      phone:this.angForm.value.number,
-      email:this.angForm.value.email,
-      password:this.angForm.value.password
-    }
-    this.api.sendRequest('signupHereNow',data).subscribe((res:any)=>{
-      console.log(res);
-      if(res.status == 'success'){
-        this.api.presentToast("Success!");
-        this.router.navigate(['/sign-in']);
-      }else if(res.status == 'error'){
-        this.api.presentToast(res.message);
-      }else{
-        
+    if(this.base64String !== ''){
+      this.api.showLoading();
+      // ==============api Call==================
+      let data  = {
+        username:this.angForm.value.name,
+        phone:this.angForm.value.number,
+        email:this.angForm.value.email,
+        password:this.angForm.value.password,
+        profile_pic:this.base64String
       }
-    },(error:any)=>{
-      console.log(error);
+      this.api.sendRequest('signupHereNow',data).subscribe((res:any)=>{
+        this.api.hideLoading();
+        console.log(res);
+        if(res.status == 'success'){
+          this.api.presentToast("Success!");
+          this.router.navigate(['/sign-in']);
+        }else if(res.status == 'error'){
+          this.api.presentToast(res.message);
+          this.api.hideLoading();
+        }else{
+          
+        }
+      },(error:any)=>{
+        console.log(error);
+        this.api.hideLoading();
+        
+      })
+      // =======================done===================
       
-    })
-    // =======================done===================
+    }else{
+      this.api.presentToast('Plz add image');
+    }
+  
+    
+    
     
   }
 }

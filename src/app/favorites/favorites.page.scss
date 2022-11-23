@@ -4,11 +4,11 @@ ion-header{
 }
 ion-content.background{
     --background: url('../../assets/images/empty_street.svg') no-repeat center center / cover;
-    // --background: #FBFBFB !important;
     font-family: "Poppins", sans-serif;
+    background-color: #FBFBFB ;
 }
 ion-content{
-    --background: #FBFBFB !important;
+    --background: #FBFBFB ;
     font-family: "Poppins", sans-serif;
 }
 ion-footer{

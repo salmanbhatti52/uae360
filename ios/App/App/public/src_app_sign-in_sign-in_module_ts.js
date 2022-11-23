@@ -1,100 +1,6 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_sign-in_sign-in_module_ts"],{
 
-/***/ 5830:
-/*!*****************************************!*\
-  !*** ./src/app/services/api.service.ts ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApiService": () => (/* binding */ ApiService)
-/* harmony export */ });
-/* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 58987);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ 93819);
-
-
-
-
-
-
-let ApiService = class ApiService {
-  constructor(http, toastController, loadingCtrl) {
-    this.http = http;
-    this.toastController = toastController;
-    this.loadingCtrl = loadingCtrl;
-    this.baseURL = 'https://360uae.eigix.net/api';
-    this.datesToDisable = [];
-  }
-
-  sendRequest(action, data) {
-    let header;
-    header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
-      "Content-Type": "application/json"
-    });
-    return this.http.post(`${this.baseURL}/${action}`, JSON.stringify(data), {
-      headers: header
-    });
-  }
-
-  getData(action) {
-    let header;
-    header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
-      "Content-Type": "application/json"
-    });
-    return this.http.get(`${this.baseURL}/${action}`, {
-      headers: header
-    });
-  }
-
-  presentToast(toastMsg) {
-    var _this = this;
-
-    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const toast = yield _this.toastController.create({
-        message: toastMsg,
-        duration: 2000
-      });
-      toast.present();
-    })();
-  }
-
-  showLoading() {
-    var _this2 = this;
-
-    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const loading = yield _this2.loadingCtrl.create({
-        duration: 3000
-      });
-      loading.present();
-    })();
-  }
-
-  hideLoading() {
-    this.loadingCtrl.dismiss();
-  }
-
-};
-
-ApiService.ctorParameters = () => [{
-  type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient
-}, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ToastController
-}, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.LoadingController
-}];
-
-ApiService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
-  providedIn: 'root'
-})], ApiService);
-
-
-/***/ }),
-
 /***/ 93088:
 /*!***************************************************!*\
   !*** ./src/app/sign-in/sign-in-routing.module.ts ***!
@@ -186,17 +92,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SignInPage": () => (/* binding */ SignInPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _sign_in_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sign-in.page.html?ngResource */ 90521);
-/* harmony import */ var _sign_in_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-in.page.scss?ngResource */ 18345);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 94666);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 60124);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 2508);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 93819);
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ 5830);
-/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../check-user.service */ 47852);
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app.component */ 55041);
+/* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _sign_in_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sign-in.page.html?ngResource */ 90521);
+/* harmony import */ var _sign_in_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sign-in.page.scss?ngResource */ 18345);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ 94666);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/api.service */ 5830);
+/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../check-user.service */ 47852);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../app.component */ 55041);
+/* harmony import */ var _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @codetrix-studio/capacitor-google-auth */ 15414);
+
+
 
 
 
@@ -209,121 +119,190 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SignInPage = class SignInPage {
-    constructor(location, router, menuCtrl, fb, api, checkUser, appComponent) {
-        this.location = location;
-        this.router = router;
-        this.menuCtrl = menuCtrl;
-        this.fb = fb;
-        this.api = api;
-        this.checkUser = checkUser;
-        this.appComponent = appComponent;
-        this.showPassword = false;
-        this.getType = 'password';
-        this.activateEmailField = false;
-        this.activatePasswordField = false;
-        this.createForm();
+  constructor(location, router, menuCtrl, fb, api, checkUser, appComponent) {
+    this.location = location;
+    this.router = router;
+    this.menuCtrl = menuCtrl;
+    this.fb = fb;
+    this.api = api;
+    this.checkUser = checkUser;
+    this.appComponent = appComponent;
+    this.showPassword = false;
+    this.getType = 'password';
+    this.activateEmailField = false;
+    this.activatePasswordField = false;
+    this.localUserData = {
+      profile_pic: "",
+      username: '',
+      location: ''
+    };
+    this.createForm();
+  }
+
+  createForm() {
+    this.angForm = this.fb.group({
+      email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required]
+    });
+  }
+
+  ngOnInit() {}
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(false);
+  }
+
+  ionViewWillLeave() {
+    // enable the root left menu when leaving this page
+    this.menuCtrl.enable(true);
+  } // ionViewWillEnter(){
+  //   this.menuCtrl.close();
+  // }
+
+
+  goBack() {
+    this.router.navigate(['/home-before-login']);
+  }
+
+  toggleGetType() {
+    if (this.getType == 'password') {
+      this.getType = 'text';
+      this.showPassword = true;
+    } else {
+      this.getType = 'password';
+      this.showPassword = false;
     }
-    createForm() {
-        this.angForm = this.fb.group({
-            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-            password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required]
-        });
-    }
-    ngOnInit() {
-    }
-    ionViewDidEnter() {
-        this.menuCtrl.enable(false);
-    }
-    ionViewWillLeave() {
-        // enable the root left menu when leaving this page
-        this.menuCtrl.enable(true);
-    }
-    // ionViewWillEnter(){
-    //   this.menuCtrl.close();
-    // }
-    goBack() {
-        this.router.navigate(['/home-before-login']);
-    }
-    toggleGetType() {
-        if (this.getType == 'password') {
-            this.getType = 'text';
-            this.showPassword = true;
-        }
-        else {
-            this.getType = 'password';
-            this.showPassword = false;
-        }
-    }
-    activate(val) {
-        if (val == 'email') {
-            this.activateEmailField = true;
-            this.activatePasswordField = false;
-        }
-        else if (val == 'pwd') {
-            this.activateEmailField = false;
-            this.activatePasswordField = true;
-        }
-        else {
-        }
-    }
-    gotoHome() {
-        this.activateEmailField = false;
-        this.activatePasswordField = false;
-        console.log(this.angForm.value.email);
-        console.log(this.angForm.value.password);
-        let data = {
-            email: this.angForm.value.email,
-            password: this.angForm.value.password,
-        };
-        this.api.sendRequest('loginHereNow', data).subscribe((res) => {
-            console.log(res);
-            if (res.status == 'success') {
-                localStorage.setItem('appUserId', res.data.appUserId);
-                console.log('appUserId', res.data.appUserId);
-                this.checkUser.appUserId = res.data.appUserId;
-                // this.api.presentToast('Success! Welcome')
-                // ===update appPages===========
-                console.log(this.checkUser.appUserId);
-                this.checkUser.checkUser();
-                localStorage.setItem("appPagesAfterLogin", JSON.stringify(this.checkUser.appPages));
-                console.log(localStorage.getItem('appPagesAfterLogin'));
-                this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin'));
-                // =======done============
-                this.router.navigate(['/home-cars-after-login']);
-            }
-            else if (res.status == 'error') {
-                this.api.presentToast(res.message);
-            }
-            else {
-            }
-        }, (error) => {
-            console.log(error);
-            this.api.presentToast(error);
-        });
-    }
-    gotoSignUp() {
-        this.router.navigate(['/sign-up']);
-    }
-    gotoForgotPasswordByEmail() {
-        this.router.navigate(['/forgot-password-by-email']);
-    }
+  }
+
+  activate(val) {
+    if (val == 'email') {
+      this.activateEmailField = true;
+      this.activatePasswordField = false;
+    } else if (val == 'pwd') {
+      this.activateEmailField = false;
+      this.activatePasswordField = true;
+    } else {}
+  }
+
+  gotoHome() {
+    this.activateEmailField = false;
+    this.activatePasswordField = false;
+    console.log(this.angForm.value.email);
+    console.log(this.angForm.value.password);
+    let data = {
+      email: this.angForm.value.email,
+      password: this.angForm.value.password
+    };
+    this.api.sendRequest('loginHereNow', data).subscribe(res => {
+      console.log(res);
+
+      if (res.status == 'success') {
+        // this.api.presentToast('Success! Welcome')
+        localStorage.setItem('appUserId', res.data.appUserId);
+        console.log('appUserId', res.data.appUserId);
+        this.checkUser.appUserId = res.data.appUserId; // =============localUserData fetch===================
+
+        this.localUserData.profile_pic = res.data.profile_pic;
+        this.localUserData.username = res.data.username;
+        this.localUserData.location = res.data.location;
+        localStorage.setItem('localUserData', JSON.stringify(this.localUserData)); // ===update appPages===========
+
+        console.log(this.checkUser.appUserId);
+        this.checkUser.checkUser(); // =============Maybe for Learning or used in app==============
+
+        localStorage.setItem("appPagesAfterLogin", JSON.stringify(this.checkUser.appPages));
+        console.log(localStorage.getItem('appPagesAfterLogin'));
+        this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); // =======done============
+
+        this.router.navigate(['/home-cars-after-login']);
+      } else if (res.status == 'error') {
+        this.api.presentToast(res.message);
+      } else {}
+    }, error => {
+      console.log(error);
+      this.api.presentToast(error);
+    });
+  }
+
+  gotoSignUp() {
+    this.router.navigate(['/sign-up']);
+  }
+
+  gotoForgotPasswordByEmail() {
+    this.router.navigate(['/forgot-password-by-email']);
+  }
+
+  googleSignIn() {
+    var _this = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      _this.googleUser = yield _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_6__.GoogleAuth.signIn();
+      console.log('GoogleUserResponse: ', _this.googleUser);
+      _this.api.googleSignInResponse = _this.googleUser;
+
+      if (_this.googleUser.authentication.accessToken !== '') {
+        console.log('AccessToken: ', _this.googleUser.authentication.accessToken);
+
+        _this.router.navigate(['/home-cars-after-login']);
+      }
+    })();
+  }
+
 };
-SignInPage.ctorParameters = () => [
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_6__.Location },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormBuilder },
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__.ApiService },
-    { type: _check_user_service__WEBPACK_IMPORTED_MODULE_3__.CheckUserService },
-    { type: _app_component__WEBPACK_IMPORTED_MODULE_4__.AppComponent }
-];
-SignInPage = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
-        selector: 'app-sign-in',
-        template: _sign_in_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
-        styles: [_sign_in_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], SignInPage);
+
+SignInPage.ctorParameters = () => [{
+  type: _angular_common__WEBPACK_IMPORTED_MODULE_8__.Location
+}, {
+  type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__.MenuController
+}, {
+  type: _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormBuilder
+}, {
+  type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService
+}, {
+  type: _check_user_service__WEBPACK_IMPORTED_MODULE_4__.CheckUserService
+}, {
+  type: _app_component__WEBPACK_IMPORTED_MODULE_5__.AppComponent
+}];
+
+SignInPage = (0,tslib__WEBPACK_IMPORTED_MODULE_11__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_12__.Component)({
+  selector: 'app-sign-in',
+  template: _sign_in_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_sign_in_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], SignInPage);
+
+
+/***/ }),
+
+/***/ 5579:
+/*!*************************************************************************************!*\
+  !*** ./node_modules/@codetrix-studio/capacitor-google-auth/dist/esm/definitions.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/// <reference types="@capacitor/cli" />
+
+
+/***/ }),
+
+/***/ 15414:
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@codetrix-studio/capacitor-google-auth/dist/esm/index.js ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GoogleAuth": () => (/* binding */ GoogleAuth)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 26549);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 5579);
+
+const GoogleAuth = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('GoogleAuth', {
+  web: () => __webpack_require__.e(/*! import() */ "node_modules_codetrix-studio_capacitor-google-auth_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 14707)).then(m => new m.GoogleAuthWeb())
+});
 
 
 
@@ -345,7 +324,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center;\">\n      <div class=\"app_title\">360UAE</div>\n      <div class=\"welcome_msg\" style=\"margin-top: 16px;\">Hey there,</div>\n      <div class=\"welcome_msg\">welcome back</div>\n      <div class=\"login_label\" style=\"margin-top: 13px;\">Please login your account.</div>\n    </div>\n    <form [formGroup]=\"angForm\" novalidate>\n      <div style=\"margin-top: 28px;\">\n        <div class=\"inputs_label\">Email</div>\n        <ion-input formControlName=\"email\" class=\"input_box\" (ionInput)=\"activate('email')\" [class.active_input_box]=\"activateEmailField==true\" placeholder=\"rose.matthews@gmail.com\" type=\"email\"></ion-input>\n        \n        <div *ngIf=\"angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)\">\n          <div *ngIf=\"angForm.controls['email'].errors.required\" class=\"alert\">\n            Email is required\n          </div>\n          <div *ngIf=\"angForm.controls['email'].errors.pattern\" class=\"alert\">\n            Email is invalid\n          </div>\n        </div>\n  \n        <div class=\"inputs_label\" style=\"margin-top: 22px;\">Password</div>\n        <div class=\"password_box\" [class.active_input_box]=\"activatePasswordField==true\">\n          <ion-input formControlName=\"password\" class=\"password_input\" (ionInput)=\"activate('pwd')\"  placeholder=\".......\" type=\"{{getType}}\"></ion-input>\n          <ion-icon style=\"color: #B0B0B0;\" name=\"eye\" *ngIf=\"showPassword==false\" (click)=\"toggleGetType()\"></ion-icon>\n          <ion-icon style=\"color: #B0B0B0;\" name=\"eye-off\" *ngIf=\"showPassword==true\" (click)=\"toggleGetType()\"></ion-icon>\n        </div>\n        <div *ngIf=\"angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)\">\n          <div *ngIf=\"angForm.controls['password'].errors.required\" class=\"alert\">\n            Password is required\n          </div>\n        </div>\n      </div>\n  \n      <div class=\"remerber_forgot_labels\" >\n        <div style=\"display: flex;\">\n          <ion-checkbox slot=\"start\" class=\"checkbox\"></ion-checkbox>\n          <span class=\"rem_fg_lablel\" >Remember my preference</span>\n        </div>\n        <div class=\"rem_fg_lablel\" (click)=\"gotoForgotPasswordByEmail()\">Forgot your password?</div>\n      </div>\n      \n      <ion-button type=\"submit\" [disabled]=\"angForm.invalid || angForm.pristine\" class=\"login_button\" (click)=\"gotoHome()\">\n        <span class=\"btn_text\">Login</span>\n      </ion-button>\n    </form>\n    \n\n    <div class=\"or_choice\">\n      <hr style=\"width: 35%;\">\n      <span class=\"or_label\">or</span>\n      <hr style=\"width: 35%;\">\n    </div>\n    \n    <div class=\"fb_gmail_box\">\n      <ion-button style=\"--background:#3245B8;\" class=\"fb_gmail_btns\"><img (click)=\"goBack()\" src=\"assets/images/icons/facebook.svg\" alt=\"\"></ion-button>\n      <ion-button style=\"--background:#F04336;\" class=\"fb_gmail_btns\"><img (click)=\"goBack()\" src=\"assets/images/icons/google.svg\" alt=\"\"></ion-button>\n    </div>\n\n    <div class=\"last_div\"><span style=\"font-weight: 400;\">Don't have an account? </span> <span (click)=\"gotoSignUp()\" style=\"font-weight: 700;text-decoration: underline;\">Sign up</span> </div>\n  </div>\n</ion-content>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center;\">\n      <div class=\"app_title\">360UAE</div>\n      <div class=\"welcome_msg\" style=\"margin-top: 16px;\">Hey there,</div>\n      <div class=\"welcome_msg\">welcome back</div>\n      <div class=\"login_label\" style=\"margin-top: 13px;\">Please login your account.</div>\n    </div>\n    <form [formGroup]=\"angForm\" novalidate>\n      <div style=\"margin-top: 28px;\">\n        <div class=\"inputs_label\">Email</div>\n        <ion-input formControlName=\"email\" class=\"input_box\" (ionInput)=\"activate('email')\" [class.active_input_box]=\"activateEmailField==true\" placeholder=\"rose.matthews@gmail.com\" type=\"email\"></ion-input>\n        \n        <div *ngIf=\"angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)\">\n          <div *ngIf=\"angForm.controls['email'].errors.required\" class=\"alert\">\n            Email is required\n          </div>\n          <div *ngIf=\"angForm.controls['email'].errors.pattern\" class=\"alert\">\n            Email is invalid\n          </div>\n        </div>\n  \n        <div class=\"inputs_label\" style=\"margin-top: 22px;\">Password</div>\n        <div class=\"password_box\" [class.active_input_box]=\"activatePasswordField==true\">\n          <ion-input formControlName=\"password\" class=\"password_input\" (ionInput)=\"activate('pwd')\"  placeholder=\".......\" type=\"{{getType}}\"></ion-input>\n          <ion-icon style=\"color: #B0B0B0;\" name=\"eye\" *ngIf=\"showPassword==false\" (click)=\"toggleGetType()\"></ion-icon>\n          <ion-icon style=\"color: #B0B0B0;\" name=\"eye-off\" *ngIf=\"showPassword==true\" (click)=\"toggleGetType()\"></ion-icon>\n        </div>\n        <div *ngIf=\"angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)\">\n          <div *ngIf=\"angForm.controls['password'].errors.required\" class=\"alert\">\n            Password is required\n          </div>\n        </div>\n      </div>\n  \n      <div class=\"remerber_forgot_labels\" >\n        <div style=\"display: flex;\">\n          <ion-checkbox slot=\"start\" class=\"checkbox\"></ion-checkbox>\n          <span class=\"rem_fg_lablel\" >Remember my preference</span>\n        </div>\n        <div class=\"rem_fg_lablel\" (click)=\"gotoForgotPasswordByEmail()\">Forgot your password?</div>\n      </div>\n      \n      <ion-button type=\"submit\" [disabled]=\"angForm.invalid || angForm.pristine\" class=\"login_button\" (click)=\"gotoHome()\">\n        <span class=\"btn_text\">Login</span>\n      </ion-button>\n    </form>\n    \n\n    <div class=\"or_choice\">\n      <hr style=\"width: 35%;\">\n      <span class=\"or_label\">or</span>\n      <hr style=\"width: 35%;\">\n    </div>\n    \n    <div class=\"fb_gmail_box\">\n      <ion-button style=\"--background:#3245B8;\" class=\"fb_gmail_btns\"><img (click)=\"goBack()\" src=\"assets/images/icons/facebook.svg\" alt=\"\"></ion-button>\n      <ion-button (click)=\"googleSignIn()\" style=\"--background:#F04336;\" class=\"fb_gmail_btns\"><img  src=\"assets/images/icons/google.svg\" alt=\"\"></ion-button>\n    </div>\n\n    <div class=\"last_div\"><span style=\"font-weight: 400;\">Don't have an account? </span> <span (click)=\"gotoSignUp()\" style=\"font-weight: 700;text-decoration: underline;\">Sign up</span> </div>\n  </div>\n</ion-content>\n";
 
 /***/ })
 
