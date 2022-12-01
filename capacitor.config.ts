@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.uae360.app',
   appName: '360UAE',
   webDir: 'www',
   bundledWebRuntime: false,
@@ -17,7 +17,7 @@ const config: CapacitorConfig = {
     },
     GoogleAuth: {
       scopes: ["profile", "email"],
-      serverClientId: "598717051286-96hgbo1769ha8f8fdfh7q7uk3qbe9h9h.apps.googleusercontent.com",
+      serverClientId: "598717051286-89srp6tvqk24hdfbg7p8quuh84ckrscj.apps.googleusercontent.com",
       forceCodeForRefreshToken: true,
     },
   },

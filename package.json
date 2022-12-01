@@ -24,6 +24,7 @@
     "@angular/router": "^14.0.0",
     "@awesome-cordova-plugins/core": "^6.0.1",
     "@awesome-cordova-plugins/native-geocoder": "^6.2.0",
+    "@capacitor-community/facebook-login": "^4.0.0-1",
     "@capacitor/android": "^4.2.0",
     "@capacitor/app": "4.0.1",
     "@capacitor/camera": "^4.1.2",

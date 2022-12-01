@@ -135,7 +135,12 @@ let CarDetailsPage = class CarDetailsPage {
             for (let data of this.carData) {
                 this.vehicleName = data.vehical_name;
                 this.carId = data.car_id;
-                this.favorites = data.favourite_status;
+                if (!data.favourite_status) {
+                    this.favorites = 'dislike';
+                }
+                else {
+                    this.favorites = data.favourite_status;
+                }
             }
         }
         this.appUserId = localStorage.getItem('appUserId');

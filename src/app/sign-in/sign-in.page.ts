@@ -8,6 +8,9 @@ import { CheckUserService } from '../check-user.service';
 import { AppComponent } from '../app.component';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { Capacitor } from '@capacitor/core';
+import { FacebookLogin, FacebookLoginResponse } from '@capacitor-community/facebook-login';
+import { Plugins } from 'protractor/built/plugins';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.page.html',
@@ -19,19 +22,23 @@ export class SignInPage implements OnInit {
   getType='password';
   activateEmailField= false;
   activatePasswordField= false;
-  googleUser:any;
+  googleUserData:any;
   localUserData = {
     profile_pic: "",
     username:'',
-    location: ''
+    location: '',
+    email:'',
+    about:''
   };
+  token: any;
   constructor(public  location:Location,
     public router:Router,
     public menuCtrl:MenuController,
     private fb:FormBuilder,
     public api:ApiService,
     public checkUser:CheckUserService,
-    public appComponent:AppComponent) {
+    public appComponent:AppComponent,
+    public http:HttpClient) {
       this.createForm();
    }
    createForm(){
@@ -100,6 +107,8 @@ export class SignInPage implements OnInit {
         this.localUserData.profile_pic = res.data.profile_pic;
         this.localUserData.username = res.data.username;
         this.localUserData.location = res.data.location;
+        this.localUserData.email = res.data.email;
+        this.localUserData.about = res.data.about;
         this.api.localUserData = this.localUserData;
         localStorage.setItem('localUserData',JSON.stringify(this.localUserData));
         
@@ -133,14 +142,50 @@ export class SignInPage implements OnInit {
   gotoForgotPasswordByEmail(){
     this.router.navigate(['/forgot-password-by-email']);
   }
-  async googleSignIn(){
-    this.googleUser = await GoogleAuth.signIn();
-    console.log('GoogleUserResponse: ',this.googleUser);
-    this.api.googleSignInResponse = this.googleUser;
-    if(this.googleUser.authentication.accessToken !== ''){
-      console.log('AccessToken: ',this.googleUser.authentication.accessToken);
-      this.router.navigate(['/home-cars-after-login']);
-      
+
+  // ====================signInWithFacebook===========================
+  async signInWithFacebook(){
+    const FACEBOOK_PERMISSIONS = [
+      'email',
+      'user_birthday',
+      'user_photos',
+      'user_gender',
+    ];
+    const result = await (<FacebookLoginResponse><unknown>(
+      FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS })
+    ));
+
+    console.log("Result: ",result);
+    if(result.accessToken && result.accessToken.userId){
+      this.token = result.accessToken;
+      //Login Successful.
+      console.log(`Facebook access token is ${result.accessToken.token}`);  
+      this.loadUserData();    
     }
   }
+  loadUserData(){
+    const url = 'https://graph.facebook.com/'+this.token.userId+'?fields=id,name,picture.width(720),birthday,email&access_token='+this.token.token;
+    this.http.post(url, {}, {}).subscribe(res=>{
+      console.log('resp=' ,res);
+      
+    })
+  }
+  // =============================================================
+
+  // ====================signInWithGoogle==========================
+  async signInWithGoogle(){
+    this.googleUserData = await GoogleAuth.signIn();
+    console.log('GoogleUserResponse: ',this.googleUserData);
+    this.api.googleSignInResponse = this.googleUserData;
+    // if(this.googleUserData.authentication.accessToken !== ''){
+    //   console.log('AccessToken: ',this.googleUserData.authentication.accessToken);
+    //   this.router.navigate(['/home-cars-after-login']);
+      
+    // }
+  }
+  // async refresh(){
+  //   const authCode = await GoogleAuth.refresh();
+  //   console.log('refresh: ',authCode);
+  // }
+  // ==========================done======================================
 }

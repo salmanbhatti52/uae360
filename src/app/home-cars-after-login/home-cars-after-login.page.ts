@@ -107,8 +107,10 @@ export class HomeCarsAfterLoginPage implements OnInit {
   getCarTypes(){
     this.api.showLoading();
     this.api.sendRequest('carType').subscribe((res:any)=>{
+      this.api.hideLoading();
       console.log('getCarTypes: ',res);
       if(res.status=='success'){
+        
         this.carTypes = res.data;
         this.carTypeOne = this.carTypes[0].car_type;
         this.carTypeTwo = this.carTypes[1].car_type;
@@ -119,7 +121,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
         this.carTypeTwoId = this.carTypes[1].car_type_id;
         this.carTypeThreeId = this.carTypes[2].car_type_id;
         this.carTypeFourId = this.carTypes[3].car_type_id;
-        this.api.hideLoading();
+        
       }
       
     },(err:any)=>{
@@ -130,6 +132,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
   getCars(){
     this.api.showLoading();
     this.api.getData('cars').subscribe((res:any)=>{
+      this.api.hideLoading();
       console.log(res);
       if(res.status == 'success'){
         this.api.hideLoading();
@@ -145,11 +148,12 @@ export class HomeCarsAfterLoginPage implements OnInit {
     this.router.navigate(['/filters']);
   }
   gotoCarDetails(car_id){
-    this.api.showLoading();
+    
     let data = {
       car_id: car_id,
       user_id: this.checkUser.appUserId
     }
+    this.api.showLoading();
     this.api.sendRequest('getCarsById',data).subscribe((res:any)=>{
       this.api.hideLoading();
       console.log('api response:',res);
@@ -185,14 +189,16 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item4 = false;
       this.item5 = false;
       
-      this.api.showLoading();
+      
         let data = {
           car_type_id: this.carTypeOneId
         }
+        this.api.showLoading();
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
+          this.api.hideLoading();
           console.log(res);
           if(res.status == 'success'){
-            this.api.hideLoading();
+            
             this.pickups = res.data;
           }
         },(err)=>{
@@ -208,14 +214,16 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item4 = false;
       this.item5 = false;
 
-      this.api.showLoading();
+      
         let data = {
           car_type_id: this.carTypeTwoId
         }
+        this.api.showLoading();
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
+          this.api.hideLoading();
           console.log(res);
           if(res.status == 'success'){
-            this.api.hideLoading();
+            
             this.pickups = res.data;
           }
         },(err)=>{
@@ -231,14 +239,16 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item4 = true;
       this.item5 = false;
 
-      this.api.showLoading();
+      
         let data = {
           car_type_id: this.carTypeThreeId
         }
+        this.api.showLoading();
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
+          this.api.hideLoading();
           console.log(res);
           if(res.status == 'success'){
-            this.api.hideLoading();
+            
             this.pickups = res.data;
           }
         },(err)=>{
@@ -254,14 +264,16 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item4 = false;
       this.item5 = true;
 
-      this.api.showLoading();
+      
         let data = {
           car_type_id: this.carTypeFourId
         }
+        this.api.showLoading();
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
+          this.api.hideLoading();
           console.log(res);
           if(res.status == 'success'){
-            this.api.hideLoading();
+            
             this.pickups = res.data;
           }
         },(err)=>{

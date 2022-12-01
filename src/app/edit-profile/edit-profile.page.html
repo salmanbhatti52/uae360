@@ -10,31 +10,41 @@
 <ion-content>
   <div class="wrapper">
     <div class="profile_div">
-      <img (click)="addNewProfile()"  src="assets/images/dummy_profile.svg" alt="" *ngIf="profileImg === ''">
-      <img (click)="addNewProfile()" style="height: 160px;width: 160px; border-radius: 50%;" src="{{profileImg}}" alt="" *ngIf="profileImg !== ''">
-      <img class="edit_icon" src="../../assets/images/icons/edit_profile.svg" alt="">
+      <img   src="assets/images/dummy_profile.svg" alt="" *ngIf="userProfile === ''">
+      <img  style="height: 160px;width: 160px; border-radius: 50%;" src="{{userProfile}}" alt="" *ngIf="userProfile !== ''">
+      <img class="edit_icon" (click)="addNewProfile()" src="../../assets/images/icons/edit_profile.svg" alt="">
     </div>
-
-    <div style="padding-top: 25px;">
-      <div class="input_label">First Name</div>
-      <ion-input type="text" placeholder="John" [class.active_input]="firstName == true" (ionInput)="activate('first_name')"></ion-input>
-    </div>
-    <div style="padding-top: 12.5px;">
-      <div class="input_label">Last Name</div>
-      <ion-input type="text" placeholder="Doe" [class.active_input]="lastName == true" (ionInput)="activate('last_name')"></ion-input>
-    </div>
-    <div style="padding-top: 12.5px;">
-      <div class="input_label">About</div>
-      <ion-textarea auto-grow="true" rows="2" cols="20" type="text" placeholder="Lorem ipsum" [class.active_input]="about == true" (ionInput)="activate('about')"></ion-textarea>
-    </div>
-    <div style="padding-top: 12.5px;">
-      <div class="input_label">Email</div>
-      <ion-input type="email" placeholder="rose.matthews@mail.com" [class.active_input]="email == true" (ionInput)="activate('email')"></ion-input>
-    </div>
-    <div style="padding-top: 12.5px;">
-      <div class="input_label">Location</div>
-      <ion-input type="text" placeholder="Enter your location here" [class.active_input]="address == true" (ionInput)="activate('address')"></ion-input>
-    </div>
+    <form [formGroup]="angForm">
+      <div style="padding-top: 25px;">
+        <div class="input_label">First Name</div>
+        <ion-input type="text" formControlName="fName"  placeholder="John" [class.active_input]="firstName == true" (ionInput)="activate('first_name')"></ion-input>
+      </div>
+      <div style="padding-top: 12.5px;">
+        <div class="input_label">Last Name</div>
+        <ion-input type="text" formControlName="lName" placeholder="Doe" [class.active_input]="lastName == true" (ionInput)="activate('last_name')"></ion-input>
+      </div>
+      <div style="padding-top: 12.5px;">
+        <div class="input_label">About</div>
+        <ion-textarea auto-grow="true" formControlName="about" rows="2" cols="20" type="text" placeholder="Lorem ipsum" [class.active_input]="about == true" (ionInput)="activate('about')"></ion-textarea>
+      </div>
+      <div style="padding-top: 12.5px;">
+        <div class="input_label">Email</div>
+        <ion-input type="email" formControlName="email" placeholder="rose.matthews@mail.com" [class.active_input]="email == true" (ionInput)="activate('email')"></ion-input>
+        <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)">
+          <!-- <div *ngIf="angForm.controls['email'].errors.required" class="alert">
+            Email is required
+          </div> -->
+          <div *ngIf="angForm.controls['email'].errors.pattern" class="alert">
+            Email is invalid
+          </div>
+        </div>
+      </div>
+      <div style="padding-top: 12.5px;">
+        <div class="input_label">Location</div>
+        <ion-input type="text" formControlName="location" placeholder="Enter your location here" [class.active_input]="address == true" (ionInput)="activate('address')"></ion-input>
+      </div>
+    </form>
+    
 
   </div>
 </ion-content>

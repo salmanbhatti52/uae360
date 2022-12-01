@@ -169,8 +169,10 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
     console.log("AppPages: ", this.checkUser.appPages);
     this.appComponent.appPages = this.checkUser.appPages; // =======done============
     // ==============localUserData====================
+    // this.api.localUserData = undefined;
 
-    this.api.localUserData = JSON.parse(localStorage.getItem('localUserData')); // this.api.localUserData.profile_pic = userData.profile_pic;
+    this.api.localUserData = JSON.parse(localStorage.getItem('localUserData')); //  JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
+    // this.api.localUserData.profile_pic = userData.profile_pic;
     // this.api.localUserData.username = userData.username;
     // this.api.localUserData.location = userData.location;
 
@@ -211,6 +213,7 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
   getCarTypes() {
     this.api.showLoading();
     this.api.sendRequest('carType').subscribe(res => {
+      this.api.hideLoading();
       console.log('getCarTypes: ', res);
 
       if (res.status == 'success') {
@@ -223,7 +226,6 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
         this.carTypeTwoId = this.carTypes[1].car_type_id;
         this.carTypeThreeId = this.carTypes[2].car_type_id;
         this.carTypeFourId = this.carTypes[3].car_type_id;
-        this.api.hideLoading();
       }
     }, err => {
       console.log('Error', err);
@@ -234,6 +236,7 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
   getCars() {
     this.api.showLoading();
     this.api.getData('cars').subscribe(res => {
+      this.api.hideLoading();
       console.log(res);
 
       if (res.status == 'success') {
@@ -251,16 +254,21 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
   }
 
   gotoCarDetails(car_id) {
-    this.api.showLoading();
     let data = {
-      car_id: car_id
+      car_id: car_id,
+      user_id: this.checkUser.appUserId
     };
+    this.api.showLoading();
     this.api.sendRequest('getCarsById', data).subscribe(res => {
       this.api.hideLoading();
       console.log('api response:', res);
 
       if (res.status == 'success') {
-        this.api.carDataById = res.data;
+        this.api.carDataById = res.data; // if(!res.data.favourite_status){
+        //   console.log("Favorite status not found");
+        //   this.api.favorite_status = false;
+        // }
+
         console.log('carDataById:', this.api.carDataById);
         this.router.navigate(['/car-details']);
       }
@@ -285,15 +293,15 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
       this.item3 = false;
       this.item4 = false;
       this.item5 = false;
-      this.api.showLoading();
       let data = {
         car_type_id: this.carTypeOneId
       };
+      this.api.showLoading();
       this.api.sendRequest('getCarsByCarType', data).subscribe(res => {
+        this.api.hideLoading();
         console.log(res);
 
         if (res.status == 'success') {
-          this.api.hideLoading();
           this.pickups = res.data;
         }
       }, err => {
@@ -307,15 +315,15 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
       this.item3 = true;
       this.item4 = false;
       this.item5 = false;
-      this.api.showLoading();
       let data = {
         car_type_id: this.carTypeTwoId
       };
+      this.api.showLoading();
       this.api.sendRequest('getCarsByCarType', data).subscribe(res => {
+        this.api.hideLoading();
         console.log(res);
 
         if (res.status == 'success') {
-          this.api.hideLoading();
           this.pickups = res.data;
         }
       }, err => {
@@ -329,15 +337,15 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
       this.item3 = false;
       this.item4 = true;
       this.item5 = false;
-      this.api.showLoading();
       let data = {
         car_type_id: this.carTypeThreeId
       };
+      this.api.showLoading();
       this.api.sendRequest('getCarsByCarType', data).subscribe(res => {
+        this.api.hideLoading();
         console.log(res);
 
         if (res.status == 'success') {
-          this.api.hideLoading();
           this.pickups = res.data;
         }
       }, err => {
@@ -351,15 +359,15 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
       this.item3 = false;
       this.item4 = false;
       this.item5 = true;
-      this.api.showLoading();
       let data = {
         car_type_id: this.carTypeFourId
       };
+      this.api.showLoading();
       this.api.sendRequest('getCarsByCarType', data).subscribe(res => {
+        this.api.hideLoading();
         console.log(res);
 
         if (res.status == 'success') {
-          this.api.hideLoading();
           this.pickups = res.data;
         }
       }, err => {

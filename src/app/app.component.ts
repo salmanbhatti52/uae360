@@ -5,6 +5,8 @@ import { SplashScreen } from '@capacitor/splash-screen';
 import { Platform } from '@ionic/angular';
 import { CheckUserService } from './check-user.service';
 import { ApiService } from './services/api.service';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { FacebookLogin, FacebookLoginResponse } from '@capacitor-community/facebook-login';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,22 +16,35 @@ export class AppComponent {
   appUserId:any;
   appPages = [];
   appUserData: any;
+  googleUserData: any;
   constructor(public menu:MenuController,
-    public router:Router,
-    public navCtrl:NavController,
-    public platform:Platform,
-    public checkUser:CheckUserService,
-    public api:ApiService){}
+  public router:Router,
+  public navCtrl:NavController,
+  public platform:Platform,
+  public checkUser:CheckUserService,
+  public api:ApiService){}
 
-    async ngOnInit() {
-      let userId =  localStorage.getItem('appUserId')
-      console.log('userId: ',userId);
-      
-      if(userId !== null){
-        this.router.navigate(['/home-cars-after-login']);
-      }
-    }
+  async ngOnInit() {
+    let userId =  localStorage.getItem('appUserId')
+    console.log('userId: ',userId);
     
+    if(userId !== null){
+      this.router.navigate(['/home-cars-after-login']);
+    }
+  }
+  async refresh(){
+    const authCode = await GoogleAuth.refresh();
+    console.log('refresh: ',authCode);
+  }
+  async signOutForGoogle(){
+    await GoogleAuth.signOut();
+    this.googleUserData = null;
+  }
+
+  async signOutForFacebook(){
+    await FacebookLogin.logout();
+  }
+  
   logout(){
     this.checkUser.appUserId = null;
     localStorage.removeItem('appUserId');

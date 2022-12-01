@@ -37,11 +37,11 @@ const routes = [
     },
     {
         path: 'sign-in',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_capacitor_core_dist_index_js"), __webpack_require__.e("src_app_sign-in_sign-in_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./sign-in/sign-in.module */ 22831)).then(m => m.SignInPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_sign-in_sign-in_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./sign-in/sign-in.module */ 22831)).then(m => m.SignInPageModule)
     },
     {
         path: 'sign-up',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_capacitor_core_dist_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_sign-up_sign-up_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./sign-up/sign-up.module */ 73982)).then(m => m.SignUpPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_sign-up_sign-up_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./sign-up/sign-up.module */ 73982)).then(m => m.SignUpPageModule)
     },
     {
         path: 'verify-phone-by-otp',
@@ -85,7 +85,7 @@ const routes = [
     },
     {
         path: 'home-cars-after-login',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_capacitor_core_dist_index_js"), __webpack_require__.e("default-node_modules_swiper_angular_fesm2015_swiper_angular_mjs"), __webpack_require__.e("src_app_home-cars-after-login_home-cars-after-login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home-cars-after-login/home-cars-after-login.module */ 53034)).then(m => m.HomeCarsAfterLoginPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_swiper_angular_fesm2015_swiper_angular_mjs"), __webpack_require__.e("src_app_home-cars-after-login_home-cars-after-login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home-cars-after-login/home-cars-after-login.module */ 53034)).then(m => m.HomeCarsAfterLoginPageModule)
     },
     {
         path: 'message-owner-side',
@@ -105,7 +105,7 @@ const routes = [
     },
     {
         path: 'car-booking',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-node_modules_capacitor_core_dist_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_car-booking_car-booking_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./car-booking/car-booking.module */ 45333)).then(m => m.CarBookingPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_car-booking_car-booking_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./car-booking/car-booking.module */ 45333)).then(m => m.CarBookingPageModule)
     },
     {
         path: 'select-date',
@@ -149,7 +149,7 @@ const routes = [
     },
     {
         path: 'edit-profile',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_capacitor_core_dist_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_edit-profile_edit-profile_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./edit-profile/edit-profile.module */ 71241)).then(m => m.EditProfilePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_edit-profile_edit-profile_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./edit-profile/edit-profile.module */ 71241)).then(m => m.EditProfilePageModule)
     },
     {
         path: 'delete-account-popup',
@@ -191,14 +191,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
 /* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.html?ngResource */ 33383);
 /* harmony import */ var _app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component.scss?ngResource */ 79259);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 93819);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 60124);
 /* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./check-user.service */ 47852);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/api.service */ 5830);
+/* harmony import */ var _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @codetrix-studio/capacitor-google-auth */ 15414);
+/* harmony import */ var _capacitor_community_facebook_login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @capacitor-community/facebook-login */ 4655);
+
+
 
 
 
@@ -233,9 +237,32 @@ let AppComponent = class AppComponent {
     })();
   }
 
+  refresh() {
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      const authCode = yield _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_5__.GoogleAuth.refresh();
+      console.log('refresh: ', authCode);
+    })();
+  }
+
+  signOutForGoogle() {
+    var _this2 = this;
+
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      yield _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_5__.GoogleAuth.signOut();
+      _this2.googleUserData = null;
+    })();
+  }
+
+  signOutForFacebook() {
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      yield _capacitor_community_facebook_login__WEBPACK_IMPORTED_MODULE_6__.FacebookLogin.logout();
+    })();
+  }
+
   logout() {
     this.checkUser.appUserId = null;
     localStorage.removeItem('appUserId');
+    this.api.localUserData = undefined;
     localStorage.removeItem('localUserData');
     console.log('appUserId removed'); // ===========to update sidemenu pages after logout==============
 
@@ -265,20 +292,20 @@ let AppComponent = class AppComponent {
 };
 
 AppComponent.ctorParameters = () => [{
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.MenuController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.MenuController
 }, {
-  type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router
+  type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.NavController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.NavController
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.Platform
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.Platform
 }, {
   type: _check_user_service__WEBPACK_IMPORTED_MODULE_3__.CheckUserService
 }, {
   type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__.ApiService
 }];
 
-AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
   selector: 'app-root',
   template: _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -1170,7 +1197,7 @@ module.exports = "ion-menu {\n  --background:black !important;\n}\n\nion-menu io
 /***/ ((module) => {
 
 "use strict";
-module.exports = "<ion-app>\n  <ion-split-pane contentId=\"main-content\">\n    <ion-menu contentId=\"main-content\" type=\"overlay\">\n      <ion-content style=\"--background: black !important; --padding: 60px 23px 40px;\">\n        <!-- <ion-list id=\"inbox-list\">\n          <ion-list-header>Inbox</ion-list-header>\n          <ion-note>hi@ionicframework.com</ion-note> -->\n          <div>\n            <img (click)=\"closeMenu()\" src=\"assets/images/icons/cancel.svg\" alt=\"\">\n          </div>\n          <div class=\"app_title\" *ngIf=\"checkUser.appUserId==null\">\n            360UAE\n          </div>\n          <div *ngIf=\"checkUser.appUserId !== null && api.localUserData !== undefined \" (click)=\"goForEditProfile()\">\n            <div class=\"profile_div\">\n              <img src=\"assets/images/sm_dummy_profile.svg\" alt=\"\" *ngIf=\"api.localUserData.profile_pic === '' \">\n              <img style=\"border-radius: 50px;\" src=\"{{api.localUserData.profile_pic}}\" alt=\"\" *ngIf=\"api.localUserData.profile_pic !== '' \">\n              <img class=\"edit_icon\" src=\"assets/images/icons/sm_edit_icon.svg\" alt=\"\">\n            </div>\n            <!-- <div class=\"user_name\" *ngIf=\"api.googleSignInResponse\">{{api.googleSignInResponse.displayName}}</div> -->\n            <div class=\"user_name\" >{{api.localUserData.username}}</div>\n            <div class=\"location_box\">\n              <img style=\"margin-right: 6.3px;\" src=\"assets/images/icons/sm_location_icon.svg\" alt=\"\">\n              <span class=\"location\" *ngIf=\"api.localUserData.location !== null\">{{api.localUserData.location}}</span>\n              <span class=\"location\" *ngIf=\"api.localUserData.location === null\">{{api.fetchLocation}}</span>\n            </div>\n          </div>\n          <!-- <div style=\"margin-top: 36px; text-align: center;\">\n            <div class=\"select_language\">Choose your language</div>\n            <div class=\"language_btns\">\n              <ion-button style=\"--background: white; margin-right: 12px;\">\n                <img src=\"assets/images/icons/language_blue.svg\" alt=\"\">\n                <span class=\"english_text\">\n                  English\n                </span>\n              </ion-button>\n              <ion-button fill=\"outline\" style=\"--border-color: #D4DCE1;\">\n                <img src=\"assets/images/icons/language_white.svg\" alt=\"\">\n                <span class=\"arabic_text\" style=\"color: #D4DCE1; font-size: 12px; margin-left: 5.5px;\">\n                  العربی\n                </span> \n              </ion-button>\n            </div>\n          </div> -->\n          <div style=\"height: 50px;\"></div>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages; let i = index\">\n            <div routerDirection=\"root\" [routerLink]=\"[p.url]\" lines=\"none\" detail=\"false\" routerLinkActive=\"selected\" style=\"--background: black !important; text-align: center;\">\n              <!-- <ion-icon slot=\"start\" [ios]=\"p.icon + '-outline'\" [md]=\"p.icon + '-sharp'\"></ion-icon> -->\n              <div style=\"margin-top: 20px; text-align: left;\">\n                <ion-row>\n                  <ion-col style=\"padding: 0px;\" size=\"2\"><img  src=\"{{p.img}}\"></ion-col>\n                  <ion-col style=\"padding: 0px;\" size=\"7\"><ion-label class=\"item_label\">{{ p.title }}</ion-label></ion-col>\n                  <ion-col style=\"padding: 0px;\" size=\"3\"></ion-col>\n                </ion-row>\n              </div>\n            </div>\n          </ion-menu-toggle>\n        <!-- </ion-list> -->\n\n        <!-- <ion-list id=\"labels-list\">\n          <ion-list-header>Labels</ion-list-header>\n\n          <ion-item *ngFor=\"let label of labels\" lines=\"none\">\n            <ion-icon slot=\"start\" ios=\"bookmark-outline\" md=\"bookmark-sharp\"></ion-icon>\n            <ion-label>{{ label }}</ion-label>\n          </ion-item>\n        </ion-list> -->\n      </ion-content>\n     \n      <div style=\"padding: 20px 23px 30px;\">\n        <ion-row >\n          <ion-col style=\"padding: 0px;\" size=\"2\"><img src=\"assets/images/icons/log_in_out_sm.svg\" alt=\"\"></ion-col>\n          <ion-col style=\"padding: 0px;\" size=\"7\">\n            <span (click)=\"gotoSignIn()\" class=\"item_label\" *ngIf=\"checkUser.appUserId==null\">Login or Signup</span>\n            <span (click)=\"logout()\" class=\"item_label\" *ngIf=\"checkUser.appUserId!=null\">Logout</span>\n          </ion-col>\n          <ion-col style=\"padding: 0px;\" size=\"3\"></ion-col>\n        </ion-row>\n      </div>\n    \n    </ion-menu>\n    <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n";
+module.exports = "<ion-app>\n  <ion-split-pane contentId=\"main-content\">\n    <ion-menu contentId=\"main-content\" type=\"overlay\">\n      <ion-content style=\"--background: black !important; --padding: 60px 23px 40px;\">\n        <!-- <ion-list id=\"inbox-list\">\n          <ion-list-header>Inbox</ion-list-header>\n          <ion-note>hi@ionicframework.com</ion-note> -->\n          <div>\n            <img (click)=\"closeMenu()\" src=\"assets/images/icons/cancel.svg\" alt=\"\">\n          </div>\n          <div class=\"app_title\" *ngIf=\"checkUser.appUserId==null\">\n            360UAE\n          </div>\n          <div *ngIf=\"checkUser.appUserId !== null && api.localUserData !== undefined \" (click)=\"goForEditProfile()\">\n            <div class=\"profile_div\">\n              <img src=\"assets/images/sm_dummy_profile.svg\" alt=\"\" *ngIf=\"api.localUserData.profile_pic === '' \">\n              <img style=\"border-radius: 50px;height: 85px;\" src=\"{{api.localUserData.profile_pic}}\" alt=\"\" *ngIf=\"api.localUserData.profile_pic !== '' \">\n              <img class=\"edit_icon\" src=\"assets/images/icons/sm_edit_icon.svg\" alt=\"\">\n            </div>\n            <!-- <div class=\"user_name\" *ngIf=\"api.googleSignInResponse\">{{api.googleSignInResponse.displayName}}</div> -->\n            <div class=\"user_name\" >{{api.localUserData.username}}</div>\n            <div class=\"location_box\">\n              <img style=\"margin-right: 6.3px;\" src=\"assets/images/icons/sm_location_icon.svg\" alt=\"\">\n              <span class=\"location\" *ngIf=\"api.localUserData.location !== null\">{{api.localUserData.location}}</span>\n              <span class=\"location\" *ngIf=\"api.localUserData.location === null\">{{api.fetchLocation}}</span>\n            </div>\n          </div>\n          <!-- <div style=\"margin-top: 36px; text-align: center;\">\n            <div class=\"select_language\">Choose your language</div>\n            <div class=\"language_btns\">\n              <ion-button style=\"--background: white; margin-right: 12px;\">\n                <img src=\"assets/images/icons/language_blue.svg\" alt=\"\">\n                <span class=\"english_text\">\n                  English\n                </span>\n              </ion-button>\n              <ion-button fill=\"outline\" style=\"--border-color: #D4DCE1;\">\n                <img src=\"assets/images/icons/language_white.svg\" alt=\"\">\n                <span class=\"arabic_text\" style=\"color: #D4DCE1; font-size: 12px; margin-left: 5.5px;\">\n                  العربی\n                </span> \n              </ion-button>\n            </div>\n          </div> -->\n          <div style=\"height: 50px;\"></div>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages; let i = index\">\n            <div routerDirection=\"root\" [routerLink]=\"[p.url]\" lines=\"none\" detail=\"false\" routerLinkActive=\"selected\" style=\"--background: black !important; text-align: center;\">\n              <!-- <ion-icon slot=\"start\" [ios]=\"p.icon + '-outline'\" [md]=\"p.icon + '-sharp'\"></ion-icon> -->\n              <div style=\"margin-top: 20px; text-align: left;\">\n                <ion-row>\n                  <ion-col style=\"padding: 0px;\" size=\"2\"><img  src=\"{{p.img}}\"></ion-col>\n                  <ion-col style=\"padding: 0px;\" size=\"7\"><ion-label class=\"item_label\">{{ p.title }}</ion-label></ion-col>\n                  <ion-col style=\"padding: 0px;\" size=\"3\"></ion-col>\n                </ion-row>\n              </div>\n            </div>\n          </ion-menu-toggle>\n        <!-- </ion-list> -->\n\n        <!-- <ion-list id=\"labels-list\">\n          <ion-list-header>Labels</ion-list-header>\n\n          <ion-item *ngFor=\"let label of labels\" lines=\"none\">\n            <ion-icon slot=\"start\" ios=\"bookmark-outline\" md=\"bookmark-sharp\"></ion-icon>\n            <ion-label>{{ label }}</ion-label>\n          </ion-item>\n        </ion-list> -->\n      </ion-content>\n     \n      <div style=\"padding: 20px 23px 30px;\">\n        <ion-row >\n          <ion-col style=\"padding: 0px;\" size=\"2\"><img src=\"assets/images/icons/log_in_out_sm.svg\" alt=\"\"></ion-col>\n          <ion-col style=\"padding: 0px;\" size=\"7\">\n            <span (click)=\"gotoSignIn()\" class=\"item_label\" *ngIf=\"checkUser.appUserId==null\">Login or Signup</span>\n            <span (click)=\"logout()\" class=\"item_label\" *ngIf=\"checkUser.appUserId!=null\">Logout</span>\n          </ion-col>\n          <ion-col style=\"padding: 0px;\" size=\"3\"></ion-col>\n        </ion-row>\n      </div>\n    \n    </ion-menu>\n    <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n";
 
 /***/ })
 
