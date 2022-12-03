@@ -180,8 +180,28 @@ export class SignInPage implements OnInit {
     // if(this.googleUserData.authentication.accessToken !== ''){
     //   console.log('AccessToken: ',this.googleUserData.authentication.accessToken);
     //   this.router.navigate(['/home-cars-after-login']);
-      
     // }
+    
+    // let data={
+    //   username: ,
+    //   email: ,
+    //   one_signal_id: ,
+    //   google_access_token:,
+    //   profile_pic: ,
+    //   account_type : "SignupWithSocial",
+    //   social_acc_type:"Google",
+    //   password:"dummy",
+    //   status:"Active",
+    //   phone:"dummy",
+    //   verify_code:"dummy",
+    // }
+    // this.api.sendRequest('signupwithsocial',data).subscribe((res:any)=>{
+    //   console.log('Response: ',res);
+      
+    // },(err)=>{
+    //   console.log("Error: ",err);
+      
+    // });
   }
   // async refresh(){
   //   const authCode = await GoogleAuth.refresh();

@@ -191,16 +191,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
 /* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.html?ngResource */ 33383);
 /* harmony import */ var _app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component.scss?ngResource */ 79259);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 93819);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 60124);
 /* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./check-user.service */ 47852);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/api.service */ 5830);
 /* harmony import */ var _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @codetrix-studio/capacitor-google-auth */ 15414);
 /* harmony import */ var _capacitor_community_facebook_login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @capacitor-community/facebook-login */ 4655);
+/* harmony import */ var onesignal_cordova_plugin__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! onesignal-cordova-plugin */ 10182);
+/* harmony import */ var onesignal_cordova_plugin__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(onesignal_cordova_plugin__WEBPACK_IMPORTED_MODULE_7__);
+
 
 
 
@@ -222,6 +225,30 @@ let AppComponent = class AppComponent {
     this.checkUser = checkUser;
     this.api = api;
     this.appPages = [];
+    this.platform.ready().then(() => {
+      this.initializeApp();
+    });
+  }
+
+  initializeApp() {
+    this.pushNotification();
+  }
+
+  pushNotification() {
+    console.log("push notification in function.....");
+    onesignal_cordova_plugin__WEBPACK_IMPORTED_MODULE_7___default().setAppId("dccb0c3d-85b9-484f-956e-86b25216432f");
+    onesignal_cordova_plugin__WEBPACK_IMPORTED_MODULE_7___default().setNotificationOpenedHandler(function (jsonData) {
+      console.log("notificationOpenedCallback: " + JSON.stringify(jsonData));
+    });
+    onesignal_cordova_plugin__WEBPACK_IMPORTED_MODULE_7___default().promptForPushNotificationsWithUserResponse(accepted => {
+      console.log("promptForPushNotificationsWithUserResponse: " + accepted);
+    });
+    onesignal_cordova_plugin__WEBPACK_IMPORTED_MODULE_7___default().getDeviceState(resp => {
+      const osUser = resp;
+      console.log("incoming onesignl resp-----", resp);
+      console.log("incoming onesignl uidd-----", osUser.userId);
+      localStorage.setItem("onesignaluserid", osUser.userId);
+    });
   }
 
   ngOnInit() {
@@ -292,20 +319,20 @@ let AppComponent = class AppComponent {
 };
 
 AppComponent.ctorParameters = () => [{
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.MenuController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.MenuController
 }, {
-  type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router
+  type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.NavController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.NavController
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.Platform
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.Platform
 }, {
   type: _check_user_service__WEBPACK_IMPORTED_MODULE_3__.CheckUserService
 }, {
   type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__.ApiService
 }];
 
-AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
+AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
   selector: 'app-root',
   template: _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -325,18 +352,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser */ 34497);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ 60124);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 93819);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ 58987);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser */ 34497);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/http */ 58987);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 55041);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 90158);
 /* harmony import */ var _awesome_cordova_plugins_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @awesome-cordova-plugins/native-geocoder/ngx */ 86675);
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser/animations */ 37146);
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/platform-browser/animations */ 37146);
 /* harmony import */ var ion2_calendar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ion2-calendar */ 8325);
 /* harmony import */ var ion2_calendar__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(ion2_calendar__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _awesome_cordova_plugins_onesignal_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @awesome-cordova-plugins/onesignal/ngx */ 13860);
+
 
 
 
@@ -350,14 +379,15 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.NgModule)({
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.NgModule)({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__.BrowserModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule.forRoot(),
+        imports: [
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__.BrowserModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicModule.forRoot(),
             _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule,
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_8__.HttpClientModule,
-            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__.BrowserAnimationsModule,
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HttpClientModule,
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_10__.BrowserAnimationsModule,
             ion2_calendar__WEBPACK_IMPORTED_MODULE_3__.CalendarModule.forRoot({
                 doneLabel: 'Save',
                 closeIcon: true
@@ -365,10 +395,11 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
         ],
         providers: [
             {
-                provide: _angular_router__WEBPACK_IMPORTED_MODULE_10__.RouteReuseStrategy,
-                useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicRouteStrategy
+                provide: _angular_router__WEBPACK_IMPORTED_MODULE_11__.RouteReuseStrategy,
+                useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicRouteStrategy
             },
             _awesome_cordova_plugins_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_2__.NativeGeocoder,
+            _awesome_cordova_plugins_onesignal_ngx__WEBPACK_IMPORTED_MODULE_4__.OneSignal,
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
     })

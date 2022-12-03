@@ -10,10 +10,13 @@ import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@aw
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'ion2-calendar';
 
+import { OneSignal } from "@awesome-cordova-plugins/onesignal/ngx";
+
 @NgModule({
   
   declarations: [AppComponent],
-  imports: [BrowserModule,
+  imports: [
+    BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
@@ -25,11 +28,13 @@ import { CalendarModule } from 'ion2-calendar';
     })
   ],
   providers: [
+  
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
     },
-    NativeGeocoder,
+    NativeGeocoder, 
+    OneSignal,
   ],
   bootstrap: [AppComponent],
 })

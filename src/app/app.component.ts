@@ -7,6 +7,9 @@ import { CheckUserService } from './check-user.service';
 import { ApiService } from './services/api.service';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { FacebookLogin, FacebookLoginResponse } from '@capacitor-community/facebook-login';
+import OneSignal from "onesignal-cordova-plugin";
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -22,8 +25,37 @@ export class AppComponent {
   public navCtrl:NavController,
   public platform:Platform,
   public checkUser:CheckUserService,
-  public api:ApiService){}
+  public api:ApiService){
+    this.platform.ready().then(() => {
+      this.initializeApp();
+    });
+  }
 
+  initializeApp() {
+
+    this.pushNotification();
+  }
+
+  pushNotification() {
+    console.log("push notification in function.....");
+    OneSignal.setAppId("9b5b89b8-946c-4f66-8bad-e6142d157d17");
+    OneSignal.setNotificationOpenedHandler(function (jsonData) {
+      console.log("notificationOpenedCallback: " + JSON.stringify(jsonData));
+    });
+
+    OneSignal.promptForPushNotificationsWithUserResponse((accepted) => {
+      console.log("promptForPushNotificationsWithUserResponse: " + accepted);
+    });
+
+    OneSignal.getDeviceState((resp: any) => {
+      const osUser: any = resp;
+      console.log("incoming onesignl resp-----", resp);
+      console.log("incoming onesignl uidd-----", osUser.userId);
+
+      localStorage.setItem("onesignaluserid", osUser.userId);
+    });
+    
+  }
   async ngOnInit() {
     let userId =  localStorage.getItem('appUserId')
     console.log('userId: ',userId);
