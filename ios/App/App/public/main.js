@@ -236,7 +236,7 @@ let AppComponent = class AppComponent {
 
   pushNotification() {
     console.log("push notification in function.....");
-    onesignal_cordova_plugin__WEBPACK_IMPORTED_MODULE_7___default().setAppId("dccb0c3d-85b9-484f-956e-86b25216432f");
+    onesignal_cordova_plugin__WEBPACK_IMPORTED_MODULE_7___default().setAppId("9b5b89b8-946c-4f66-8bad-e6142d157d17");
     onesignal_cordova_plugin__WEBPACK_IMPORTED_MODULE_7___default().setNotificationOpenedHandler(function (jsonData) {
       console.log("notificationOpenedCallback: " + JSON.stringify(jsonData));
     });

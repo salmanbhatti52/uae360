@@ -4,7 +4,7 @@
     <string name="title_activity_main">360UAE</string>
     <string name="package_name">com.uae360.app</string>
     <string name="custom_url_scheme">com.uae360.app</string>
-    <string name="server_client_id">598717051286-89srp6tvqk24hdfbg7p8quuh84ckrscj.apps.googleusercontent.com</string>
+    <string name="server_client_id">346937437512-cfsv6opbsmusjjmcoccni34i08d3dke5.apps.googleusercontent.com</string>
 
     <string name="facebook_app_id">1268762053696865</string>
     <string name="facebook_client_token">1268762053696865</string>
