@@ -146,6 +146,10 @@ const routes: Routes = [
   {
     path: 'set-new-password',
     loadChildren: () => import('./set-new-password/set-new-password.module').then( m => m.SetNewPasswordPageModule)
+  },
+  {
+    path: 'booking-details',
+    loadChildren: () => import('./booking-details/booking-details.module').then( m => m.BookingDetailsPageModule)
   }
 ];
 

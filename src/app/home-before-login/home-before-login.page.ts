@@ -14,6 +14,7 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 })
 export class HomeBeforeLoginPage implements OnInit {
   totalNotifications = 6;
+  imageUrlString = 'https://360uae.eigix.net/public/';
   item1 = true;
   item2 = false;
   item3 = false;
@@ -32,7 +33,6 @@ export class HomeBeforeLoginPage implements OnInit {
   showCategories = false;
   rentCategories = [{category:'Day'},{category:'Month'}]
   categoryVal = 'Day';
-  
   // pickups = [
   //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
   //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},

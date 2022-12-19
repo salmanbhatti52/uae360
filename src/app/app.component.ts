@@ -16,6 +16,7 @@ import OneSignal from "onesignal-cordova-plugin";
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  imageUrlString = 'https://360uae.eigix.net/public/';
   appUserId:any;
   appPages = [];
   appUserData: any;
@@ -26,13 +27,18 @@ export class AppComponent {
   public platform:Platform,
   public checkUser:CheckUserService,
   public api:ApiService){
-    this.platform.ready().then(() => {
+    
+    this.platform.ready().then(async () => {
+      // setTimeout(()=>{
+      //   SplashScreen.hide({
+      //     // fadeOutDuration: 1000
+      //   });
+      // }, 3000);
       this.initializeApp();
     });
   }
 
-  initializeApp() {
-
+   initializeApp() { 
     this.pushNotification();
   }
 
@@ -52,11 +58,13 @@ export class AppComponent {
       console.log("incoming onesignl resp-----", resp);
       console.log("incoming onesignl uidd-----", osUser.userId);
 
-      localStorage.setItem("onesignaluserid", osUser.userId);
+      localStorage.setItem("oneSignalUserId", osUser.userId);
+      // this.api.oneSignalUserId = osUser.userId
     });
     
   }
   async ngOnInit() {
+
     let userId =  localStorage.getItem('appUserId')
     console.log('userId: ',userId);
     
@@ -64,6 +72,11 @@ export class AppComponent {
       this.router.navigate(['/home-cars-after-login']);
     }
   }
+
+  // ionViewWillEnter(){
+  // 
+  // }
+
   async refresh(){
     const authCode = await GoogleAuth.refresh();
     console.log('refresh: ',authCode);

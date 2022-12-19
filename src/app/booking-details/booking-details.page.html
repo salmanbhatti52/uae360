@@ -1,0 +1,277 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bgtoolbar">
+    <div class="header">
+      <!-- <ion-menu-button class="menuicon"></ion-menu-button> -->
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="title">Bookings</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <div style="display: flex;justify-content: space-between;">
+      <ion-button class="tab_button" [class.tab_active]="previous_tab=='true'" >Previous</ion-button>
+      <ion-button class="tab_button" [class.tab_active]="upcoming_tab=='true'" >Upcoming</ion-button>
+    </div>
+    <div *ngIf="previous_tab=='true'" >
+     
+      <div >
+        <div style="text-align: center; margin-top: 16px; position: relative;" >
+          <img style="width: 100%;" src="assets/images/bookings_car.svg" alt="">
+          <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="">
+          <!-- <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt=""> -->
+          <div class="rebook_label poppins" (click)="startCarBooking()">Rebook</div>
+          <div class="car_info_box" >
+            <div>
+              <div class="car_name poppins">BMW 2 series</div>
+              <!-- (click)="openModal()" -->
+              <div style="text-align: left;line-height: 1;" >
+                <span>
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                </span>
+                <span class="rating_value urbanist">(0)</span>
+              </div>
+            </div>
+            <div class="car_info_subdiv">
+              <div><span class="cost_label poppins">Total Cost</span><span class="car_price poppins">$</span><span class="car_price poppins" style="font-size: 32px;">{{bookingRecordData.total_cost}}</span></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- -------------------previous details-------------------- -->
+        <div >
+          <div class="box_styling">
+            <div class="box_heading">Description</div>
+            <div class="box_description">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's standard dummy text ever since the 
+              1500s, when an unknown printer took a galley of type and scrambled it to
+              make a type specimen book.It has survived not only five centuries, but 
+              also the leap into electronic typesetting, remaining essentially 
+              unchanged. It was popularised in the 1960s with the release of Letraset 
+              sheets containing Lorem Ipsum passages, and more recently with desktop 
+              publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </div>
+          </div>
+      
+          <div class="box_styling">
+            <div class="box_heading">Owner's Details</div>
+            <div class="box_sub_heading">About</div>
+            <div class="box_description">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's standard dummy text ever since
+              the 1500s.
+            </div>
+          </div>
+      
+          <div class="box_styling">
+            <div class="box_sub_heading" style="margin-top: 0px;">Location</div>
+            <div class="box_description" style="margin-top: 4px;">
+               {{bookingRecordData.company_location}}
+            </div>
+          </div>
+      
+          <div class="box_styling">
+            <div class="box_heading">Rent Dates</div>
+            <div style="display: flex;justify-content: space-between;width: 85%;">
+              <div>
+                <div class="box_sub_heading" style="margin-top: 3px;">Start Date</div>
+                <div class="box_description" style="margin-top: 3px;">{{bookingRecordData.start_date}}</div>
+              </div>
+              <div>
+                <div class="box_sub_heading" style="margin-top: 3px;">End Date</div>
+                <div class="box_description" style="margin-top: 3px;">{{bookingRecordData.end_date}}</div>
+              </div>
+            </div>
+          </div>
+      
+          
+          <!-- --------------------design object for advertisement---------------- -->
+          <div class="box_heading" style="color: #0F172A;margin-top: 11px;">You might like this too!</div>
+          <div style="text-align: center; margin-top: 13px; position: relative; ">
+            <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
+            <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
+            <div class="rebook_label urbanist" (click)="startCarBooking()">Rebook</div>
+            <div class="car_info_box" >
+              <div>
+                <div class="car_name urbanist">BMW 2 series</div>
+                <div style="text-align: left;line-height: 1;">
+                  <span>
+                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    <img class="star_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  </span>
+                  <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;">not rated yet</span>
+                </div>
+              </div>
+              <div class="car2_info_subdiv">
+                <div style="line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+                <!-- <div><img src="assets/images/icons/drop_down_arrow.svg" alt=""></div> -->
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <!-- ---------------------------detailse end---------------------- -->
+      </div>
+
+    </div>
+    <div *ngIf="upcoming_tab=='true'" >
+      
+      <div >
+        <div style="text-align: center; margin-top: 16px; position: relative;" >
+          <img style="width: 100%;" src="assets/images/bookings_car.svg" alt="">
+          <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="">
+          <!-- <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt=""> -->
+          <div class="rebook_label urbanist" style="background: #E23C3C;color: white;" (click)="openCancelBookingModal(bookingRecordData.booking_id)">Cancel</div>
+          <div class="car_info_box" >
+            <div>
+              <div class="car_name urbanist">BMW 2 series</div>
+              <div style="text-align: left;line-height: 1;">
+                <span>
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                </span>
+                <span class="rating_value urbanist">(4.0)</span>
+              </div>
+            </div>
+            <div class="car_info_subdiv">
+              <div><span class="cost_label urbanist">Total Cost</span><span class="car_price urbanist">$</span><span class="car_price urbanist" style="font-size: 32px;">{{bookingRecordData.total_cost}}</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- -------------------------upcoming details------------------------------- -->
+        <div >
+          <div style="display: flex;justify-content: space-between;">
+            <div class="box_styling" style="width: 55%;">
+              <div class="box_heading">Owner's Details</div>
+              <div class="box_sub_heading">About</div>
+              <div class="box_description" style="max-height: 108px;">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever since
+                the 1500s.
+              </div>
+            </div>
+        
+            <div class="box_styling set_width">
+              <div class="box_heading">Rent Dates</div>
+    
+              <div style="position: relative;" >
+                <div class="range_div">
+                  <ion-range class="ion_range"></ion-range>
+                </div>
+                <div style="position: absolute; top: 14px; left: 23px;">
+                  <div>
+                    <div style="display: flex;align-items: center;">
+                      <div style="margin-right: 8px;">
+                        <img src="assets/images/icons/range_point.svg" alt="">
+                      </div>
+                      <div>
+                        <div class="box_sub_heading" style="margin-top: 3px;">Start Date</div>
+                        <div class="box_description" style="margin-top: 3px;">{{bookingRecordData.start_date}}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="height: 33px;"></div>
+                  <div>
+                    <div style="display: flex;align-items: center;">
+                      <div style="margin-right: 8px;">
+                        <img src="assets/images/icons/range_point.svg" alt="">
+                      </div>
+                      <div>
+                        <div class="box_sub_heading" style="margin-top: 3px;">End Date</div>
+                        <div class="box_description" style="margin-top: 3px;">{{bookingRecordData.end_date}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          
+          <!-- ------------design object for advertisement--------------- -->
+          <div class="box_heading" style="color: #0F172A;margin-top: 11px;">You might like this too!</div>
+          <div style="text-align: center; margin-top: 13px; position: relative; ">
+            <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
+            <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
+            <!-- (click)="openCancelBookingModal()" -->
+            <div class="rebook_label urbanist" style="background: #E23C3C;color: white;" >Cancel</div>
+            <div class="car_info_box" >
+              <div>
+                <div class="car_name urbanist">BMW 2 series</div>
+                <div style="text-align: left;line-height: 1;">
+                  <span>
+                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    <img class="star_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  </span>
+                  <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;">not rated yet</span>
+                </div>
+              </div>
+              <div class="car2_info_subdiv">
+                <div style="line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+                <!-- <div><img src="assets/images/icons/drop_down_arrow.svg" alt=""></div> -->
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <!-- -----------------details end--------------- -->
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>
+<ion-footer class="ion-no-border">
+    <div style="margin: 10px 0px 12px;" *ngIf="previous_tab=='true'">
+      <div style="text-align: center;">
+        <ion-button class="invite_btn" (click)="openModal()">
+          <span class="btn-text">Give Ratings</span>
+        </ion-button>
+      </div>
+    </div>
+
+    <ion-tabs style="display:contents ;">
+
+      <ion-tab-bar class="ion_tab_bar" slot="bottom">
+
+        <ion-tab-button  style="background: white;" (click)="homeTab()">
+          <img src="assets/images/tab_icons/home.svg" alt="">
+          <ion-label class="btn_label">Home</ion-label>
+          <!-- <ion-badge>6</ion-badge> -->
+        </ion-tab-button>
+    
+        <ion-tab-button  style="background: white;" (click)="messagesTab()">
+          <img style="height: 32px;width: 32px;"  src="assets/images/tab_icons/messages.svg" alt="">
+          <ion-label class="btn_label" >Messages</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button  style="background: white;" (click)="bookingTab()">
+          <img src="assets/images/tab_icons/booking_active.svg" alt="">
+          <ion-label class="btnActive_label">Booking</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button  style="background: white;" (click)="favoriteTab()">
+          <img src="assets/images/tab_icons/favorite.svg" alt="">
+          <ion-label class="btn_label">Favorities</ion-label>
+        </ion-tab-button>
+
+      </ion-tab-bar>
+
+    </ion-tabs>
+</ion-footer>

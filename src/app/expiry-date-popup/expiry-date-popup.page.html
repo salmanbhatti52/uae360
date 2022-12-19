@@ -1,6 +1,6 @@
 <ion-content>
   <div class="wrapper">
     <div class="date_label">Select Date  </div>
-    <ion-datetime (ionCancel)="cancel(ev)" [showDefaultButtons]="true"  presentation="date" (ionChange)="formattedString()" size="cover" [(ngModel)]="date"></ion-datetime>
+    <ion-datetime #datetime (ionCancel)="cancel(ev)" [showDefaultButtons]="true"  presentation="date" (ionChange)="formattedString(datetime.value)" size="cover" ></ion-datetime>
   </div>
 </ion-content>

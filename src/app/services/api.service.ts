@@ -14,6 +14,8 @@ export class ApiService {
   googleSignInResponse:any;
   localUserData:any;
   fetchLocation:any;
+  oneSignalUserId:any;
+  companyId: any;
   constructor(private http:HttpClient, 
     public toastController:ToastController,
     public loadingCtrl:LoadingController) { }
@@ -54,7 +56,9 @@ export class ApiService {
 
   async showLoading(){
     const loading = await this.loadingCtrl.create({
-      duration:3000
+      duration:3000,
+      message:'Please wait...'
+    
     });
     loading.present();
   }

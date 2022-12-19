@@ -11,6 +11,7 @@ import { CheckUserService } from '../check-user.service';
   styleUrls: ['./edit-profile.page.scss'],
 })
 export class EditProfilePage implements OnInit {
+  imageUrlString = 'https://360uae.eigix.net/public/';
   angForm:FormGroup;
   fName = '';
   lName = '';

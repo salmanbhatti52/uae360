@@ -138,6 +138,7 @@ let HomeBeforeLoginPage = class HomeBeforeLoginPage {
         this.showCategories = false;
         this.rentCategories = [{ category: 'Day' }, { category: 'Month' }];
         this.categoryVal = 'Day';
+        this.imageUrlString = 'https://360uae.eigix.net/';
         // pickups = [
         //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
         //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},

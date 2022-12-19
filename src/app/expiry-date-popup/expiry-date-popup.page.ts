@@ -12,10 +12,10 @@ export class ExpiryDatePopupPage implements OnInit {
 
   ngOnInit() {
   }
-  formattedString(){
-    const formattedString = format(parseISO(this.date), 'dd MMM, yyyy');
+  formattedString(value){
+    const formattedString = format(parseISO(value), 'dd MMM, yyyy');
     // =====dashed date for summary page=====
-    const dashedDate = format(parseISO(this.date), 'dd-MM-yyyy');
+    const dashedDate = format(parseISO(value), 'dd-MM-yyyy');
     this.date = dashedDate;
     console.log(dashedDate);
     // ============done================

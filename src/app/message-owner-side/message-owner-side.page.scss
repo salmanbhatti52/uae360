@@ -66,6 +66,8 @@ ion-footer{
     font-size: 14px;
     font-weight: 400;
     color: white;
+    width: auto;
+    max-width: 260px;
 }
 .message_time{
     margin-top: 6px;
@@ -106,6 +108,8 @@ ion-footer{
     font-size: 14px;
     font-weight: 400;
     color: #000000;
+    width: auto;
+    max-width: 260px;
 }
 .textarea{
     --background: #FBFBFB;

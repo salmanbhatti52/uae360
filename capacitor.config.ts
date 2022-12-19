@@ -10,8 +10,8 @@ const config: CapacitorConfig = {
       useDialog: false,
       showSpinner: true,
       spinnerColor: "#FFFFFF",
-      launchShowDuration: 3000,
-      launchAutoHide: true,
+      launchShowDuration: 8000,
+			launchAutoHide: true,
       backgroundColor: "#000000",
       androidSplashResourceName: "splash"
     },
@@ -24,3 +24,18 @@ const config: CapacitorConfig = {
 };
 
 export default config;
+// launchShowDuration: 3000,
+// "useDialog": false,
+// 			"showSpinner": true,
+// 			"spinnerColor": "#FFFFFF",
+// 			"launchAutoHide": false,
+// 			"backgroundColor": "#000000",
+// 			"androidSplashResourceName": "splash"
+
+// launchShowDuration: 3000,
+// 			launchAutoHide: false,
+// 			androidScaleType: "CENTER_INSIDE",
+// 			splashFullScreen: false,
+// 			splashImmersive: false,
+// 			backgroundColor: "#1C3461",
+// 			androidSplashResourceName: "splash"

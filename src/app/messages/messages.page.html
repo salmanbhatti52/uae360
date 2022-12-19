@@ -14,27 +14,36 @@
 <ion-content>
   <div class="wrapper">
     <div class="cover">
-      <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
-        <div style="display: flex;align-items: center;">
-          <div style="position: relative; margin-right: 15px;">
-            <img src="assets/images/message_profile_dummy1.svg" alt="">
-            <img style="position: absolute;bottom: 0px;left: 46px;" src="assets/images/icons/active1.svg" alt="">
+      <div *ngFor="let chat of chatList">
+        <div  style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="startChat(chat.receiver_id,chat.company_name,chat.company_online)">
+          <div style="display: flex;align-items: center;">
+            <div style="position: relative; margin-right: 15px;">
+              <img class="company_profile" src="{{imageUrlString}}{{chat.company_logo}}" alt="">
+              <img style="position: absolute;bottom: 0px;left: 46px;" src="assets/images/icons/active1.svg" alt="" *ngIf="chat.company_online == 'Yes'">
+              <img style="position: absolute;bottom: 0px;left: 46px;" src="assets/images/icons/active2.svg" alt="" *ngIf="chat.company_online == 'No'">
+            </div>
+            <div>
+              <div class="name">{{chat.company_name}}</div>
+              <div class="last_message">{{chat.last_message.message}}</div>
+            </div>
           </div>
-          <div>
-            <div class="name">Josh Gibson</div>
-            <div class="last_message">Subject line comes here</div>
+          
+          <div class="message_time">
+            {{chat.date}}
+            <div style="margin-top: 19.2px;" *ngIf="chat.last_message.status == 'Unread' && chat.last_message.sender_type == 'Companies'">
+              {{chat.last_message.status}}
+            </div>
           </div>
+          
         </div>
-        
-        <div class="message_time">
-          10 min ago
-        </div>
+        <hr>
       </div>
-      <hr>
+      
+
   
       <!-- --------------------------------copy----------------------------- -->
       
-      <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
+      <!-- <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
         <div style="display: flex;align-items: center;">
           <div style="position: relative; margin-right: 15px;">
             <img src="assets/images/message_profile_dummy2.svg" alt="">
@@ -50,9 +59,9 @@
           10 min ago
         </div>
       </div>
-      <hr>
+      <hr> -->
       <!-- --------------------------------copy----------------------------- -->
-      <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
+      <!-- <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
         <div style="display: flex;align-items: center;">
           <div style="position: relative; margin-right: 15px;">
             <img src="assets/images/message_profile_dummy3.svg" alt="">
@@ -68,9 +77,9 @@
           10 min ago
         </div>
       </div>
-      <hr>
+      <hr> -->
       <!-- --------------------------------copy----------------------------- -->
-      <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
+      <!-- <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
         <div style="display: flex;align-items: center;">
           <div style="position: relative; margin-right: 15px;">
             <img src="assets/images/message_profile_dummy4.svg" alt="">
@@ -86,9 +95,9 @@
           10 min ago
         </div>
       </div>
-      <hr>
+      <hr> -->
       <!-- --------------------------------copy----------------------------- -->
-      <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
+      <!-- <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
         <div style="display: flex;align-items: center;">
           <div style="position: relative; margin-right: 15px;">
             <img src="assets/images/message_profile_dummy5.svg" alt="">
@@ -104,7 +113,7 @@
           10 min ago
         </div>
       </div>
-      <hr>
+      <hr> -->
       <!-- --------------------------------copy ----------------------------- -->
     </div>
     

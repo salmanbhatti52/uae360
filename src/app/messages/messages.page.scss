@@ -62,12 +62,20 @@ ion-footer{
     font-weight: 500;
     color: black;
 }
+.company_profile{
+    height: 56px;
+    width: 56px;
+    border-radius: 20px;
+}
 .last_message{
     font-family: 'Poppins',sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: black;
     margin-top: 10.2px;
+    max-height: 25px;
+    max-width: 200px;
+    overflow: hidden;
 }
 .message_time{
     font-family: 'Poppins',sans-serif;

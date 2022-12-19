@@ -151,14 +151,7 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
     this.options = {
       useLocale: true,
       maxResults: 5
-    }; // pickups = [
-    //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-    //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
-    // ]
-
+    };
     this.pickups = [];
   }
 
@@ -169,19 +162,28 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
     console.log("AppPages: ", this.checkUser.appPages);
     this.appComponent.appPages = this.checkUser.appPages; // =======done============
     // ==============localUserData====================
-    // this.api.localUserData = undefined;
 
-    this.api.localUserData = JSON.parse(localStorage.getItem('localUserData')); //  JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
-    // this.api.localUserData.profile_pic = userData.profile_pic;
-    // this.api.localUserData.username = userData.username;
-    // this.api.localUserData.location = userData.location;
-
+    this.api.localUserData = JSON.parse(localStorage.getItem('localUserData'));
     console.log('localUserData: ', this.api.localUserData); // ================================================
 
     this.getCarTypes();
     this.getCars();
     this.fetchLocation();
-  }
+  } // checkAPI(){
+  //   let data = {
+  //     email: "ali12@gmail.com",
+  //     password: "1234",
+  //     account_type: "SignupWithApp",
+  //     // one_signal_id: localStorage.getItem("onesignaluserid"),
+  //     one_signal_id: "test",
+  //   };
+  //   this.api.sendRequest('signup',data).subscribe((res:any)=>{
+  //     console.log("Res Test: ",res);
+  //   },(err)=>{
+  //     console.log("Error: ",err);
+  //   });
+  // }
+
 
   fetchLocation() {
     var _this = this;

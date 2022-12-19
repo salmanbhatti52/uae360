@@ -19,6 +19,7 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 })
 export class HomeCarsAfterLoginPage implements OnInit {
   totalNotifications = 6;
+  imageUrlString = 'https://360uae.eigix.net/public/';
   item1 = true;
   item2 = false;
   item3 = false;
@@ -41,13 +42,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
     useLocale: true,
     maxResults: 5
   };
-  // pickups = [
-  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-  //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-  //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
-  // ]
+  
   pickups = [];
   constructor(public router:Router,
     public navCtrlr:NavController,
@@ -66,13 +61,8 @@ export class HomeCarsAfterLoginPage implements OnInit {
    // =======done============
 
   // ==============localUserData====================
-  // this.api.localUserData = undefined;
+ 
    this.api.localUserData = JSON.parse(localStorage.getItem('localUserData'));
-  //  JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
-    // this.api.localUserData.profile_pic = userData.profile_pic;
-    // this.api.localUserData.username = userData.username;
-    // this.api.localUserData.location = userData.location;
-
     console.log('localUserData: ',this.api.localUserData);
     
   // ================================================
@@ -80,6 +70,24 @@ export class HomeCarsAfterLoginPage implements OnInit {
    this.getCars();
    this.fetchLocation();
   }
+
+  // checkAPI(){
+  //   let data = {
+  //     email: "ali12@gmail.com",
+  //     password: "1234",
+  //     account_type: "SignupWithApp",
+  //     // one_signal_id: localStorage.getItem("onesignaluserid"),
+  //     one_signal_id: "test",
+  //   };
+  //   this.api.sendRequest('signup',data).subscribe((res:any)=>{
+  //     console.log("Res Test: ",res);
+      
+  //   },(err)=>{
+  //     console.log("Error: ",err);
+      
+  //   });
+  // }
+
   async fetchLocation(){
     const getCurrentLocation = await Geolocation.getCurrentPosition({
       enableHighAccuracy:true
@@ -188,7 +196,6 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item3 = false;
       this.item4 = false;
       this.item5 = false;
-      
       
         let data = {
           car_type_id: this.carTypeOneId

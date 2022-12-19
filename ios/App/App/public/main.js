@@ -81,7 +81,7 @@ const routes = [
     },
     {
         path: 'bookings',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_give-ratings-popup_give-ratings-popup_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_bookings_bookings_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./bookings/bookings.module */ 7938)).then(m => m.BookingsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_give-ratings-popup_give-ratings-popup_page_ts"), __webpack_require__.e("default-src_app_cancel-booking-popup_cancel-booking-popup_page_ts"), __webpack_require__.e("src_app_bookings_bookings_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./bookings/bookings.module */ 7938)).then(m => m.BookingsPageModule)
     },
     {
         path: 'home-cars-after-login',
@@ -97,7 +97,7 @@ const routes = [
     },
     {
         path: 'cancel-booking-popup',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_cancel-booking-popup_cancel-booking-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./cancel-booking-popup/cancel-booking-popup.module */ 35638)).then(m => m.CancelBookingPopupPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_cancel-booking-popup_cancel-booking-popup_page_ts"), __webpack_require__.e("src_app_cancel-booking-popup_cancel-booking-popup_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./cancel-booking-popup/cancel-booking-popup.module */ 35638)).then(m => m.CancelBookingPopupPageModule)
     },
     {
         path: 'live-chat-screen',
@@ -162,6 +162,10 @@ const routes = [
     {
         path: 'set-new-password',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_set-new-password_set-new-password_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./set-new-password/set-new-password.module */ 99695)).then(m => m.SetNewPasswordPageModule)
+    },
+    {
+        path: 'booking-details',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_give-ratings-popup_give-ratings-popup_page_ts"), __webpack_require__.e("default-src_app_cancel-booking-popup_cancel-booking-popup_page_ts"), __webpack_require__.e("src_app_booking-details_booking-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./booking-details/booking-details.module */ 83698)).then(m => m.BookingDetailsPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -218,6 +222,8 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppComponent = class AppComponent {
   constructor(menu, router, navCtrl, platform, checkUser, api) {
+    var _this = this;
+
     this.menu = menu;
     this.router = router;
     this.navCtrl = navCtrl;
@@ -225,9 +231,14 @@ let AppComponent = class AppComponent {
     this.checkUser = checkUser;
     this.api = api;
     this.appPages = [];
-    this.platform.ready().then(() => {
-      this.initializeApp();
-    });
+    this.platform.ready().then( /*#__PURE__*/(0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      // setTimeout(()=>{
+      //   SplashScreen.hide({
+      //     // fadeOutDuration: 1000
+      //   });
+      // }, 3000);
+      _this.initializeApp();
+    }));
   }
 
   initializeApp() {
@@ -247,22 +258,25 @@ let AppComponent = class AppComponent {
       const osUser = resp;
       console.log("incoming onesignl resp-----", resp);
       console.log("incoming onesignl uidd-----", osUser.userId);
-      localStorage.setItem("onesignaluserid", osUser.userId);
+      localStorage.setItem("oneSignalUserId", osUser.userId); // this.api.oneSignalUserId = osUser.userId
     });
   }
 
   ngOnInit() {
-    var _this = this;
+    var _this2 = this;
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       let userId = localStorage.getItem('appUserId');
       console.log('userId: ', userId);
 
       if (userId !== null) {
-        _this.router.navigate(['/home-cars-after-login']);
+        _this2.router.navigate(['/home-cars-after-login']);
       }
     })();
-  }
+  } // ionViewWillEnter(){
+  // 
+  // }
+
 
   refresh() {
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
@@ -272,11 +286,11 @@ let AppComponent = class AppComponent {
   }
 
   signOutForGoogle() {
-    var _this2 = this;
+    var _this3 = this;
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       yield _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_5__.GoogleAuth.signOut();
-      _this2.googleUserData = null;
+      _this3.googleUserData = null;
     })();
   }
 
@@ -530,7 +544,8 @@ let ApiService = class ApiService {
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const loading = yield _this2.loadingCtrl.create({
-        duration: 3000
+        duration: 3000,
+        message: 'Please wait...'
       });
       loading.present();
     })();
@@ -681,12 +696,12 @@ var map = {
 	],
 	"./ion-datetime-button.entry.js": [
 		17950,
-		"default-node_modules_ionic_core_dist_esm_parse-decd0f85_js-node_modules_ionic_core_dist_esm_t-a92c48",
+		"default-node_modules_ionic_core_dist_esm_data-cb72448c_js-node_modules_ionic_core_dist_esm_th-29e28e",
 		"node_modules_ionic_core_dist_esm_ion-datetime-button_entry_js"
 	],
 	"./ion-datetime_3.entry.js": [
 		79689,
-		"default-node_modules_ionic_core_dist_esm_parse-decd0f85_js-node_modules_ionic_core_dist_esm_t-a92c48",
+		"default-node_modules_ionic_core_dist_esm_data-cb72448c_js-node_modules_ionic_core_dist_esm_th-29e28e",
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-datetime_3_entry_js"
 	],
@@ -706,6 +721,7 @@ var map = {
 	],
 	"./ion-input.entry.js": [
 		83288,
+		"common",
 		"node_modules_ionic_core_dist_esm_ion-input_entry_js"
 	],
 	"./ion-item-option_3.entry.js": [

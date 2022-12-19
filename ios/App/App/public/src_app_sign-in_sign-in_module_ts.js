@@ -153,7 +153,10 @@ let SignInPage = class SignInPage {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.oneSignalUserId = localStorage.getItem('oneSignalUserId');
+    console.log('oneSignalUserId: ', this.oneSignalUserId);
+  }
 
   ionViewDidEnter() {
     this.menuCtrl.enable(false);
@@ -218,7 +221,7 @@ let SignInPage = class SignInPage {
         localStorage.setItem('localUserData', JSON.stringify(this.localUserData)); // ===update appPages===========
 
         console.log(this.checkUser.appUserId);
-        this.checkUser.checkUser(); // =============Maybe for Learning or used in app==============
+        this.checkUser.checkUser(); // =============  ==============
 
         localStorage.setItem("appPagesAfterLogin", JSON.stringify(this.checkUser.appPages));
         console.log(localStorage.getItem('appPagesAfterLogin'));
@@ -267,6 +270,28 @@ let SignInPage = class SignInPage {
     const url = 'https://graph.facebook.com/' + this.token.userId + '?fields=id,name,picture.width(720),birthday,email&access_token=' + this.token.token;
     this.http.post(url, {}, {}).subscribe(res => {
       console.log('resp=', res);
+      this.fbUserData = res;
+      let data = {
+        username: res.name,
+        email: res.email,
+        one_signal_id: this.oneSignalUserId,
+        google_access_token: this.token.token,
+        profile_pic: res.picture.data.url,
+        account_type: "SignupWithSocial",
+        social_acc_type: "Facebook",
+        password: "dummy",
+        status: "Active",
+        phone: "dummy",
+        verify_code: "dummy"
+      };
+      this.api.sendRequest('signupwithsocial', data).subscribe(res => {
+        console.log('Response: ', res);
+
+        if (res.status == 'success') {// this.router.navigate(['/home-cars-after-login']);
+        }
+      }, err => {
+        console.log("Error: ", err);
+      });
     });
   } // =============================================================
   // ====================signInWithGoogle==========================
@@ -278,28 +303,52 @@ let SignInPage = class SignInPage {
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       _this2.googleUserData = yield _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_6__.GoogleAuth.signIn();
       console.log('GoogleUserResponse: ', _this2.googleUserData);
-      _this2.api.googleSignInResponse = _this2.googleUserData; // if(this.googleUserData.authentication.accessToken !== ''){
-      //   console.log('AccessToken: ',this.googleUserData.authentication.accessToken);
-      //   this.router.navigate(['/home-cars-after-login']);
-      // }
-      // let data={
-      //   username: ,
-      //   email: ,
-      //   one_signal_id: ,
-      //   google_access_token:,
-      //   profile_pic: ,
-      //   account_type : "SignupWithSocial",
-      //   social_acc_type:"Google",
-      //   password:"dummy",
-      //   status:"Active",
-      //   phone:"dummy",
-      //   verify_code:"dummy",
-      // }
-      // this.api.sendRequest('signupwithsocial',data).subscribe((res:any)=>{
-      //   console.log('Response: ',res);
-      // },(err)=>{
-      //   console.log("Error: ",err);
-      // });
+      _this2.api.googleSignInResponse = _this2.googleUserData;
+      let data = {
+        username: _this2.googleUserData.displayName,
+        email: _this2.googleUserData.email,
+        one_signal_id: _this2.oneSignalUserId,
+        google_access_token: _this2.googleUserData.authentication.accessToken,
+        profile_pic: _this2.googleUserData.imageUrl,
+        account_type: "SignupWithSocial",
+        social_acc_type: "Google",
+        password: "dummy",
+        status: "Active",
+        phone: "dummy",
+        verify_code: "dummy"
+      };
+
+      _this2.api.sendRequest('signupwithsocial', data).subscribe(res => {
+        console.log('Response: ', res);
+
+        if (res.status == 'success') {
+          // this.api.presentToast('Success! Welcome')
+          localStorage.setItem('appUserId', res.data.appUserId);
+          console.log('appUserId', res.data.appUserId);
+          _this2.checkUser.appUserId = res.data.appUserId; // =============localUserData fetch===================
+
+          _this2.localUserData.profile_pic = res.data.profile_pic;
+          _this2.localUserData.username = res.data.username;
+          _this2.localUserData.location = res.data.location;
+          _this2.localUserData.email = res.data.email;
+          _this2.localUserData.about = res.data.about;
+          _this2.api.localUserData = _this2.localUserData;
+          localStorage.setItem('localUserData', JSON.stringify(_this2.localUserData)); // ======update appPages===========
+
+          console.log(_this2.checkUser.appUserId);
+
+          _this2.checkUser.checkUser(); // =============  ==============
+
+
+          localStorage.setItem("appPagesAfterLogin", JSON.stringify(_this2.checkUser.appPages));
+          console.log(localStorage.getItem('appPagesAfterLogin'));
+          _this2.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); // =======done============
+
+          _this2.router.navigate(['/home-cars-after-login']);
+        }
+      }, err => {
+        console.log("Error: ", err);
+      });
     })();
   }
 

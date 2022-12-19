@@ -8,7 +8,7 @@
 			"useDialog": false,
 			"showSpinner": true,
 			"spinnerColor": "#FFFFFF",
-			"launchShowDuration": 3000,
+			"launchShowDuration": 8000,
 			"launchAutoHide": true,
 			"backgroundColor": "#000000",
 			"androidSplashResourceName": "splash"

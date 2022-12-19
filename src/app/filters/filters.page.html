@@ -1,5 +1,5 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar class="bgtoolbar">
+<ion-header class="ion-no-border" [class.header_footer_bg]="checkUser.appUserId != null">
+  <ion-toolbar class="bgtoolbar" [class.content_background]="checkUser.appUserId != null">
     <div class="header">
       <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
       <div class="title">Filter</div>
@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [class.content_background]="checkUser.appUserId != null">
   <div class="wrapper">
     <div class="date_alignment">
       <ion-datetime size="cover" class="date_box" presentation="date"></ion-datetime> 
@@ -39,7 +39,7 @@
 
   </div>
 </ion-content>
-<ion-footer class="ion-no-border">
+<ion-footer class="ion-no-border" [class.header_footer_bg]="checkUser.appUserId != null">
   <div style="margin: 5px 0px 10px;">
     <div style="text-align: center;">
       <ion-button class="invite_btn" (click)="gotoHomeAfterLogin()">

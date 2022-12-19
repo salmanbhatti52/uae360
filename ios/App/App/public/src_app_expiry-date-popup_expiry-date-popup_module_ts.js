@@ -109,10 +109,10 @@ let ExpiryDatePopupPage = class ExpiryDatePopupPage {
     }
     ngOnInit() {
     }
-    formattedString() {
-        const formattedString = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(this.date), 'dd MMM, yyyy');
+    formattedString(value) {
+        const formattedString = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(value), 'dd MMM, yyyy');
         // =====dashed date for summary page=====
-        const dashedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(this.date), 'dd-MM-yyyy');
+        const dashedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(value), 'dd-MM-yyyy');
         this.date = dashedDate;
         console.log(dashedDate);
         // ============done================
@@ -155,7 +155,7 @@ module.exports = "ion-content {\n  --background:#FBFBFB !important;\n}\n\n.wrapp
   \**************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"date_label\">Select Date  </div>\n    <ion-datetime (ionCancel)=\"cancel(ev)\" [showDefaultButtons]=\"true\"  presentation=\"date\" (ionChange)=\"formattedString()\" size=\"cover\" [(ngModel)]=\"date\"></ion-datetime>\n  </div>\n</ion-content>\n";
+module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"date_label\">Select Date  </div>\n    <ion-datetime #datetime (ionCancel)=\"cancel(ev)\" [showDefaultButtons]=\"true\"  presentation=\"date\" (ionChange)=\"formattedString(datetime.value)\" size=\"cover\" ></ion-datetime>\n  </div>\n</ion-content>\n";
 
 /***/ })
 

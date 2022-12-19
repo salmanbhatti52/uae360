@@ -1,5 +1,5 @@
-<ion-header class="ion-no-border" [class.header_footer_bg]="this.checkUser.appUserId != null">
-  <ion-toolbar class="bgtoolbar" [class.content_background]="this.checkUser.appUserId != null">
+<ion-header class="ion-no-border" [class.header_footer_bg]="checkUser.appUserId != null">
+  <ion-toolbar class="bgtoolbar" [class.content_background]="checkUser.appUserId != null">
     <div class="header">
       <img (click)="goBack()" src="assets/images/icons/back_arrow.svg" alt="">
       <div class="title">{{vehicleName}}</div>
@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [class.content_background]="this.checkUser.appUserId != null">
+<ion-content [class.content_background]="checkUser.appUserId != null">
   <div class="wrapper">
     <div *ngFor="let data of carData">
       <swiper [pagination]="true" [config]="{ intialSlide: 0, speed: 400, slidesPerView:1 }">
@@ -18,35 +18,35 @@
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img (click)="makefavorite()" style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img (click)="makefavorite()" style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
-            <img class="car_image" src="{{data.image1}}" alt="">
+            <img class="car_image" src="{{imageUrlString}}{{data.image1}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
-            <img class="car_image" src="{{data.image2}}" alt="">
+            <img class="car_image" src="{{imageUrlString}}{{data.image2}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
-            <img class="car_image" src="{{data.image3}}" alt="">
+            <img class="car_image" src="{{imageUrlString}}{{data.image3}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
-            <img class="car_image" src="{{data.image4}}" alt="">
+            <img class="car_image" src="{{imageUrlString}}{{data.image4}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
-            <img class="car_image" src="{{data.image5}}" alt="">
+            <img class="car_image" src="{{imageUrlString}}{{data.image5}}" alt="">
           </div>
         </ng-template>
       </swiper>
@@ -119,14 +119,13 @@
           <img src="assets/images/icons/next.svg" alt="">
         </div>
       </div>
-      
     </div>
 
   </div>
 
 </ion-content>
 
-<ion-footer class="ion-no-border" [class.header_footer_bg]="this.checkUser.appUserId != null">
+<ion-footer class="ion-no-border" [class.header_footer_bg]="checkUser.appUserId != null">
     <div style="margin: 10px 0px 15px;">
       <div style="text-align: center;">
         <ion-button class="invite_btn" (click)="startCarBooking()">

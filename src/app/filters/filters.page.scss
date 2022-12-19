@@ -10,6 +10,12 @@ ion-footer{
     font-family: 'Poppins', sans-serif;
     background-color: #FCF6FF !important;
 }
+.header_footer_bg{
+    background-color: #FBFBFB !important;
+}
+.content_background{
+    --background: #FBFBFB !important;
+}
 .header{
     display: flex;
     align-items: center;

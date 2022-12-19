@@ -17,12 +17,15 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 export class CarDetailsPage implements OnInit {
   favorites = '';
   showCategories = false;
+  imageUrlString = 'https://360uae.eigix.net/public/';
   rentCategories = [{category:'Day'},{category:'Month'}]
   categoryVal = 'Day';
   carData = [];
   vehicleName:any;
   carId: any;
   appUserId: string;
+  company_id: any;
+  company_name: any;
   
   constructor(public location:Location,
     public navCtrlr:NavController,
@@ -36,6 +39,8 @@ export class CarDetailsPage implements OnInit {
       for (let data of this.carData) {
         this.vehicleName = data.vehical_name;
         this.carId = data.car_id;
+        this.company_id = data.users_company_id;
+        this.company_name = data.company_name;
         if(!data.favourite_status){
           this.favorites = 'dislike';
         }else{
@@ -117,7 +122,34 @@ export class CarDetailsPage implements OnInit {
     if(this.checkUser.appUserId == null){
       this.navCtrlr.navigateRoot('sign-in');
     }else if(this.checkUser.appUserId != null){
-      this.navCtrlr.navigateRoot('message-owner-side');
+      let data = {
+        requestType:"startChat",
+        userId:this.checkUser.appUserId,
+        otherUserId:this.company_id
+      }
+      this.api.sendRequest("Chat", data).subscribe((res:any)=>{
+        console.log("Start_chat_Request_Response: ",res);
+        if(res.status == 'success'){
+          this.api.companyId = this.company_id;
+          console.log("this.api.companyId: ",this.api.companyId);
+          
+          // console.log();
+          // let chat_ids = {
+          //   user_id: this.checkUser.appUserId,
+          //   company_id: this.company_id
+          // }
+          // this.api.chat_ids.user_id = this.checkUser.appUserId;
+          // this.api.chat_ids.company_id = this.company_id;
+          this.navCtrlr.navigateForward(['/message-owner-side',{
+            company_id: this.company_id,
+            company_name: this.company_name 
+          }]);
+        }
+      },(err)=>{
+        console.log("Error: ",err);
+        
+      })
+      
     }else{
 
     }

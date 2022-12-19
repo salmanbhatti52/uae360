@@ -3,41 +3,43 @@
     <div class="header">
       <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
       <div style="margin: 0px auto;text-align: center;">
-        <div class="header_title">Chat with Seth Anderson</div>
-        <div class="show_status">Online</div>
+        <div class="header_title">Chat with {{companyName}}</div>
+        <div class="show_status" *ngIf="companyOnline == 'Yes'">Online</div>
+        <div class="show_status" *ngIf="companyOnline == 'No'">Offline</div>
       </div>
       
     </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="wrapper">
-    <div style="display: flex; align-items: flex-start;">
-      <img style="margin-right: 12px;"  src="assets/images/icons/owner_pic.svg" alt="">
-      <div class="owner_message_box">
-        <div class="owner_message">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-           nonumy eirmod tempor invidunt ut labore et</div>
-        <div class="message_time" style="opacity: 50%;"><span>6:08pm</span><span> Today</span></div>
+<ion-content #IonContent>
+  <div class="wrapper" >
+    <div  *ngFor="let msg of messages; let last = last">
+      <div style="display: flex; align-items: flex-start;padding-bottom: 14px;width: 85%;" *ngIf="msg.sender_type === 'Companies'">
+        <img style="margin-right: 12px;height: 24px; width: 24px; border-radius: 50%;"  src="{{imageUrlString}}{{msg.users_data.company_logo}}" alt="">
+        <div class="owner_message_box">
+          <div class="owner_message">{{msg.message}}</div>
+          <!-- {{last? callFunction() : ''}} -->
+          <div class="message_time" style="opacity: 50%;"><span>{{msg.time}}</span><span> {{msg.date}} </span></div>
+        </div>
+      </div>
+  
+      <div style="display: flex; justify-content: flex-end;padding-bottom: 14px; float: right;width: 85%;" *ngIf="msg.sender_type === 'Users'">
+        <div class="consumer_message_box">
+          <div class="consumer_message">{{msg.message}}</div>
+          <!-- {{last? callFunction() : ''}} -->
+          <div class="message_time" style="color: #B1A8B9;"><span>{{msg.time}}</span><span> {{msg.date}} </span></div>
+        </div>
+        <img style="margin-left: 12px;height: 24px; width: 24px; border-radius: 50%;"  src="{{imageUrlString}}{{msg.users_data.profile_pic}}" alt="">
       </div>
     </div>
-
-    <div style="display: flex; align-items: flex-start;margin-top: 18px;float: right;">
-      <div class="consumer_message_box">
-        <div class="consumer_message">Lorem ipsum dolor sit amet</div>
-        <div class="message_time" style="color: #B1A8B9;"><span>6:08pm</span><span> Today</span></div>
-      </div>
-      <img style="margin-left: 12px;"  src="assets/images/icons/consumer_pic.svg" alt="">
-    </div>
-    
-    
   </div>
 
 </ion-content>
 <ion-footer class="ion-no-border">
   <div style="display: flex;align-items: center;padding: 9px 16px 10px; box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);">
-    <ion-textarea class="textarea" auto-grow="true" placeholder="Type your message here....."></ion-textarea>
-    <div><img src="assets/images/icons/send_message.svg" alt=""></div>
+    <ion-textarea #textarea class="textarea" auto-grow="true" placeholder="Type your message here....." ></ion-textarea>
+    <div><img (click)="sendMessage(textarea.value)" src="assets/images/icons/send_message.svg" alt=""></div>
   </div>
 
 </ion-footer>

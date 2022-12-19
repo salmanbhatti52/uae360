@@ -29,6 +29,7 @@ interface LocalFile {
   styleUrls: ['./car-booking.page.scss'],
 })
 export class CarBookingPage implements OnInit {
+  imageUrlString = 'https://360uae.eigix.net/public/';
   dateRange:any;
   type: 'string';
   start_date: any;
