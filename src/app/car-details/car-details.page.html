@@ -85,9 +85,7 @@
         <div class="box_heading">Owner's Details</div>
         <div class="box_sub_heading">About</div>
         <div class="box_description">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard dummy text ever since
-          the 1500s.
+          {{data.about}}
         </div>
       </div>
   
@@ -97,29 +95,67 @@
           {{data.company_location}}
         </div>
       </div>
-    </div>
-    
-
-    
-
-    <div class="box_styling" style="padding: 14px 14px 15px;" (click)="gotoRatings()">
-      <div class="inner_box">
-        <div>
-          <span class="box_heading" style="margin-right: 10px;">Ratings</span>
-          <span style="margin-right: 6px;">
-            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-          </span>
-          <span class="trips_label">269 trips</span>
-        </div>
-        <div>
-          <img src="assets/images/icons/next.svg" alt="">
+      <div class="box_styling" style="padding: 14px 14px 15px;" (click)="gotoRatings()">
+        <div class="inner_box">
+          <div>
+            <span class="box_heading" style="margin-right: 10px;">Ratings</span>
+            
+            <span *ngIf="data.rating == 0 ">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+            </span>
+            <span *ngIf="data.rating >=1 && data.rating < 1.5">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+            </span>
+            <span *ngIf="data.rating >=1.5 && data.rating < 2.5">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+            </span>
+            <span *ngIf="data.rating >=2.5 && data.rating < 3.5">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+            </span>
+            <span *ngIf="data.rating >=3.5 && data.rating < 4.5">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+            </span>
+            <span *ngIf="data.rating >=4.5 && data.rating < 5.1">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+            </span>
+              
+            <span class="trips_label">269 trips</span>
+          </div>
+          <div>
+            <img src="assets/images/icons/next.svg" alt="">
+          </div>
         </div>
       </div>
     </div>
+    
+
+    
+
+    
 
   </div>
 

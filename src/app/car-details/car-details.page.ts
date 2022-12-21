@@ -33,7 +33,7 @@ export class CarDetailsPage implements OnInit {
     public api:ApiService,
     public router:Router) { }
 
-  ngOnInit() {
+  ionViewWillEnter(){
     this.carData = this.api.carDataById;
     if (this.carData != undefined) {
       for (let data of this.carData) {
@@ -56,6 +56,10 @@ export class CarDetailsPage implements OnInit {
       this.favorites = 'dislike';
     }
   }
+  ngOnInit() {
+    
+    
+  }
   goBack(){
     this.location.back();
   }
@@ -71,17 +75,20 @@ export class CarDetailsPage implements OnInit {
     if(this.appUserId == null){
       this.navCtrlr.navigateRoot('sign-in');
     }else{
-      this.api.showLoading();
+      
       let data = {
         favourite_car_id: this.carId,
         user_id:this.appUserId,
       };
+      this.api.showLoading();
       this.api.sendRequest('favouriteCars',data).subscribe((res:any)=>{
+        this.api.hideLoading();
         console.log('Favorite Api Response: ',res);
         if(res.status == 'success'){
           this.favorites = res.data
+          this.getCarDataById();
         }
-        this.api.hideLoading();
+        
         // else if(res.status == 'error'){
         //   this.api.presentToast()
         // }
@@ -92,9 +99,35 @@ export class CarDetailsPage implements OnInit {
         
       });
     }
-    
-
   }
+
+  getCarDataById(){
+    
+    let data = {
+      car_id: this.carId,
+      user_id: this.checkUser.appUserId
+    }
+    this.api.showLoading();
+    this.api.sendRequest('getCarsById',data).subscribe((res:any)=>{
+      this.api.hideLoading();
+      console.log('api response:',res);
+      if(res.status == 'success'){
+        this.api.carDataById = res.data;
+        // if(!res.data.favourite_status){
+        //   console.log("Favorite status not found");
+        //   this.api.favorite_status = false;
+        // }
+        console.log('carDataById:',this.api.carDataById);
+        
+      }
+      
+    },(err)=>{
+      this.api.hideLoading();
+      console.log(err);
+      
+    })
+  }
+
   selectedCategory(val){
     console.log(val);
     this.categoryVal = val;
@@ -103,7 +136,9 @@ export class CarDetailsPage implements OnInit {
     if(this.checkUser.appUserId == null){
       this.navCtrlr.navigateRoot('sign-in');
     }else if(this.checkUser.appUserId != null){
-      this.navCtrlr.navigateRoot('ratings'); 
+      // this.router.navigate
+      this.navCtrlr.navigateRoot('ratings');
+
     }else{
 
     }

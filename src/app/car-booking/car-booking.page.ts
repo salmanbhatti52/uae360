@@ -30,6 +30,7 @@ interface LocalFile {
 })
 export class CarBookingPage implements OnInit {
   imageUrlString = 'https://360uae.eigix.net/public/';
+  favorites = '';
   dateRange:any;
   type: 'string';
   start_date: any;
@@ -100,23 +101,28 @@ export class CarBookingPage implements OnInit {
     public checkUser: CheckUserService,
     private platform: Platform) { }
 
-  ngOnInit() {
+  ionViewWillEnter(){
     this.carData = this.api.carDataById;
     
     if (this.carData != undefined) {
       for (let data of this.carData) {
-        this.carId = data.car_id
+        this.carId = data.car_id;
         this.costPerDay = new Number(data.rent_cost_day);
         this.costPerMonth = new Number(data.rent_cost_month);
         this.vehicleName = data.vehical_name;
         this.company_location = data.company_location;
+        if(!data.favourite_status){
+          this.favorites = 'dislike';
+        }else{
+          this.favorites = data.favourite_status;
+        }
       }
     }
+    this.getBooking();
+  }
+  ngOnInit() {
     
     this.loadFiles();
-    this.getBooking();
-
-    
   }
   getStartHours(){
     console.log('getStartHours: ',this.dateRange);
@@ -306,8 +312,58 @@ export class CarBookingPage implements OnInit {
     }
       
   }
-  
 
+  makefavorite(){
+
+    let data = {
+      favourite_car_id: this.carId,
+      user_id:this.checkUser.appUserId,
+    };
+    this.api.showLoading();
+    this.api.sendRequest('favouriteCars',data).subscribe((res:any)=>{
+      this.api.hideLoading();
+      console.log('Favorite Api Response: ',res);
+      if(res.status == 'success'){
+        this.favorites = res.data
+        this.getCarDataById();
+      }
+      // else if(res.status == 'error'){
+      //   this.api.presentToast()
+      // }
+      
+    },(err)=>{
+      this.api.hideLoading();
+      console.log('Error', err);
+      
+    });
+
+  }
+
+  getCarDataById(){
+    
+    let data = {
+      car_id: this.carId,
+      user_id: this.checkUser.appUserId
+    }
+    this.api.showLoading();
+    this.api.sendRequest('getCarsById',data).subscribe((res:any)=>{
+      this.api.hideLoading();
+      console.log('api response:',res);
+      if(res.status == 'success'){
+        this.api.carDataById = res.data;
+        // if(!res.data.favourite_status){
+        //   console.log("Favorite status not found");
+        //   this.api.favorite_status = false;
+        // }
+        console.log('carDataById:',this.api.carDataById);
+      }
+      
+    },(err)=>{
+      this.api.hideLoading();
+      console.log(err);
+      
+    })
+  }
   async loadFiles() {
     this.image = [];
     this.api.showLoading();

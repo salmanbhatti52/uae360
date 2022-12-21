@@ -18,7 +18,7 @@
       <img style="margin-right: 11px;" src="assets/images/icons/lighted_star.svg" alt="" *ngIf="rateStar5==true;" (click)="rateStar(5)">
       
     </div>
-    <ion-textarea auto-grow="true" name="feedback"  type="text" maxlength="150" class="textarea" rows="3" cols="20" placeholder="Add your feedback" [(ngModel)]="feedback"></ion-textarea>
+    <ion-textarea #textarea auto-grow="true" name="feedback"  type="text" maxlength="150" class="textarea" rows="3" cols="20" placeholder="Add your feedback" [(ngModel)]="feedback"></ion-textarea>
     <div class="characters_limit">*Maximum 150 characters</div>
     <div style="text-align: center;margin-top: 16px;">
       <ion-button class="invite_btn" (click)="sendFeedback()">

@@ -59,6 +59,7 @@ createForm(){
 
     }
     this.userProfile = this.api.localUserData.profile_pic;
+    this.userProfile = `https://360uae.eigix.net/public/${this.userProfile}`
     this.userEmail = this.api.localUserData.email;
     this.userAbout = this.api.localUserData.about;
     this.userLocation = this.api.localUserData.location;
@@ -161,12 +162,14 @@ createForm(){
       this.api.hideLoading();
       console.log('Updat Profile Res: ',res);
       if(res.status == 'success'){
+        this.api.presentToast('Success!')
         this.api.localUserData.username = res.data[0].username;
         this.api.localUserData.about = res.data[0].about;
         this.api.localUserData.profile_pic = res.data[0].profile_pic;
         this.api.localUserData.email = res.data[0].email;
         this.api.localUserData.location = res.data[0].location;
         console.log('api Local User Data: ',this.api.localUserData);
+        localStorage.setItem('localUserData',JSON.stringify(this.api.localUserData));
         this.navCtrlr.navigateRoot('settings');
       }else if(res.status == 'error'){
         // console.log("Error: ",);

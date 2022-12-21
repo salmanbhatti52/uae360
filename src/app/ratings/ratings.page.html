@@ -9,37 +9,76 @@
 
 <ion-content>
   <div class="wrapper">
-    <div class="rating_item" >
-      <img class="user_img" src="assets/images/message_profile_dummy1.svg" alt="">
-      <div>
-        <div class="title_star_div" >
-          <div class="user_title" >Josh Gibson</div>
-          <div >
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/empty_star.svg" alt="">
+    <div *ngIf="carRatings !== undefined">
+      <div class="rating_item" *ngFor="let rating of carRatings">
+        <img class="user_img" src="{{imageUrlString}}{{rating.profile_pic}}" alt="">
+        <div>
+          <div class="title_star_div" >
+            <div class="user_title" >{{rating.username}}</div>
+            
+            <div *ngIf="rating.rate_stars == 0 ">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+            </div>
+            <div *ngIf="rating.rate_stars >=1 && rating.rate_stars < 1.5">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+            </div>
+            <div *ngIf="rating.rate_stars >=1.5 && rating.rate_stars < 2.5">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+            </div>
+            <div *ngIf="rating.rate_stars >=2.5 && rating.rate_stars < 3.5">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+            </div>
+            <div *ngIf="rating.rate_stars >=3.5 && rating.rate_stars < 4.5">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+            </div>
+            <div *ngIf="rating.rate_stars >=4.5 && rating.rate_stars < 5.1">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+            </div>
+            
           </div>
-        </div>
-        <div class="item_text" >
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-          eirmod tempor invidunt ut labore et dolore magna.
+          <div class="item_text" >
+            {{rating.comments}} It was the best experience  It was the best experience  It was the best experience  It was the best experience  It was the best experience  It was the best experience  It was the best experience  It was the best experience 
+          </div>
         </div>
       </div>
     </div>
+    
     <!-- ==============================copy============================ -->
-    <div class="rating_item" >
+    <!-- <div class="rating_item" >
       <img class="user_img" src="assets/images/message_profile_dummy1.svg" alt="">
       <div>
         <div class="title_star_div" >
           <div class="user_title" >Josh Gibson</div>
           <div >
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/empty_star.svg" alt="">
+            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+            <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+            <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
           </div>
         </div>
         <div class="item_text" >
@@ -47,47 +86,8 @@
           eirmod tempor invidunt ut labore et dolore magna.
         </div>
       </div>
-    </div>
-    <!-- ==============================copy============================ -->
-    <div class="rating_item" >
-      <img class="user_img" src="assets/images/message_profile_dummy1.svg" alt="">
-      <div>
-        <div class="title_star_div" >
-          <div class="user_title" >Josh Gibson</div>
-          <div >
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/empty_star.svg" alt="">
-          </div>
-        </div>
-        <div class="item_text" >
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-          eirmod tempor invidunt ut labore et dolore magna.
-        </div>
-      </div>
-    </div>
-    <!-- ==============================copy============================ -->
-    <div class="rating_item" >
-      <img class="user_img" src="assets/images/message_profile_dummy1.svg" alt="">
-      <div>
-        <div class="title_star_div" >
-          <div class="user_title" >Josh Gibson</div>
-          <div >
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-            <img class="start_margin" src="assets/images/icons/empty_star.svg" alt="">
-          </div>
-        </div>
-        <div class="item_text" >
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-          eirmod tempor invidunt ut labore et dolore magna.
-        </div>
-      </div>
-    </div>
+    </div> -->
+   
   </div>
 </ion-content>
 

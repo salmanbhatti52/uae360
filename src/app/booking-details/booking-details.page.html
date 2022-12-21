@@ -18,23 +18,65 @@
      
       <div >
         <div style="text-align: center; margin-top: 16px; position: relative;" >
-          <img style="width: 100%;" src="assets/images/bookings_car.svg" alt="">
-          <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="">
-          <!-- <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt=""> -->
+          <img style="width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;" src="{{imageUrlString}}{{bookingRecordData.cars_details[0].image1}}" alt="">
+          <div *ngIf="bookingRecordData.user_favourite_cars.length != 0">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status != 'liked'">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status == 'liked'">
+          </div>
+          <div *ngIf="bookingRecordData.user_favourite_cars.length == 0">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites != 'liked'">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+          </div>
           <div class="rebook_label poppins" (click)="startCarBooking()">Rebook</div>
+          <div class="status_label poppins" >{{bookingRecordData.status}}</div>
           <div class="car_info_box" >
             <div>
-              <div class="car_name poppins">BMW 2 series</div>
+              <div class="car_name poppins">{{bookingRecordData.cars_details[0].vehical_name}}</div>
               <!-- (click)="openModal()" -->
               <div style="text-align: left;line-height: 1;" >
-                <span>
-                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <span *ngIf="bookingRecordData.cars_details[0].rating == 0">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
                   <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
-                <span class="rating_value urbanist">(0)</span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating >=1 && bookingRecordData.cars_details[0].rating < 1.5">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                </span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating >=1.5 && bookingRecordData.cars_details[0].rating < 2.5">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                </span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating >=2.5 && bookingRecordData.cars_details[0].rating < 3.5">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                </span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating >=3.5 && bookingRecordData.cars_details[0].rating < 4.5">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                </span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating >=4.5 && bookingRecordData.cars_details[0].rating < 5.1">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                </span>
+                <span class="rating_value urbanist">({{bookingRecordData.cars_details[0].rating}})</span>
               </div>
             </div>
             <div class="car_info_subdiv">
@@ -48,14 +90,7 @@
           <div class="box_styling">
             <div class="box_heading">Description</div>
             <div class="box_description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since the 
-              1500s, when an unknown printer took a galley of type and scrambled it to
-              make a type specimen book.It has survived not only five centuries, but 
-              also the leap into electronic typesetting, remaining essentially 
-              unchanged. It was popularised in the 1960s with the release of Letraset 
-              sheets containing Lorem Ipsum passages, and more recently with desktop 
-              publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              {{bookingRecordData.cars_details[0].description}}
             </div>
           </div>
       
@@ -63,16 +98,14 @@
             <div class="box_heading">Owner's Details</div>
             <div class="box_sub_heading">About</div>
             <div class="box_description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since
-              the 1500s.
+              {{bookingRecordData.users_company_details[0].about}}
             </div>
           </div>
       
           <div class="box_styling">
             <div class="box_sub_heading" style="margin-top: 0px;">Location</div>
             <div class="box_description" style="margin-top: 4px;">
-               {{bookingRecordData.company_location}}
+              {{bookingRecordData.users_company_details[0].company_location}}
             </div>
           </div>
       
@@ -96,8 +129,10 @@
           <div style="text-align: center; margin-top: 13px; position: relative; ">
             <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
             <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-            <div class="rebook_label urbanist" (click)="startCarBooking()">Rebook</div>
-            <div class="car_info_box" >
+            <div class="rebook_label urbanist" >Rebook</div>
+            <!-- (click)="startCarBooking()" -->
+            <div class="status_label poppins" >Accepted</div>
+            <div class="car_info_box" style="position: absolute;">
               <div>
                 <div class="car_name urbanist">BMW 2 series</div>
                 <div style="text-align: left;line-height: 1;">
@@ -127,22 +162,65 @@
       
       <div >
         <div style="text-align: center; margin-top: 16px; position: relative;" >
-          <img style="width: 100%;" src="assets/images/bookings_car.svg" alt="">
-          <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="">
-          <!-- <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt=""> -->
+          <img style="width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;" src="{{imageUrlString}}{{bookingRecordData.cars_details[0].image1}}" alt="">
+          <div *ngIf="bookingRecordData.user_favourite_cars.length != 0">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status != 'liked'">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status == 'liked'">
+          </div>
+          <div *ngIf="bookingRecordData.user_favourite_cars.length == 0">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites != 'liked'" >
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+          </div>
+          
           <div class="rebook_label urbanist" style="background: #E23C3C;color: white;" (click)="openCancelBookingModal(bookingRecordData.booking_id)">Cancel</div>
+          <div class="status_label poppins" >{{bookingRecordData.status}}</div>
           <div class="car_info_box" >
             <div>
-              <div class="car_name urbanist">BMW 2 series</div>
+              <div class="car_name urbanist">{{bookingRecordData.cars_details[0].vehical_name}}</div>
               <div style="text-align: left;line-height: 1;">
-                <span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating == 0">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                </span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating >=1 && bookingRecordData.cars_details[0].rating < 1.5">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                </span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating >=1.5 && bookingRecordData.cars_details[0].rating < 2.5">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                </span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating >=2.5 && bookingRecordData.cars_details[0].rating < 3.5">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                </span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating >=3.5 && bookingRecordData.cars_details[0].rating < 4.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
-                <span class="rating_value urbanist">(4.0)</span>
+                <span *ngIf="bookingRecordData.cars_details[0].rating >=4.5 && bookingRecordData.cars_details[0].rating < 5.1">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                </span>
+                <span class="rating_value urbanist">({{bookingRecordData.cars_details[0].rating}})</span>
               </div>
             </div>
             <div class="car_info_subdiv">
@@ -152,14 +230,15 @@
         </div>
         <!-- -------------------------upcoming details------------------------------- -->
         <div >
-          <div style="display: flex;justify-content: space-between;">
+          <div style="display: flex;justify-content: space-between;height: 185px;">
             <div class="box_styling" style="width: 55%;">
               <div class="box_heading">Owner's Details</div>
               <div class="box_sub_heading">About</div>
               <div class="box_description" style="max-height: 108px;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                {{bookingRecordData.users_company_details[0].about}}
+                <!-- Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 Lorem Ipsum has been the industry's standard dummy text ever since
-                the 1500s.
+                the 1500s. -->
               </div>
             </div>
         
@@ -203,11 +282,12 @@
           <!-- ------------design object for advertisement--------------- -->
           <div class="box_heading" style="color: #0F172A;margin-top: 11px;">You might like this too!</div>
           <div style="text-align: center; margin-top: 13px; position: relative; ">
-            <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
+            <img style="width: 100%;border-radius: 10px 10px 0px 0px;" src="assets/images/bookings_car2.svg" alt="">
             <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
             <!-- (click)="openCancelBookingModal()" -->
             <div class="rebook_label urbanist" style="background: #E23C3C;color: white;" >Cancel</div>
-            <div class="car_info_box" >
+            <div class="status_label poppins" >Accepted</div>
+            <div class="car_info_box" style="position: absolute;" >
               <div>
                 <div class="car_name urbanist">BMW 2 series</div>
                 <div style="text-align: left;line-height: 1;">

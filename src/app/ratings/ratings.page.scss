@@ -52,10 +52,15 @@ ion-footer{
 }
 .user_img{
     margin-right: 18px;
+    height: 56px !important;
+    width: 56px !important;
+    min-width: 56px !important;
+    border-radius: 20px;
 }
 .title_star_div{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .user_title{
     font-family: 'Poppins',sans-serif;
@@ -63,7 +68,7 @@ ion-footer{
     font-weight: 500;
     color: black;
 }
-.start_margin{
+.star_margin{
     margin-right: 3.8px;
 }
 .item_text{
@@ -73,7 +78,8 @@ ion-footer{
     font-family: 'Poppins',sans-serif;
     font-size: 10px;
     font-weight: 400;
-    color: #272727;width: 95%;
+    color: #272727;
+    width: 100%;
 }
 .ion_tab_bar{
     padding: 8px 8px 12px 0px;

@@ -14,7 +14,7 @@
           <div *ngIf="checkUser.appUserId !== null && api.localUserData !== undefined " (click)="goForEditProfile()">
             <div class="profile_div">
               <img src="assets/images/sm_dummy_profile.svg" alt="" *ngIf="api.localUserData.profile_pic === '' ">
-              <img style="border-radius: 50px;height: 85px;" src="{{imageUrlString}}{{api.localUserData.profile_pic}}" alt="" *ngIf="api.localUserData.profile_pic !== '' ">
+              <img style="border-radius: 50px;height: 85px;width: 85px;" src="{{imageUrlString}}{{api.localUserData.profile_pic}}" alt="" *ngIf="api.localUserData.profile_pic !== '' ">
               <img class="edit_icon" src="assets/images/icons/sm_edit_icon.svg" alt="">
             </div>
             <!-- <div class="user_name" *ngIf="api.googleSignInResponse">{{api.googleSignInResponse.displayName}}</div> -->

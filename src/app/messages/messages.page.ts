@@ -51,9 +51,12 @@ export class MessagesPage implements OnInit {
       if(res.status == 'success'){
         this.chatList = res.data;
         for(let chat of this.chatList){
-         chat.last_message.message =  JSON.parse(chat.last_message.message) 
+          if(chat.last_message.message){
+            chat.last_message.message =  JSON.parse(chat.last_message.message) 
+          }
+         
         }
-      }
+      } 
       
     },(err)=>{
       this.api.hideLoading();
@@ -72,7 +75,9 @@ export class MessagesPage implements OnInit {
       if(res.status == 'success'){
         this.chatList = res.data;
         for(let chat of this.chatList){
-         chat.last_message.message =  JSON.parse(chat.last_message.message) 
+          if(chat.last_message.message){
+            chat.last_message.message =  JSON.parse(chat.last_message.message) 
+          }
         }
       }
       

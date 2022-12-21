@@ -98,10 +98,10 @@ export class BookingsPage implements OnInit {
         for(let rec of this.upcomingBookingRecords){
           rec.start_date = format(parseISO(new Date(rec.start_date).toISOString()),'dd-MM-yyyy')
           rec.end_date = format(parseISO(new Date(rec.end_date).toISOString()),'dd-MM-yyyy')
-          // if(rec.cars_details[0].rating && rec.cars_details[0].rating !== null ){
-          //   rec.cars_details[0].rating = Math.round(rec.cars_details[0].rating);
-          //   console.log("Rating Rounded Off: ",rec.cars_details[0].rating); 
-          // }
+          if(rec.cars_details[0].rating == 0 ){
+            rec.cars_details[0].rating = Number(rec.cars_details[0].rating);
+            console.log("Rating Value: ",rec.cars_details[0].rating); 
+          }
         }
         console.log('upcomingBookingRecords: ',this.upcomingBookingRecords);
         

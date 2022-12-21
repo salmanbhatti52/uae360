@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./booking-details.page.scss'],
 })
 export class BookingDetailsPage implements OnInit {
+  imageUrlString = 'https://360uae.eigix.net/public/';
   previous_tab=false;
   upcoming_tab=false;
   previousItemdetails = false;
@@ -23,6 +24,7 @@ export class BookingDetailsPage implements OnInit {
   selectedid = 0
   bookingRecordData:any;
   recievedObject: any;
+  favorites = '';
   constructor(public navCtrlr:NavController,
     public modalCtrlr:ModalController,
     public api:ApiService,
@@ -128,7 +130,8 @@ export class BookingDetailsPage implements OnInit {
     const modal = await this.modalCtrlr.create({
       component: GiveRatingsPopupPage,
       cssClass: 'give_ratings',
-      showBackdrop: true
+      showBackdrop: true,
+      componentProps: {car_id: this.bookingRecordData.car_id}
     });
     modal.present();
 
@@ -164,7 +167,8 @@ export class BookingDetailsPage implements OnInit {
       this.api.hideLoading();
       console.log("Response: ",res);
       if(res.status == 'success'){
-
+        this.favorites = res.data;
+        this.bookingRecordData.user_favourite_cars.length = 0;
       }else if(res.status == 'error'){
         this.api.presentToast(res.message);
       }else{
@@ -212,6 +216,22 @@ export class BookingDetailsPage implements OnInit {
   }
 
   startCarBooking(){
+    let carData  = {
+      car_id: this.bookingRecordData.car_id,
+      rent_cost_day: this.bookingRecordData.cars_details[0].rent_cost_day,
+      rent_cost_month: this.bookingRecordData.cars_details[0].rent_cost_month,
+      vehical_name: this.bookingRecordData.cars_details[0].vehical_name,
+      company_location: this.bookingRecordData.users_company_details[0].company_location,
+      favourite_status: this.bookingRecordData.user_favourite_cars[0].status,
+      image1: this.bookingRecordData.cars_details[0].image1,
+      rating: this.bookingRecordData.cars_details[0].rating,
+      total_trips: '221',
+    }
+    let carDataById = [];
+    carDataById[0] = carData;
+    console.log("CAR DATA BY ID ARRAY: ",carDataById);
+    this.api.carDataById = carDataById;
+    
     this.navCtrlr.navigateRoot('car-booking');
   }
 

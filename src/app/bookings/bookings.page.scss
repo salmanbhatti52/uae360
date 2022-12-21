@@ -60,6 +60,10 @@ ion-footer{
     font-weight: 600;
     color: white;
 }
+.no_booking{
+    text-align: center;
+    margin: 20px;
+}
 .car_info_box{
     display: flex;
     justify-content: space-between;
@@ -71,6 +75,7 @@ ion-footer{
     padding: 9px 12px 8.5px 16px;
     width: 100%;
 }
+
 .car_name{
     font-weight: 700;
     font-size: 20px;
@@ -112,6 +117,18 @@ ion-footer{
     font-size: 12px;
     font-weight: 400;
     color: #0F172A;
+}
+.status_label{
+    position: absolute;
+    bottom: 29%;
+    left: 16px;
+    background: #0F172A;
+    // background: #8000FF;
+    padding: 4px 29px;
+    border-radius: 34px;
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
 }
 .box_styling{
     background: #FBFBFB;

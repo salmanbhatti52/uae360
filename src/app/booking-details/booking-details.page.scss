@@ -66,7 +66,7 @@ ion-footer{
     background: #0F172A;
     border: 1px solid white;
     border-radius: 0px 0px 10px 10px;
-    position: absolute;
+    // position: absolute;
     bottom: 0;
     padding: 9px 12px 8.5px 16px;
     width: 100%;
@@ -113,12 +113,27 @@ ion-footer{
     font-weight: 400;
     color: #0F172A;
 }
+.status_label{
+    position: absolute;
+    bottom: 29%;
+    left: 16px;
+    background: #0F172A;
+    // background: #8000FF;
+    padding: 4px 29px;
+    border-radius: 34px;
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+}
 .box_styling{
     background: #FBFBFB;
     margin-top: 10px;
     box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
     padding: 11px 12px 10px;
     border-radius: 5px;
+    height: auto;
+    max-height: 180px;
+    overflow: hidden;
 }
 .box_heading{
     font-size: 14px;
