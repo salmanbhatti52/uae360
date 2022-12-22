@@ -11,19 +11,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "GiveRatingsPopupPage": () => (/* binding */ GiveRatingsPopupPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _give_ratings_popup_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./give-ratings-popup.page.html?ngResource */ 76274);
 /* harmony import */ var _give_ratings_popup_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./give-ratings-popup.page.scss?ngResource */ 43244);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../check-user.service */ 47852);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/api.service */ 5830);
+
+
 
 
 
 
 
 let GiveRatingsPopupPage = class GiveRatingsPopupPage {
-    constructor(modalCtrlr) {
+    constructor(modalCtrlr, checkUser, api) {
         this.modalCtrlr = modalCtrlr;
+        this.checkUser = checkUser;
+        this.api = api;
         this.rateStar1 = false;
         this.rateStar2 = false;
         this.rateStar3 = false;
@@ -36,10 +42,34 @@ let GiveRatingsPopupPage = class GiveRatingsPopupPage {
         return this.modalCtrlr.dismiss(null, 'closeModal');
     }
     sendFeedback() {
+        let data = {
+            users_customers_id: this.checkUser.appUserId,
+            cars_id: this.car_id,
+            comments: this.textarea.value,
+            rate_stars: this.ratingValue
+        };
+        console.log("Data Obj: ", data);
+        this.api.showLoading();
+        this.api.sendRequest('rate_cars', data).subscribe((res) => {
+            this.api.hideLoading();
+            console.log('Response: ', res);
+            if (res.status == 'success') {
+                this.api.presentToast('Rated Successfully');
+            }
+            else if (res.status == 'error') {
+                this.api.presentToast(res.message);
+            }
+            else {
+            }
+        }, (err) => {
+            this.api.hideLoading();
+            console.log("API Call Error: ", err);
+        });
         return this.modalCtrlr.dismiss(this.feedback, 'sendFeedback');
     }
     rateStar(val) {
         if (val == 1) {
+            this.ratingValue = val;
             if (this.rateStar1 == false) {
                 this.rateStar1 = true;
             }
@@ -52,6 +82,7 @@ let GiveRatingsPopupPage = class GiveRatingsPopupPage {
             }
         }
         else if (val == 2) {
+            this.ratingValue = val;
             if (this.rateStar2 == false) {
                 this.rateStar1 = true;
                 this.rateStar2 = true;
@@ -64,6 +95,7 @@ let GiveRatingsPopupPage = class GiveRatingsPopupPage {
             }
         }
         else if (val == 3) {
+            this.ratingValue = val;
             if (this.rateStar3 == false) {
                 this.rateStar1 = true;
                 this.rateStar2 = true;
@@ -76,6 +108,7 @@ let GiveRatingsPopupPage = class GiveRatingsPopupPage {
             }
         }
         else if (val == 4) {
+            this.ratingValue = val;
             if (this.rateStar4 == false) {
                 this.rateStar1 = true;
                 this.rateStar2 = true;
@@ -88,6 +121,7 @@ let GiveRatingsPopupPage = class GiveRatingsPopupPage {
             }
         }
         else if (val == 5) {
+            this.ratingValue = val;
             if (this.rateStar5 == false) {
                 this.rateStar1 = true;
                 this.rateStar2 = true;
@@ -104,10 +138,16 @@ let GiveRatingsPopupPage = class GiveRatingsPopupPage {
     }
 };
 GiveRatingsPopupPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ModalController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController },
+    { type: _check_user_service__WEBPACK_IMPORTED_MODULE_2__.CheckUserService },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService }
 ];
-GiveRatingsPopupPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
+GiveRatingsPopupPage.propDecorators = {
+    textarea: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.ViewChild, args: [_ionic_angular__WEBPACK_IMPORTED_MODULE_4__.IonTextarea,] }],
+    car_id: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.Input }]
+};
+GiveRatingsPopupPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-give-ratings-popup',
         template: _give_ratings_popup_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_give_ratings_popup_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -134,7 +174,7 @@ module.exports = "ion-content {\n  --background:white !important;\n}\n\n.wrapper
   \****************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: right;\">\n      <img (click)=\"closeModal()\" src=\"assets/images/icons/close_modal.svg\" alt=\"\">\n    </div>\n    <div class=\"heading\">Ratings</div>\n    <div class=\"heading_description\">Give your Ratings and Feedback</div>\n    <div class=\"margin_row\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/not_lighted_star.svg\" alt=\"\" *ngIf=\"rateStar1==false;\" (click)=\"rateStar(1)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/lighted_star.svg\" alt=\"\" *ngIf=\"rateStar1==true;\" (click)=\"rateStar(1)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/not_lighted_star.svg\" alt=\"\" *ngIf=\"rateStar2==false;\" (click)=\"rateStar(2)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/lighted_star.svg\" alt=\"\" *ngIf=\"rateStar2==true;\" (click)=\"rateStar(2)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/not_lighted_star.svg\" alt=\"\" *ngIf=\"rateStar3==false;\" (click)=\"rateStar(3)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/lighted_star.svg\" alt=\"\" *ngIf=\"rateStar3==true;\" (click)=\"rateStar(3)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/not_lighted_star.svg\" alt=\"\" *ngIf=\"rateStar4==false;\" (click)=\"rateStar(4)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/lighted_star.svg\" alt=\"\" *ngIf=\"rateStar4==true;\" (click)=\"rateStar(4)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/not_lighted_star.svg\" alt=\"\" *ngIf=\"rateStar5==false;\" (click)=\"rateStar(5)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/lighted_star.svg\" alt=\"\" *ngIf=\"rateStar5==true;\" (click)=\"rateStar(5)\">\n      \n    </div>\n    <ion-textarea auto-grow=\"true\" name=\"feedback\"  type=\"text\" maxlength=\"150\" class=\"textarea\" rows=\"3\" cols=\"20\" placeholder=\"Add your feedback\" [(ngModel)]=\"feedback\"></ion-textarea>\n    <div class=\"characters_limit\">*Maximum 150 characters</div>\n    <div style=\"text-align: center;margin-top: 16px;\">\n      <ion-button class=\"invite_btn\" (click)=\"sendFeedback()\">\n        <span class=\"btn-text\">Okay</span>\n      </ion-button>\n    </div>\n  </div>\n</ion-content>\n";
+module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: right;\">\n      <img (click)=\"closeModal()\" src=\"assets/images/icons/close_modal.svg\" alt=\"\">\n    </div>\n    <div class=\"heading\">Ratings</div>\n    <div class=\"heading_description\">Give your Ratings and Feedback</div>\n    <div class=\"margin_row\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/not_lighted_star.svg\" alt=\"\" *ngIf=\"rateStar1==false;\" (click)=\"rateStar(1)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/lighted_star.svg\" alt=\"\" *ngIf=\"rateStar1==true;\" (click)=\"rateStar(1)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/not_lighted_star.svg\" alt=\"\" *ngIf=\"rateStar2==false;\" (click)=\"rateStar(2)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/lighted_star.svg\" alt=\"\" *ngIf=\"rateStar2==true;\" (click)=\"rateStar(2)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/not_lighted_star.svg\" alt=\"\" *ngIf=\"rateStar3==false;\" (click)=\"rateStar(3)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/lighted_star.svg\" alt=\"\" *ngIf=\"rateStar3==true;\" (click)=\"rateStar(3)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/not_lighted_star.svg\" alt=\"\" *ngIf=\"rateStar4==false;\" (click)=\"rateStar(4)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/lighted_star.svg\" alt=\"\" *ngIf=\"rateStar4==true;\" (click)=\"rateStar(4)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/not_lighted_star.svg\" alt=\"\" *ngIf=\"rateStar5==false;\" (click)=\"rateStar(5)\">\n      <img style=\"margin-right: 11px;\" src=\"assets/images/icons/lighted_star.svg\" alt=\"\" *ngIf=\"rateStar5==true;\" (click)=\"rateStar(5)\">\n      \n    </div>\n    <ion-textarea #textarea auto-grow=\"true\" name=\"feedback\"  type=\"text\" maxlength=\"150\" class=\"textarea\" rows=\"3\" cols=\"20\" placeholder=\"Add your feedback\" [(ngModel)]=\"feedback\"></ion-textarea>\n    <div class=\"characters_limit\">*Maximum 150 characters</div>\n    <div style=\"text-align: center;margin-top: 16px;\">\n      <ion-button class=\"invite_btn\" (click)=\"sendFeedback()\">\n        <span class=\"btn-text\">Okay</span>\n      </ion-button>\n    </div>\n  </div>\n</ion-content>\n";
 
 /***/ })
 

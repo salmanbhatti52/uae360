@@ -18,7 +18,11 @@
 
       <div class="payment_method_box" style="margin-top: 15.4px;">
         <div style="display: flex;align-items: center;">
-          <div style="margin-right: 18px;display: flex;"><ion-checkbox  class="checkbox" checked="true"></ion-checkbox></div>
+          <div style="margin-right: 18px;display: flex;">
+            <img (click)="selectMethod('master')" src="assets/images/icons/marked.svg" alt="" *ngIf="master == true">
+            <img (click)="selectMethod('master')" src="assets/images/icons/unmarked.svg" alt="" *ngIf="master != true">
+            <!-- <ion-checkbox  class="checkbox" checked="true"></ion-checkbox> -->
+          </div>
           <div>
             <div class="owner_name">Owner name</div>
             <div class="owner_info">4162 **** **** ****</div>
@@ -31,7 +35,11 @@
       
       <div class="payment_method_box" >
         <div style="display: flex;align-items: center;">
-          <div style="margin-right: 18px;display: flex;"><ion-checkbox  class="checkbox" ></ion-checkbox></div>
+          <div style="margin-right: 18px;display: flex;">
+            <img (click)="selectMethod('visa')" src="assets/images/icons/marked.svg" alt="" *ngIf="visa == true">
+            <img (click)="selectMethod('visa')" src="assets/images/icons/unmarked.svg" alt="" *ngIf="visa != true">
+            <!-- <ion-checkbox  class="checkbox" ></ion-checkbox> -->
+          </div>
           <div>
             <div class="owner_name">Owner name</div>
             <div class="owner_info">4162 **** **** ****</div>
@@ -44,7 +52,11 @@
 
       <div class="payment_method_box" >
         <div style="display: flex;align-items: center;">
-          <div style="margin-right: 18px;display: flex;"><ion-checkbox  class="checkbox" ></ion-checkbox></div>
+          <div style="margin-right: 18px;display: flex;">
+            <img (click)="selectMethod('paypal')" src="assets/images/icons/marked.svg" alt="" *ngIf="paypal == true">
+            <img (click)="selectMethod('paypal')" src="assets/images/icons/unmarked.svg" alt="" *ngIf="paypal != true">
+            <!-- <ion-checkbox  class="checkbox" ></ion-checkbox> -->
+          </div>
           <div>
             <div class="owner_name">PayPal</div>
             <div class="owner_info">Arslan********mail.com</div>

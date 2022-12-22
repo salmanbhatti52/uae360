@@ -283,11 +283,36 @@ let SignInPage = class SignInPage {
         status: "Active",
         phone: "dummy",
         verify_code: "dummy"
-      };
+      }; //remove it later-----------------------
+
+      console.log("Facebook User Data: ", data);
+      localStorage.setItem('facebookUserData', JSON.stringify(data)); //------------------------------------
+
       this.api.sendRequest('signupwithsocial', data).subscribe(res => {
         console.log('Response: ', res);
 
-        if (res.status == 'success') {// this.router.navigate(['/home-cars-after-login']);
+        if (res.status == 'success') {
+          // this.api.presentToast('Success! Welcome')
+          localStorage.setItem('appUserId', res.data.appUserId);
+          console.log('appUserId', res.data.appUserId);
+          this.checkUser.appUserId = res.data.appUserId; // =============localUserData fetch===================
+
+          this.localUserData.profile_pic = res.data.profile_pic;
+          this.localUserData.username = res.data.username;
+          this.localUserData.location = res.data.location;
+          this.localUserData.email = res.data.email;
+          this.localUserData.about = res.data.about;
+          this.api.localUserData = this.localUserData;
+          localStorage.setItem('localUserData', JSON.stringify(this.localUserData)); // ======update appPages===========
+
+          console.log(this.checkUser.appUserId);
+          this.checkUser.checkUser(); // =============  ==============
+
+          localStorage.setItem("appPagesAfterLogin", JSON.stringify(this.checkUser.appPages));
+          console.log(localStorage.getItem('appPagesAfterLogin'));
+          this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); // =======done============
+
+          this.router.navigate(['/home-cars-after-login']);
         }
       }, err => {
         console.log("Error: ", err);
@@ -316,7 +341,10 @@ let SignInPage = class SignInPage {
         status: "Active",
         phone: "dummy",
         verify_code: "dummy"
-      };
+      }; //remove it later-----------------------
+
+      console.log("Google User Data: ", data);
+      localStorage.setItem('googleUserData', JSON.stringify(data)); //------------------------------------
 
       _this2.api.sendRequest('signupwithsocial', data).subscribe(res => {
         console.log('Response: ', res);

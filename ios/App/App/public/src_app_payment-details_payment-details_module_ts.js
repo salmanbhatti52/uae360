@@ -112,6 +112,9 @@ let PaymentDetailsPage = class PaymentDetailsPage {
   constructor(location, modalCtrlr) {
     this.location = location;
     this.modalCtrlr = modalCtrlr;
+    this.master = false;
+    this.visa = false;
+    this.paypal = false;
   }
 
   ngOnInit() {}
@@ -131,6 +134,40 @@ let PaymentDetailsPage = class PaymentDetailsPage {
       });
       modal.present();
     })();
+  }
+
+  selectMethod(val) {
+    if (val == 'master') {
+      if (this.master == false) {
+        this.master = true;
+        this.visa = false;
+        this.paypal = false;
+      } else {
+        this.master = false;
+        this.visa = false;
+        this.paypal = false;
+      }
+    } else if (val == 'visa') {
+      if (this.visa == false) {
+        this.visa = true;
+        this.master = false;
+        this.paypal = false;
+      } else {
+        this.master = false;
+        this.visa = false;
+        this.paypal = false;
+      }
+    } else if (val == 'paypal') {
+      if (this.paypal == false) {
+        this.paypal = true;
+        this.master = false;
+        this.visa = false;
+      } else {
+        this.master = false;
+        this.visa = false;
+        this.paypal = false;
+      }
+    } else {}
   }
 
   addPaymentMethod() {
@@ -188,7 +225,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \**********************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">Payment</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center;\">\n      <img src=\"assets/images/payment Info_img.svg\" alt=\"\">\n    </div>\n    <div class=\"content_heading\">Select payment method</div>\n\n    <div>\n\n      <div class=\"payment_method_box\" style=\"margin-top: 15.4px;\">\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\"><ion-checkbox  class=\"checkbox\" checked=\"true\"></ion-checkbox></div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/master_card.svg\" alt=\"\">\n        </div>\n      </div>\n      \n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\"><ion-checkbox  class=\"checkbox\" ></ion-checkbox></div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/visa_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\"><ion-checkbox  class=\"checkbox\" ></ion-checkbox></div>\n          <div>\n            <div class=\"owner_name\">PayPal</div>\n            <div class=\"owner_info\">Arslan********mail.com</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/paypal_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n      <!-- <div>\n        <ion-button class=\"login_button\" (click)=\"startPaymentProcess()\">\n          <span class=\"btn_text\">Pay</span>\n        </ion-button>\n        <ion-button class=\"login_button btn_border\" style=\"--background:#FBFBFB; margin-top: 16px;\" (click)=\"startPaymentProcess()\">\n          <span class=\"btn_text \" style=\"color: #0F172A;\">Add New Payment Method</span>\n        </ion-button>\n      </div> -->\n    </div>\n  </div>\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 25px;\">\n    <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Pay</span>\n    </ion-button>\n    <ion-button class=\"login_button btn_border\" style=\"--background:#FBFBFB; margin-top: 16px;\" (click)=\"addPaymentMethod()\">\n      <span class=\"btn_text \" style=\"color: #0F172A;\">Add New Payment Method</span>\n    </ion-button>\n  </div>\n</ion-footer>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">Payment</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center;\">\n      <img src=\"assets/images/payment Info_img.svg\" alt=\"\">\n    </div>\n    <div class=\"content_heading\">Select payment method</div>\n\n    <div>\n\n      <div class=\"payment_method_box\" style=\"margin-top: 15.4px;\">\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"master == true\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"master != true\">\n            <!-- <ion-checkbox  class=\"checkbox\" checked=\"true\"></ion-checkbox> -->\n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/master_card.svg\" alt=\"\">\n        </div>\n      </div>\n      \n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"visa == true\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"visa != true\">\n            <!-- <ion-checkbox  class=\"checkbox\" ></ion-checkbox> -->\n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/visa_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"paypal == true\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"paypal != true\">\n            <!-- <ion-checkbox  class=\"checkbox\" ></ion-checkbox> -->\n          </div>\n          <div>\n            <div class=\"owner_name\">PayPal</div>\n            <div class=\"owner_info\">Arslan********mail.com</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/paypal_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n      <!-- <div>\n        <ion-button class=\"login_button\" (click)=\"startPaymentProcess()\">\n          <span class=\"btn_text\">Pay</span>\n        </ion-button>\n        <ion-button class=\"login_button btn_border\" style=\"--background:#FBFBFB; margin-top: 16px;\" (click)=\"startPaymentProcess()\">\n          <span class=\"btn_text \" style=\"color: #0F172A;\">Add New Payment Method</span>\n        </ion-button>\n      </div> -->\n    </div>\n  </div>\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 25px;\">\n    <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Pay</span>\n    </ion-button>\n    <ion-button class=\"login_button btn_border\" style=\"--background:#FBFBFB; margin-top: 16px;\" (click)=\"addPaymentMethod()\">\n      <span class=\"btn_text \" style=\"color: #0F172A;\">Add New Payment Method</span>\n    </ion-button>\n  </div>\n</ion-footer>\n";
 
 /***/ })
 

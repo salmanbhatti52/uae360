@@ -9,7 +9,9 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./payment-details.page.scss'],
 })
 export class PaymentDetailsPage implements OnInit {
-  
+  master = false;
+  visa = false;
+  paypal = false;
   constructor(public location:Location,
     public modalCtrlr:ModalController) { }
 
@@ -25,6 +27,42 @@ export class PaymentDetailsPage implements OnInit {
       cssClass:'booked_modal'
     });
     modal.present();
+  }
+  selectMethod(val){
+    if(val == 'master'){
+      if(this.master == false){
+        this.master = true;
+        this.visa = false;
+        this.paypal = false;
+      }else{
+        this.master = false;
+        this.visa = false;
+        this.paypal = false;
+      }
+    }else if(val == 'visa'){
+      if(this.visa == false){
+        this.visa = true;
+        this.master = false;
+        this.paypal = false;
+      }else{
+        this.master = false;
+        this.visa = false;
+        this.paypal = false;
+      }
+    }else if(val == 'paypal'){
+      if(this.paypal == false){
+        this.paypal = true;
+        this.master = false;
+        this.visa = false;
+      }else{
+        this.master = false;
+        this.visa = false;
+        this.paypal = false;
+      }
+    }else{
+
+    }
+
   }
   async addPaymentMethod(){
     const modal = await this.modalCtrlr.create({

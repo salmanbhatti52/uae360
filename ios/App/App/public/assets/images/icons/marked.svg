@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="vuesax_outline_tick-circle" data-name="vuesax/outline/tick-circle" transform="translate(-748 -188)">
+    <g id="tick-circle" transform="translate(748 188)">
+      <path id="Vector" d="M14.438,28.875A14.438,14.438,0,1,1,28.875,14.438,14.45,14.45,0,0,1,14.438,28.875Z" transform="translate(1.563 1.563)" fill="#8000ff"/>
+      <path id="Vector-2" data-name="Vector" d="M4.472,8.959a.937.937,0,0,1-.662-.275L.272,5.147A.937.937,0,1,1,1.6,3.822L4.472,6.7,10.9.272A.937.937,0,0,1,12.222,1.6L5.134,8.684A.937.937,0,0,1,4.472,8.959Z" transform="translate(9.753 11.515)" fill="#fff"/>
+      <path id="Vector-3" data-name="Vector" d="M0,0H32V32H0Z" fill="none" opacity="0"/>
+    </g>
+  </g>
+</svg>

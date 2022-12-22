@@ -271,6 +271,7 @@ let EditProfilePage = class EditProfilePage {
         this.api.localUserData.email = res.data[0].email;
         this.api.localUserData.location = res.data[0].location;
         console.log('api Local User Data: ', this.api.localUserData);
+        localStorage.setItem('localUserData', JSON.stringify(this.api.localUserData));
         this.navCtrlr.navigateRoot('settings');
       } else if (res.status == 'error') {
         // console.log("Error: ",);
