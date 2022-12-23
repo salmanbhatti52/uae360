@@ -45,7 +45,9 @@ export class DeleteAccountPopupPage implements OnInit {
         console.log(this.checkUser.appUserId);
         this.navCtrlr.navigateRoot('sign-in');
         return this.modalCtrlr.dismiss('delete my account', 'delete_account');
+
       }else if(res.status == 'error'){
+        
         this.api.presentToast(res.message);
         this.api.hideLoading();
         console.log("Error Response: ",res);

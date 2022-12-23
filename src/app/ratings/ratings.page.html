@@ -13,58 +13,65 @@
       <div class="rating_item" *ngFor="let rating of carRatings">
         <img class="user_img" src="{{imageUrlString}}{{rating.profile_pic}}" alt="">
         <div>
-          <div class="title_star_div" >
+          <div >
             <div class="user_title" >{{rating.username}}</div>
             
-            <div *ngIf="rating.rate_stars == 0 ">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+            <div class="star_div">
+              <div *ngIf="rating.rate_stars == 0 ">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              </div>
+              <div *ngIf="rating.rate_stars >=1 && rating.rate_stars < 1.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              </div>
+              <div *ngIf="rating.rate_stars >=1.5 && rating.rate_stars < 2.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              </div>
+              <div *ngIf="rating.rate_stars >=2.5 && rating.rate_stars < 3.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              </div>
+              <div *ngIf="rating.rate_stars >=3.5 && rating.rate_stars < 4.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              </div>
+              <div *ngIf="rating.rate_stars >=4.5 && rating.rate_stars < 5.1">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              </div>
             </div>
-            <div *ngIf="rating.rate_stars >=1 && rating.rate_stars < 1.5">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-            </div>
-            <div *ngIf="rating.rate_stars >=1.5 && rating.rate_stars < 2.5">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-            </div>
-            <div *ngIf="rating.rate_stars >=2.5 && rating.rate_stars < 3.5">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-            </div>
-            <div *ngIf="rating.rate_stars >=3.5 && rating.rate_stars < 4.5">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-            </div>
-            <div *ngIf="rating.rate_stars >=4.5 && rating.rate_stars < 5.1">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-            </div>
+            
             
           </div>
           <div class="item_text" >
-            {{rating.comments}} It was the best experience  It was the best experience  It was the best experience  It was the best experience  It was the best experience  It was the best experience  It was the best experience  It was the best experience 
+            {{rating.comments}}
           </div>
         </div>
       </div>
+    </div>
+
+    <div *ngIf="carRatings === undefined" class="no_ratings">
+      No ratings yet
     </div>
     
     <!-- ==============================copy============================ -->

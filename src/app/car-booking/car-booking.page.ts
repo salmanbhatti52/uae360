@@ -110,7 +110,7 @@ export class CarBookingPage implements OnInit {
         this.costPerDay = new Number(data.rent_cost_day);
         this.costPerMonth = new Number(data.rent_cost_month);
         this.vehicleName = data.vehical_name;
-        this.company_location = data.company_location;
+        this.company_location = data.users_company[0].company_location;
         if(!data.favourite_status){
           this.favorites = 'dislike';
         }else{

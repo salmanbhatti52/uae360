@@ -61,7 +61,7 @@
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
             </span>
-            <span class="rating_value urbanist">269 trips</span>
+            <span class="rating_value urbanist"> trips</span>
           </div>
         </div>
         <div class="car2_info_subdiv">
@@ -152,7 +152,7 @@
     <div class="license_heading">Driving License</div>
     <div style="text-align: center;margin: 7px auto 10px;">
       <img (click)="addLicense()"  src="assets/images/upload_license_img.svg" alt="" *ngIf="imageURL===''">
-      <img (click)="addLicense()" style="height: 200px;width: 300px; border-radius: 10px;" src="{{imageURL}}" alt="" *ngIf="imageURL!==''">
+      <img (click)="addLicense()" style="height: 200px;width: 300px; border-radius: 10px;object-fit: cover;" src="{{imageURL}}" alt="" *ngIf="imageURL!==''">
 
     </div>
 

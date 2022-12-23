@@ -86,11 +86,53 @@
               <div class="card_content">
                 <div class="row_div">
                   <div>
+                    <span *ngIf="pickup.rating == 0 ">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="pickup.rating >=1 && pickup.rating < 1.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="pickup.rating >=1.5 && pickup.rating < 2.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="pickup.rating >=2.5 && pickup.rating < 3.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="pickup.rating >=3.5 && pickup.rating < 4.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="pickup.rating >=4.5 && pickup.rating < 5.1">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                    </span>
+                    <!-- <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                     <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                     <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                     <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt=""> -->
                   </div>
                   <div style="line-height: 1.2;">
                     <span class="price_span" style="font-size: 11px;">$</span>
@@ -99,7 +141,7 @@
                   
                 </div>
                 <div class="row_div">
-                  <div class="total_trips">{{pickup.total_trips}}269 trips</div>
+                  <div class="total_trips"> trips</div>
                   <div class="per_hour">Per Day</div>
                 </div>
               </div>

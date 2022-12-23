@@ -96,6 +96,8 @@ export class AppComponent {
     this.api.localUserData = undefined;
     localStorage.removeItem('localUserData');
     console.log('appUserId removed');
+    this.signOutForGoogle();
+    this.signOutForFacebook();
     // ===========to update sidemenu pages after logout==============
     console.log(this.checkUser.appUserId);
         

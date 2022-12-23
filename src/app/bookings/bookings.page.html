@@ -82,7 +82,8 @@
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                 </span>
-                <span class="rating_value urbanist">({{data.cars_details[0].rating}})</span>
+                <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;" *ngIf="data.cars_details[0].rating == 0">not rated yet</span>
+                <span class="rating_value urbanist" *ngIf="data.cars_details[0].rating != 0">({{data.cars_details[0].rating}})</span>
               </div>
             </div>
             <div class="car_info_subdiv">
@@ -91,7 +92,7 @@
           </div>
         </div>
         
-        <div *ngIf="selectedid == data.car_id">
+        <!-- <div *ngIf="selectedid == data.car_id">
           <div class="box_styling">
             <div class="box_heading">Description</div>
             <div class="box_description">
@@ -142,7 +143,6 @@
           <div style="text-align: center; margin-top: 13px; position: relative; ">
             <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
             <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-            <!-- (click)="startCarBooking()" -->
             <div class="rebook_label urbanist" >Rebook</div>
             <div class="car_info_box" >
               <div>
@@ -160,12 +160,11 @@
               </div>
               <div class="car2_info_subdiv">
                 <div style="line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
-                <!-- <div><img src="assets/images/icons/drop_down_arrow.svg" alt=""></div> -->
               </div>
               
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
     </div>
@@ -231,7 +230,8 @@
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                 </span>
-                <span class="rating_value urbanist">({{data.cars_details[0].rating}})</span>
+                <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;" *ngIf="data.cars_details[0].rating == 0">not rated yet</span>
+                <span class="rating_value urbanist" *ngIf="data.cars_details[0].rating != 0">({{data.cars_details[0].rating}})</span>
               </div>
             </div>
             <div class="car_info_subdiv">
@@ -323,13 +323,13 @@
 
 </ion-content>
 <ion-footer class="ion-no-border">
-    <div style="margin: 10px 0px 12px;" *ngIf="previous_tab==true && selectedid !== 0">
+    <!-- <div style="margin: 10px 0px 12px;" *ngIf="previous_tab==true">
       <div style="text-align: center;">
         <ion-button class="invite_btn" (click)="openModal()">
           <span class="btn-text">Give Ratings</span>
         </ion-button>
       </div>
-    </div>
+    </div> -->
 
     <ion-tabs style="display:contents ;">
 

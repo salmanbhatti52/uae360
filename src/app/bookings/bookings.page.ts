@@ -21,8 +21,8 @@ export class BookingsPage implements OnInit {
   upcomingItemdetails = false;
   previousBookingRecords = [];
   upcomingBookingRecords = [];
-  selectedid = 0
-  ratingValue: number;
+  // selectedid = 0
+  // ratingValue: number;
   constructor(public navCtrlr:NavController,
     public modalCtrlr:ModalController,
     public api:ApiService,
@@ -50,7 +50,7 @@ export class BookingsPage implements OnInit {
     };
     this.api.showLoading();
     this.api.sendRequest('getCarsBookingPrevious',data).subscribe((res:any)=>{
-      this.api.hideLoading();
+      
       console.log("Response: ",res);
       if(res.status == 'success'){
 
@@ -59,6 +59,7 @@ export class BookingsPage implements OnInit {
           rec.start_date = format(parseISO(new Date(rec.start_date).toISOString()),'dd-MM-yyyy')
           rec.end_date = format(parseISO(new Date(rec.end_date).toISOString()),'dd-MM-yyyy')
         }
+        this.api.hideLoading();
         console.log('previousBookingRecords: ',this.previousBookingRecords);
         
       }else if(res.status == 'error'){
@@ -91,7 +92,7 @@ export class BookingsPage implements OnInit {
     };
     this.api.showLoading();
     this.api.sendRequest('getCarsBookingUpcoming',data).subscribe((res:any)=>{
-      this.api.hideLoading();
+      
       console.log("Response: ",res);
       if(res.status == 'success'){
         this.upcomingBookingRecords = res.data;
@@ -103,6 +104,7 @@ export class BookingsPage implements OnInit {
             console.log("Rating Value: ",rec.cars_details[0].rating); 
           }
         }
+        this.api.hideLoading();
         console.log('upcomingBookingRecords: ',this.upcomingBookingRecords);
         
       }else if(res.status == 'error'){
@@ -179,19 +181,19 @@ export class BookingsPage implements OnInit {
 
   showDetails(data){
     console.log(data);
-
-    if( this.selectedid == data.car_id)
-    {
-      this.selectedid = 0
-    }else{
-      this.navCtrlr.navigateRoot(['/booking-details',{
-        data: JSON.stringify(data) ,
-        previous_tab: this.previous_tab,
-        upcoming_tab: this.upcoming_tab
-      }])
+    this.navCtrlr.navigateRoot(['/booking-details',{
+      data: JSON.stringify(data) ,
+      previous_tab: this.previous_tab,
+      upcoming_tab: this.upcoming_tab
+    }]);
+    // if( this.selectedid == data.car_id)
+    // {
+    //   this.selectedid = 0
+    // }else{
+      
       // this.selectedid = data.car_id;
 
-    }
+    // }
     
     // if(this.previousItemdetails == true || this.upcomingItemdetails == true){
     //   this.previousItemdetails = false;

@@ -156,21 +156,38 @@ export class SignInPage implements OnInit {
       'user_photos',
       'user_gender',
     ];
-    const result = await (<FacebookLoginResponse><unknown>(
-      FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS })
+    this.api.presentToast('Accessing Your Facebook Account');
+    await (<FacebookLoginResponse><unknown>(
+      FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS }).then((res:any)=>{
+        
+        const result = res;
+        console.log("Result: ",result);
+
+        if(result.accessToken && result.accessToken.userId){
+          this.token = result.accessToken;
+          //Login Successful.
+          this.api.presentToast('Facebook Account Identified');
+          console.log(`Facebook access token is ${result.accessToken.token}`);  
+          this.loadUserData();    
+        }
+
+      },(err)=>{
+        console.log("Error: ",err);
+        this.api.presentToast(err);
+        
+      })
     ));
 
-    console.log("Result: ",result);
-    if(result.accessToken && result.accessToken.userId){
-      this.token = result.accessToken;
-      //Login Successful.
-      console.log(`Facebook access token is ${result.accessToken.token}`);  
-      this.loadUserData();    
-    }
+    // console.log("Result: ",result);
+    
   }
+
   loadUserData(){
+
     const url = 'https://graph.facebook.com/'+this.token.userId+'?fields=id,name,picture.width(720),birthday,email&access_token='+this.token.token;
+    this.api.showLoading();
     this.http.post(url, {}, {}).subscribe((res:any)=>{
+      this.api.hideLoading();
       console.log('resp=' ,res);
       this.fbUserData = res;
       
@@ -189,51 +206,77 @@ export class SignInPage implements OnInit {
       }
       //remove it later-----------------------
       console.log("Facebook User Data: ",data);
+      
       localStorage.setItem('facebookUserData',JSON.stringify(data));
       //------------------------------------
-      this.api.sendRequest('signupwithsocial',data).subscribe((res:any)=>{
-        console.log('Response: ',res);
-        if(res.status == 'success'){
-            // this.api.presentToast('Success! Welcome')
-          localStorage.setItem('appUserId',res.data.appUserId);
-          console.log('appUserId',res.data.appUserId);
-          this.checkUser.appUserId = res.data.appUserId;
-          // =============localUserData fetch===================
-          this.localUserData.profile_pic = res.data.profile_pic;
-          this.localUserData.username = res.data.username;
-          this.localUserData.location = res.data.location;
-          this.localUserData.email = res.data.email;
-          this.localUserData.about = res.data.about;
-          this.api.localUserData = this.localUserData;
-          localStorage.setItem('localUserData',JSON.stringify(this.localUserData));
+      if(data.email != undefined){
+        this.api.showLoading();
+        this.api.sendRequest('signupwithsocial',data).subscribe((res:any)=>{
+          this.api.hideLoading();
+          console.log('Response: ',res);
+          if(res.status == 'success'){
+              // this.api.presentToast('Success! Welcome')
+            localStorage.setItem('appUserId',res.data.appUserId);
+            console.log('appUserId',res.data.appUserId);
+            this.checkUser.appUserId = res.data.appUserId;
+            // =============localUserData fetch===================
+            this.localUserData.profile_pic = res.data.profile_pic;
+            this.localUserData.username = res.data.username;
+            this.localUserData.location = res.data.location;
+            this.localUserData.email = res.data.email;
+            this.localUserData.about = res.data.about;
+            this.api.localUserData = this.localUserData;
+            localStorage.setItem('localUserData',JSON.stringify(this.localUserData));
+            
+            
+            // ======update appPages===========
+            console.log(this.checkUser.appUserId);
+            this.checkUser.checkUser();
+  
+            // =============  ==============
+            localStorage.setItem("appPagesAfterLogin", JSON.stringify(this.checkUser.appPages));
+            console.log(localStorage.getItem('appPagesAfterLogin'));
+            this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
+  
+            // =======done============
+            this.router.navigate(['/home-cars-after-login']);
+          }
           
-          
-          // ======update appPages===========
-          console.log(this.checkUser.appUserId);
-          this.checkUser.checkUser();
-
-          // =============  ==============
-          localStorage.setItem("appPagesAfterLogin", JSON.stringify(this.checkUser.appPages));
-          console.log(localStorage.getItem('appPagesAfterLogin'));
-          this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
-
-          // =======done============
-          this.router.navigate(['/home-cars-after-login']);
-        }
+        },(err)=>{
+          this.api.hideLoading();
+          console.log("Error: ",err);
+          this.api.presentToast(err);
+        });
+      }else{
+        this.api.presentToast("Plz login with a facebook account that hava an email address.");
         
-      },(err)=>{
-        console.log("Error: ",err);
-        
-      });
+      }
+      
+      
+    },(err)=>{
+      this.api.hideLoading();
+      console.log("Error: ",err);
+      this.api.presentToast(err);
     })
   }
   // =============================================================
 
   // ====================signInWithGoogle==========================
   async signInWithGoogle(){
-
-    this.googleUserData = await GoogleAuth.signIn();
-    console.log('GoogleUserResponse: ',this.googleUserData);
+    // this.api.showLoading();
+    this.api.presentToast('Accessing Your Google Account');
+    await GoogleAuth.signIn().then((res:any)=>{
+      // this.api.hideLoading();
+      this.api.presentToast('Google Account Identified');
+      console.log('GoogleUserResponse: ',res);
+      this.googleUserData = res;
+    },(err)=>{
+      // this.api.hideLoading();
+      this.api.presentToast(err);
+      console.log("Error: ",err);
+      
+    });
+    // console.log('GoogleUserResponse: ',this.googleUserData);
     this.api.googleSignInResponse = this.googleUserData;
     
     let data={
@@ -253,7 +296,9 @@ export class SignInPage implements OnInit {
     console.log("Google User Data: ",data);
     localStorage.setItem('googleUserData',JSON.stringify(data));
     //------------------------------------
+    this.api.showLoading();
     this.api.sendRequest('signupwithsocial',data).subscribe((res:any)=>{
+      this.api.hideLoading();
       console.log('Response: ',res);
       if(res.status=='success'){
         // this.api.presentToast('Success! Welcome')
@@ -284,6 +329,8 @@ export class SignInPage implements OnInit {
       }
       
     },(err)=>{
+      this.api.hideLoading();
+      this.api.presentToast(err);
       console.log("Error: ",err);
       
     });
