@@ -29,10 +29,26 @@ ion-footer{
 .wrapper{
     padding:13px 0px 20px;
 }
+.no_notifications{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 50px;
+}
+.box_color{
+    background: white;
+}
+.box_color_even_val{
+    background: rgba(255, 255, 255, 0);
+}
 .notification_box{
     display: flex;
     align-items: center;
     padding: 8.8px 8px 13px 12px;
+}
+.img_sizing{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
 .notification_text{
     font-size: 15px;

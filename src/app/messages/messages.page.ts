@@ -10,9 +10,9 @@ import { interval } from 'rxjs';
 })
 export class MessagesPage implements OnInit {
   totalNotifications = 6;
-  chatList = [];
-  imageUrlString = 'https://360uae.eigix.net/public/';
-  interval:any;
+  chatList: any;
+  interval: any;
+  response = true;
   constructor(public navCtrlr:NavController,
     public checkUser:CheckUserService,
     public api:ApiService) {
@@ -48,7 +48,11 @@ export class MessagesPage implements OnInit {
     this.api.sendRequest("getAllChat",data).subscribe((res:any)=>{
       this.api.hideLoading();
       console.log("All Chat Response: ",res);
+      
       if(res.status == 'success'){
+        if(res.data.length == 0){
+          this.response = false;
+        }
         this.chatList = res.data;
         for(let chat of this.chatList){
           if(chat.last_message.message){
@@ -73,6 +77,9 @@ export class MessagesPage implements OnInit {
       // this.api.hideLoading();
       console.log("All Chat Response: ",res);
       if(res.status == 'success'){
+        if(res.data.length == 0){
+          this.response = false;
+        }
         this.chatList = res.data;
         for(let chat of this.chatList){
           if(chat.last_message.message){

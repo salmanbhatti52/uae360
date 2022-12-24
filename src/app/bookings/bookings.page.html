@@ -15,7 +15,7 @@
     </div>
     <div *ngIf="previous_tab==true" >
      
-      <div class="no_booking" *ngIf="previousBookingRecords.length == 0">Bookings Unavailable  </div>
+      <div class="no_booking" *ngIf="response == false">Bookings Unavailable  </div>
       <div *ngFor="let data of previousBookingRecords">
         <div style="text-align: center; margin-top: 16px; position: relative;" (click)="showDetails(data)">
           <img style="width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;object-fit: cover;" src="{{imageUrlString}}{{data.cars_details[0].image1}}" alt="">
@@ -169,7 +169,7 @@
 
     </div>
     <div *ngIf="upcoming_tab==true" >
-      <div class="no_booking" *ngIf="upcomingBookingRecords.length == 0">Bookings Unavailable  </div>
+      <div class="no_booking" *ngIf="response == false">Bookings Unavailable  </div>
       <div *ngFor="let data of upcomingBookingRecords">
         <div style="text-align: center; margin-top: 16px; position: relative;" (click)="showDetails(data)">
           <img style="width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;object-fit: cover;" src="{{imageUrlString}}{{data.cars_details[0].image1}}" alt="">

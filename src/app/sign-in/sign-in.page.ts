@@ -28,7 +28,8 @@ export class SignInPage implements OnInit {
     username:'',
     location: '',
     email:'',
-    about:''
+    about:'',
+    account_type:''
   };
   token: any;
   oneSignalUserId:any;
@@ -114,6 +115,7 @@ export class SignInPage implements OnInit {
         this.localUserData.location = res.data.location;
         this.localUserData.email = res.data.email;
         this.localUserData.about = res.data.about;
+        this.localUserData.account_type = res.data.account_type;
         this.api.localUserData = this.localUserData;
         localStorage.setItem('localUserData',JSON.stringify(this.localUserData));
         
@@ -188,7 +190,7 @@ export class SignInPage implements OnInit {
     this.api.showLoading();
     this.http.post(url, {}, {}).subscribe((res:any)=>{
       this.api.hideLoading();
-      console.log('resp=' ,res);
+      console.log('Response: ' ,res);
       this.fbUserData = res;
       
       let data={
@@ -204,53 +206,54 @@ export class SignInPage implements OnInit {
         phone:"dummy",
         verify_code:"dummy",
       }
+      if(data.email == undefined){
+        data.email = "dummy@email.com" 
+      }
       //remove it later-----------------------
       console.log("Facebook User Data: ",data);
       
       localStorage.setItem('facebookUserData',JSON.stringify(data));
       //------------------------------------
-      if(data.email != undefined){
-        this.api.showLoading();
-        this.api.sendRequest('signupwithsocial',data).subscribe((res:any)=>{
-          this.api.hideLoading();
-          console.log('Response: ',res);
-          if(res.status == 'success'){
-              // this.api.presentToast('Success! Welcome')
-            localStorage.setItem('appUserId',res.data.appUserId);
-            console.log('appUserId',res.data.appUserId);
-            this.checkUser.appUserId = res.data.appUserId;
-            // =============localUserData fetch===================
-            this.localUserData.profile_pic = res.data.profile_pic;
-            this.localUserData.username = res.data.username;
-            this.localUserData.location = res.data.location;
-            this.localUserData.email = res.data.email;
-            this.localUserData.about = res.data.about;
-            this.api.localUserData = this.localUserData;
-            localStorage.setItem('localUserData',JSON.stringify(this.localUserData));
-            
-            
-            // ======update appPages===========
-            console.log(this.checkUser.appUserId);
-            this.checkUser.checkUser();
-  
-            // =============  ==============
-            localStorage.setItem("appPagesAfterLogin", JSON.stringify(this.checkUser.appPages));
-            console.log(localStorage.getItem('appPagesAfterLogin'));
-            this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
-  
-            // =======done============
-            this.router.navigate(['/home-cars-after-login']);
-          }
+
+      
+      this.api.showLoading();
+      this.api.sendRequest('signupwithsocial',data).subscribe((res:any)=>{
+        this.api.hideLoading();
+        console.log('Response: ',res);
+        if(res.status == 'success'){
+            // this.api.presentToast('Success! Welcome')
+          localStorage.setItem('appUserId',res.data[0].appUserId);
+          console.log('appUserId',res.data[0].appUserId);
+          this.checkUser.appUserId = res.data[0].appUserId;
+          // =============localUserData fetch===================
+          this.localUserData.profile_pic = res.data[0].profile_pic;
+          this.localUserData.username = res.data[0].username;
+          this.localUserData.location = res.data[0].location;
+          this.localUserData.email = res.data[0].email;
+          this.localUserData.about = res.data[0].about;
+          this.localUserData.account_type = res.data[0].account_type;
+          this.api.localUserData = this.localUserData;
+          localStorage.setItem('localUserData',JSON.stringify(this.localUserData));
           
-        },(err)=>{
-          this.api.hideLoading();
-          console.log("Error: ",err);
-          this.api.presentToast(err);
-        });
-      }else{
-        this.api.presentToast("Plz login with a facebook account that hava an email address.");
+          
+          // ======update appPages===========
+          console.log(this.checkUser.appUserId);
+          this.checkUser.checkUser();
+
+          // =============  ==============
+          localStorage.setItem("appPagesAfterLogin", JSON.stringify(this.checkUser.appPages));
+          console.log(localStorage.getItem('appPagesAfterLogin'));
+          this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
+
+          // =======done============
+          this.router.navigate(['/home-cars-after-login']);
+        }
         
-      }
+      },(err)=>{
+        this.api.hideLoading();
+        console.log("Error: ",err);
+        this.api.presentToast(err);
+      });
       
       
     },(err)=>{
@@ -302,15 +305,16 @@ export class SignInPage implements OnInit {
       console.log('Response: ',res);
       if(res.status=='success'){
         // this.api.presentToast('Success! Welcome')
-        localStorage.setItem('appUserId',res.data.appUserId);
-        console.log('appUserId',res.data.appUserId);
-        this.checkUser.appUserId = res.data.appUserId;
+        localStorage.setItem('appUserId',res.data[0].appUserId);
+        console.log('appUserId',res.data[0].appUserId);
+        this.checkUser.appUserId = res.data[0].appUserId;
         // =============localUserData fetch===================
-        this.localUserData.profile_pic = res.data.profile_pic;
-        this.localUserData.username = res.data.username;
-        this.localUserData.location = res.data.location;
-        this.localUserData.email = res.data.email;
-        this.localUserData.about = res.data.about;
+        this.localUserData.profile_pic = res.data[0].profile_pic;
+        this.localUserData.username = res.data[0].username;
+        this.localUserData.location = res.data[0].location;
+        this.localUserData.email = res.data[0].email;
+        this.localUserData.about = res.data[0].about;
+        this.localUserData.account_type = res.data[0].account_type;
         this.api.localUserData = this.localUserData;
         localStorage.setItem('localUserData',JSON.stringify(this.localUserData));
         
@@ -335,9 +339,6 @@ export class SignInPage implements OnInit {
       
     });
   }
-  // async refresh(){
-  //   const authCode = await GoogleAuth.refresh();
-  //   console.log('refresh: ',authCode);
-  // }
+  
   // ==========================done======================================
 }

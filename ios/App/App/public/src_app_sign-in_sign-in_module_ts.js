@@ -141,7 +141,8 @@ let SignInPage = class SignInPage {
       username: '',
       location: '',
       email: '',
-      about: ''
+      about: '',
+      account_type: ''
     };
     this.createForm();
   }
@@ -217,6 +218,7 @@ let SignInPage = class SignInPage {
         this.localUserData.location = res.data.location;
         this.localUserData.email = res.data.email;
         this.localUserData.about = res.data.about;
+        this.localUserData.account_type = res.data.account_type;
         this.api.localUserData = this.localUserData;
         localStorage.setItem('localUserData', JSON.stringify(this.localUserData)); // ===update appPages===========
 
@@ -251,25 +253,38 @@ let SignInPage = class SignInPage {
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
-      const result = yield _capacitor_community_facebook_login__WEBPACK_IMPORTED_MODULE_7__.FacebookLogin.login({
+
+      _this.api.presentToast('Accessing Your Facebook Account');
+
+      yield _capacitor_community_facebook_login__WEBPACK_IMPORTED_MODULE_7__.FacebookLogin.login({
         permissions: FACEBOOK_PERMISSIONS
-      });
-      console.log("Result: ", result);
+      }).then(res => {
+        const result = res;
+        console.log("Result: ", result);
 
-      if (result.accessToken && result.accessToken.userId) {
-        _this.token = result.accessToken; //Login Successful.
+        if (result.accessToken && result.accessToken.userId) {
+          _this.token = result.accessToken; //Login Successful.
 
-        console.log(`Facebook access token is ${result.accessToken.token}`);
+          _this.api.presentToast('Facebook Account Identified');
 
-        _this.loadUserData();
-      }
+          console.log(`Facebook access token is ${result.accessToken.token}`);
+
+          _this.loadUserData();
+        }
+      }, err => {
+        console.log("Error: ", err);
+
+        _this.api.presentToast(err);
+      }); // console.log("Result: ",result);
     })();
   }
 
   loadUserData() {
     const url = 'https://graph.facebook.com/' + this.token.userId + '?fields=id,name,picture.width(720),birthday,email&access_token=' + this.token.token;
+    this.api.showLoading();
     this.http.post(url, {}, {}).subscribe(res => {
-      console.log('resp=', res);
+      this.api.hideLoading();
+      console.log('Response: ', res);
       this.fbUserData = res;
       let data = {
         username: res.name,
@@ -283,25 +298,33 @@ let SignInPage = class SignInPage {
         status: "Active",
         phone: "dummy",
         verify_code: "dummy"
-      }; //remove it later-----------------------
+      };
+
+      if (data.email == undefined) {
+        data.email = "dummy@email.com";
+      } //remove it later-----------------------
+
 
       console.log("Facebook User Data: ", data);
       localStorage.setItem('facebookUserData', JSON.stringify(data)); //------------------------------------
 
+      this.api.showLoading();
       this.api.sendRequest('signupwithsocial', data).subscribe(res => {
+        this.api.hideLoading();
         console.log('Response: ', res);
 
         if (res.status == 'success') {
           // this.api.presentToast('Success! Welcome')
-          localStorage.setItem('appUserId', res.data.appUserId);
-          console.log('appUserId', res.data.appUserId);
-          this.checkUser.appUserId = res.data.appUserId; // =============localUserData fetch===================
+          localStorage.setItem('appUserId', res.data[0].appUserId);
+          console.log('appUserId', res.data[0].appUserId);
+          this.checkUser.appUserId = res.data[0].appUserId; // =============localUserData fetch===================
 
-          this.localUserData.profile_pic = res.data.profile_pic;
-          this.localUserData.username = res.data.username;
-          this.localUserData.location = res.data.location;
-          this.localUserData.email = res.data.email;
-          this.localUserData.about = res.data.about;
+          this.localUserData.profile_pic = res.data[0].profile_pic;
+          this.localUserData.username = res.data[0].username;
+          this.localUserData.location = res.data[0].location;
+          this.localUserData.email = res.data[0].email;
+          this.localUserData.about = res.data[0].about;
+          this.localUserData.account_type = res.data[0].account_type;
           this.api.localUserData = this.localUserData;
           localStorage.setItem('localUserData', JSON.stringify(this.localUserData)); // ======update appPages===========
 
@@ -315,8 +338,14 @@ let SignInPage = class SignInPage {
           this.router.navigate(['/home-cars-after-login']);
         }
       }, err => {
+        this.api.hideLoading();
         console.log("Error: ", err);
+        this.api.presentToast(err);
       });
+    }, err => {
+      this.api.hideLoading();
+      console.log("Error: ", err);
+      this.api.presentToast(err);
     });
   } // =============================================================
   // ====================signInWithGoogle==========================
@@ -326,8 +355,22 @@ let SignInPage = class SignInPage {
     var _this2 = this;
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      _this2.googleUserData = yield _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_6__.GoogleAuth.signIn();
-      console.log('GoogleUserResponse: ', _this2.googleUserData);
+      // this.api.showLoading();
+      _this2.api.presentToast('Accessing Your Google Account');
+
+      yield _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_6__.GoogleAuth.signIn().then(res => {
+        // this.api.hideLoading();
+        _this2.api.presentToast('Google Account Identified');
+
+        console.log('GoogleUserResponse: ', res);
+        _this2.googleUserData = res;
+      }, err => {
+        // this.api.hideLoading();
+        _this2.api.presentToast(err);
+
+        console.log("Error: ", err);
+      }); // console.log('GoogleUserResponse: ',this.googleUserData);
+
       _this2.api.googleSignInResponse = _this2.googleUserData;
       let data = {
         username: _this2.googleUserData.displayName,
@@ -346,20 +389,25 @@ let SignInPage = class SignInPage {
       console.log("Google User Data: ", data);
       localStorage.setItem('googleUserData', JSON.stringify(data)); //------------------------------------
 
+      _this2.api.showLoading();
+
       _this2.api.sendRequest('signupwithsocial', data).subscribe(res => {
+        _this2.api.hideLoading();
+
         console.log('Response: ', res);
 
         if (res.status == 'success') {
           // this.api.presentToast('Success! Welcome')
-          localStorage.setItem('appUserId', res.data.appUserId);
-          console.log('appUserId', res.data.appUserId);
-          _this2.checkUser.appUserId = res.data.appUserId; // =============localUserData fetch===================
+          localStorage.setItem('appUserId', res.data[0].appUserId);
+          console.log('appUserId', res.data[0].appUserId);
+          _this2.checkUser.appUserId = res.data[0].appUserId; // =============localUserData fetch===================
 
-          _this2.localUserData.profile_pic = res.data.profile_pic;
-          _this2.localUserData.username = res.data.username;
-          _this2.localUserData.location = res.data.location;
-          _this2.localUserData.email = res.data.email;
-          _this2.localUserData.about = res.data.about;
+          _this2.localUserData.profile_pic = res.data[0].profile_pic;
+          _this2.localUserData.username = res.data[0].username;
+          _this2.localUserData.location = res.data[0].location;
+          _this2.localUserData.email = res.data[0].email;
+          _this2.localUserData.about = res.data[0].about;
+          _this2.localUserData.account_type = res.data[0].account_type;
           _this2.api.localUserData = _this2.localUserData;
           localStorage.setItem('localUserData', JSON.stringify(_this2.localUserData)); // ======update appPages===========
 
@@ -375,6 +423,10 @@ let SignInPage = class SignInPage {
           _this2.router.navigate(['/home-cars-after-login']);
         }
       }, err => {
+        _this2.api.hideLoading();
+
+        _this2.api.presentToast(err);
+
         console.log("Error: ", err);
       });
     })();

@@ -10,7 +10,6 @@ import { ApiService } from '../services/api.service';
 export class RatingsPage implements OnInit {
   carData: any;
   carRatings: any;
-  imageUrlString = 'https://360uae.eigix.net/public/';
   constructor(public location:Location,
     public navCtrlr:NavController,
     public api:ApiService) { }

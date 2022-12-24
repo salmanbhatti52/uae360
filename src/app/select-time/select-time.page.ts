@@ -23,6 +23,8 @@ export class SelectTimePage implements OnInit {
     
   }
   formattedString(timeVal){
+    console.log("ionChangeTimeVal",timeVal);
+    
     this.dates.calendarDateTimeString = timeVal
     // console.log('calendarDateTimeString',this.dates.calendarDateTimeString);
     

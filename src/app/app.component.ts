@@ -16,7 +16,7 @@ import OneSignal from "onesignal-cordova-plugin";
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  imageUrlString = 'https://360uae.eigix.net/public/';
+
   appUserId:any;
   appPages = [];
   appUserData: any;

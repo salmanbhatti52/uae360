@@ -179,6 +179,7 @@ let SelectTimePage = class SelectTimePage {
         console.log(this.selectedTime);
     }
     formattedString(timeVal) {
+        console.log("ionChangeTimeVal", timeVal);
         this.dates.calendarDateTimeString = timeVal;
         // console.log('calendarDateTimeString',this.dates.calendarDateTimeString);
         this.selectedTime = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(timeVal), "hh:mm aaa");

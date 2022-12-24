@@ -11,8 +11,8 @@
   <div class="wrapper">
     <div class="profile_div">
       <img   src="assets/images/dummy_profile.svg" alt="" *ngIf="userProfile === ''">
-      <img  style="height: 160px;width: 160px; border-radius: 50%;" src="{{userProfile}}" alt="" *ngIf="userProfile !== ''">
-      <!-- <img  style="height: 160px;width: 160px; border-radius: 50%;" src="{{userProfile}}" alt="" *ngIf="userProfile !== ''"> -->
+      <img  style="height: 160px;width: 160px; border-radius: 50%;" src="{{userProfile}}" alt="" *ngIf="userProfile !== '' ">
+      <!-- <img  style="height: 160px;width: 160px; border-radius: 50%;" src="{{userProfile}}" alt="" *ngIf="userProfile !== '' && api.localUserData.account_type !== 'SignupWithApp'""> -->
       <img class="edit_icon" (click)="addNewProfile()" src="../../assets/images/icons/edit_profile.svg" alt="">
     </div>
     <form [formGroup]="angForm">

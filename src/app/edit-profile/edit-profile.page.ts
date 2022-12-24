@@ -11,7 +11,6 @@ import { CheckUserService } from '../check-user.service';
   styleUrls: ['./edit-profile.page.scss'],
 })
 export class EditProfilePage implements OnInit {
-  imageUrlString = 'https://360uae.eigix.net/public/';
   angForm:FormGroup;
   fName = '';
   lName = '';
@@ -59,7 +58,10 @@ createForm(){
 
     }
     this.userProfile = this.api.localUserData.profile_pic;
-    this.userProfile = `https://360uae.eigix.net/public/${this.userProfile}`
+    if(this.api.localUserData.account_type == 'SignupWithApp'){
+      this.userProfile = `https://360uae.eigix.net/public/${this.userProfile}`
+    }
+    
     this.userEmail = this.api.localUserData.email;
     this.userAbout = this.api.localUserData.about;
     this.userLocation = this.api.localUserData.location;

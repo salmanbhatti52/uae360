@@ -21,6 +21,7 @@ export class BookingsPage implements OnInit {
   upcomingItemdetails = false;
   previousBookingRecords = [];
   upcomingBookingRecords = [];
+  response = true;
   // selectedid = 0
   // ratingValue: number;
   constructor(public navCtrlr:NavController,
@@ -53,7 +54,7 @@ export class BookingsPage implements OnInit {
       
       console.log("Response: ",res);
       if(res.status == 'success'){
-
+        this.response = true;
         this.previousBookingRecords = res.data;
         for(let rec of this.previousBookingRecords){
           rec.start_date = format(parseISO(new Date(rec.start_date).toISOString()),'dd-MM-yyyy')
@@ -63,7 +64,7 @@ export class BookingsPage implements OnInit {
         console.log('previousBookingRecords: ',this.previousBookingRecords);
         
       }else if(res.status == 'error'){
-
+        this.response = false;
       }else{
         
       }
@@ -95,6 +96,7 @@ export class BookingsPage implements OnInit {
       
       console.log("Response: ",res);
       if(res.status == 'success'){
+        this.response = true;
         this.upcomingBookingRecords = res.data;
         for(let rec of this.upcomingBookingRecords){
           rec.start_date = format(parseISO(new Date(rec.start_date).toISOString()),'dd-MM-yyyy')
@@ -108,7 +110,7 @@ export class BookingsPage implements OnInit {
         console.log('upcomingBookingRecords: ',this.upcomingBookingRecords);
         
       }else if(res.status == 'error'){
-
+        this.response = false;
       }else{
 
       }

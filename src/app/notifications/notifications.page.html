@@ -9,14 +9,28 @@
 
 <ion-content>
   <div class="wrapper">
-    <div class="notification_box" style="background: white;">
-      <div style="margin-right: 12px;"><img src="assets/images/icons/notification_dummy1.svg" alt=""></div>
-      <div>
-        <div class="notification_text">company name accepted your booking.</div>
-        <div class="notification_time">6:40 am</div>
+    <div *ngIf="notifications !== undefined">
+      <div *ngFor="let notification of notifications; let i = index ; ">
+        <div class="notification_box box_color" [class.box_color_even_val]="(i+1)%2 == 0">
+          <div style="margin-right: 12px;">
+            <img class="img_sizing" src="{{api.imageUrlString}}{{notification.company_logo}}" alt="">
+          </div>
+          <div>
+            <div class="notification_text">{{notification.company_name}} {{notification.message}}</div>
+            <div class="notification_time">{{notification.notification_date}}</div>
+          </div>
+        </div>
       </div>
+      
     </div>
-    <div class="notification_box" style="background: rgba(255, 255, 255, 0);">
+
+    
+    <div *ngIf="response == false" class="no_notifications">
+      No notifications yet
+    </div>
+
+    
+    <!-- <div class="notification_box" style="background: rgba(255, 255, 255, 0);">
       <div style="margin-right: 12px;"><img src="assets/images/icons/notification_dummy2.svg" alt=""></div>
       <div>
         <div class="notification_text">company name accepted your booking.</div>
@@ -43,7 +57,7 @@
         <div class="notification_text">company name accepted your booking.</div>
         <div class="notification_time">6:40 am</div>
       </div>
-    </div>
+    </div> -->
   </div>
 </ion-content>
 <ion-footer class="ion-no-border">

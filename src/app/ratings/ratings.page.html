@@ -11,7 +11,7 @@
   <div class="wrapper">
     <div *ngIf="carRatings !== undefined">
       <div class="rating_item" *ngFor="let rating of carRatings">
-        <img class="user_img" src="{{imageUrlString}}{{rating.profile_pic}}" alt="">
+        <img class="user_img" src="{{api.imageUrlString}}{{rating.profile_pic}}" alt="">
         <div>
           <div >
             <div class="user_title" >{{rating.username}}</div>
