@@ -28,7 +28,7 @@
 
   </div>
       <div class="items_label">What are you looking for?</div>
-      <div style="padding-left: 11px;padding-right: 11px; ">
+      <div style="padding-left: 11px;">
         <swiper [config]="{slidesPerView:4.4, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false" style="padding: 8px;">
           <ng-template swiperSlide class="categories">
             <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem('all')">
@@ -78,7 +78,7 @@
       <swiper pager="false" [config]="{slidesPerView:1.4 ,spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false">
         <ng-template swiperSlide *ngFor="let pickup of pickups;" style="width: 58%; height: 100%;">
           <ion-card class="card" (click)="gotoCarDetails(pickup.car_id)">
-            <img class="car_img" src="{{imageUrlString}}{{pickup.image1}}" alt="">
+            <img class="car_img" src="{{api.imageUrlString}}{{pickup.image1}}" alt="">
             <div style="padding: 5px 7px 7.5px 8px;">
               <div>
                 <div class="card_title">{{pickup.vehical_name}}</div>

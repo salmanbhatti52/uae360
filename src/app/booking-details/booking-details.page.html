@@ -6,19 +6,20 @@
       <div class="title">Bookings</div>
     </div>
   </ion-toolbar>
+  <div class="btns_bg_css" >
+    <ion-button class="tab_button" [class.tab_active]="previous_tab=='true'" >Previous</ion-button>
+    <ion-button class="tab_button" [class.tab_active]="upcoming_tab=='true'" >Upcoming</ion-button>
+  </div>
 </ion-header>
 
 <ion-content>
   <div class="wrapper">
-    <div style="display: flex;justify-content: space-between;">
-      <ion-button class="tab_button" [class.tab_active]="previous_tab=='true'" >Previous</ion-button>
-      <ion-button class="tab_button" [class.tab_active]="upcoming_tab=='true'" >Upcoming</ion-button>
-    </div>
+   
     <div *ngIf="previous_tab=='true'" >
      
       <div >
         <div style="text-align: center; margin-top: 16px; position: relative;" >
-          <img style="object-fit: cover;width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;" src="{{imageUrlString}}{{bookingRecordData.cars_details[0].image1}}" alt="">
+          <img style="object-fit: cover;width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;" src="{{api.imageUrlString}}{{bookingRecordData.cars_details[0].image1}}" alt="">
           <div *ngIf="bookingRecordData.user_favourite_cars.length != 0">
             <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status != 'liked'">
             <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status == 'liked'">
@@ -163,7 +164,7 @@
       
       <div >
         <div style="text-align: center; margin-top: 16px; position: relative;" >
-          <img style="object-fit: cover;width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;" src="{{imageUrlString}}{{bookingRecordData.cars_details[0].image1}}" alt="">
+          <img style="object-fit: cover;width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;" src="{{api.imageUrlString}}{{bookingRecordData.cars_details[0].image1}}" alt="">
           <div *ngIf="bookingRecordData.user_favourite_cars.length != 0">
             <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status != 'liked'">
             <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status == 'liked'">

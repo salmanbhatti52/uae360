@@ -16,7 +16,6 @@ export class MessageOwnerSidePage implements OnInit {
   messages: any;
   companyId: any;
   companyName:any;
-  imageUrlString = 'https://360uae.eigix.net/public/';
   @ViewChild(IonContent) content: IonContent; 
   @ViewChild(IonTextarea) textarea: IonTextarea; 
   companyOnline: any;
@@ -38,13 +37,15 @@ export class MessageOwnerSidePage implements OnInit {
       //   this.getMessages()
       // },3000);
 
-      this.interval = setInterval(() => {
-        this.getMessagesAgain();
-      },3000);
+      
 
       
     }
-
+    ionViewWillEnter(){
+      this.interval = setInterval(() => {
+        this.getMessagesAgain();
+      },3000);
+    }
     ionViewWillLeave() {
       clearInterval(this.interval);
       console.log('leave view');

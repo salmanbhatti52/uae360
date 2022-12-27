@@ -10,11 +10,13 @@ import { ApiService } from '../services/api.service';
 export class CancelBookingPopupPage implements OnInit {
   cancel:string
   @Input() booking_id:any;
+  @Input() hours_left:any;
   constructor(public modalCtrlr:ModalController,
     public checkUser:CheckUserService,
     public api:ApiService) { }
 
   ngOnInit() {
+    console.log("hours_left",this.hours_left);
     
   }
   ngAfterViewInit(){

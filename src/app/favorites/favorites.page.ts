@@ -11,7 +11,7 @@ export class FavoritesPage implements OnInit {
   totalNotifications = 6;
   favorites:any;
   favoriteCars = [];
-  imageUrlString = 'https://360uae.eigix.net/public/';
+  // imageUrlString = 'https://360uae.eigix.net/public/';
   constructor(public navCtrlr:NavController,
     public checkUser:CheckUserService,
     public api:ApiService) { }

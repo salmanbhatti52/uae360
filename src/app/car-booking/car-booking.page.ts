@@ -29,7 +29,6 @@ interface LocalFile {
   styleUrls: ['./car-booking.page.scss'],
 })
 export class CarBookingPage implements OnInit {
-  imageUrlString = 'https://360uae.eigix.net/public/';
   favorites = '';
   dateRange:any;
   type: 'string';
@@ -116,6 +115,8 @@ export class CarBookingPage implements OnInit {
         }else{
           this.favorites = data.favourite_status;
         }
+        console.log("favorites_Status: ",this.favorites);
+        
       }
     }
     this.getBooking();

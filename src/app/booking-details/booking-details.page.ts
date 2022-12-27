@@ -5,7 +5,7 @@ import { GiveRatingsPopupPage } from '../give-ratings-popup/give-ratings-popup.p
 import { CancelBookingPopupPage } from '../cancel-booking-popup/cancel-booking-popup.page';
 import { ApiService } from '../services/api.service';
 import { CheckUserService } from '../check-user.service';
-import { format, parseISO } from 'date-fns';
+import { differenceInHours, format, getDate, getTime, parseISO } from 'date-fns';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -14,11 +14,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./booking-details.page.scss'],
 })
 export class BookingDetailsPage implements OnInit {
-  imageUrlString = 'https://360uae.eigix.net/public/';
-  previous_tab=false;
-  upcoming_tab=false;
-  previousItemdetails = false;
-  upcomingItemdetails = false;
+  previous_tab='false';
+  upcoming_tab='false';
+  previousItemdetails = 'false';
+  upcomingItemdetails = 'false';
   previousBookingRecords = [];
   upcomingBookingRecords = [];
   selectedid = 0
@@ -37,93 +36,13 @@ export class BookingDetailsPage implements OnInit {
     this.bookingRecordData = JSON.parse(this.activatedRoute.snapshot.params['data']) ;
     console.log('bookingRecordData: ',this.bookingRecordData);
     
-    this.previous_tab  = this.activatedRoute.snapshot.params['previous_tab']  ;
+    this.previous_tab = this.activatedRoute.snapshot.params['previous_tab'];
     console.log('previous_tab: ',this.previous_tab);
-    this.upcoming_tab = this.activatedRoute.snapshot.params['upcoming_tab'] ;
+    this.upcoming_tab = this.activatedRoute.snapshot.params['upcoming_tab'];
     console.log('upcoming_tab: ',this.upcoming_tab);
   }
   goBack(){
     this.location.back();
-  }
-  previousTab(tabVal){
-    if(tabVal = 'previous'){
-      console.log(tabVal);
-      this.previous_tab = true;
-      this.upcoming_tab = false;
-      console.log("this.upcoming_tab: ",this.upcoming_tab);
-      console.log("this.previous_tab: ",this.previous_tab);
-      this.previousItemdetails = false;
-      this.upcomingItemdetails = false;
-      this.getPreviousBookings();
-    }
-  }
-  
-  getPreviousBookings(){
-    let data = {
-      appuser_id: this.checkUser.appUserId
-    };
-    this.api.showLoading();
-    this.api.sendRequest('getCarsBookingPrevious',data).subscribe((res:any)=>{
-      this.api.hideLoading();
-      console.log("Response: ",res);
-      if(res.status == 'success'){
-
-        this.previousBookingRecords = res.data;
-        for(let rec of this.previousBookingRecords){
-          rec.start_date = format(parseISO(new Date(rec.start_date).toISOString()),'dd-MM-yyyy')
-          rec.end_date = format(parseISO(new Date(rec.end_date).toISOString()),'dd-MM-yyyy')
-        }
-        console.log('previousBookingRecords: ',this.previousBookingRecords);
-        
-      }else if(res.status == 'error'){
-
-      }else{
-        
-      }
-    },(err)=>{
-      this.api.hideLoading();
-      console.log("Api Call Error: ",err);
-      
-    });
-  }
-
-  upcomingTab(tabVal){
-    if(tabVal = 'upcoming'){
-      console.log(tabVal)
-      this.upcoming_tab = true;
-      this.previous_tab = false;
-      console.log("this.upcoming_tab: ",this.upcoming_tab);
-      console.log("this.previous_tab: ",this.previous_tab);
-      this.previousItemdetails = false;
-      this.upcomingItemdetails = false;
-      this.getUpcomingBookings();
-    }
-  }
-  getUpcomingBookings(){
-    let data = {
-      appuser_id: this.checkUser.appUserId
-    };
-    this.api.showLoading();
-    this.api.sendRequest('getCarsBookingUpcoming',data).subscribe((res:any)=>{
-      this.api.hideLoading();
-      console.log("Response: ",res);
-      if(res.status == 'success'){
-        this.upcomingBookingRecords = res.data;
-        for(let rec of this.upcomingBookingRecords){
-          rec.start_date = format(parseISO(new Date(rec.start_date).toISOString()),'dd-MM-yyyy')
-          rec.end_date = format(parseISO(new Date(rec.end_date).toISOString()),'dd-MM-yyyy')
-        }
-        console.log('upcomingBookingRecords: ',this.upcomingBookingRecords);
-      }else if(res.status == 'error'){
-
-      }else{
-
-      }
-    },(err)=>{
-      this.api.hideLoading();
-      console.log("Api Call Error: ",err);
-      
-    });
   }
   
   async openModal() {
@@ -141,12 +60,28 @@ export class BookingDetailsPage implements OnInit {
     }
   }
   async openCancelBookingModal(bookingId){
+    
+    const stDate = new Date(`${this.bookingRecordData.start_date} ${this.bookingRecordData.start_time}`);
+    console.log("startDateTime: ",stDate);
+    
+    let todayDate = new Date(); 
+    console.log("NewDateTime: ",todayDate);
+    
+    
+    // How many hours are between 2 July 2014 06:50:00 and 2 July 2014 19:00:00?
+    let result = differenceInHours(
+      stDate,
+      todayDate
+    )
+    console.log("result = ", result);
+    //=> 12
+  
     console.log("showBookingId", bookingId);
     
     const modal = await this.modalCtrlr.create({
       component:CancelBookingPopupPage,
-      cssClass: 'cancel_booking',
-      componentProps: {booking_id:bookingId} ,
+      cssClass: (result>24)? 'cancel_booking' : 'cancel_booking2',
+      componentProps: {booking_id:bookingId, hours_left:result} ,
       showBackdrop:true
     });
     modal.present();
@@ -192,28 +127,18 @@ export class BookingDetailsPage implements OnInit {
     this.navCtrlr.navigateRoot('favorites');
   }
 
-  showDetails(data){
-    console.log(data);
+  // showDetails(data){
+  //   console.log(data);
 
-    if( this.selectedid == data.car_id)
-    {
-      this.selectedid = 0
-    }else{
-      this.selectedid = data.car_id
+  //   if( this.selectedid == data.car_id)
+  //   {
+  //     this.selectedid = 0
+  //   }else{
+  //     this.selectedid = data.car_id
 
-    }
+  //   }
     
-    // if(this.previousItemdetails == true || this.upcomingItemdetails == true){
-    //   this.previousItemdetails = false;
-    //   this.upcomingItemdetails = false;
-    // }
-    // else if(this.previousItemdetails == false || this.upcomingItemdetails == false){
-    //   this.previousItemdetails = true;
-    //   this.upcomingItemdetails = true;
-
-    // }
-    
-  }
+  // }
 
   startCarBooking(){
     let carData  = {
@@ -221,7 +146,12 @@ export class BookingDetailsPage implements OnInit {
       rent_cost_day: this.bookingRecordData.cars_details[0].rent_cost_day,
       rent_cost_month: this.bookingRecordData.cars_details[0].rent_cost_month,
       vehical_name: this.bookingRecordData.cars_details[0].vehical_name,
-      company_location: this.bookingRecordData.users_company_details[0].company_location,
+      users_company: [
+        {
+          company_location: this.bookingRecordData.users_company_details[0].company_location
+        }
+      ]
+      ,
       favourite_status: this.bookingRecordData.user_favourite_cars[0].status,
       image1: this.bookingRecordData.cars_details[0].image1,
       rating: this.bookingRecordData.cars_details[0].rating,
@@ -232,7 +162,7 @@ export class BookingDetailsPage implements OnInit {
     console.log("CAR DATA BY ID ARRAY: ",carDataById);
     this.api.carDataById = carDataById;
     
-    this.navCtrlr.navigateRoot('car-booking');
+    this.navCtrlr.navigateForward('car-booking');
   }
 
 }

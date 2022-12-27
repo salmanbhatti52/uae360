@@ -150,6 +150,10 @@ const routes: Routes = [
   {
     path: 'booking-details',
     loadChildren: () => import('./booking-details/booking-details.module').then( m => m.BookingDetailsPageModule)
+  },
+  {
+    path: 'booking2',
+    loadChildren: () => import('./booking2/booking2.module').then( m => m.Booking2PageModule)
   }
 ];
 

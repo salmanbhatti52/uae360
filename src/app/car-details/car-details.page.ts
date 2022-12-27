@@ -17,7 +17,6 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 export class CarDetailsPage implements OnInit {
   favorites = '';
   showCategories = false;
-  imageUrlString = 'https://360uae.eigix.net/public/';
   rentCategories = [{category:'Day'},{category:'Month'}]
   categoryVal = 'Day';
   carData = [];

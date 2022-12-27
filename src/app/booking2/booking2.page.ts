@@ -7,50 +7,36 @@ import { format, parseISO } from 'date-fns';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-bookings',
-  templateUrl: './bookings.page.html',
-  styleUrls: ['./bookings.page.scss'],
+  selector: 'app-booking2',
+  templateUrl: './booking2.page.html',
+  styleUrls: ['./booking2.page.scss'],
 })
-export class BookingsPage implements OnInit {
-  
-  previous_tab = 'true';
-  upcoming_tab = 'false';
-  // previousItemdetails = 'false';
-  // upcomingItemdetails = 'false';
+export class Booking2Page implements OnInit {
+
   previousBookingRecords = [];
   upcomingBookingRecords = [];
   response = 'true';
-  // requestsType: string;
-  // selectedid = 0
-  // ratingValue: number;
-  constructor(public navCtrlr:NavController,
+  segmentModel = "previous"
+  previous_tab = 'true';
+  upcoming_tab = 'false';
+  constructor(public router:Router,
     public modalCtrlr:ModalController,
     public api:ApiService,
-    public checkUser:CheckUserService,
-    public router:Router) { }
+    public checkUser:CheckUserService) { }
 
   ngOnInit() {
-    
   }
-  ionViewWillEnter(){
-    if(this.previous_tab == 'true'){
-      this.previousTab();
-    }else{
-      this.upcomingTab();
-    }
-   
-  }
-  
-  previousTab(){
-  
-      this.previous_tab = 'true';
-      this.upcoming_tab = 'false';
-      console.log("this.previous_tab: ",this.previous_tab);
-      console.log("this.upcoming_tab: ",this.upcoming_tab);
-      this.getPreviousBookings();
 
+  ionViewWillEnter(){
+    this.getPreviousBookings()
+    this.getUpcomingBookings()
   }
-  
+
+  segmentChanged(event: any) {
+    console.log("rrr", this.segmentModel);
+    console.log("eee", event);
+  }
+
   getPreviousBookings(){
     let data = {
       appuser_id: this.checkUser.appUserId
@@ -82,15 +68,6 @@ export class BookingsPage implements OnInit {
     });
   }
 
-  upcomingTab(){
-   
-      this.previous_tab = 'false';
-      this.upcoming_tab = 'true';
-      console.log("this.previous_tab: ",this.previous_tab);
-      console.log("this.upcoming_tab: ",this.upcoming_tab);
-      this.getUpcomingBookings();
-  
-  }
   getUpcomingBookings(){
     let data = {
       appuser_id: this.checkUser.appUserId
@@ -128,46 +105,38 @@ export class BookingsPage implements OnInit {
     });
   }
   
-  
   homeTab(){
-    this.navCtrlr.navigateRoot('home-cars-after-login');
+    this.router.navigate(['home-cars-after-login']);
   }
   messagesTab(){
-    this.navCtrlr.navigateRoot('messages');
+    this.router.navigate(['messages']);
   }
   bookingTab(){
-    this.navCtrlr.navigateRoot('bookings');
+    this.router.navigate(['booking2']);
   }
   favoriteTab(){
-    this.navCtrlr.navigateRoot('favorites');
+    this.router.navigate(['favorites']);
   }
-
   showDetails(data){
+
+    if(this.segmentModel == "previous"){
+      this.previous_tab = "true"
+      this.upcoming_tab = "false"
+    }else{
+      this.previous_tab = "false"
+      this.upcoming_tab = "true"
+    }
     console.log(data);
     this.router.navigate(['/booking-details',{
       data: JSON.stringify(data) ,
       previous_tab: this.previous_tab,
       upcoming_tab: this.upcoming_tab
     }]);
-    // if( this.selectedid == data.car_id)
-    // {
-    //   this.selectedid = 0
-    // }else{
-      
-      // this.selectedid = data.car_id;
-
-    // }
-    
-    // if(this.previousItemdetails == true || this.upcomingItemdetails == true){
-    //   this.previousItemdetails = false;
-    //   this.upcomingItemdetails = false;
-    // }
-    // else if(this.previousItemdetails == false || this.upcomingItemdetails == false){
-    //   this.previousItemdetails = true;
-    //   this.upcomingItemdetails = true;
-
-    // }
+   
     
   }
 
+  startCarBooking(){
+    this.router.navigate(['car-booking']);
+  }
 }

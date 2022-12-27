@@ -18,35 +18,35 @@
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img (click)="makefavorite()" style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img (click)="makefavorite()" style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
-            <img class="car_image" src="{{imageUrlString}}{{data.image1}}" alt="">
+            <img class="car_image" src="{{api.imageUrlString}}{{data.image1}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
-            <img class="car_image" src="{{imageUrlString}}{{data.image2}}" alt="">
+            <img class="car_image" src="{{api.imageUrlString}}{{data.image2}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
-            <img class="car_image" src="{{imageUrlString}}{{data.image3}}" alt="">
+            <img class="car_image" src="{{api.imageUrlString}}{{data.image3}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
-            <img class="car_image" src="{{imageUrlString}}{{data.image4}}" alt="">
+            <img class="car_image" src="{{api.imageUrlString}}{{data.image4}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
           <div style="display: flex;justify-content: center;width: 100%; position: relative;">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
-            <img class="car_image" src="{{imageUrlString}}{{data.image5}}" alt="">
+            <img class="car_image" src="{{api.imageUrlString}}{{data.image5}}" alt="">
           </div>
         </ng-template>
       </swiper>

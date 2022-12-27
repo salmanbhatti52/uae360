@@ -19,7 +19,6 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 })
 export class HomeCarsAfterLoginPage implements OnInit {
   totalNotifications = 6;
-  imageUrlString = 'https://360uae.eigix.net/public/';
   item1 = true;
   item2 = false;
   item3 = false;

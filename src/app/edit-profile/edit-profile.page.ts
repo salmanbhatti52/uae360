@@ -48,7 +48,11 @@ createForm(){
     const str = this.api.localUserData.username;
     const strArray = str.split(' ');
     console.log(strArray);
-    if(strArray.length >= 2){
+    if(strArray.length == 3){
+      this.fName = strArray[0];
+      this.lName = `${strArray[1]} ${strArray[2]}`;
+    }
+    else if(strArray.length == 2){
       this.fName = strArray[0];
       this.lName = strArray[1];
 

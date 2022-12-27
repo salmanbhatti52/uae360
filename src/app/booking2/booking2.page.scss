@@ -37,9 +37,53 @@ ion-footer{
     margin: 0px auto;
 }
 .wrapper{
-    padding:5px 16px 20px;
+    padding:15px 16px 20px;
 }
+// .segment_bg{
+//     --background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.065);
+//     padding: 7px;
+//     border-radius: 10px;
+// }
 
+// .tab_button.ios{
+//     font-family: "Urbanist", sans-serif;
+//     font-size: 16px;
+//     font-weight: 400;
+//     --color: #B0B0B0;
+//     --background: #FBFBFB;
+//     height: 45px;
+//     width: 48%;
+//     margin: 0px;
+//     text-transform: capitalize;
+//     --box-shadow: !important;
+//     --border-color: #D4DCE1 !important;
+//     --border-width: 1.5px;
+//     --border-style: solid;
+//     --border-radius: 10px !important;
+//     --indicator-color: #8000FF;
+//     --indicator-height: 45px;
+//     --color-checked: #fff !important;
+// }
+// .tab_button.md{
+//     font-family: "Urbanist", sans-serif;
+//     font-size: 16px;
+//     font-weight: 400;
+//     --color: #B0B0B0;
+//     --background: #FBFBFB;
+//     --background-checked: #8000FF;
+//     height: 45px;
+//     width: 48%;
+//     margin: 0px;
+//     text-transform: capitalize;
+//     --box-shadow: !important;
+//     --border-color: #D4DCE1 !important;
+//     --border-width: 1.5px;
+//     --border-style: solid;
+//     --border-radius: 10px !important;
+//     --indicator-color: none;
+//     --indicator-height: 0px;
+//     --color-checked: #fff !important;
+// }
 .tab_button{
     font-family: "Urbanist", sans-serif;
     font-size: 16px;
@@ -56,7 +100,16 @@ ion-footer{
     --border-style: solid;
     --border-radius: 10px !important;
 }
-
+// .tab_active.md{
+//     // --background:#8000FF;
+//     font-weight: 600;
+//     --color: white !important;
+// }
+// .tab_active.ios{
+//     // --background:#8000FF;
+//     font-weight: 600;
+//     --color: white !important;
+// }
 .btn_active{
     --background:#8000FF;
     font-weight: 600;

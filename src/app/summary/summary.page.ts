@@ -9,7 +9,6 @@ import { CheckUserService } from '../check-user.service';
   styleUrls: ['./summary.page.scss'],
 })
 export class SummaryPage implements OnInit {
-  imageUrlString = 'https://360uae.eigix.net/public/';
   favorites = '';
   startDate = '';
   endDate = '';

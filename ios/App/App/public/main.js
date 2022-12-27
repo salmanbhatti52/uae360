@@ -81,7 +81,7 @@ const routes = [
     },
     {
         path: 'bookings',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_give-ratings-popup_give-ratings-popup_page_ts"), __webpack_require__.e("default-src_app_cancel-booking-popup_cancel-booking-popup_page_ts"), __webpack_require__.e("src_app_bookings_bookings_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./bookings/bookings.module */ 7938)).then(m => m.BookingsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("src_app_bookings_bookings_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./bookings/bookings.module */ 7938)).then(m => m.BookingsPageModule)
     },
     {
         path: 'home-cars-after-login',
@@ -165,7 +165,11 @@ const routes = [
     },
     {
         path: 'booking-details',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_give-ratings-popup_give-ratings-popup_page_ts"), __webpack_require__.e("default-src_app_cancel-booking-popup_cancel-booking-popup_page_ts"), __webpack_require__.e("src_app_booking-details_booking-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./booking-details/booking-details.module */ 83698)).then(m => m.BookingDetailsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_give-ratings-popup_give-ratings-popup_page_ts"), __webpack_require__.e("default-src_app_cancel-booking-popup_cancel-booking-popup_page_ts"), __webpack_require__.e("src_app_booking-details_booking-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./booking-details/booking-details.module */ 83698)).then(m => m.BookingDetailsPageModule)
+    },
+    {
+        path: 'booking2',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("src_app_booking2_booking2_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./booking2/booking2.module */ 75068)).then(m => m.Booking2PageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {

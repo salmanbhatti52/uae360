@@ -32,6 +32,7 @@ let CancelBookingPopupPage = class CancelBookingPopupPage {
         this.api = api;
     }
     ngOnInit() {
+        console.log("hours_left", this.hours_left);
     }
     ngAfterViewInit() {
         // console.log("BookingId: ",this.booking_id);
@@ -72,7 +73,8 @@ CancelBookingPopupPage.ctorParameters = () => [
     { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService }
 ];
 CancelBookingPopupPage.propDecorators = {
-    booking_id: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.Input }]
+    booking_id: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.Input }],
+    hours_left: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.Input }]
 };
 CancelBookingPopupPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
@@ -102,7 +104,7 @@ module.exports = "ion-content {\n  --background:white !important;\n}\n\n.wrapper
   \********************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: right;\">\n      <img (click)=\"justCloseModal()\" src=\"assets/images/icons/close_modal.svg\" alt=\"\">\n    </div>\n    <div class=\"heading\">Cancel?</div>\n    <div class=\"heading_description\">Are you sure you want to cancel your booking?</div>\n    <div class=\"cancelling_terms\">* Cancelling booking will result in 10% cut of your payment.</div>\n    <div class=\"cancelling_terms\" style=\"margin-top: 9.5px;\">* Booking can not be cancelled if 24 hours are remaining in starting.</div>\n    <div style=\"text-align: center;margin-top: 21px;\">\n      <ion-button class=\"invite_btn\" (click)=\"cancelBooking()\">\n        <span class=\"btn-text\" >Okay</span>\n      </ion-button>\n    </div>\n    <div style=\"text-align: center;margin-top: 16px;\">\n      <ion-button class=\"cancel_btn\" (click)=\"justCloseModal()\">\n        <span class=\"btn2-text\" >No</span>\n      </ion-button>\n    </div>\n  </div>\n</ion-content>\n";
+module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: right;\">\n      <img (click)=\"justCloseModal()\" src=\"assets/images/icons/close_modal.svg\" alt=\"\">\n    </div>\n    <div class=\"heading\">Cancel?</div>\n    <div class=\"heading_description\">Are you sure you want to cancel your booking?</div>\n    <div class=\"cancelling_terms\">* Cancelling booking will result in 10% cut of your payment.</div>\n    <div class=\"cancelling_terms\" style=\"margin-top: 9.5px;\">* Booking can not be cancelled if 24 hours are remaining in starting.</div>\n    <div style=\"text-align: center;margin-top: 21px;\" *ngIf=\"hours_left>24\">\n      <ion-button class=\"invite_btn\" (click)=\"cancelBooking()\">\n        <span class=\"btn-text\" >Okay</span>\n      </ion-button>\n    </div>\n    <div style=\"text-align: center;margin-top: 16px;\" *ngIf=\"hours_left>24\">\n      <ion-button class=\"cancel_btn\" (click)=\"justCloseModal()\">\n        <span class=\"btn2-text\" >No</span>\n      </ion-button>\n    </div>\n  </div>\n</ion-content>\n";
 
 /***/ })
 

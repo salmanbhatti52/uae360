@@ -5084,6 +5084,12 @@ ion-input, ion-textarea, ion-label {
   --width: 90%;
   background: rgba(15, 23, 42, 0.5);
 }
+.cancel_booking2 {
+  --height: 300px;
+  --border-radius: 20px;
+  --width: 90%;
+  background: rgba(15, 23, 42, 0.5);
+}
 .date_modal {
   --width: 90%;
   --height: 558px;

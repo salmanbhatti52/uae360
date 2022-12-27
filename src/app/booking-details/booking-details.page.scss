@@ -37,7 +37,12 @@ ion-footer{
     margin: 0px auto;
 }
 .wrapper{
-    padding:15px 16px 20px;
+    padding:5px 16px 20px;
+}
+.btns_bg_css{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 16px 5px;
 }
 .tab_button{
     font-family: "Urbanist", sans-serif;
