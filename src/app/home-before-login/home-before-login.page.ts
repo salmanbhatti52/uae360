@@ -40,7 +40,10 @@ export class HomeBeforeLoginPage implements OnInit {
   //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
   // ]
   pickups = [];
-  selectedCarID: any = 0;
+  result = [];
+  showContent = true;
+  // selectedCarID: any = 0;
+
   constructor(public router:Router,
     public api:ApiService,
     public checkUser:CheckUserService,
@@ -75,6 +78,61 @@ export class HomeBeforeLoginPage implements OnInit {
     this.getCarTypes();
     this.getCars();
 
+  }
+  ionViewWillEnter(){
+    if(this.result.length > 0){
+      this.showContent = false;
+    }else{
+      this.showContent = true;
+    }
+    
+  }
+  handleChange(event){
+    this.result = []
+    console.log('Event: ',event);
+    // const query = event.detail.value.toLowerCase();
+    const query = event.target.value.toLowerCase();
+    console.log('query: ',query);
+
+    if(query == ''){
+      this.showContent = true;
+      // this.api.presentToast('Keyword Required')
+    }
+    if(query != ''){
+      let data = {
+        "keyword":query
+      };
+      this.api.showLoading();
+      this.api.sendRequest('getCarsByFiltersByName',data).subscribe((res:any)=>{
+        console.log("Response: ",res);
+        this.api.hideLoading();
+        if(res.status == 'success'){
+          this.showContent = false;
+          this.result = res.data;
+
+        }else if(res.status == 'error'){
+          if(res.message != 'Keyword Required'){
+            this.api.presentToast(res.message);
+          }
+        }else{
+  
+        }
+        
+      },(err)=>{
+        this.api.hideLoading();
+        console.log("API Call Error: ",err);
+        
+      })
+    }
+    
+    // this.results = this.data.filter(d => d.toLowerCase().indexOf(query) > -1);
+    // console.log('query1: ',query1);
+    
+  }
+  
+  clearResult(){
+    this.result = []
+    this.showContent = true;
   }
 
   getCars(){
@@ -118,31 +176,10 @@ export class HomeBeforeLoginPage implements OnInit {
     })
   }
 
-  gotoFilter(){
-    this.router.navigate(['/filters']);
+  gotoSignIn(){
+    this.router.navigate(['/sign-in']);
   }
-  gotoCarDetails(car_id){
-    this.api.showLoading();
-    let data = {
-      car_id: car_id
-    }
-    this.api.sendRequest('getCarsById',data).subscribe((res:any)=>{
-      this.api.hideLoading();
-      console.log('api response:',res);
-      if(res.status == 'success'){
-        // this.api.presentToast('Success!')
-        this.api.carDataById = res.data;
-        console.log('carDataById:',this.api.carDataById);
-        this.router.navigate(['/car-details']);
-      }
-      
-    },(err)=>{
-      this.api.hideLoading();
-      console.log(err);
-      
-    })
-    
-  }
+  
   selectItem(itemVal){
     if(itemVal == 'all'){
       this.item1 = true;

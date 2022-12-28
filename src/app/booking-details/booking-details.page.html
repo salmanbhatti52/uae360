@@ -5,11 +5,12 @@
       <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
       <div class="title">Bookings</div>
     </div>
+    <div class="btns_bg_css" >
+      <ion-button class="tab_button" [class.tab_active]="previous_tab=='true'" >Previous</ion-button>
+      <ion-button class="tab_button" [class.tab_active]="upcoming_tab=='true'" >Upcoming</ion-button>
+    </div>
   </ion-toolbar>
-  <div class="btns_bg_css" >
-    <ion-button class="tab_button" [class.tab_active]="previous_tab=='true'" >Previous</ion-button>
-    <ion-button class="tab_button" [class.tab_active]="upcoming_tab=='true'" >Upcoming</ion-button>
-  </div>
+  
 </ion-header>
 
 <ion-content>

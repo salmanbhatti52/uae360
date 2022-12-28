@@ -13,76 +13,136 @@
        </div>
       </div>
     </div>
-  </ion-toolbar>
-  <!-- <div class="search_box" style="margin: 16px;">
-    <div style="width: 100%;">
-      <ion-searchbar show-clear-button="always" class="input_field" placeholder="Search for Cars"></ion-searchbar>
+    <div style="margin: 16px;">
+      <ion-searchbar [debounce]="1000" 
+        (ionChange)="handleChange($event)" type="text"
+        show-clear-button="always" class="input_field" 
+        placeholder="Search for Cars" (ionClear)="clearResult()">
+      </ion-searchbar>
     </div>
-  </div> -->
+  </ion-toolbar >
+  
 </ion-header>
 
 <ion-content>
-  <div class="wrapper">
-    
-    <div class="search_box">
-      <div style="width: 100%;">
-        <ion-input class="input_field" placeholder="Search for Cars"></ion-input>
+  <div class="wrapper" *ngIf="result.length > 0">
+    <div *ngFor="let res of result">
+      <div style="text-align: center; margin-top: 13px; position: relative;" (click)="gotoCarDetails(res.car_id)" >
+        <img style="object-fit: cover;width: 100%;height: 200px; border-radius: 10px 10px 0px 0px;" src="{{api.imageUrlString}}{{res.image1}}" alt="">
+        <!-- *ngIf="favorites == 'dislike'" -->
+        <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="res.favourite_status != 'liked'">
+        <!-- (click)="makeUnFavorite(favorite.car_id)" -->
+        <img  style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="res.favourite_status == 'liked'">
+        <div class="car_info_box" >
+          <div>
+            <div class="car_name poppins">{{res.vehical_name}}</div>
+            <div style="text-align: left;line-height: 1;margin-top: 3px;">
+              <span *ngIf="res.rating == 0 ">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span *ngIf="res.rating >=1 && res.rating < 1.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span *ngIf="res.rating >=1.5 && res.rating < 2.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span *ngIf="res.rating >=2.5 && res.rating < 3.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span *ngIf="res.rating >=3.5 && res.rating < 4.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span *ngIf="res.rating >=4.5 && res.rating < 5.1">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+              </span>
+              <span class="rating_value poppins">trips</span>
+            </div>
+          </div>
+          <div class="car2_info_subdiv">
+            <div style="line-height: 1;"><span class="car2_price poppins" >$</span><span class="car2_price poppins" style="font-size: 32px;margin-right: 8px;">{{res.rent_cost_day}}</span><span class="car2_price poppins" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+          </div>
+          
+        </div>
       </div>
-      <!-- <div style="width: 100%;">
-        <ion-searchbar show-clear-button="always" class="input_field" placeholder="Search for Cars"></ion-searchbar>
-      </div> -->
-      <div style="display: flex;"><img src="assets/images/icons/search_input.svg" alt=""></div>
     </div>
     
+    
   </div>
-      <div class="items_label">What are you looking for?</div>
-      <div style="padding-left: 11px;" >
-        <swiper [config]="{slidesPerView:4.4, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false" style="padding: 8px;">
-          <ng-template swiperSlide class="categories">
-            <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem('all')">
-              <img src="assets/images/icons/car_grey.svg" alt="" *ngIf="item1 == false">
-              <img src="assets/images/icons/car_white.svg" alt="" *ngIf="item1 == true">
-              <div class="cars_label" [class.fontActive]="item1 == true">All Cars</div>
-            </div>
-          </ng-template>
-          <ng-template swiperSlide class="categories">
-            <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem('Sports')">
-              <img src="assets/images/icons/sports_car_grey.svg" alt="" *ngIf="item2 == false">
-              <img src="assets/images/icons/sports_car_white.svg" alt="" *ngIf="item2 == true">
-              <div class="cars_label" [class.fontActive]="item2 == true">{{carTypeOne}}</div>
-            </div>
-          </ng-template>
-          <ng-template swiperSlide class="categories">
-            <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem('Luxury')">
-              <img src="assets/images/icons/luxury_car_grey.svg" alt="" *ngIf="item3 == false">
-              <img src="assets/images/icons/luxury_car_white.svg" alt="" *ngIf="item3 == true">
-              <div class="cars_label" [class.fontActive]="item3 == true">{{carTypeTwo}}</div>
-            </div>
-          </ng-template>
-          <ng-template swiperSlide class="categories">
-            <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem('Pickup')">
-              <img src="assets/images/icons/taxi_grey.svg" alt="" *ngIf="item4 == false">
-              <img src="assets/images/icons/taxi_white.svg" alt="" *ngIf="item4 == true">
-              <div class="cars_label" [class.fontActive]="item4 == true">{{carTypeThree}}</div>
-            </div>
-          </ng-template>
-          <ng-template swiperSlide class="categories" >
-            <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem('SUV')">
-              <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
-              <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">
-              <div class="cars_label" [class.fontActive]="item5 == true">{{carTypeFour}}</div>
-            </div>
-          </ng-template>
-        </swiper>
-      </div>
-      
-      <!-- <div class="items_box">
-      </div> -->
-  
+  <!-- <div *ngIf="result.length == 0">No Cars Found</div> -->
+  <div *ngIf="showContent == true">
+    <div class="items_label">What are you looking for?</div>
+    <div style="padding-left: 11px;" >
+      <swiper [config]="{slidesPerView:4.4, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false" style="padding: 8px;">
+        <ng-template swiperSlide class="categories">
+          <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem('all')">
+            <img src="assets/images/icons/car_grey.svg" alt="" *ngIf="item1 == false">
+            <img src="assets/images/icons/car_white.svg" alt="" *ngIf="item1 == true">
+            <div class="cars_label" [class.fontActive]="item1 == true">All Cars</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide class="categories">
+          <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem('Sports')">
+            <img src="assets/images/icons/sports_car_grey.svg" alt="" *ngIf="item2 == false">
+            <img src="assets/images/icons/sports_car_white.svg" alt="" *ngIf="item2 == true">
+            <div class="cars_label" [class.fontActive]="item2 == true">{{carTypeOne}}</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide class="categories">
+          <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem('Luxury')">
+            <img src="assets/images/icons/luxury_car_grey.svg" alt="" *ngIf="item3 == false">
+            <img src="assets/images/icons/luxury_car_white.svg" alt="" *ngIf="item3 == true">
+            <div class="cars_label" [class.fontActive]="item3 == true">{{carTypeTwo}}</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide class="categories">
+          <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem('Pickup')">
+            <img src="assets/images/icons/taxi_grey.svg" alt="" *ngIf="item4 == false">
+            <img src="assets/images/icons/taxi_white.svg" alt="" *ngIf="item4 == true">
+            <div class="cars_label" [class.fontActive]="item4 == true">{{carTypeThree}}</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide class="categories" >
+          <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;" (click)="selectItem('SUV')">
+            <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
+            <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">
+            <div class="cars_label" [class.fontActive]="item5 == true">{{carTypeFour}}</div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+    
+    <!-- <div class="items_box">
+    </div> -->
 
-  <div class="items_wrapper">
-    <div class="items_label" style="margin-top: 5px;padding-left: 3px;">Top Rented</div>
-    <!-- <div *ngIf="item1==true"> -->
+
+    <div class="items_wrapper">
+      <div class="items_label" style="margin-top: 5px;padding-left: 3px;">Top Rented
+      </div>
+      <!-- <div *ngIf="item1==true"> -->
       <swiper [config]="{slidesPerView:1.4 ,spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false" >
         <ng-template swiperSlide *ngFor="let pickup of pickups;" style="width: 58%; height: 100%;">
           <ion-card class="card" (click)="gotoCarDetails(pickup.car_id)">
@@ -159,9 +219,9 @@
         </ng-template>
         
       </swiper>
-    <!-- </div> -->
+      <!-- </div> -->
     
-    <!-- <ion-slides pager="false" [options]="slideOpts" style="padding-bottom: 1px;">
+      <!-- <ion-slides pager="false" [options]="slideOpts" style="padding-bottom: 1px;">
       <ion-slide *ngFor="let pickup of pickups;" style="width: 48%; height: 100%;">
         <ion-card class="card" (click)="gotoCarDetails()">
           <img style="width: 100%;" src="{{pickup.img}}" alt="">
@@ -191,13 +251,16 @@
       </ion-slide>
       
     </ion-slides> -->
-
+    </div>
     
+
+  
   </div>
+
 </ion-content>
 <ion-footer class="ion-no-border">
    
-  <div style="margin: 15px 0px 15px;">
+  <div style="margin: 15px 0px 15px;" *ngIf="showContent == true">
     <div style="text-align: center;">
       <div class="invite_label">Invite Friends</div>
       <div class="invite_label" style="font-weight: 400;">And spread the word</div>

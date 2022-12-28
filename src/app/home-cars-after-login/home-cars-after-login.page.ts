@@ -41,7 +41,10 @@ export class HomeCarsAfterLoginPage implements OnInit {
     useLocale: true,
     maxResults: 5
   };
-  
+  public data = ['Amsterdam', 'Buenos Aires', 'Cairo', 'Geneva', 'Hong Kong', 'Istanbul', 'London', 'Madrid', 'New York', 'Panama City'];
+  public results = [...this.data];
+  result = [];
+  showContent = true;
   pickups = [];
   constructor(public router:Router,
     public navCtrlr:NavController,
@@ -70,6 +73,61 @@ export class HomeCarsAfterLoginPage implements OnInit {
    this.fetchLocation();
   }
 
+  ionViewWillEnter(){
+    if(this.result.length > 0){
+      this.showContent = false;
+    }else{
+      this.showContent = true;
+    }
+    
+  }
+  handleChange(event){
+    this.result = []
+    console.log('Event: ',event);
+    // const query = event.detail.value.toLowerCase();
+    const query = event.target.value.toLowerCase();
+    console.log('query: ',query);
+
+    if(query == ''){
+      this.showContent = true;
+      // this.api.presentToast('Keyword Required')
+    }
+    if(query != ''){
+      let data = {
+        "keyword":query
+      };
+      this.api.showLoading();
+      this.api.sendRequest('getCarsByFiltersByName',data).subscribe((res:any)=>{
+        console.log("Response: ",res);
+        this.api.hideLoading();
+        if(res.status == 'success'){
+          this.showContent = false;
+          this.result = res.data;
+
+        }else if(res.status == 'error'){
+          if(res.message != 'Keyword Required'){
+            this.api.presentToast(res.message);
+          }
+        }else{
+  
+        }
+        
+      },(err)=>{
+        this.api.hideLoading();
+        console.log("API Call Error: ",err);
+        
+      })
+    }
+    
+    // this.results = this.data.filter(d => d.toLowerCase().indexOf(query) > -1);
+    // console.log('query1: ',query1);
+    
+  }
+  
+  clearResult(){
+    this.result = []
+    this.showContent = true;
+  }
   // checkAPI(){
   //   let data = {
   //     email: "ali12@gmail.com",
@@ -155,7 +213,6 @@ export class HomeCarsAfterLoginPage implements OnInit {
     this.router.navigate(['/filters']);
   }
   gotoCarDetails(car_id){
-    
     let data = {
       car_id: car_id,
       user_id: this.checkUser.appUserId

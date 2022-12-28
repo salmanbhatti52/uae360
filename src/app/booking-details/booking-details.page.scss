@@ -48,7 +48,7 @@ ion-footer{
     font-family: "Urbanist", sans-serif;
     font-size: 16px;
     font-weight: 400;
-    color: #B0B0B0;
+    --color: #B0B0B0;
     --background: #FBFBFB;
     height: 48px;
     width: 48%;
@@ -63,7 +63,7 @@ ion-footer{
 .tab_active{
     --background:#8000FF;
     font-weight: 600;
-    color: white;
+    --color: white;
 }
 .car_info_box{
     display: flex;
