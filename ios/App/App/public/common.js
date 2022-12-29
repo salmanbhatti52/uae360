@@ -30,7 +30,7 @@ let BookedPage = class BookedPage {
     }
     closeModal() {
         this.modalCtrlr.dismiss();
-        this.navCtrlr.navigateRoot('bookings');
+        this.navCtrlr.navigateForward('bookings');
     }
 };
 BookedPage.ctorParameters = () => [
@@ -104,7 +104,7 @@ let DeleteAccountPopupPage = class DeleteAccountPopupPage {
                 localStorage.removeItem('appUserId');
                 console.log('appUserId removed');
                 console.log(this.checkUser.appUserId);
-                this.navCtrlr.navigateRoot('sign-in');
+                this.navCtrlr.navigateForward('sign-in');
                 return this.modalCtrlr.dismiss('delete my account', 'delete_account');
             }
             else if (res.status == 'error') {
@@ -115,7 +115,7 @@ let DeleteAccountPopupPage = class DeleteAccountPopupPage {
                 localStorage.removeItem('appUserId');
                 console.log('appUserId removed');
                 console.log(this.checkUser.appUserId);
-                this.navCtrlr.navigateRoot('sign-in');
+                this.navCtrlr.navigateForward('sign-in');
                 return this.modalCtrlr.dismiss('delete my account', 'delete_account');
             }
         }, (err) => {

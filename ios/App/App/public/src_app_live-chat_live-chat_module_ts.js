@@ -107,7 +107,7 @@ let LiveChatPage = class LiveChatPage {
     ngOnInit() {
     }
     startLiveChat() {
-        this.navCtrlr.navigateRoot('live-chat-screen');
+        this.navCtrlr.navigateForward('live-chat-screen');
     }
 };
 LiveChatPage.ctorParameters = () => [

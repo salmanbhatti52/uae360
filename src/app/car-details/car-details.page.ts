@@ -38,8 +38,8 @@ export class CarDetailsPage implements OnInit {
       for (let data of this.carData) {
         this.vehicleName = data.vehical_name;
         this.carId = data.car_id;
-        this.company_id = data.users_company_id;
-        this.company_name = data.company_name;
+        this.company_id = data.users_company[0].users_company_id;
+        this.company_name = data.users_company[0].company_name;
         if(!data.favourite_status){
           this.favorites = 'dislike';
         }else{
@@ -72,7 +72,7 @@ export class CarDetailsPage implements OnInit {
   }
   makefavorite(){
     if(this.appUserId == null){
-      this.navCtrlr.navigateRoot('sign-in');
+      this.navCtrlr.navigateForward('sign-in');
     }else{
       
       let data = {
@@ -133,10 +133,10 @@ export class CarDetailsPage implements OnInit {
   }
   gotoRatings(){
     if(this.checkUser.appUserId == null){
-      this.navCtrlr.navigateRoot('sign-in');
+      this.navCtrlr.navigateForward('sign-in');
     }else if(this.checkUser.appUserId != null){
       // this.router.navigate
-      this.navCtrlr.navigateRoot('ratings');
+      this.navCtrlr.navigateForward('ratings');
 
     }else{
 
@@ -154,7 +154,7 @@ export class CarDetailsPage implements OnInit {
   }
   startChatwithOwner(){
     if(this.checkUser.appUserId == null){
-      this.navCtrlr.navigateRoot('sign-in');
+      this.navCtrlr.navigateForward('sign-in');
     }else if(this.checkUser.appUserId != null){
       let data = {
         requestType:"startChat",

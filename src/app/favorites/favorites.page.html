@@ -29,12 +29,47 @@
           <div>
             <div class="car_name poppins">{{favorite.vehical_name}}</div>
             <div style="text-align: left;line-height: 1;">
-              <span>
-                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-                <img class="start_margin" src="assets/images/icons/rated_star.svg" alt="">
-                <img class="start_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <span *ngIf="favorite.rating == 0 ">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span *ngIf="favorite.rating >=1 && favorite.rating < 1.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span *ngIf="favorite.rating >=1.5 && favorite.rating < 2.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span *ngIf="favorite.rating >=2.5 && favorite.rating < 3.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span *ngIf="favorite.rating >=3.5 && favorite.rating < 4.5">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              </span>
+              <span *ngIf="favorite.rating >=4.5 && favorite.rating < 5.1">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               </span>
               <span class="rating_value poppins">trips</span>
             </div>

@@ -176,7 +176,7 @@ createForm(){
         this.api.localUserData.location = res.data[0].location;
         console.log('api Local User Data: ',this.api.localUserData);
         localStorage.setItem('localUserData',JSON.stringify(this.api.localUserData));
-        this.navCtrlr.navigateRoot('settings');
+        this.navCtrlr.navigateForward('settings');
       }else if(res.status == 'error'){
         // console.log("Error: ",);
         this.api.hideLoading();

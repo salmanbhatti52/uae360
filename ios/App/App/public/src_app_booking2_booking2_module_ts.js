@@ -143,8 +143,8 @@ let Booking2Page = class Booking2Page {
                 this.response = 'true';
                 this.previousBookingRecords = res.data;
                 for (let rec of this.previousBookingRecords) {
-                    rec.start_date = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(rec.start_date).toISOString()), 'dd-MM-yyyy');
-                    rec.end_date = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(rec.end_date).toISOString()), 'dd-MM-yyyy');
+                    rec.f_start_date = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(rec.start_date).toISOString()), 'dd-MM-yyyy');
+                    rec.f_end_date = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(rec.end_date).toISOString()), 'dd-MM-yyyy');
                 }
                 this.api.hideLoading();
                 console.log('previousBookingRecords: ', this.previousBookingRecords);
@@ -171,12 +171,8 @@ let Booking2Page = class Booking2Page {
                 this.response = 'true';
                 this.upcomingBookingRecords = res.data;
                 for (let rec of this.upcomingBookingRecords) {
-                    rec.start_date = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(rec.start_date).toISOString()), 'dd-MM-yyyy');
-                    rec.end_date = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(rec.end_date).toISOString()), 'dd-MM-yyyy');
-                    if (rec.cars_details[0].rating == 0) {
-                        rec.cars_details[0].rating = Number(rec.cars_details[0].rating);
-                        console.log("Rating Value: ", rec.cars_details[0].rating);
-                    }
+                    rec.f_start_date = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(rec.start_date).toISOString()), 'dd-MM-yyyy');
+                    rec.f_end_date = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(rec.end_date).toISOString()), 'dd-MM-yyyy');
                 }
                 this.api.hideLoading();
                 console.log('upcomingBookingRecords: ', this.upcomingBookingRecords);
@@ -193,16 +189,16 @@ let Booking2Page = class Booking2Page {
         });
     }
     homeTab() {
-        this.router.navigate(['home-cars-after-login']);
+        this.router.navigate(['/home-cars-after-login']);
     }
     messagesTab() {
-        this.router.navigate(['messages']);
+        this.router.navigate(['/messages']);
     }
     bookingTab() {
-        this.router.navigate(['booking2']);
+        this.router.navigate(['/booking2']);
     }
     favoriteTab() {
-        this.router.navigate(['favorites']);
+        this.router.navigate(['/favorites']);
     }
     showDetails(data) {
         if (this.segmentModel == "previous") {
@@ -219,9 +215,6 @@ let Booking2Page = class Booking2Page {
                 previous_tab: this.previous_tab,
                 upcoming_tab: this.upcoming_tab
             }]);
-    }
-    startCarBooking() {
-        this.router.navigate(['car-booking']);
     }
 };
 Booking2Page.ctorParameters = () => [

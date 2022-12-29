@@ -94,7 +94,8 @@ export class HomeCarsAfterLoginPage implements OnInit {
     }
     if(query != ''){
       let data = {
-        "keyword":query
+        users_customers_id:this.checkUser.appUserId,
+        keyword:query
       };
       this.api.showLoading();
       this.api.sendRequest('getCarsByFiltersByName',data).subscribe((res:any)=>{
@@ -348,19 +349,34 @@ export class HomeCarsAfterLoginPage implements OnInit {
       
     }
   }
+  // gotoNotifications(){
+  //   this.navCtrlr.navigateRoot('notifications');
+  // }
+  // homeTab(){
+  //   this.navCtrlr.navigateRoot('home-cars-after-login');
+  // }
+  // messagesTab(){
+  //   this.navCtrlr.navigateRoot('messages');
+  // }
+  // bookingTab(){
+  //   this.navCtrlr.navigateRoot('bookings');
+  // }
+  // favoriteTab(){
+  //   this.navCtrlr.navigateRoot('favorites');
+  // }
   gotoNotifications(){
-    this.navCtrlr.navigateRoot('notifications');
+    this.router.navigate(['/notifications']);
   }
   homeTab(){
-    this.navCtrlr.navigateRoot('home-cars-after-login');
+    this.router.navigate(['/home-cars-after-login']);
   }
   messagesTab(){
-    this.navCtrlr.navigateRoot('messages');
+    this.router.navigate(['/messages']);
   }
   bookingTab(){
-    this.navCtrlr.navigateRoot('bookings');
+    this.router.navigate(['/bookings']);
   }
   favoriteTab(){
-    this.navCtrlr.navigateRoot('favorites');
+    this.router.navigate(['/favorites']);
   }
 }

@@ -712,7 +712,7 @@ export class CarBookingPage implements OnInit {
 
           this.api.bookingResponse = this.bookingObj;
           this.api.hideLoading();
-          this.navCtrlr.navigateRoot('summary');
+          this.navCtrlr.navigateForward('summary');
 
         }else if(res.status == 'error'){
           

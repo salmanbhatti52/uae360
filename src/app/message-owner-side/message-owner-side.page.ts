@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { ApiService } from '../services/api.service';
 import { CheckUserService } from '../check-user.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { interval } from 'rxjs';
+// import { interval } from 'rxjs';
 import { IonContent, IonTextarea } from '@ionic/angular';
 
 @Component({

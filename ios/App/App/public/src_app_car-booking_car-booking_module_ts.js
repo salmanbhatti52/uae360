@@ -779,7 +779,7 @@ let CarBookingPage = class CarBookingPage {
 
             _this8.api.hideLoading();
 
-            _this8.navCtrlr.navigateRoot('summary');
+            _this8.navCtrlr.navigateForward('summary');
           } else if (res.status == 'error') {
             _this8.api.hideLoading();
           } else {}

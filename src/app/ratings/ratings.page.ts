@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NavController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-ratings',
   templateUrl: './ratings.page.html',
@@ -12,6 +13,7 @@ export class RatingsPage implements OnInit {
   carRatings: any;
   constructor(public location:Location,
     public navCtrlr:NavController,
+    public router:Router,
     public api:ApiService) { }
 
   ngOnInit() {
@@ -33,16 +35,31 @@ export class RatingsPage implements OnInit {
   goBack(){
     this.location.back();
   }
+  // gotoNotifications(){
+  //   this.router.navigate(['/notifications']);
+  // }
   homeTab(){
-    this.navCtrlr.navigateRoot('home-cars-after-login');
+    this.router.navigate(['/home-cars-after-login']);
   }
   messagesTab(){
-    this.navCtrlr.navigateRoot('messages');
+    this.router.navigate(['/messages']);
   }
   bookingTab(){
-    this.navCtrlr.navigateRoot('bookings');
+    this.router.navigate(['/bookings']);
   }
   favoriteTab(){
-    this.navCtrlr.navigateRoot('favorites');
+    this.router.navigate(['/favorites']);
   }
+  // homeTab(){
+  //   this.navCtrlr.navigateRoot('home-cars-after-login');
+  // }
+  // messagesTab(){
+  //   this.navCtrlr.navigateRoot('messages');
+  // }
+  // bookingTab(){
+  //   this.navCtrlr.navigateRoot('bookings');
+  // }
+  // favoriteTab(){
+  //   this.navCtrlr.navigateRoot('favorites');
+  // }
 }

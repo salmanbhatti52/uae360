@@ -71,6 +71,7 @@ export class FiltersPage implements OnInit {
         this.api.presentToast("Plz specify your range for month");
       }else{
         let data = {
+          users_customers_id: this.checkUser.appUserId,
           rent_cost_day_start: this.rentCostDayStart,
           rent_cost_day_end: this.rentCostDayEnd,
           rent_cost_month_start:this.rentCostMonthStart,

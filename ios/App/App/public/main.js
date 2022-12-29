@@ -69,7 +69,7 @@ const routes = [
     },
     {
         path: 'notifications',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_notifications_notifications_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./notifications/notifications.module */ 89182)).then(m => m.NotificationsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("src_app_notifications_notifications_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./notifications/notifications.module */ 89182)).then(m => m.NotificationsPageModule)
     },
     {
         path: 'messages',
@@ -165,7 +165,7 @@ const routes = [
     },
     {
         path: 'booking-details',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_give-ratings-popup_give-ratings-popup_page_ts"), __webpack_require__.e("default-src_app_cancel-booking-popup_cancel-booking-popup_page_ts"), __webpack_require__.e("src_app_booking-details_booking-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./booking-details/booking-details.module */ 83698)).then(m => m.BookingDetailsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_give-ratings-popup_give-ratings-popup_page_ts"), __webpack_require__.e("default-src_app_cancel-booking-popup_cancel-booking-popup_page_ts"), __webpack_require__.e("src_app_booking-details_booking-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./booking-details/booking-details.module */ 83698)).then(m => m.BookingDetailsPageModule)
     },
     {
         path: 'booking2',
@@ -454,7 +454,7 @@ let CheckUserService = class CheckUserService {
         if (this.appUserId == null) {
             this.appPages = [
                 { title: 'Browse', url: '/home-before-login', img: 'assets/images/icons/search_sm.svg' },
-                { title: 'Live Chat', url: '/live-chat', img: 'assets/images/icons/live_chat_sm.svg' },
+                { title: 'Live Chat', url: '/sign-in', img: 'assets/images/icons/live_chat_sm.svg' },
                 { title: 'About Us', url: '/about-us', img: 'assets/images/icons/about_us_sm.svg' },
             ];
         }

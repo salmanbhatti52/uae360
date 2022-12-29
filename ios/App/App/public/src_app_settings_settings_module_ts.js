@@ -135,15 +135,15 @@ let SettingsPage = class SettingsPage {
   }
 
   goForChangePassword() {
-    this.navCtrlr.navigateRoot('change-password');
+    this.navCtrlr.navigateForward('change-password');
   }
 
   goForPaymentDetails() {
-    this.navCtrlr.navigateRoot('saved-payment-methods');
+    this.navCtrlr.navigateForward('saved-payment-methods');
   }
 
   editProfile() {
-    this.navCtrlr.navigateRoot('edit-profile');
+    this.navCtrlr.navigateForward('edit-profile');
   }
 
   deleteAccountModal() {

@@ -3,8 +3,8 @@ import { Location } from '@angular/common';
 import { NavController } from '@ionic/angular';
 import { CheckUserService } from '../check-user.service';
 import { ApiService } from '../services/api.service';
-import { format } from 'path';
-import { getHours, getMinutes, getTime, parseISO, parseJSON } from 'date-fns';
+import {format, parseISO } from 'date-fns';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
@@ -16,7 +16,8 @@ export class NotificationsPage implements OnInit {
   constructor(public location:Location,
     public navCtrlr:NavController,
     public checkUser:CheckUserService,
-    public api:ApiService) { }
+    public api:ApiService,
+    public router:Router) { }
 
   ngOnInit() {
     this.getNotifications();
@@ -35,18 +36,14 @@ export class NotificationsPage implements OnInit {
         }
         this.notifications = res.data;
         for(let data of this.notifications){
-        
-          let date = new Date(data.notification_date).toLocaleTimeString();
-
-          console.log("DateandTime: ",date);
-          console.log(date.substring(0, 4));
-          console.log(date.substring(8,10));
-          let time = date.substring(0, 4);
-          let format = date.substring(8,10);
-          console.log("complete Date: ",`${time} ${format}`);
-          data.notification_date = `${time} ${format}`;
-          console.log("Response: ",res);
-
+          let dateString = data.notification_date
+          let datePartOne = dateString.substring(0,10)
+          let datePartTwo = dateString.substring(11)
+          let formattedDate = `${datePartOne}T${datePartTwo}+05:00`
+          console.log(`My Formatted Date: ${datePartOne}T${datePartTwo}+05:00`);
+          console.log(`ionChangeTimeVal: 2022-12-29T11:28:00+05:00`);
+          data.notification_date = format(parseISO(formattedDate), "hh:mm aaa");
+          
         }
         
       }
@@ -61,15 +58,27 @@ export class NotificationsPage implements OnInit {
     this.location.back();
   }
   homeTab(){
-    this.navCtrlr.navigateRoot('home-cars-after-login');
+    this.router.navigate(['/home-cars-after-login']);
   }
   messagesTab(){
-    this.navCtrlr.navigateRoot('messages');
+    this.router.navigate(['/messages']);
   }
   bookingTab(){
-    this.navCtrlr.navigateRoot('bookings');
+    this.router.navigate(['/bookings']);
   }
   favoriteTab(){
-    this.navCtrlr.navigateRoot('favorites');
+    this.router.navigate(['/favorites']);
   }
+  // homeTab(){
+  //   this.navCtrlr.navigateRoot('home-cars-after-login');
+  // }
+  // messagesTab(){
+  //   this.navCtrlr.navigateRoot('messages');
+  // }
+  // bookingTab(){
+  //   this.navCtrlr.navigateRoot('bookings');
+  // }
+  // favoriteTab(){
+  //   this.navCtrlr.navigateRoot('favorites');
+  // }
 }

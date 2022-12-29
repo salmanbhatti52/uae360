@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { CheckUserService } from '../check-user.service';
 import { ApiService } from '../services/api.service';
-import { interval } from 'rxjs';
+// import { interval } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.page.html',
@@ -15,7 +16,8 @@ export class MessagesPage implements OnInit {
   response = true;
   constructor(public navCtrlr:NavController,
     public checkUser:CheckUserService,
-    public api:ApiService) {
+    public api:ApiService,
+    public router:Router) {
       // in 3 seconds do something
       // interval(1000).subscribe(x => {
       //   this.getAllChatAgain();
@@ -98,20 +100,32 @@ export class MessagesPage implements OnInit {
 
   
   gotoNotifications(){
-    this.navCtrlr.navigateRoot('notifications');
+    this.router.navigate(['/notifications']);
   }
   homeTab(){
-    this.navCtrlr.navigateRoot('home-cars-after-login');
+    this.router.navigate(['/home-cars-after-login']);
   }
   messagesTab(){
-    this.navCtrlr.navigateRoot('messages');
+    this.router.navigate(['/messages']);
   }
   bookingTab(){
-    this.navCtrlr.navigateRoot('bookings');
+    this.router.navigate(['/bookings']);
   }
   favoriteTab(){
-    this.navCtrlr.navigateRoot('favorites');
+    this.router.navigate(['/favorites']);
   }
+  // homeTab(){
+  //   this.navCtrlr.navigateRoot('home-cars-after-login');
+  // }
+  // messagesTab(){
+  //   this.navCtrlr.navigateRoot('messages');
+  // }
+  // bookingTab(){
+  //   this.navCtrlr.navigateRoot('bookings');
+  // }
+  // favoriteTab(){
+  //   this.navCtrlr.navigateRoot('favorites');
+  // }
   // startMessageOwnerSide(recieverId){
   //   this.startchat(recieverId);
   //   // this.navCtrlr.navigateForward(['/message-owner-side',{

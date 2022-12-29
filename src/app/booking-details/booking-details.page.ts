@@ -60,7 +60,9 @@ export class BookingDetailsPage implements OnInit {
     }
   }
   async openCancelBookingModal(bookingId){
-    
+    console.log(format(parseISO(new Date(this.bookingRecordData.start_date).toISOString()),'yyyy-MM-dd'));
+     
+    console.log(`${this.bookingRecordData.start_date} ${this.bookingRecordData.start_time}`);
     const stDate = new Date(`${this.bookingRecordData.start_date} ${this.bookingRecordData.start_time}`);
     console.log("startDateTime: ",stDate);
     

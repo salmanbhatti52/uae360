@@ -14,6 +14,6 @@ export class BookedPage implements OnInit {
   }
   closeModal(){
     this.modalCtrlr.dismiss();
-    this.navCtrlr.navigateRoot('bookings');
+    this.navCtrlr.navigateForward('bookings');
   }
 }

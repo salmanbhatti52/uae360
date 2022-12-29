@@ -43,7 +43,7 @@ export class DeleteAccountPopupPage implements OnInit {
         localStorage.removeItem('appUserId');
         console.log('appUserId removed');
         console.log(this.checkUser.appUserId);
-        this.navCtrlr.navigateRoot('sign-in');
+        this.navCtrlr.navigateForward('sign-in');
         return this.modalCtrlr.dismiss('delete my account', 'delete_account');
 
       }else if(res.status == 'error'){
@@ -56,7 +56,7 @@ export class DeleteAccountPopupPage implements OnInit {
         localStorage.removeItem('appUserId');
         console.log('appUserId removed');
         console.log(this.checkUser.appUserId);
-        this.navCtrlr.navigateRoot('sign-in');
+        this.navCtrlr.navigateForward('sign-in');
         return this.modalCtrlr.dismiss('delete my account', 'delete_account');
         
       }

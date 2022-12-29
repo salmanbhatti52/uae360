@@ -88,42 +88,8 @@ export class HomeBeforeLoginPage implements OnInit {
     
   }
   handleChange(event){
-    this.result = []
-    console.log('Event: ',event);
-    // const query = event.detail.value.toLowerCase();
-    const query = event.target.value.toLowerCase();
-    console.log('query: ',query);
-
-    if(query == ''){
-      this.showContent = true;
-      // this.api.presentToast('Keyword Required')
-    }
-    if(query != ''){
-      let data = {
-        "keyword":query
-      };
-      this.api.showLoading();
-      this.api.sendRequest('getCarsByFiltersByName',data).subscribe((res:any)=>{
-        console.log("Response: ",res);
-        this.api.hideLoading();
-        if(res.status == 'success'){
-          this.showContent = false;
-          this.result = res.data;
-
-        }else if(res.status == 'error'){
-          if(res.message != 'Keyword Required'){
-            this.api.presentToast(res.message);
-          }
-        }else{
-  
-        }
-        
-      },(err)=>{
-        this.api.hideLoading();
-        console.log("API Call Error: ",err);
-        
-      })
-    }
+    
+    
     
     // this.results = this.data.filter(d => d.toLowerCase().indexOf(query) > -1);
     // console.log('query1: ',query1);

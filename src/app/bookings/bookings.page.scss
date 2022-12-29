@@ -40,7 +40,7 @@ ion-footer{
     padding:5px 16px 20px;
 }
 
-.tab_button{
+.tab_button.md{
     font-family: "Urbanist", sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -50,14 +50,35 @@ ion-footer{
     width: 48%;
     margin: 0px;
     text-transform: capitalize;
-    --box-shadow: !important;
+    --box-shadow: none;
     --border-color: #D4DCE1 !important;
     --border-width: 1.5px;
     --border-style: solid;
     --border-radius: 10px !important;
 }
 
-.btn_active{
+.btn_active.md{
+    --background:#8000FF;
+    font-weight: 600;
+    --color: white !important;
+}
+.tab_button.ios{
+    font-family: "Urbanist", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    --color: #B0B0B0;
+    --background: #FBFBFB;
+    height: 48px;
+    width: 48%;
+    margin: 0px;
+    text-transform: capitalize;
+    --box-shadow: none;
+    --border-color: #D4DCE1 !important;
+    --border-width: 1.5px;
+    --border-style: solid;
+    --border-radius: 10px !important;
+}
+.btn_active.ios{
     --background:#8000FF;
     font-weight: 600;
     --color: white !important;
@@ -65,6 +86,7 @@ ion-footer{
 .no_booking{
     text-align: center;
     margin: 20px;
+    color: #0F172A;
 }
 .car_info_box{
     display: flex;

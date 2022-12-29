@@ -81,7 +81,7 @@ export class ChangePasswordPage implements OnInit {
       console.log("res: ",res);
       if(res.status == 'success'){
         this.api.presentToast('Password Changed Successfully.')
-        this.navCtrlr.navigateRoot('settings');
+        this.navCtrlr.navigateForward('settings');
       
       }else if(res.status == 'error'){
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { CheckUserService } from '../check-user.service';
 import { ApiService } from '../services/api.service';
@@ -14,26 +15,42 @@ export class FavoritesPage implements OnInit {
   // imageUrlString = 'https://360uae.eigix.net/public/';
   constructor(public navCtrlr:NavController,
     public checkUser:CheckUserService,
-    public api:ApiService) { }
+    public api:ApiService,
+    public router:Router) { }
 
   ngOnInit() {
     // this.favorites = 0
     this.getFavoriteCars();
   }
+  // gotoNotifications(){
+  //   this.navCtrlr.navigateRoot('notifications');
+  // }
+  // homeTab(){
+  //   this.navCtrlr.navigateRoot('home-cars-after-login');
+  // }
+  // messagesTab(){
+  //   this.navCtrlr.navigateRoot('messages');
+  // }
+  // bookingTab(){
+  //   this.navCtrlr.navigateRoot('bookings');
+  // }
+  // favoriteTab(){
+  //   this.navCtrlr.navigateRoot('favorites');
+  // }
   gotoNotifications(){
-    this.navCtrlr.navigateRoot('notifications');
+    this.router.navigate(['/notifications']);
   }
   homeTab(){
-    this.navCtrlr.navigateRoot('home-cars-after-login');
+    this.router.navigate(['/home-cars-after-login']);
   }
   messagesTab(){
-    this.navCtrlr.navigateRoot('messages');
+    this.router.navigate(['/messages']);
   }
   bookingTab(){
-    this.navCtrlr.navigateRoot('bookings');
+    this.router.navigate(['/bookings']);
   }
   favoriteTab(){
-    this.navCtrlr.navigateRoot('favorites');
+    this.router.navigate(['/favorites']);
   }
   makeUnFavorite(carId){
     let data = {

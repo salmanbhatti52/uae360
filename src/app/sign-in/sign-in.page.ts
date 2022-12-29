@@ -56,18 +56,19 @@ export class SignInPage implements OnInit {
     console.log('oneSignalUserId: ',this.oneSignalUserId);
     
   }
-  ionViewDidEnter(){
-    this.menuCtrl.enable(false);
-  }
-  ionViewWillLeave() {
-    // enable the root left menu when leaving this page
-    this.menuCtrl.enable(true);
-  }
+  // ionViewWillEnter(){
+  //   this.menuCtrl.enable(false);
+  // }
+  // ionViewWillLeave() {
+  //   // enable the root left menu when leaving this page
+  //   this.menuCtrl.enable(true);
+  // }
   // ionViewWillEnter(){
   //   this.menuCtrl.close();
   // }
   goBack(){
-    this.router.navigate(['/home-before-login']);
+    this.location.back()
+    // this.router.navigate(['/home-before-login']);
   }
   toggleGetType(){
     if(this.getType == 'password'){

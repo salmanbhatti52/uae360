@@ -21,9 +21,7 @@
       <div *ngFor="let data of previousBookingRecords"> 
         <div style="text-align: center;position: relative;margin-top: 16px;" (click)="showDetails(data)">
           <img style="width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;object-fit: cover;" src="{{api.imageUrlString}}{{data.cars_details[0].image1}}" alt="">
-          <!-- (click)="updateFavoriteStatus(data.car_id)" -->
           
-
           <div *ngIf="data.user_favourite_cars.length>0">
             <img  style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="data.user_favourite_cars[0].status !='liked'">
             <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="data.user_favourite_cars[0].status == 'liked'">
@@ -33,9 +31,6 @@
             <img  style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg">
           </div>
          
-          <!-- (click)="updateFavoriteStatus(data.car_id)" -->
-          <!-- <img (click)="updateFavoriteStatus()" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt=""> -->
-          <!-- (click)="startCarBooking()" -->
           <div class="rebook_label poppins" >Rebook</div>
           <div class="status_label poppins" >{{data.status}}</div>
           <div class="car_info_box" >
@@ -95,79 +90,7 @@
           </div>
         </div>
         
-        <!-- <div *ngIf="selectedid == data.car_id">
-          <div class="box_styling">
-            <div class="box_heading">Description</div>
-            <div class="box_description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since the 
-              1500s, when an unknown printer took a galley of type and scrambled it to
-              make a type specimen book.It has survived not only five centuries, but 
-              also the leap into electronic typesetting, remaining essentially 
-              unchanged. It was popularised in the 1960s with the release of Letraset 
-              sheets containing Lorem Ipsum passages, and more recently with desktop 
-              publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </div>
-          </div>
-      
-          <div class="box_styling">
-            <div class="box_heading">Owner's Details</div>
-            <div class="box_sub_heading">About</div>
-            <div class="box_description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since
-              the 1500s.
-            </div>
-          </div>
-      
-          <div class="box_styling">
-            <div class="box_sub_heading" style="margin-top: 0px;">Location</div>
-            <div class="box_description" style="margin-top: 4px;">
-              Los Angeles, CA 90015 {{data.company_location}}
-            </div>
-          </div>
-      
-          <div class="box_styling">
-            <div class="box_heading">Rent Dates</div>
-            <div style="display: flex;justify-content: space-between;width: 85%;">
-              <div>
-                <div class="box_sub_heading" style="margin-top: 3px;">Start Date</div>
-                <div class="box_description" style="margin-top: 3px;">{{data.start_date}}</div>
-              </div>
-              <div>
-                <div class="box_sub_heading" style="margin-top: 3px;">End Date</div>
-                <div class="box_description" style="margin-top: 3px;">{{data.end_date}}</div>
-              </div>
-            </div>
-          </div>
-      
-          <div class="box_heading" style="color: #0F172A;margin-top: 11px;">You might like this too!</div>
-      
-          <div style="text-align: center; margin-top: 13px; position: relative; ">
-            <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
-            <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-            <div class="rebook_label urbanist" >Rebook</div>
-            <div class="car_info_box" >
-              <div>
-                <div class="car_name urbanist">BMW 2 series</div>
-                <div style="text-align: left;line-height: 1;">
-                  <span>
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  </span>
-                  <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;">not rated yet</span>
-                </div>
-              </div>
-              <div class="car2_info_subdiv">
-                <div style="line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
-              </div>
-              
-            </div>
-          </div>
-        </div> -->
+        
       </div>
 
     </div>
@@ -243,81 +166,6 @@
           </div>
         </div>
         
-        <!-- <div *ngIf="selectedid == data.car_id">
-          <div style="display: flex;justify-content: space-between;">
-            <div class="box_styling" style="width: 55%;">
-              <div class="box_heading">Owner's Details</div>
-              <div class="box_sub_heading">About</div>
-              <div class="box_description" style="max-height: 108px;">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since
-                the 1500s.
-              </div>
-            </div>
-        
-            <div class="box_styling set_width">
-              <div class="box_heading">Rent Dates</div>
-    
-              <div style="position: relative;" >
-                <div class="range_div">
-                  <ion-range class="ion_range"></ion-range>
-                </div>
-                <div style="position: absolute; top: 14px; left: 23px;">
-                  <div>
-                    <div style="display: flex;align-items: center;">
-                      <div style="margin-right: 8px;">
-                        <img src="assets/images/icons/range_point.svg" alt="">
-                      </div>
-                      <div>
-                        <div class="box_sub_heading" style="margin-top: 3px;">Start Date</div>
-                        <div class="box_description" style="margin-top: 3px;">{{data.start_date}}</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div style="height: 33px;"></div>
-                  <div>
-                    <div style="display: flex;align-items: center;">
-                      <div style="margin-right: 8px;">
-                        <img src="assets/images/icons/range_point.svg" alt="">
-                      </div>
-                      <div>
-                        <div class="box_sub_heading" style="margin-top: 3px;">End Date</div>
-                        <div class="box_description" style="margin-top: 3px;">{{data.end_date}}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-      
-          <div style="text-align: center; margin-top: 13px; position: relative; ">
-            <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
-            <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-            
-            <div class="rebook_label urbanist" style="background: #E23C3C;color: white;" >Cancel</div>
-            <div class="car_info_box" >
-              <div>
-                <div class="car_name urbanist">BMW 2 series</div>
-                <div style="text-align: left;line-height: 1;">
-                  <span>
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  </span>
-                  <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;">not rated yet</span>
-                </div>
-              </div>
-              <div class="car2_info_subdiv">
-                <div style="line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
-              </div>
-              
-            </div>
-          </div>
-        </div> -->
       </div>
 
     </div>
@@ -326,13 +174,6 @@
 
 </ion-content>
 <ion-footer class="ion-no-border">
-    <!-- <div style="margin: 10px 0px 12px;" *ngIf="previous_tab==true">
-      <div style="text-align: center;">
-        <ion-button class="invite_btn" (click)="openModal()">
-          <span class="btn-text">Give Ratings</span>
-        </ion-button>
-      </div>
-    </div> -->
 
     <ion-tabs style="display:contents ;">
 

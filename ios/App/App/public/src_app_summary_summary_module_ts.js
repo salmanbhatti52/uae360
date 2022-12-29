@@ -211,7 +211,7 @@ let SummaryPage = class SummaryPage {
         this.location.back();
     }
     startPaymentProcess() {
-        this.navCtrlr.navigateRoot('payment-details');
+        this.navCtrlr.navigateForward('payment-details');
     }
 };
 SummaryPage.ctorParameters = () => [

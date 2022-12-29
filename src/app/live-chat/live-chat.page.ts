@@ -12,6 +12,6 @@ export class LiveChatPage implements OnInit {
   ngOnInit() {
   }
   startLiveChat(){
-    this.navCtrlr.navigateRoot('live-chat-screen');
+    this.navCtrlr.navigateForward('live-chat-screen');
   }
 }

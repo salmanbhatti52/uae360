@@ -6,6 +6,7 @@ import { CheckUserService } from '../check-user.service';
 import { format, parseISO } from 'date-fns';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-booking2',
   templateUrl: './booking2.page.html',
@@ -49,8 +50,8 @@ export class Booking2Page implements OnInit {
         this.response = 'true';
         this.previousBookingRecords = res.data;
         for(let rec of this.previousBookingRecords){
-          rec.start_date = format(parseISO(new Date(rec.start_date).toISOString()),'dd-MM-yyyy')
-          rec.end_date = format(parseISO(new Date(rec.end_date).toISOString()),'dd-MM-yyyy')
+          rec.f_start_date = format(parseISO(new Date(rec.start_date).toISOString()),'dd-MM-yyyy')
+          rec.f_end_date = format(parseISO(new Date(rec.end_date).toISOString()),'dd-MM-yyyy')
         }
         this.api.hideLoading();
         console.log('previousBookingRecords: ',this.previousBookingRecords);
@@ -81,12 +82,8 @@ export class Booking2Page implements OnInit {
         this.response = 'true';
         this.upcomingBookingRecords = res.data;
         for(let rec of this.upcomingBookingRecords){
-          rec.start_date = format(parseISO(new Date(rec.start_date).toISOString()),'dd-MM-yyyy')
-          rec.end_date = format(parseISO(new Date(rec.end_date).toISOString()),'dd-MM-yyyy')
-          if(rec.cars_details[0].rating == 0 ){
-            rec.cars_details[0].rating = Number(rec.cars_details[0].rating);
-            console.log("Rating Value: ",rec.cars_details[0].rating); 
-          }
+          rec.f_start_date = format(parseISO(new Date(rec.start_date).toISOString()),'dd-MM-yyyy')
+          rec.f_end_date = format(parseISO(new Date(rec.end_date).toISOString()),'dd-MM-yyyy')
         }
         this.api.hideLoading();
         console.log('upcomingBookingRecords: ',this.upcomingBookingRecords);
@@ -106,16 +103,16 @@ export class Booking2Page implements OnInit {
   }
   
   homeTab(){
-    this.router.navigate(['home-cars-after-login']);
+    this.router.navigate(['/home-cars-after-login']);
   }
   messagesTab(){
-    this.router.navigate(['messages']);
+    this.router.navigate(['/messages']);
   }
   bookingTab(){
-    this.router.navigate(['booking2']);
+    this.router.navigate(['/booking2']);
   }
   favoriteTab(){
-    this.router.navigate(['favorites']);
+    this.router.navigate(['/favorites']);
   }
   showDetails(data){
 
@@ -136,7 +133,5 @@ export class Booking2Page implements OnInit {
     
   }
 
-  startCarBooking(){
-    this.router.navigate(['car-booking']);
-  }
+ 
 }
