@@ -4,12 +4,12 @@
       <ion-menu-button class="menuicon"></ion-menu-button>
       <div class="title">Bookings</div>
     </div>
-    <div style="display: flex;justify-content: space-between;padding: 15px 16px 5px;">
-      <ion-button class="tab_button" [class.btn_active]="previous_tab=='true'" (click)="previousTab()">Previous</ion-button>
-      <ion-button class="tab_button" [class.btn_active]="upcoming_tab=='true'" (click)="upcomingTab()">Upcoming</ion-button>
-    </div>
-  </ion-toolbar>
     
+  </ion-toolbar>
+  <div style="display: flex;justify-content: space-between;padding: 15px 16px 5px;">
+    <ion-button class="tab_button" [class.btn_active]="previous_tab=='true'" (click)="previousTab()">Previous</ion-button>
+    <ion-button class="tab_button" [class.btn_active]="upcoming_tab=='true'" (click)="upcomingTab()">Upcoming</ion-button>
+  </div>
 </ion-header>
 
 <ion-content>

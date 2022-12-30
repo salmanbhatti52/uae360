@@ -103,6 +103,13 @@ ion-datetime.ios{
     box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
     margin: 12px auto 12px;
 }
+.selected_range{
+        font-size: 12px;
+    font-weight: 400;
+    font-family: "Poppins", sans-serif;
+    color: black;
+    margin-bottom: 5px;
+}
 .price_label{
     font-size: 14px;
     font-weight: 700;
@@ -127,6 +134,7 @@ hr{
     --bar-border-radius: 5.5px;
     --bar-background-active: #8000FF;
     padding: 0px;
+    margin-top: 5px;
 }
 .ion_range.md{
     --pin-background: #8000FF;
