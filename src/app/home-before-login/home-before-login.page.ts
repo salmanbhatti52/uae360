@@ -5,6 +5,7 @@ import { CheckUserService } from '../check-user.service';
 import { AppComponent } from '../app.component';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
 import { IonicSlides } from '@ionic/angular';
+import { Share } from '@capacitor/share';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 @Component({
@@ -146,6 +147,14 @@ export class HomeBeforeLoginPage implements OnInit {
     this.router.navigate(['/sign-in']);
   }
   
+  async inviteOthers(){
+    await Share.share({
+      title: 'Book Cars Online at 360UAE',
+      text: 'Really awesome cars you can book',
+      url: 'https://dubai360.com/',
+      dialogTitle: 'Share with buddies',
+    })
+  }
   selectItem(itemVal){
     if(itemVal == 'all'){
       this.item1 = true;

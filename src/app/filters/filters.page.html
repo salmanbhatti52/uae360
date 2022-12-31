@@ -16,12 +16,13 @@
       <div><span class="price_label">Price</span><span class="per_hour_span">/day</span></div>
       <hr>
       <ion-range (ionChange)="onIonChangePerDay($event)" [pin]="true" [pinFormatter]="pinFormatter" class="ion_range" 
-      min="5" max="500" [dualKnobs]="true" 
+      min="10" max="500" [dualKnobs]="true" 
       [value]="{ lower: 20, upper: 200 }">
     </ion-range>
-    <div class="selected_range" *ngIf="rentCostDayStart != undefined && rentCostDayEnd  != undefined">Selected Range: {{rentCostDayStart}} - {{rentCostDayEnd}}</div>
+    
+    <div class="selected_range" *ngIf="rentCostDayStart != undefined && rentCostDayEnd  != undefined"> ${{rentCostDayStart}} - ${{rentCostDayEnd}}</div>
       <div class="prices_div">
-        <div class="price">$5</div>
+        <div class="price">$10</div>
         <div class="price">$500</div>
       </div>
     </div>
@@ -29,13 +30,13 @@
       <div><span class="price_label">Price</span><span class="per_hour_span">/month</span></div>
       <hr>
       <ion-range (ionChange)="onIonChangePerMonth($event)" [pin]="true" [pinFormatter]="pinFormatter" class="ion_range" 
-      min="50" max="5000" [dualKnobs]="true" 
-      [value]="{ lower: 20, upper: 1000 }">
+      min="50" max="3000" [dualKnobs]="true" 
+      [value]="{ lower: 100, upper: 1000 }">
     </ion-range>
-    <div class="selected_range" *ngIf="rentCostMonthStart != undefined && rentCostMonthEnd  != undefined">Selected Range: {{rentCostMonthStart}} - {{rentCostMonthEnd}}</div>
+    <div class="selected_range" *ngIf="rentCostMonthStart != undefined && rentCostMonthEnd  != undefined"> ${{rentCostMonthStart}} - ${{rentCostMonthEnd}}</div>
     <div class="prices_div">
         <div class="price">$50</div>
-        <div class="price">$5000</div>
+        <div class="price">$3000</div>
       </div>
     </div>
     <div  *ngIf="result.length > 0">
@@ -92,7 +93,7 @@
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                 </span>
-                <span class="rating_value poppins">trips</span>
+                <span class="rating_value poppins">{{res.total_bookings}} trips</span>
               </div>
             </div>
             <div class="car2_info_subdiv">

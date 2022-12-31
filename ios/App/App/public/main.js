@@ -236,11 +236,6 @@ let AppComponent = class AppComponent {
     this.api = api;
     this.appPages = [];
     this.platform.ready().then( /*#__PURE__*/(0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      // setTimeout(()=>{
-      //   SplashScreen.hide({
-      //     // fadeOutDuration: 1000
-      //   });
-      // }, 3000);
       _this.initializeApp();
     }));
   }
@@ -277,10 +272,7 @@ let AppComponent = class AppComponent {
         _this2.router.navigate(['/home-cars-after-login']);
       }
     })();
-  } // ionViewWillEnter(){
-  // 
-  // }
-
+  }
 
   refresh() {
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {

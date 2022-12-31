@@ -17,6 +17,7 @@ export class ApiService {
   fetchLocation:any;
   oneSignalUserId:any;
   companyId: any;
+  toggleVal:any;
   constructor(private http:HttpClient, 
     public toastController:ToastController,
     public loadingCtrl:LoadingController) { }

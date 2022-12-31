@@ -5085,7 +5085,7 @@ ion-input, ion-textarea, ion-label {
   background: rgba(15, 23, 42, 0.5);
 }
 .cancel_booking2 {
-  --height: 300px;
+  --height: 230px;
   --border-radius: 20px;
   --width: 90%;
   background: rgba(15, 23, 42, 0.5);

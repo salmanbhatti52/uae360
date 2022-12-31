@@ -4,8 +4,8 @@
       <ion-menu-button class="menuicon"></ion-menu-button>
       <div class="title">Home</div>
       <div style="display: flex">
-       <div class="bell_div" (click)="gotoNotifications()">
-         <div class="notifications" >{{totalNotifications}}</div>
+       <div class="bell_div" (click)="gotoNotifications()" *ngIf="api.toggleVal == true">
+         <div class="notifications" *ngIf="totalNotifications > 0">{{totalNotifications}}</div>
          <img src="assets/images/icons/bell.svg" alt="">
        </div>
        <div style="display: flex;padding-left: 13.5px;">
@@ -209,7 +209,7 @@
                   
                 </div>
                 <div class="row_div">
-                  <div class="total_trips"> trips</div>
+                  <div class="total_trips">{{pickup.total_bookings}} trips</div>
                   <div class="per_hour">Per Day</div>
                 </div>
               </div>
@@ -266,7 +266,7 @@
       <div class="invite_label" style="font-weight: 400;">And spread the word</div>
     </div>
     <div style="text-align: center;">
-      <ion-button class="invite_btn">
+      <ion-button (click)="inviteOthers()" class="invite_btn">
         <span class="btn-text">Invite</span>
       </ion-button>
     </div>

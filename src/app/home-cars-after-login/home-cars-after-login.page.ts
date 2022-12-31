@@ -10,6 +10,7 @@ import { IonicSlides } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
 import { AwesomeCordovaNativePlugin } from '@awesome-cordova-plugins/core';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
+import { Share } from '@capacitor/share';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 @Component({
@@ -18,7 +19,8 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
   styleUrls: ['./home-cars-after-login.page.scss'],
 })
 export class HomeCarsAfterLoginPage implements OnInit {
-  totalNotifications = 6;
+  totalNotifications:Number;
+  interval:any;
   item1 = true;
   item2 = false;
   item3 = false;
@@ -80,6 +82,31 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.showContent = true;
     }
     
+    this.getNotifications();
+
+  }
+
+  getNotifications(){
+    let data = {
+      users_id:this.checkUser.appUserId
+    };
+    this.api.sendRequest('notifications_unread',data).subscribe((res:any)=>{
+      console.log("Notification Respone: ",res);
+      if(res.status == 'success'){
+        if(res.data.length > 0){
+          this.totalNotifications = res.data.length
+        }else if(res.data.length == 0){
+          this.totalNotifications = 0;
+        }
+        
+      }else if(res.status == 'error'){
+
+      }
+      
+    },(err)=>{
+      console.log("Api Error: ",err);
+      
+    })
   }
   handleChange(event){
     this.result = []
@@ -348,6 +375,15 @@ export class HomeCarsAfterLoginPage implements OnInit {
     }else{
       
     }
+  }
+
+  async inviteOthers(){
+    await Share.share({
+      title: 'Book Cars Online at 360UAE',
+      text: 'Really awesome cars you can book',
+      url: 'https://dubai360.com/',
+      dialogTitle: 'Share with buddies',
+    })
   }
   // gotoNotifications(){
   //   this.navCtrlr.navigateRoot('notifications');

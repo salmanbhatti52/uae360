@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
+import { CheckUserService } from '../check-user.service';
 import { DeleteAccountPopupPage } from '../delete-account-popup/delete-account-popup.page';
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -10,20 +12,58 @@ import { DeleteAccountPopupPage } from '../delete-account-popup/delete-account-p
 export class SettingsPage implements OnInit {
   english_language = true;
   arabic_language = false;
-  toggleVal = true;
+  toggleVal :any ; 
   constructor(public navCtrlr:NavController,
-    public modalCtrlr:ModalController) { }
+    public checkUser:CheckUserService,
+    public modalCtrlr:ModalController,
+    public api:ApiService) { }
 
   ngOnInit() {
     
   }
-  toggleNotifications(){
-    if(this.toggleVal == true){
-      this.toggleVal = false;
+  // ionViewWillEnter(){
+  //   // this.toggleVal = Boolean(localStorage.getItem('notificationVal')) ;
+  // }
+  // toggleNotifications(){
+    // if(this.toggleVal == true){
+    //   this.toggleVal = false;
+    // }
+    // else{
+    //   this.toggleVal = true;
+    // }
+  // }
+
+  onChange(event){
+    console.log("Event: ",event);
+    console.log(event.detail.checked);
+    let toggleVal;
+    if(event.detail.checked == true){
+      this.api.toggleVal = event.detail.checked
+      localStorage.setItem('notificationVal','true');
+      toggleVal = 'Yes'
+    }else{
+      this.api.toggleVal = event.detail.checked
+      localStorage.setItem('notificationVal','false');
+      toggleVal = 'No'
     }
-    else{
-      this.toggleVal = true;
+    let data = {
+      user_id: this.checkUser.appUserId,
+      notifications: toggleVal
     }
+    this.api.sendRequest('updateAppUserProfileNotifications',data).subscribe((res:any)=>{
+      console.log("Response: ",res);
+      if(res.status == 'success'){
+
+      }else if(res.staus == 'error'){
+
+      }else{
+
+      }
+    },(err)=>{
+      console.log("Api Error: ",err);
+      
+    })
+    
   }
   changeLanguage(){
     if(this.english_language == true){

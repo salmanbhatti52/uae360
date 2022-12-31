@@ -9,13 +9,14 @@
 
 <ion-content>
   <div class="wrapper">
-    <div class="settings_item" (click)="toggleNotifications()">
+    <div class="settings_item" >
+      <!-- (click)="toggleNotifications()" -->
         <div>
           <div class="heading">Notifications</div>
           <div class="heading_description">Enable your notifications</div>
         </div>
         <div>
-          <ion-toggle class="ion_toogle" checked="{{toggleVal}}"></ion-toggle>
+          <ion-toggle class="ion_toogle" checked="{{api.toggleVal}}" (ionChange)="onChange($event)"></ion-toggle>
         </div>
     </div>
 

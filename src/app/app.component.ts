@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuController,NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { SplashScreen } from '@capacitor/splash-screen';
+import { SplashScreen} from '@capacitor/splash-screen';
 import { Platform } from '@ionic/angular';
 import { CheckUserService } from './check-user.service';
 import { ApiService } from './services/api.service';
@@ -26,20 +26,18 @@ export class AppComponent {
   public navCtrl:NavController,
   public platform:Platform,
   public checkUser:CheckUserService,
-  public api:ApiService){
-    
-    this.platform.ready().then(async () => {
-      // setTimeout(()=>{
-      //   SplashScreen.hide({
-      //     // fadeOutDuration: 1000
-      //   });
-      // }, 3000);
-      this.initializeApp();
-    });
+  public api:ApiService,
+  )
+  {
+    this.initializeApp();
   }
 
-   initializeApp() { 
-    this.pushNotification();
+  initializeApp() { 
+    this.platform.ready().then(() => {
+      SplashScreen.hide();
+      this.pushNotification();
+    });
+    
   }
 
   pushNotification() {
@@ -71,11 +69,19 @@ export class AppComponent {
     if(userId !== null){
       this.router.navigate(['/home-cars-after-login']);
     }
+    
+    // ================notifications status check===================
+    console.log('notificationVal: ',localStorage.getItem('notificationVal'));
+    let toggleVal =  localStorage.getItem('notificationVal');
+    if(toggleVal == 'true'){
+      this.api.toggleVal = true;
+    }else{
+      this.api.toggleVal = false;
+    }
+    
+    console.log('api.toggleVal',this.api.toggleVal);
+    // ====================done=====================
   }
-
-  // ionViewWillEnter(){
-  // 
-  // }
 
   async refresh(){
     const authCode = await GoogleAuth.refresh();

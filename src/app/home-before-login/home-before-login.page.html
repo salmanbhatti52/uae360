@@ -5,7 +5,7 @@
       <div class="title">Home</div>
       <div style="display: flex">
        <div class="bell_div" >
-         <div class="notifications" >{{totalNotifications}}</div>
+         <!-- <div class="notifications" >{{totalNotifications}}</div> -->
          <img (click)="gotoSignIn()" src="assets/images/icons/bell.svg" alt="">
        </div>
        <div style="display: flex;padding-left: 13.5px;">
@@ -204,7 +204,7 @@
                   </div>
                   <div class="row_div" >
                     
-                      <div class="total_trips"> trips</div>
+                      <div class="total_trips">{{pickup.total_bookings}} trips</div>
                       <div style="text-align: right;">
                         <span class="price_label" style="margin-right: 5px;">Per Day</span>
                       </div>
@@ -318,7 +318,7 @@
         <div class="invite_label" style="font-weight: 400;">And spread the word</div>
       </div>
       <div style="text-align: center;">
-        <ion-button (click)="gotoSignIn()" class="invite_btn">
+        <ion-button (click)="inviteOthers()" class="invite_btn">
           <span class="btn-text">Invite</span>
         </ion-button>
       </div>

@@ -10,8 +10,8 @@ const config: CapacitorConfig = {
       useDialog: false,
       showSpinner: true,
       spinnerColor: "#FFFFFF",
-      launchShowDuration: 8000,
-			launchAutoHide: true,
+      launchShowDuration: 3000,
+			launchAutoHide: false,
       backgroundColor: "#000000",
       androidSplashResourceName: "splash"
     },
