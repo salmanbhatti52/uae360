@@ -24,6 +24,15 @@ export class BookingDetailsPage implements OnInit {
   bookingRecordData:any;
   recievedObject: any;
   favorites = '';
+  carTerms = {
+    car_type: '',
+    rent_cost_day: '',
+    rent_cost_month: '',
+    favorite_status: '',
+    company_name: '',
+  };
+  sameTypeCars = [];
+  selectedCar:any;
   constructor(public navCtrlr:NavController,
     public modalCtrlr:ModalController,
     public api:ApiService,
@@ -32,6 +41,9 @@ export class BookingDetailsPage implements OnInit {
     public activatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
+
+    console.log("api.allCars: ",this.api.allCars);
+    
     // this.previousTab('previous');
     this.bookingRecordData = JSON.parse(this.activatedRoute.snapshot.params['data']) ;
     console.log('bookingRecordData: ',this.bookingRecordData);
@@ -40,7 +52,25 @@ export class BookingDetailsPage implements OnInit {
     console.log('previous_tab: ',this.previous_tab);
     this.upcoming_tab = this.activatedRoute.snapshot.params['upcoming_tab'];
     console.log('upcoming_tab: ',this.upcoming_tab);
+    this.carTerms.car_type = this.bookingRecordData.cars_details[0].car_type;
+    this.carTerms.rent_cost_day = this.bookingRecordData.cars_details[0].rent_cost_day;
+    this.carTerms.rent_cost_month = this.bookingRecordData.cars_details[0].rent_cost_month;
+    this.carTerms.favorite_status = this.bookingRecordData.user_favourite_cars[0].status;
+    this.carTerms.company_name = this.bookingRecordData.users_company_details[0].company_name;
+
+    console.log("Car Terms: ",this.carTerms);
+    
   }
+
+  ionViewWillEnter(){
+    for(let i= 0; i<this.api.allCars.length ; i++){
+      // console.log(this.api.allCars[i]);
+      if(this.carTerms.car_type == this.api.allCars[i].car_type){
+        this.sameTypeCars.push(this.api.allCars[i]);
+      }
+    }
+  }
+
   goBack(){
     this.location.back();
   }

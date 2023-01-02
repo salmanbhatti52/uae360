@@ -9,7 +9,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./favorites.page.scss'],
 })
 export class FavoritesPage implements OnInit {
-  totalNotifications = 6;
+  totalNotifications:Number;
   favorites:any;
   favoriteCars = [];
   // imageUrlString = 'https://360uae.eigix.net/public/';
@@ -19,8 +19,32 @@ export class FavoritesPage implements OnInit {
     public router:Router) { }
 
   ngOnInit() {
-    // this.favorites = 0
     this.getFavoriteCars();
+  }
+  ionViewWillEnter(){
+    this.getNotifications();
+  }
+  getNotifications(){
+    let data = {
+      users_id:this.checkUser.appUserId
+    };
+    this.api.sendRequest('notifications_unread',data).subscribe((res:any)=>{
+      console.log("Notification Respone: ",res);
+      if(res.status == 'success'){
+        if(res.data.length > 0){
+          this.totalNotifications = res.data.length
+        }else if(res.data.length == 0){
+          this.totalNotifications = 0;
+        }
+        
+      }else if(res.status == 'error'){
+
+      }
+      
+    },(err)=>{
+      console.log("Api Error: ",err);
+      
+    })
   }
   // gotoNotifications(){
   //   this.navCtrlr.navigateRoot('notifications');

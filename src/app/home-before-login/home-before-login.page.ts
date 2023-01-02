@@ -33,41 +33,16 @@ export class HomeBeforeLoginPage implements OnInit {
   showCategories = false;
   rentCategories = [{category:'Day'},{category:'Month'}]
   categoryVal = 'Day';
-  // pickups = [
-  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-  //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-  //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-  //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
-  // ]
   pickups = [];
-  result = [];
-  showContent = true;
   // selectedCarID: any = 0;
 
   constructor(public router:Router,
     public api:ApiService,
     public checkUser:CheckUserService,
-    public appComponent:AppComponent) { }
+    public appComponent:AppComponent) {
 
-  // displayCategories(car_id){
-  //   if(car_id !=null){
+  }
 
-  //   }
-  //   if(car_id !=null){
-  //     this.showCategories = true;
-  //   }
-  //   else{
-  //     this.showCategories = false;
-  //   }
-  // }
-  // selectedCategory(val,id){
-  //   console.log(val);
-  //   console.log('iiiii',id);
-  //   this.selectedCarID = id
-  //   console.log('fffff',this.selectedCarID);
-  //   this.categoryVal = val;
-  // }
   ngOnInit() {
     this.checkUser.appUserId = null;
     console.log(this.checkUser.appUserId);
@@ -80,31 +55,27 @@ export class HomeBeforeLoginPage implements OnInit {
     this.getCars();
 
   }
+
   ionViewWillEnter(){
-    if(this.result.length > 0){
-      this.showContent = false;
-    }else{
-      this.showContent = true;
-    }
+  
     
   }
   handleChange(event){
-    
-    
-    
     // this.results = this.data.filter(d => d.toLowerCase().indexOf(query) > -1);
     // console.log('query1: ',query1);
     
   }
   
   clearResult(){
-    this.result = []
-    this.showContent = true;
+    
   }
 
   getCars(){
     this.api.showLoading();
-    this.api.getData('cars').subscribe((res:any)=>{
+    let data = {
+      user_id: ''
+    }
+    this.api.sendRequest('cars',data).subscribe((res:any)=>{
       this.api.hideLoading();
       console.log(res);
       if(res.status == 'success'){

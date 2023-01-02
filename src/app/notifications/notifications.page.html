@@ -10,7 +10,7 @@
 <ion-content>
   <div class="wrapper">
     <div *ngIf="notifications !== undefined">
-      <div *ngFor="let notification of notifications; let i = index ; ">
+      <div *ngFor="let notification of topNotifications; let i = index ; ">
         <div class="notification_box box_color" [class.box_color_even_val]="(i+1)%2 == 0">
           <div style="margin-right: 12px;">
             <img class="img_sizing" src="{{api.imageUrlString}}{{notification.company_logo}}" alt="">

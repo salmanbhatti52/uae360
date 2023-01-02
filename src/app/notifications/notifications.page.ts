@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class NotificationsPage implements OnInit {
   notifications: any;
   response = true;
+  topNotifications= [];
   constructor(public location:Location,
     public navCtrlr:NavController,
     public checkUser:CheckUserService,
@@ -42,9 +43,14 @@ export class NotificationsPage implements OnInit {
           let formattedDate = `${datePartOne}T${datePartTwo}+05:00`
           console.log(`My Formatted Date: ${datePartOne}T${datePartTwo}+05:00`);
           console.log(`ionChangeTimeVal: 2022-12-29T11:28:00+05:00`);
-          data.notification_date = format(parseISO(formattedDate), "hh:mm aaa");
+          data.notification_date = format(parseISO(formattedDate), "h:mm aaa");
           
         }
+
+        for(let i = this.notifications.length - 1; i>=0; i--){
+          this.topNotifications.push(this.notifications[i]);
+        }
+        console.log("NF. List: ",this.topNotifications);
         
       }
       

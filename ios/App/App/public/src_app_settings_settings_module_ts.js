@@ -91,12 +91,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SettingsPage": () => (/* binding */ SettingsPage)
 /* harmony export */ });
 /* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _settings_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./settings.page.html?ngResource */ 75375);
 /* harmony import */ var _settings_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./settings.page.scss?ngResource */ 2282);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 93819);
-/* harmony import */ var _delete_account_popup_delete_account_popup_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../delete-account-popup/delete-account-popup.page */ 43178);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../check-user.service */ 47852);
+/* harmony import */ var _delete_account_popup_delete_account_popup_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../delete-account-popup/delete-account-popup.page */ 43178);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/api.service */ 5830);
+
+
 
 
 
@@ -106,22 +110,54 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SettingsPage = class SettingsPage {
-  constructor(navCtrlr, modalCtrlr) {
+  constructor(navCtrlr, checkUser, modalCtrlr, api) {
     this.navCtrlr = navCtrlr;
+    this.checkUser = checkUser;
     this.modalCtrlr = modalCtrlr;
+    this.api = api;
     this.english_language = true;
     this.arabic_language = false;
-    this.toggleVal = true;
   }
 
-  ngOnInit() {}
+  ngOnInit() {} // ionViewWillEnter(){
+  //   // this.toggleVal = Boolean(localStorage.getItem('notificationVal')) ;
+  // }
+  // toggleNotifications(){
+  // if(this.toggleVal == true){
+  //   this.toggleVal = false;
+  // }
+  // else{
+  //   this.toggleVal = true;
+  // }
+  // }
 
-  toggleNotifications() {
-    if (this.toggleVal == true) {
-      this.toggleVal = false;
+
+  onChange(event) {
+    console.log("Event: ", event);
+    console.log(event.detail.checked);
+    let toggleVal;
+
+    if (event.detail.checked == true) {
+      this.api.toggleVal = event.detail.checked;
+      localStorage.setItem('notificationVal', 'true');
+      toggleVal = 'Yes';
     } else {
-      this.toggleVal = true;
+      this.api.toggleVal = event.detail.checked;
+      localStorage.setItem('notificationVal', 'false');
+      toggleVal = 'No';
     }
+
+    let data = {
+      user_id: this.checkUser.appUserId,
+      notifications: toggleVal
+    };
+    this.api.sendRequest('updateAppUserProfileNotifications', data).subscribe(res => {
+      console.log("Response: ", res);
+
+      if (res.status == 'success') {} else if (res.staus == 'error') {} else {}
+    }, err => {
+      console.log("Api Error: ", err);
+    });
   }
 
   changeLanguage() {
@@ -151,7 +187,7 @@ let SettingsPage = class SettingsPage {
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       const modal = yield _this.modalCtrlr.create({
-        component: _delete_account_popup_delete_account_popup_page__WEBPACK_IMPORTED_MODULE_3__.DeleteAccountPopupPage,
+        component: _delete_account_popup_delete_account_popup_page__WEBPACK_IMPORTED_MODULE_4__.DeleteAccountPopupPage,
         showBackdrop: true,
         cssClass: 'delete_account'
       });
@@ -171,12 +207,16 @@ let SettingsPage = class SettingsPage {
 };
 
 SettingsPage.ctorParameters = () => [{
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.NavController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.NavController
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController
+  type: _check_user_service__WEBPACK_IMPORTED_MODULE_3__.CheckUserService
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController
+}, {
+  type: _services_api_service__WEBPACK_IMPORTED_MODULE_5__.ApiService
 }];
 
-SettingsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+SettingsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
   selector: 'app-settings',
   template: _settings_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_settings_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -201,7 +241,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \********************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <ion-menu-button class=\"menuicon\"></ion-menu-button>\n      <div class=\"title\">Settings</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"settings_item\" (click)=\"toggleNotifications()\">\n        <div>\n          <div class=\"heading\">Notifications</div>\n          <div class=\"heading_description\">Enable your notifications</div>\n        </div>\n        <div>\n          <ion-toggle class=\"ion_toogle\" checked=\"{{toggleVal}}\"></ion-toggle>\n        </div>\n    </div>\n\n    <div class=\"settings_item\" (click)=\"goForPaymentDetails()\">\n        <div>\n          <div class=\"heading\">Payment Details</div>\n          <div class=\"heading_description\">Add your cards for quick payments</div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/next.svg\" alt=\"\">\n        </div>\n    </div>\n\n    <div class=\"settings_item\" (click)=\"goForChangePassword()\">\n        <div>\n          <div class=\"heading\">Change Password</div>\n          <div class=\"heading_description\">Update your password</div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/next.svg\" alt=\"\">\n        </div>\n    </div>\n\n    <div class=\"settings_item\" (click)=\"editProfile()\">\n        <div>\n          <div class=\"heading\">Profile</div>\n          <div class=\"heading_description\">Update your profile</div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/next.svg\" alt=\"\">\n        </div>\n    </div>\n\n    <div class=\"settings_item\" (click)=\"deleteAccountModal()\">\n        <div>\n          <div class=\"heading\" style=\"color: #FF0000;\">Delete Account</div>\n          <div class=\"heading_description\">Delete your account</div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/next.svg\" alt=\"\">\n        </div>\n    </div>\n\n    <div class=\"language_label\">Choose your language</div>\n    <div class=\"language_div\" >\n      <ion-button class=\"language_btn urbanist english\" [class.active_language]=\"english_language==true\" (click)=\"changeLanguage()\" >\n        <!-- <img style=\"margin-right: 6.5px;\" src=\"assets/images/icons/language_icon.svg\" alt=\"\" *ngIf=\"english_language==true\"> -->\n        <!-- <img style=\"margin-right: 6.5px;\" src=\"assets/images/icons/language_icon_dull.svg\" alt=\"\" *ngIf=\"english_language==false\"> -->\n        <span>English</span>\n      </ion-button>\n      <ion-button class=\"language_btn noto_sans_arabic arabic\" [class.active_language]=\"arabic_language==true\" (click)=\"changeLanguage()\">\n        <!-- <img style=\"margin-right: 6.5px;\" src=\"assets/images/icons/language_icon.svg\" alt=\"\" *ngIf=\"arabic_language==true\"> -->\n        <!-- <img style=\"margin-right: 6.5px;\" src=\"assets/images/icons/language_icon_dull.svg\" alt=\"\" *ngIf=\"arabic_language==false\"> -->\n        <span>العربی</span>\n      </ion-button>\n    </div>\n  </div>\n</ion-content>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <ion-menu-button class=\"menuicon\"></ion-menu-button>\n      <div class=\"title\">Settings</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"settings_item\" >\n      <!-- (click)=\"toggleNotifications()\" -->\n        <div>\n          <div class=\"heading\">Notifications</div>\n          <div class=\"heading_description\">Enable your notifications</div>\n        </div>\n        <div>\n          <ion-toggle class=\"ion_toogle\" checked=\"{{api.toggleVal}}\" (ionChange)=\"onChange($event)\"></ion-toggle>\n        </div>\n    </div>\n\n    <div class=\"settings_item\" (click)=\"goForPaymentDetails()\">\n        <div>\n          <div class=\"heading\">Payment Details</div>\n          <div class=\"heading_description\">Add your cards for quick payments</div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/next.svg\" alt=\"\">\n        </div>\n    </div>\n\n    <div class=\"settings_item\" (click)=\"goForChangePassword()\">\n        <div>\n          <div class=\"heading\">Change Password</div>\n          <div class=\"heading_description\">Update your password</div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/next.svg\" alt=\"\">\n        </div>\n    </div>\n\n    <div class=\"settings_item\" (click)=\"editProfile()\">\n        <div>\n          <div class=\"heading\">Profile</div>\n          <div class=\"heading_description\">Update your profile</div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/next.svg\" alt=\"\">\n        </div>\n    </div>\n\n    <div class=\"settings_item\" (click)=\"deleteAccountModal()\">\n        <div>\n          <div class=\"heading\" style=\"color: #FF0000;\">Delete Account</div>\n          <div class=\"heading_description\">Delete your account</div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/next.svg\" alt=\"\">\n        </div>\n    </div>\n\n    <div class=\"language_label\">Choose your language</div>\n    <div class=\"language_div\" >\n      <ion-button class=\"language_btn urbanist english\" [class.active_language]=\"english_language==true\" (click)=\"changeLanguage()\" >\n        <!-- <img style=\"margin-right: 6.5px;\" src=\"assets/images/icons/language_icon.svg\" alt=\"\" *ngIf=\"english_language==true\"> -->\n        <!-- <img style=\"margin-right: 6.5px;\" src=\"assets/images/icons/language_icon_dull.svg\" alt=\"\" *ngIf=\"english_language==false\"> -->\n        <span>English</span>\n      </ion-button>\n      <ion-button class=\"language_btn noto_sans_arabic arabic\" [class.active_language]=\"arabic_language==true\" (click)=\"changeLanguage()\">\n        <!-- <img style=\"margin-right: 6.5px;\" src=\"assets/images/icons/language_icon.svg\" alt=\"\" *ngIf=\"arabic_language==true\"> -->\n        <!-- <img style=\"margin-right: 6.5px;\" src=\"assets/images/icons/language_icon_dull.svg\" alt=\"\" *ngIf=\"arabic_language==false\"> -->\n        <span>العربی</span>\n      </ion-button>\n    </div>\n  </div>\n</ion-content>\n";
 
 /***/ })
 

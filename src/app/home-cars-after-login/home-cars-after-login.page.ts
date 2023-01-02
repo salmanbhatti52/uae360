@@ -224,12 +224,18 @@ export class HomeCarsAfterLoginPage implements OnInit {
   }
   getCars(){
     this.api.showLoading();
-    this.api.getData('cars').subscribe((res:any)=>{
+    let data = {
+      user_id: this.checkUser.appUserId
+    }
+    this.api.sendRequest('cars',data).subscribe((res:any)=>{
       this.api.hideLoading();
       console.log(res);
       if(res.status == 'success'){
         this.api.hideLoading();
         this.pickups = res.data;
+        this.api.allCars = res.data;
+        console.log("api.allCars: ",this.api.allCars);
+        
       }
     },(err)=>{
       this.api.hideLoading();

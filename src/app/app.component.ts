@@ -75,8 +75,10 @@ export class AppComponent {
     let toggleVal =  localStorage.getItem('notificationVal');
     if(toggleVal == 'true'){
       this.api.toggleVal = true;
-    }else{
+    }else if(toggleVal == 'false'){
       this.api.toggleVal = false;
+    }else{
+      this.api.toggleVal = true;
     }
     
     console.log('api.toggleVal',this.api.toggleVal);

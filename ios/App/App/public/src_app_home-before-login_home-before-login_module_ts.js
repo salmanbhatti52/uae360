@@ -93,16 +93,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "HomeBeforeLoginPage": () => (/* binding */ HomeBeforeLoginPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 34929);
-/* harmony import */ var _home_before_login_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home-before-login.page.html?ngResource */ 21080);
-/* harmony import */ var _home_before_login_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home-before-login.page.scss?ngResource */ 41840);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 60124);
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ 5830);
-/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../check-user.service */ 47852);
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app.component */ 55041);
-/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! swiper */ 63587);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 26710);
+/* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var _home_before_login_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home-before-login.page.html?ngResource */ 21080);
+/* harmony import */ var _home_before_login_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home-before-login.page.scss?ngResource */ 41840);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/api.service */ 5830);
+/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../check-user.service */ 47852);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../app.component */ 55041);
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! swiper */ 63587);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 26710);
+/* harmony import */ var _capacitor_share__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @capacitor/share */ 58921);
 
 
 
@@ -113,238 +115,232 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-swiper__WEBPACK_IMPORTED_MODULE_5__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_5__.Autoplay, swiper__WEBPACK_IMPORTED_MODULE_5__.Keyboard, swiper__WEBPACK_IMPORTED_MODULE_5__.Pagination, swiper__WEBPACK_IMPORTED_MODULE_5__.Scrollbar, swiper__WEBPACK_IMPORTED_MODULE_5__.Zoom, _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicSlides]);
+
+
+swiper__WEBPACK_IMPORTED_MODULE_6__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_6__.Autoplay, swiper__WEBPACK_IMPORTED_MODULE_6__.Keyboard, swiper__WEBPACK_IMPORTED_MODULE_6__.Pagination, swiper__WEBPACK_IMPORTED_MODULE_6__.Scrollbar, swiper__WEBPACK_IMPORTED_MODULE_6__.Zoom, _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicSlides]);
 let HomeBeforeLoginPage = class HomeBeforeLoginPage {
-    // selectedCarID: any = 0;
-    constructor(router, api, checkUser, appComponent) {
-        this.router = router;
-        this.api = api;
-        this.checkUser = checkUser;
-        this.appComponent = appComponent;
-        this.totalNotifications = 6;
-        this.item1 = true;
-        this.item2 = false;
-        this.item3 = false;
-        this.item4 = false;
-        this.item5 = false;
-        this.carTypes = [];
-        this.carTypeOne = '';
-        this.carTypeTwo = '';
-        this.carTypeThree = '';
-        this.carTypeFour = '';
-        this.carTypeOneId = '';
-        this.carTypeTwoId = '';
-        this.carTypeThreeId = '';
-        this.carTypeFourId = '';
-        this.showCategories = false;
-        this.rentCategories = [{ category: 'Day' }, { category: 'Month' }];
-        this.categoryVal = 'Day';
-        // pickups = [
-        //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-        //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-        //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-        //   {img:'assets/images/card2_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269},
-        //   {img:'assets/images/card1_car.svg', name:'BMW 2 SERIES, 2016', price:26, total_trips:269}
-        // ]
-        this.pickups = [];
-        this.result = [];
-        this.showContent = true;
-    }
-    // displayCategories(car_id){
-    //   if(car_id !=null){
-    //   }
-    //   if(car_id !=null){
-    //     this.showCategories = true;
-    //   }
-    //   else{
-    //     this.showCategories = false;
-    //   }
-    // }
-    // selectedCategory(val,id){
-    //   console.log(val);
-    //   console.log('iiiii',id);
-    //   this.selectedCarID = id
-    //   console.log('fffff',this.selectedCarID);
-    //   this.categoryVal = val;
-    // }
-    ngOnInit() {
-        this.checkUser.appUserId = null;
-        console.log(this.checkUser.appUserId);
-        this.checkUser.checkUser();
-        console.log(this.checkUser.appPages);
-        this.appComponent.appPages = this.checkUser.appPages;
-        this.getCarTypes();
-        this.getCars();
-    }
-    ionViewWillEnter() {
-        if (this.result.length > 0) {
-            this.showContent = false;
-        }
-        else {
-            this.showContent = true;
-        }
-    }
-    handleChange(event) {
-        // this.results = this.data.filter(d => d.toLowerCase().indexOf(query) > -1);
-        // console.log('query1: ',query1);
-    }
-    clearResult() {
-        this.result = [];
-        this.showContent = true;
-    }
-    getCars() {
-        this.api.showLoading();
-        this.api.getData('cars').subscribe((res) => {
-            this.api.hideLoading();
-            console.log(res);
-            if (res.status == 'success') {
-                console.log(res.data);
-                this.pickups = res.data;
-            }
-        }, (err) => {
-            this.api.hideLoading();
-            console.log(err);
-        });
-    }
-    getCarTypes() {
-        this.api.showLoading();
-        this.api.sendRequest('carType').subscribe((res) => {
-            console.log('getCarTypes: ', res);
-            if (res.status == 'success') {
-                this.carTypes = res.data;
-                this.carTypeOne = this.carTypes[0].car_type;
-                this.carTypeTwo = this.carTypes[1].car_type;
-                this.carTypeThree = this.carTypes[2].car_type;
-                this.carTypeFour = this.carTypes[3].car_type;
-                this.carTypeOneId = this.carTypes[0].car_type_id;
-                this.carTypeTwoId = this.carTypes[1].car_type_id;
-                this.carTypeThreeId = this.carTypes[2].car_type_id;
-                this.carTypeFourId = this.carTypes[3].car_type_id;
-                this.api.hideLoading();
-            }
-        }, (err) => {
-            console.log('Error', err);
-            this.api.hideLoading();
-        });
-    }
-    gotoSignIn() {
-        this.router.navigate(['/sign-in']);
-    }
-    selectItem(itemVal) {
-        if (itemVal == 'all') {
-            this.item1 = true;
-            this.item2 = false;
-            this.item3 = false;
-            this.item4 = false;
-            this.item5 = false;
-            this.getCars();
-        }
-        else if (itemVal == 'Sports') {
-            this.pickups = [];
-            this.item1 = false;
-            this.item2 = true;
-            this.item3 = false;
-            this.item4 = false;
-            this.item5 = false;
-            this.api.showLoading();
-            let data = {
-                car_type_id: this.carTypeOneId
-            };
-            this.api.sendRequest('getCarsByCarType', data).subscribe((res) => {
-                console.log(res);
-                if (res.status == 'success') {
-                    this.api.hideLoading();
-                    this.pickups = res.data;
-                }
-            }, (err) => {
-                this.api.hideLoading();
-                console.log(err);
-            });
-        }
-        else if (itemVal == 'Luxury') {
-            this.pickups = [];
-            this.item1 = false;
-            this.item2 = false;
-            this.item3 = true;
-            this.item4 = false;
-            this.item5 = false;
-            this.api.showLoading();
-            let data = {
-                car_type_id: this.carTypeTwoId
-            };
-            this.api.sendRequest('getCarsByCarType', data).subscribe((res) => {
-                console.log(res);
-                if (res.status == 'success') {
-                    this.api.hideLoading();
-                    this.pickups = res.data;
-                }
-            }, (err) => {
-                this.api.hideLoading();
-                console.log(err);
-            });
-        }
-        else if (itemVal == 'Pickup') {
-            this.pickups = [];
-            this.item1 = false;
-            this.item2 = false;
-            this.item3 = false;
-            this.item4 = true;
-            this.item5 = false;
-            this.api.showLoading();
-            let data = {
-                car_type_id: this.carTypeThreeId
-            };
-            this.api.sendRequest('getCarsByCarType', data).subscribe((res) => {
-                console.log(res);
-                if (res.status == 'success') {
-                    this.api.hideLoading();
-                    this.pickups = res.data;
-                }
-            }, (err) => {
-                this.api.hideLoading();
-                console.log(err);
-            });
-        }
-        else if (itemVal == 'SUV') {
-            this.pickups = [];
-            this.item1 = false;
-            this.item2 = false;
-            this.item3 = false;
-            this.item4 = false;
-            this.item5 = true;
-            this.api.showLoading();
-            let data = {
-                car_type_id: this.carTypeFourId
-            };
-            this.api.sendRequest('getCarsByCarType', data).subscribe((res) => {
-                console.log(res);
-                if (res.status == 'success') {
-                    this.api.hideLoading();
-                    this.pickups = res.data;
-                }
-            }, (err) => {
-                this.api.hideLoading();
-                console.log(err);
-            });
-        }
-        else {
-        }
-    }
-};
-HomeBeforeLoginPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router },
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__.ApiService },
-    { type: _check_user_service__WEBPACK_IMPORTED_MODULE_3__.CheckUserService },
-    { type: _app_component__WEBPACK_IMPORTED_MODULE_4__.AppComponent }
-];
-HomeBeforeLoginPage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
-        selector: 'app-home-before-login',
-        template: _home_before_login_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
-        styles: [_home_before_login_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], HomeBeforeLoginPage);
+  // selectedCarID: any = 0;
+  constructor(router, api, checkUser, appComponent) {
+    this.router = router;
+    this.api = api;
+    this.checkUser = checkUser;
+    this.appComponent = appComponent;
+    this.totalNotifications = 6;
+    this.item1 = true;
+    this.item2 = false;
+    this.item3 = false;
+    this.item4 = false;
+    this.item5 = false;
+    this.carTypes = [];
+    this.carTypeOne = '';
+    this.carTypeTwo = '';
+    this.carTypeThree = '';
+    this.carTypeFour = '';
+    this.carTypeOneId = '';
+    this.carTypeTwoId = '';
+    this.carTypeThreeId = '';
+    this.carTypeFourId = '';
+    this.showCategories = false;
+    this.rentCategories = [{
+      category: 'Day'
+    }, {
+      category: 'Month'
+    }];
+    this.categoryVal = 'Day';
+    this.pickups = [];
+  }
 
+  ngOnInit() {
+    this.checkUser.appUserId = null;
+    console.log(this.checkUser.appUserId);
+    this.checkUser.checkUser();
+    console.log(this.checkUser.appPages);
+    this.appComponent.appPages = this.checkUser.appPages;
+    this.getCarTypes();
+    this.getCars();
+  }
+
+  ionViewWillEnter() {}
+
+  handleChange(event) {// this.results = this.data.filter(d => d.toLowerCase().indexOf(query) > -1);
+    // console.log('query1: ',query1);
+  }
+
+  clearResult() {}
+
+  getCars() {
+    this.api.showLoading();
+    let data = {
+      user_id: ''
+    };
+    this.api.sendRequest('cars', data).subscribe(res => {
+      this.api.hideLoading();
+      console.log(res);
+
+      if (res.status == 'success') {
+        console.log(res.data);
+        this.pickups = res.data;
+      }
+    }, err => {
+      this.api.hideLoading();
+      console.log(err);
+    });
+  }
+
+  getCarTypes() {
+    this.api.showLoading();
+    this.api.sendRequest('carType').subscribe(res => {
+      console.log('getCarTypes: ', res);
+
+      if (res.status == 'success') {
+        this.carTypes = res.data;
+        this.carTypeOne = this.carTypes[0].car_type;
+        this.carTypeTwo = this.carTypes[1].car_type;
+        this.carTypeThree = this.carTypes[2].car_type;
+        this.carTypeFour = this.carTypes[3].car_type;
+        this.carTypeOneId = this.carTypes[0].car_type_id;
+        this.carTypeTwoId = this.carTypes[1].car_type_id;
+        this.carTypeThreeId = this.carTypes[2].car_type_id;
+        this.carTypeFourId = this.carTypes[3].car_type_id;
+        this.api.hideLoading();
+      }
+    }, err => {
+      console.log('Error', err);
+      this.api.hideLoading();
+    });
+  }
+
+  gotoSignIn() {
+    this.router.navigate(['/sign-in']);
+  }
+
+  inviteOthers() {
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      yield _capacitor_share__WEBPACK_IMPORTED_MODULE_7__.Share.share({
+        title: 'Book Cars Online at 360UAE',
+        text: 'Really awesome cars you can book',
+        url: 'https://dubai360.com/',
+        dialogTitle: 'Share with buddies'
+      });
+    })();
+  }
+
+  selectItem(itemVal) {
+    if (itemVal == 'all') {
+      this.item1 = true;
+      this.item2 = false;
+      this.item3 = false;
+      this.item4 = false;
+      this.item5 = false;
+      this.getCars();
+    } else if (itemVal == 'Sports') {
+      this.pickups = [];
+      this.item1 = false;
+      this.item2 = true;
+      this.item3 = false;
+      this.item4 = false;
+      this.item5 = false;
+      this.api.showLoading();
+      let data = {
+        car_type_id: this.carTypeOneId
+      };
+      this.api.sendRequest('getCarsByCarType', data).subscribe(res => {
+        console.log(res);
+
+        if (res.status == 'success') {
+          this.api.hideLoading();
+          this.pickups = res.data;
+        }
+      }, err => {
+        this.api.hideLoading();
+        console.log(err);
+      });
+    } else if (itemVal == 'Luxury') {
+      this.pickups = [];
+      this.item1 = false;
+      this.item2 = false;
+      this.item3 = true;
+      this.item4 = false;
+      this.item5 = false;
+      this.api.showLoading();
+      let data = {
+        car_type_id: this.carTypeTwoId
+      };
+      this.api.sendRequest('getCarsByCarType', data).subscribe(res => {
+        console.log(res);
+
+        if (res.status == 'success') {
+          this.api.hideLoading();
+          this.pickups = res.data;
+        }
+      }, err => {
+        this.api.hideLoading();
+        console.log(err);
+      });
+    } else if (itemVal == 'Pickup') {
+      this.pickups = [];
+      this.item1 = false;
+      this.item2 = false;
+      this.item3 = false;
+      this.item4 = true;
+      this.item5 = false;
+      this.api.showLoading();
+      let data = {
+        car_type_id: this.carTypeThreeId
+      };
+      this.api.sendRequest('getCarsByCarType', data).subscribe(res => {
+        console.log(res);
+
+        if (res.status == 'success') {
+          this.api.hideLoading();
+          this.pickups = res.data;
+        }
+      }, err => {
+        this.api.hideLoading();
+        console.log(err);
+      });
+    } else if (itemVal == 'SUV') {
+      this.pickups = [];
+      this.item1 = false;
+      this.item2 = false;
+      this.item3 = false;
+      this.item4 = false;
+      this.item5 = true;
+      this.api.showLoading();
+      let data = {
+        car_type_id: this.carTypeFourId
+      };
+      this.api.sendRequest('getCarsByCarType', data).subscribe(res => {
+        console.log(res);
+
+        if (res.status == 'success') {
+          this.api.hideLoading();
+          this.pickups = res.data;
+        }
+      }, err => {
+        this.api.hideLoading();
+        console.log(err);
+      });
+    } else {}
+  }
+
+};
+
+HomeBeforeLoginPage.ctorParameters = () => [{
+  type: _angular_router__WEBPACK_IMPORTED_MODULE_9__.Router
+}, {
+  type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService
+}, {
+  type: _check_user_service__WEBPACK_IMPORTED_MODULE_4__.CheckUserService
+}, {
+  type: _app_component__WEBPACK_IMPORTED_MODULE_5__.AppComponent
+}];
+
+HomeBeforeLoginPage = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
+  selector: 'app-home-before-login',
+  template: _home_before_login_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
+  styles: [_home_before_login_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
+})], HomeBeforeLoginPage);
 
 
 /***/ }),
@@ -365,7 +361,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \**************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <ion-menu-button class=\"menuicon\"></ion-menu-button>\n      <div class=\"title\">Home</div>\n      <div style=\"display: flex\">\n       <div class=\"bell_div\" >\n         <div class=\"notifications\" >{{totalNotifications}}</div>\n         <img (click)=\"gotoSignIn()\" src=\"assets/images/icons/bell.svg\" alt=\"\">\n       </div>\n       <div style=\"display: flex;padding-left: 13.5px;\">\n         <img (click)=\"gotoSignIn()\" src=\"assets/images/icons/filter.svg\" alt=\"\">\n       </div>\n      </div>\n    </div>\n    <div style=\"margin: 16px;\">\n      <ion-searchbar [debounce]=\"1000\" \n        (ionChange)=\"handleChange($event)\" type=\"text\"\n        show-clear-button=\"always\" class=\"input_field\" \n        placeholder=\"Search for Cars\" (ionClear)=\"clearResult()\">\n      </ion-searchbar>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content >\n  <div class=\"wrapper\" *ngIf=\"result.length > 0\">\n    <div *ngFor=\"let res of result\">\n      <div style=\"text-align: center; margin-top: 13px; position: relative;\" (click)=\"gotoSignIn()\">\n        <img style=\"object-fit: cover;width: 100%;height: 200px; border-radius: 10px 10px 0px 0px;\" src=\"{{api.imageUrlString}}{{res.image1}}\" alt=\"\">\n        <!-- *ngIf=\"favorites == 'dislike'\" -->\n        <img style=\"position: absolute;right: 5%;top: 5%;\" src=\"assets/images/icons/heart.svg\" alt=\"\" *ngIf=\"res.favourite_status != 'liked'\">\n        <!-- (click)=\"makeUnFavorite(favorite.car_id)\" -->\n        <img  style=\"position: absolute;right: 5%;top: 5%;\" src=\"assets/images/icons/red_heart.svg\" alt=\"\" *ngIf=\"res.favourite_status == 'liked'\">\n        <div class=\"car_info_box\" >\n          <div>\n            <div class=\"car_name poppins\">{{res.vehical_name}}</div>\n            <div style=\"text-align: left;line-height: 1;margin-top: 3px;\">\n              <span *ngIf=\"res.rating == 0 \">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              </span>\n              <span *ngIf=\"res.rating >=1 && res.rating < 1.5\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              </span>\n              <span *ngIf=\"res.rating >=1.5 && res.rating < 2.5\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              </span>\n              <span *ngIf=\"res.rating >=2.5 && res.rating < 3.5\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              </span>\n              <span *ngIf=\"res.rating >=3.5 && res.rating < 4.5\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              </span>\n              <span *ngIf=\"res.rating >=4.5 && res.rating < 5.1\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              </span>\n              <span class=\"rating_value poppins\">trips</span>\n            </div>\n          </div>\n          <div class=\"car2_info_subdiv\">\n            <div style=\"line-height: 1;\"><span class=\"car2_price poppins\" >$</span><span class=\"car2_price poppins\" style=\"font-size: 32px;margin-right: 8px;\">{{res.rent_cost_day}}</span><span class=\"car2_price poppins\" style=\"font-size: 10px;font-weight: 500;\">/Day</span></div>\n          </div>\n          \n        </div>\n      </div>\n    </div>\n    \n    \n  </div>\n  <div *ngIf=\"showContent == true\">\n    <div class=\"items_label\">What are you looking for?</div>\n    <div style=\"padding-left: 11px;\">\n      <swiper [config]=\"{slidesPerView:4.4, spaceBetween:9, initialSlide:0, speed:400}\" [pagination]=\"false\" style=\"padding: 8px;\">\n        <ng-template swiperSlide class=\"categories\">\n          <div class=\"carItem_box\" [class.selected_item]=\"item1 == true\" (click)=\"selectItem('all')\">\n            <img src=\"assets/images/icons/car_grey.svg\" alt=\"\" *ngIf=\"item1 == false\">\n            <img src=\"assets/images/icons/car_white.svg\" alt=\"\" *ngIf=\"item1 == true\">\n            <div class=\"cars_label\" [class.fontActive]=\"item1 == true\">All Cars</div>\n          </div>\n        </ng-template>\n        <ng-template swiperSlide class=\"categories\">\n          <div class=\"carItem_box\" [class.selected_item]=\"item2 == true\" (click)=\"selectItem('Sports')\">\n            <img src=\"assets/images/icons/sports_car_grey.svg\" alt=\"\" *ngIf=\"item2 == false\">\n            <img src=\"assets/images/icons/sports_car_white.svg\" alt=\"\" *ngIf=\"item2 == true\">\n            <div class=\"cars_label\" [class.fontActive]=\"item2 == true\">{{carTypeOne}}</div>\n          </div>\n        </ng-template>\n        <ng-template swiperSlide class=\"categories\">\n          <div class=\"carItem_box\" [class.selected_item]=\"item3 == true\" (click)=\"selectItem('Luxury')\">\n            <img src=\"assets/images/icons/luxury_car_grey.svg\" alt=\"\" *ngIf=\"item3 == false\">\n            <img src=\"assets/images/icons/luxury_car_white.svg\" alt=\"\" *ngIf=\"item3 == true\">\n            <div class=\"cars_label\" [class.fontActive]=\"item3 == true\">{{carTypeTwo}}</div>\n          </div>\n        </ng-template>\n        <ng-template swiperSlide class=\"categories\">\n          <div class=\"carItem_box\" [class.selected_item]=\"item4 == true\" (click)=\"selectItem('Pickup')\">\n            <img src=\"assets/images/icons/taxi_grey.svg\" alt=\"\" *ngIf=\"item4 == false\">\n            <img src=\"assets/images/icons/taxi_white.svg\" alt=\"\" *ngIf=\"item4 == true\">\n            <div class=\"cars_label\" [class.fontActive]=\"item4 == true\">{{carTypeThree}}</div>\n          </div>\n        </ng-template>\n        <ng-template swiperSlide class=\"categories\" >\n          <div class=\"carItem_box\" [class.selected_item]=\"item5 == true\" style=\"margin-right: 0px;\" (click)=\"selectItem('SUV')\">\n            <img src=\"assets/images/icons/suv's_grey.svg\" alt=\"\" *ngIf=\"item5 == false\">\n            <img src=\"assets/images/icons/suv's_white.svg\" alt=\"\" *ngIf=\"item5 == true\">\n            <div class=\"cars_label\" [class.fontActive]=\"item5 == true\">{{carTypeFour}}</div>\n          </div>\n        </ng-template>\n      </swiper>\n    </div>\n    \n    <!-- <div class=\"items_box\">\n    </div> -->\n  \n\n    <div class=\"items_wrapper\">\n      <div class=\"items_label\" style=\"margin-top: 5px;padding-left: 3px;\">Top Rented</div>\n      <!-- <div *ngIf=\"item1==true\"> -->\n        <swiper pager=\"false\" [config]=\"{slidesPerView:1.4 ,spaceBetween:9, initialSlide:0, speed:400}\" [pagination]=\"false\">\n          <ng-template swiperSlide *ngFor=\"let pickup of pickups;\" style=\"width: 58%; height: 100%;\">\n            <ion-card class=\"card\" (click)=\"gotoSignIn()\">\n              <img class=\"car_img\" src=\"{{api.imageUrlString}}{{pickup.image1}}\" alt=\"\">\n              <div style=\"padding: 5px 7px 7.5px 8px;\">\n                <div>\n                  <div class=\"card_title\">{{pickup.vehical_name}}</div>\n                </div>\n                <div class=\"card_content\">\n                  <div class=\"row_div\">\n                    <div>\n                      <span *ngIf=\"pickup.rating == 0 \">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                      </span>\n                      <span *ngIf=\"pickup.rating >=1 && pickup.rating < 1.5\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                      </span>\n                      <span *ngIf=\"pickup.rating >=1.5 && pickup.rating < 2.5\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                      </span>\n                      <span *ngIf=\"pickup.rating >=2.5 && pickup.rating < 3.5\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                      </span>\n                      <span *ngIf=\"pickup.rating >=3.5 && pickup.rating < 4.5\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                      </span>\n                      <span *ngIf=\"pickup.rating >=4.5 && pickup.rating < 5.1\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                      </span>\n                    </div>\n                    <div style=\"line-height: 1.2;\">\n                      <span class=\"price_span\" style=\"font-size: 11px;\">$</span>\n                      <span class=\"price_span\" style=\"font-size: 32px;line-height: 0.8;\" *ngIf=\"categoryVal=='Day'\">{{pickup.rent_cost_day}}</span>\n                      <!-- <span class=\"price_span\" style=\"font-size: 32px;\" *ngIf=\"categoryVal=='Day'\">{{pickup.rent_cost_day}}</span>\n                      <span class=\"price_span\" style=\"font-size: 32px;\" *ngIf=\"categoryVal=='Month'\">{{pickup.rent_cost_month}}</span> -->\n                    </div>\n                    \n                  </div>\n                  <div class=\"row_div\" >\n                    \n                      <div class=\"total_trips\"> trips</div>\n                      <div style=\"text-align: right;\">\n                        <span class=\"price_label\" style=\"margin-right: 5px;\">Per Day</span>\n                      </div>\n                      <!-- <div (click)=\"displayCategories(pickup.car_id)\" style=\"display: flex;align-items: baseline;position: relative;justify-content: flex-end;\">\n                      <span class=\"price_label\" style=\"margin-right: 5px;\">{{categoryVal}}</span> \n                      <img [class.rotate_icon]=\"showCategories==true\"  src=\"assets/images/icons/dropdown_icon.svg\" alt=\"\">\n                      <div  class=\"price_categories\">\n                        <div *ngFor=\"let type of rentCategories\" (click)=\"selectedCategory(type.category,pickup.car_id)\">\n                          <span class=\"price_label\" style=\"font-size: 12px; font-family: 'Poppins',sans-serif;\">{{type.category}}</span>\n                        </div> \n                      </div>\n                      </div> -->\n                  </div>\n                </div>\n              </div>\n              \n            </ion-card>\n          </ng-template>\n        </swiper>\n        <!-- <ion-slides pager=\"false\" [options]=\"slideOpts\">\n          <ion-slide *ngFor=\"let pickup of pickups;\" style=\"width: 48%; height: 100%;\">\n            <ion-card class=\"card\" >\n              <img (click)=\"gotoCarDetails()\" style=\"width: 100%;\" src=\"{{pickup.img}}\" alt=\"\">\n              <div style=\"padding: 5px 7px 7.5px 8px;\">\n                <div>\n                  <div class=\"card_title\">{{pickup.name}}</div>\n                </div>\n                <div class=\"card_content\">\n                  <div>\n                    <div>\n                      <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                      <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                      <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                      <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                      <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                    </div>\n                    <div class=\"total_trips\">{{pickup.total_trips}} trips</div>\n                  </div>\n                  <div>\n                    <div style=\"line-height: 1.2;\"><span class=\"price_span\" style=\"font-size: 11px;\">$</span><span class=\"price_span\" style=\"font-size: 32px;\">{{pickup.price}}</span> </div>\n                    \n                    <div (click)=\"displayCategories()\" style=\"display: flex;align-items: baseline;position: relative;\">\n                      <span class=\"price_label\" style=\"margin-right: 5px;\">{{categoryVal}}</span> \n                      <img [class.rotate_icon]=\"showCategories==true\"  src=\"assets/images/icons/dropdown_icon.svg\" alt=\"\">\n                      <div *ngIf=\"showCategories==true\" class=\"price_categories\">\n                        <div *ngFor=\"let type of rentCategories\" (click)=\"selectedCategory(type.category)\">\n                          <span class=\"price_label\" style=\"font-size: 12px; font-family: 'Poppins',sans-serif;\">{{type.category}}</span>\n                        </div> \n                      </div>\n                      \n                      \n                    </div>\n                  </div>\n                </div>\n              </div>\n              \n            </ion-card>\n          </ion-slide>\n        </ion-slides>\n        <ion-slides pager=\"false\" [options]=\"slideOpts\">\n          <ion-slide *ngFor=\"let pickup of pickups;\" style=\"width: 48%; height: 100%;padding-bottom: 1px;\">\n            <ion-card class=\"card\" >\n              <img (click)=\"gotoCarDetails()\" style=\"width: 100%;\" src=\"{{pickup.img}}\" alt=\"\">\n              <div style=\"padding: 5px 7px 7.5px 8px;\">\n                <div>\n                  <div class=\"card_title\">{{pickup.name}}</div>\n                </div>\n                <div class=\"card_content\">\n                  <div>\n                    <div>\n                      <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                      <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                      <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                      <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                      <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                    </div>\n                    <div class=\"total_trips\">{{pickup.total_trips}} trips</div>\n                  </div>\n                  <div>\n                    <div style=\"line-height: 1.2;\"><span class=\"price_span\" style=\"font-size: 11px;\">$</span><span class=\"price_span\" style=\"font-size: 32px;\">{{pickup.price}}</span> </div>\n                    \n                    <div (click)=\"displayCategories()\" style=\"display: flex;align-items: baseline;position: relative;\">\n                      <span class=\"price_label\" style=\"margin-right: 5px;\">{{categoryVal}}</span> \n                      <img [class.rotate_icon]=\"showCategories==true\"  src=\"assets/images/icons/dropdown_icon.svg\" alt=\"\">\n                      <div *ngIf=\"showCategories==true\" class=\"price_categories\">\n                        <div *ngFor=\"let type of rentCategories\" (click)=\"selectedCategory(type.category)\">\n                          <span class=\"price_label\" style=\"font-size: 12px; font-family: 'Poppins',sans-serif;\">{{type.category}}</span>\n                        </div> \n                      </div>\n                      \n                      \n                    </div>\n                  </div>\n                </div>\n              </div>\n              \n            </ion-card>\n          </ion-slide>\n        </ion-slides> -->\n      <!-- </div> -->\n      \n    </div>\n  </div>\n    \n</ion-content>\n<ion-footer class=\"ion-no-border \" style=\"padding-bottom:15px;\" >\n  <ion-toolbar class=\"bgtoolbar\" *ngIf=\"showContent == true\">\n    <div style=\"margin: 15px 0px 15px;\" >\n      <div style=\"text-align: center;\">\n        <div class=\"invite_label\">Invite Friends</div>\n        <div class=\"invite_label\" style=\"font-weight: 400;\">And spread the word</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <ion-button (click)=\"gotoSignIn()\" class=\"invite_btn\">\n          <span class=\"btn-text\">Invite</span>\n        </ion-button>\n      </div>\n    </div>\n    \n    \n  </ion-toolbar>\n</ion-footer>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <ion-menu-button class=\"menuicon\"></ion-menu-button>\n      <div class=\"title\">Home</div>\n      <div style=\"display: flex\">\n       <div class=\"bell_div\" >\n         <!-- <div class=\"notifications\" >{{totalNotifications}}</div> -->\n         <img (click)=\"gotoSignIn()\" src=\"assets/images/icons/bell.svg\" alt=\"\">\n       </div>\n       <div style=\"display: flex;padding-left: 13.5px;\">\n         <img (click)=\"gotoSignIn()\" src=\"assets/images/icons/filter.svg\" alt=\"\">\n       </div>\n      </div>\n    </div>\n    <div style=\"margin: 16px;\">\n      <ion-searchbar [debounce]=\"1000\" \n        (ionChange)=\"handleChange($event)\" type=\"text\"\n        show-clear-button=\"always\" class=\"input_field\" \n        placeholder=\"Search for Cars\" (ionClear)=\"clearResult()\">\n      </ion-searchbar>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content >\n  <div >\n    <div class=\"items_label\">What are you looking for?</div>\n    <div style=\"padding-left: 11px;\">\n      <swiper [config]=\"{slidesPerView:4.4, spaceBetween:9, initialSlide:0, speed:400}\" [pagination]=\"false\" style=\"padding: 8px;\">\n        <ng-template swiperSlide class=\"categories\">\n          <div class=\"carItem_box\" [class.selected_item]=\"item1 == true\" (click)=\"selectItem('all')\">\n            <img src=\"assets/images/icons/car_grey.svg\" alt=\"\" *ngIf=\"item1 == false\">\n            <img src=\"assets/images/icons/car_white.svg\" alt=\"\" *ngIf=\"item1 == true\">\n            <div class=\"cars_label\" [class.fontActive]=\"item1 == true\">All Cars</div>\n          </div>\n        </ng-template>\n        <ng-template swiperSlide class=\"categories\">\n          <div class=\"carItem_box\" [class.selected_item]=\"item2 == true\" (click)=\"selectItem('Sports')\">\n            <img src=\"assets/images/icons/sports_car_grey.svg\" alt=\"\" *ngIf=\"item2 == false\">\n            <img src=\"assets/images/icons/sports_car_white.svg\" alt=\"\" *ngIf=\"item2 == true\">\n            <div class=\"cars_label\" [class.fontActive]=\"item2 == true\">{{carTypeOne}}</div>\n          </div>\n        </ng-template>\n        <ng-template swiperSlide class=\"categories\">\n          <div class=\"carItem_box\" [class.selected_item]=\"item3 == true\" (click)=\"selectItem('Luxury')\">\n            <img src=\"assets/images/icons/luxury_car_grey.svg\" alt=\"\" *ngIf=\"item3 == false\">\n            <img src=\"assets/images/icons/luxury_car_white.svg\" alt=\"\" *ngIf=\"item3 == true\">\n            <div class=\"cars_label\" [class.fontActive]=\"item3 == true\">{{carTypeTwo}}</div>\n          </div>\n        </ng-template>\n        <ng-template swiperSlide class=\"categories\">\n          <div class=\"carItem_box\" [class.selected_item]=\"item4 == true\" (click)=\"selectItem('Pickup')\">\n            <img src=\"assets/images/icons/taxi_grey.svg\" alt=\"\" *ngIf=\"item4 == false\">\n            <img src=\"assets/images/icons/taxi_white.svg\" alt=\"\" *ngIf=\"item4 == true\">\n            <div class=\"cars_label\" [class.fontActive]=\"item4 == true\">{{carTypeThree}}</div>\n          </div>\n        </ng-template>\n        <ng-template swiperSlide class=\"categories\" >\n          <div class=\"carItem_box\" [class.selected_item]=\"item5 == true\" style=\"margin-right: 0px;\" (click)=\"selectItem('SUV')\">\n            <img src=\"assets/images/icons/suv's_grey.svg\" alt=\"\" *ngIf=\"item5 == false\">\n            <img src=\"assets/images/icons/suv's_white.svg\" alt=\"\" *ngIf=\"item5 == true\">\n            <div class=\"cars_label\" [class.fontActive]=\"item5 == true\">{{carTypeFour}}</div>\n          </div>\n        </ng-template>\n      </swiper>\n    </div>\n\n    <div class=\"items_wrapper\">\n      <div class=\"items_label\" style=\"margin-top: 5px;padding-left: 3px;\">Top Rented</div>\n      \n        <swiper pager=\"false\" [config]=\"{slidesPerView:1.4 ,spaceBetween:9, initialSlide:0, speed:400}\" [pagination]=\"false\">\n          <ng-template swiperSlide *ngFor=\"let pickup of pickups;\" style=\"width: 58%; height: 100%;\">\n            <ion-card class=\"card\" (click)=\"gotoSignIn()\">\n              <img class=\"car_img\" src=\"{{api.imageUrlString}}{{pickup.image1}}\" alt=\"\">\n              <div style=\"padding: 5px 7px 7.5px 8px;\">\n                <div>\n                  <div class=\"card_title\">{{pickup.vehical_name}}</div>\n                </div>\n                <div class=\"card_content\">\n                  <div class=\"row_div\">\n                    <div>\n                      <span *ngIf=\"pickup.rating == 0 \">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                      </span>\n                      <span *ngIf=\"pickup.rating >=1 && pickup.rating < 1.5\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                      </span>\n                      <span *ngIf=\"pickup.rating >=1.5 && pickup.rating < 2.5\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                      </span>\n                      <span *ngIf=\"pickup.rating >=2.5 && pickup.rating < 3.5\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                      </span>\n                      <span *ngIf=\"pickup.rating >=3.5 && pickup.rating < 4.5\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" style=\"margin-right: 3.8px;\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n                      </span>\n                      <span *ngIf=\"pickup.rating >=4.5 && pickup.rating < 5.1\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                        <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n                      </span>\n                    </div>\n                    <div style=\"line-height: 1.2;\">\n                      <span class=\"price_span\" style=\"font-size: 11px;\">$</span>\n                      <span class=\"price_span\" style=\"font-size: 32px;line-height: 0.8;\" *ngIf=\"categoryVal=='Day'\">{{pickup.rent_cost_day}}</span>\n                      <!-- <span class=\"price_span\" style=\"font-size: 32px;\" *ngIf=\"categoryVal=='Day'\">{{pickup.rent_cost_day}}</span>\n                      <span class=\"price_span\" style=\"font-size: 32px;\" *ngIf=\"categoryVal=='Month'\">{{pickup.rent_cost_month}}</span> -->\n                    </div>\n                    \n                  </div>\n                  <div class=\"row_div\" >\n                    \n                      <div class=\"total_trips\">{{pickup.total_bookings}} trips</div>\n                      <div style=\"text-align: right;\">\n                        <span class=\"price_label\" style=\"margin-right: 5px;\">Per Day</span>\n                      </div>\n                      <!-- <div (click)=\"displayCategories(pickup.car_id)\" style=\"display: flex;align-items: baseline;position: relative;justify-content: flex-end;\">\n                      <span class=\"price_label\" style=\"margin-right: 5px;\">{{categoryVal}}</span> \n                      <img [class.rotate_icon]=\"showCategories==true\"  src=\"assets/images/icons/dropdown_icon.svg\" alt=\"\">\n                      <div  class=\"price_categories\">\n                        <div *ngFor=\"let type of rentCategories\" (click)=\"selectedCategory(type.category,pickup.car_id)\">\n                          <span class=\"price_label\" style=\"font-size: 12px; font-family: 'Poppins',sans-serif;\">{{type.category}}</span>\n                        </div> \n                      </div>\n                      </div> -->\n                  </div>\n                </div>\n              </div>\n              \n            </ion-card>\n          </ng-template>\n        </swiper>\n      \n    </div>\n  </div>\n    \n</ion-content>\n<ion-footer class=\"ion-no-border \" style=\"padding-bottom:15px;\" >\n  <ion-toolbar class=\"bgtoolbar\" >\n    <div style=\"margin: 15px 0px 15px;\" >\n      <div style=\"text-align: center;\">\n        <div class=\"invite_label\">Invite Friends</div>\n        <div class=\"invite_label\" style=\"font-weight: 400;\">And spread the word</div>\n      </div>\n      <div style=\"text-align: center;\">\n        <ion-button (click)=\"inviteOthers()\" class=\"invite_btn\">\n          <span class=\"btn-text\">Invite</span>\n        </ion-button>\n      </div>\n    </div>\n    \n    \n  </ion-toolbar>\n</ion-footer>\n";
 
 /***/ })
 

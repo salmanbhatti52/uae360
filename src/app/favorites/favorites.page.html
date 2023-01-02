@@ -3,10 +3,11 @@
     <div class="header">
       <ion-menu-button class="menuicon"></ion-menu-button>
       <div class="title">Favorite</div>
-      <div class="bell_div" (click)="gotoNotifications()">
-        <div class="notifications" >{{totalNotifications}}</div>
+      <div class="bell_div" (click)="gotoNotifications()" *ngIf="api.toggleVal == true">
+        <div class="notifications" *ngIf="totalNotifications > 0">{{totalNotifications}}</div>
         <img src="assets/images/icons/bell.svg" alt="">
       </div>
+      <div *ngIf="api.toggleVal != true" class="no_notifications"></div>
     </div>
   </ion-toolbar>
 </ion-header>

@@ -10,10 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./messages.page.scss'],
 })
 export class MessagesPage implements OnInit {
-  totalNotifications = 6;
+  totalNotifications:Number;
   chatList: any;
   interval: any;
-  response = true;
+  response :boolean;
   constructor(public navCtrlr:NavController,
     public checkUser:CheckUserService,
     public api:ApiService,
@@ -25,17 +25,42 @@ export class MessagesPage implements OnInit {
 
 
      
-    }
-    ionViewWillEnter(){
-      this.interval = setInterval(() => {
-        this.getAllChatAgain();
-      },1000);
-    }
-    ionViewWillLeave() {
-      clearInterval(this.interval);
-      console.log('leave view');
-    }
+  }
 
+  ionViewWillEnter(){
+    this.interval = setInterval(() => {
+      this.getAllChatAgain();
+    },2000);
+
+    this.getNotifications();
+  }
+  ionViewWillLeave() {
+    clearInterval(this.interval);
+    console.log('leave view');
+  }
+
+  getNotifications(){
+    let data = {
+      users_id:this.checkUser.appUserId
+    };
+    this.api.sendRequest('notifications_unread',data).subscribe((res:any)=>{
+      console.log("Notification Respone: ",res);
+      if(res.status == 'success'){
+        if(res.data.length > 0){
+          this.totalNotifications = res.data.length
+        }else if(res.data.length == 0){
+          this.totalNotifications = 0;
+        }
+        
+      }else if(res.status == 'error'){
+
+      }
+      
+    },(err)=>{
+      console.log("Api Error: ",err);
+      
+    })
+  }
   ngOnInit() {
     this.getAllChat();
 
@@ -54,20 +79,27 @@ export class MessagesPage implements OnInit {
       if(res.status == 'success'){
         if(res.data.length == 0){
           this.response = false;
-        }
-        this.chatList = res.data;
-        for(let chat of this.chatList){
-          if(chat.last_message.message){
-            chat.last_message.message =  JSON.parse(chat.last_message.message) 
+        }else{
+          this.response = true;
+          this.chatList = res.data;
+          for(let chat of this.chatList){
+            if(chat.last_message.message){
+              chat.last_message.message =  JSON.parse(chat.last_message.message) 
+            }
+           
           }
-         
         }
-      } 
+        
+      }else if(res.status == 'error'){
+        this.response = false;
+      }else{
+
+      }
       
     },(err)=>{
       this.api.hideLoading();
       console.log("Error: ",err);
-      
+      this.response = false;
     });
   }
   getAllChatAgain(){
@@ -81,18 +113,25 @@ export class MessagesPage implements OnInit {
       if(res.status == 'success'){
         if(res.data.length == 0){
           this.response = false;
-        }
-        this.chatList = res.data;
-        for(let chat of this.chatList){
-          if(chat.last_message.message){
-            chat.last_message.message =  JSON.parse(chat.last_message.message) 
+        }else{
+          this.response = true;
+          this.chatList = res.data;
+          for(let chat of this.chatList){
+            if(chat.last_message.message){
+              chat.last_message.message =  JSON.parse(chat.last_message.message) 
+            }
           }
         }
+        
+      }else if(res.status == 'error'){
+        this.response = false;
+      }else{
+
       }
       
     },(err)=>{
-      // this.api.hideLoading();
       console.log("Error: ",err);
+      this.response = false;
       
     });
   }

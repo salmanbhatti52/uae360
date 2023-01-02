@@ -18,6 +18,7 @@ export class ApiService {
   oneSignalUserId:any;
   companyId: any;
   toggleVal:any;
+  allCars: any;
   constructor(private http:HttpClient, 
     public toastController:ToastController,
     public loadingCtrl:LoadingController) { }
