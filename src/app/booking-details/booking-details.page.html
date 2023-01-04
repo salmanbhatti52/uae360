@@ -1,13 +1,12 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="bgtoolbar">
     <div class="header">
-      <!-- <ion-menu-button class="menuicon"></ion-menu-button> -->
       <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
       <div class="title">Bookings</div>
     </div>
    
   </ion-toolbar>
-  <div class="btns_bg_css" >
+  <div class="btns_bg_css">
     <ion-button class="tab_button" [class.tab_active]="previous_tab=='true'" >Previous</ion-button>
     <ion-button class="tab_button" [class.tab_active]="upcoming_tab=='true'" >Upcoming</ion-button>
   </div>
@@ -19,57 +18,56 @@
     <div *ngIf="previous_tab=='true'" >
      
       <div >
-        <div style="text-align: center; margin-top: 16px; position: relative;" >
-          <img style="object-fit: cover;width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;" src="{{api.imageUrlString}}{{bookingRecordData.cars_details[0].image1}}" alt="">
+        <div class="car_card" >
+          <img class="car_image" src="{{api.imageUrlString}}{{bookingRecordData.cars_details[0].image1}}" alt="">
           <div *ngIf="bookingRecordData.user_favourite_cars.length != 0">
-            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status != 'liked'">
-            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status == 'liked'">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status != 'liked'">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status == 'liked'">
           </div>
           <div *ngIf="bookingRecordData.user_favourite_cars.length == 0">
-            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites != 'liked'">
-            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites != 'liked'">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
           </div>
           <div class="rebook_label poppins" (click)="startCarBooking()">Rebook</div>
           <div class="status_label poppins" >{{bookingRecordData.status}}</div>
           <div class="car_info_box" >
             <div>
               <div class="car_name poppins">{{bookingRecordData.cars_details[0].vehical_name}}</div>
-              <!-- (click)="openModal()" -->
-              <div style="text-align: left;line-height: 1;" >
+              <div class="left_subdiv">
                 <span *ngIf="bookingRecordData.cars_details[0].rating == 0">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin"  src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin"  src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin"  src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin"  src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin"  src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="bookingRecordData.cars_details[0].rating >=1 && bookingRecordData.cars_details[0].rating < 1.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="bookingRecordData.cars_details[0].rating >=1.5 && bookingRecordData.cars_details[0].rating < 2.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="bookingRecordData.cars_details[0].rating >=2.5 && bookingRecordData.cars_details[0].rating < 3.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="bookingRecordData.cars_details[0].rating >=3.5 && bookingRecordData.cars_details[0].rating < 4.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="bookingRecordData.cars_details[0].rating >=4.5 && bookingRecordData.cars_details[0].rating < 5.1">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
@@ -78,7 +76,7 @@
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                 </span>
-                <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;" *ngIf="bookingRecordData.cars_details[0].rating == 0">not rated yet</span>
+                <span class="rating_value urbanist" style="color:#FFDF00;text-decoration: underline;" *ngIf="bookingRecordData.cars_details[0].rating == 0">not rated yet</span>
                 <span class="rating_value urbanist" *ngIf="bookingRecordData.cars_details[0].rating != 0">({{bookingRecordData.cars_details[0].rating}})</span>
               </div>
             </div>
@@ -128,34 +126,73 @@
       
           
           <!-- --------------------design object for advertisement---------------- -->
-          <div class="box_heading" style="color: #0F172A;margin-top: 11px;">You might like this too!</div>
-          <div style="text-align: center; margin-top: 13px; position: relative; ">
-            <img style="width: 100%;" src="assets/images/bookings_car2.svg" alt="">
-            <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-            <!-- <div class="rebook_label urbanist" >Rebook</div> -->
-            <!-- (click)="startCarBooking()" -->
-            <!-- <div class="status_label poppins" >Accepted</div> -->
-            <div class="car_info_box" style="position: absolute;">
-              <div>
-                <div class="car_name urbanist">BMW 2 series</div>
-                <div style="text-align: left;line-height: 1;">
-                  <span>
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  </span>
-                  <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;">not rated yet</span>
+          <div *ngIf="this.selectedCar !== undefined">
+            <div class="box_heading mrg_tp" >You might like this too!</div>
+            <div class="car_card" style="margin-top: 13px;">
+              <img class="car_image"  src="{{api.imageUrlString}}{{selectedCar.image1}}" alt="">
+              <img class="heart_icon"  src="assets/images/icons/heart.svg" alt="" *ngIf="selectedCar.favourite_status != 'liked'" (click)="updateFavoriteStatus2(selectedCar.car_id)">
+              <img class="heart_icon"  src="assets/images/icons/red_heart.svg" alt="" *ngIf="selectedCar.favourite_status == 'liked'" (click)="updateFavoriteStatus2(selectedCar.car_id)">
+              <div class="rebook_label urbanist" (click)="startCarBooking2()">Book</div>
+              <div class="car_info_box" >
+                <div>
+                  <div class="car_name urbanist">{{selectedCar.vehical_name}}</div>
+                  
+                  <div class="left_subdiv" >
+                    <span *ngIf="selectedCar.rating == 0">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="selectedCar.rating >=1 && selectedCar.rating < 1.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="selectedCar.rating >=1.5 && selectedCar.rating < 2.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="selectedCar.rating >=2.5 && selectedCar.rating < 3.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="selectedCar.rating >=3.5 && selectedCar.rating < 4.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="selectedCar.rating >=4.5 && selectedCar.rating < 5.1">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                    </span>
+                    <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;" *ngIf="selectedCar.rating == 0">not rated yet</span>
+                    <span class="rating_value urbanist" *ngIf="selectedCar.rating != 0">({{selectedCar.rating}})</span>
+                  </div>
                 </div>
+                <div class="car2_info_subdiv">
+                  <div style="line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">{{selectedCar.rent_cost_day}}</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+                  
+                </div>
+                
               </div>
-              <div class="car2_info_subdiv">
-                <div style="line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
-                <!-- <div><img src="assets/images/icons/drop_down_arrow.svg" alt=""></div> -->
-              </div>
-              
             </div>
           </div>
+          
         </div>
         <!-- ---------------------------detailse end---------------------- -->
       </div>
@@ -164,15 +201,15 @@
     <div *ngIf="upcoming_tab=='true'" >
       
       <div >
-        <div style="text-align: center; margin-top: 16px; position: relative;" >
-          <img style="object-fit: cover;width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;" src="{{api.imageUrlString}}{{bookingRecordData.cars_details[0].image1}}" alt="">
+        <div class="car_card" >
+          <img class="car_image" src="{{api.imageUrlString}}{{bookingRecordData.cars_details[0].image1}}" alt="">
           <div *ngIf="bookingRecordData.user_favourite_cars.length != 0">
-            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status != 'liked'">
-            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status == 'liked'">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status != 'liked'">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="bookingRecordData.user_favourite_cars[0].status == 'liked'">
           </div>
           <div *ngIf="bookingRecordData.user_favourite_cars.length == 0">
-            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites != 'liked'" >
-            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites != 'liked'" >
+            <img (click)="updateFavoriteStatus(bookingRecordData.car_id)" class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
           </div>
           
           <div class="rebook_label urbanist" style="background: #E23C3C;color: white;" (click)="openCancelBookingModal(bookingRecordData.booking_id)">Cancel</div>
@@ -180,41 +217,41 @@
           <div class="car_info_box" >
             <div>
               <div class="car_name urbanist">{{bookingRecordData.cars_details[0].vehical_name}}</div>
-              <div style="text-align: left;line-height: 1;">
+              <div class="left_subdiv">
                 <span *ngIf="bookingRecordData.cars_details[0].rating == 0">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="bookingRecordData.cars_details[0].rating >=1 && bookingRecordData.cars_details[0].rating < 1.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="bookingRecordData.cars_details[0].rating >=1.5 && bookingRecordData.cars_details[0].rating < 2.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="bookingRecordData.cars_details[0].rating >=2.5 && bookingRecordData.cars_details[0].rating < 3.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="bookingRecordData.cars_details[0].rating >=3.5 && bookingRecordData.cars_details[0].rating < 4.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="bookingRecordData.cars_details[0].rating >=4.5 && bookingRecordData.cars_details[0].rating < 5.1">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
@@ -234,15 +271,12 @@
         </div>
         <!-- -------------------------upcoming details------------------------------- -->
         <div >
-          <div style="display: flex;justify-content: space-between;height: 185px;">
+          <div class="upcoming_dt">
             <div class="box_styling" style="width: 55%;">
               <div class="box_heading">Owner's Details</div>
               <div class="box_sub_heading">About</div>
               <div class="box_description" style="max-height: 108px;">
                 {{bookingRecordData.users_company_details[0].about}}
-                <!-- Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since
-                the 1500s. -->
               </div>
             </div>
         
@@ -253,7 +287,7 @@
                 <div class="range_div">
                   <ion-range class="ion_range"></ion-range>
                 </div>
-                <div style="position: absolute; top: 14px; left: 23px;">
+                <div class="st_end_dts" >
                   <div>
                     <div style="display: flex;align-items: center;">
                       <div style="margin-right: 8px;">
@@ -284,34 +318,74 @@
           </div>
           
           <!-- ------------design object for advertisement--------------- -->
-          <div class="box_heading" style="color: #0F172A;margin-top: 11px;">You might like this too!</div>
-          <div style="text-align: center; margin-top: 13px; position: relative; ">
-            <img style="width: 100%;border-radius: 10px 10px 0px 0px;" src="assets/images/bookings_car2.svg" alt="">
-            <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-            <!-- (click)="openCancelBookingModal()" -->
-            <!-- <div class="rebook_label urbanist" style="background: #E23C3C;color: white;" >Cancel</div> -->
-            <!-- <div class="status_label poppins" >Accepted</div> -->
-            <div class="car_info_box" style="position: absolute;" >
-              <div>
-                <div class="car_name urbanist">BMW 2 series</div>
-                <div style="text-align: left;line-height: 1;">
-                  <span>
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                    <img class="star_margin" style="margin-right: 6.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  </span>
-                  <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;">not rated yet</span>
-                </div>
-              </div>
-              <div class="car2_info_subdiv">
-                <div style="line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">26</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
-                <!-- <div><img src="assets/images/icons/drop_down_arrow.svg" alt=""></div> -->
-              </div>
+          <div *ngIf="this.selectedCar !== undefined">
+            <div class="box_heading mrg_tp"  >You might like this too!</div>
+            <div class="car_card" >
+              <img class="car_image"  src="{{api.imageUrlString}}{{selectedCar.image1}}" alt="">
+              <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="selectedCar.favourite_status != 'liked'" (click)="updateFavoriteStatus2(selectedCar.car_id)">
+              <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="selectedCar.favourite_status == 'liked'" (click)="updateFavoriteStatus2(selectedCar.car_id)">
+              <div class="rebook_label urbanist" (click)="startCarBooking2()">Book</div>
               
+              <div class="car_info_box" >
+                <div>
+                  <div class="car_name urbanist">{{selectedCar.vehical_name}}</div>
+                  
+                  <div class="left_subdiv" >
+                    <span *ngIf="selectedCar.rating == 0">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="selectedCar.rating >=1 && selectedCar.rating < 1.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="selectedCar.rating >=1.5 && selectedCar.rating < 2.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="selectedCar.rating >=2.5 && selectedCar.rating < 3.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="selectedCar.rating >=3.5 && selectedCar.rating < 4.5">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                    </span>
+                    <span *ngIf="selectedCar.rating >=4.5 && selectedCar.rating < 5.1">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
+                    </span>
+                    <span class="rating_value urbanist" style="color: #FFDF00;text-decoration: underline;" *ngIf="selectedCar.rating == 0">not rated yet</span>
+                    <span class="rating_value urbanist" *ngIf="selectedCar.rating != 0">({{selectedCar.rating}})</span>
+                  </div>
+                </div>
+                <div class="car2_info_subdiv">
+                  <div style="line-height: 1;"><span class="car2_price urbanist" >$</span><span class="car2_price urbanist" style="font-size: 32px;margin-right: 8px;">{{selectedCar.rent_cost_day}}</span><span class="car2_price urbanist" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+                </div>
+                
+              </div>
+             
             </div>
           </div>
+          
         </div>
         <!-- -----------------details end--------------- -->
       </div>

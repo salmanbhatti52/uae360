@@ -75,16 +75,5 @@ export class NotificationsPage implements OnInit {
   favoriteTab(){
     this.router.navigate(['/favorites']);
   }
-  // homeTab(){
-  //   this.navCtrlr.navigateRoot('home-cars-after-login');
-  // }
-  // messagesTab(){
-  //   this.navCtrlr.navigateRoot('messages');
-  // }
-  // bookingTab(){
-  //   this.navCtrlr.navigateRoot('bookings');
-  // }
-  // favoriteTab(){
-  //   this.navCtrlr.navigateRoot('favorites');
-  // }
+  
 }

@@ -17,12 +17,12 @@
     <div class="cover" *ngIf="response == true">
       <div *ngIf="chatList != undefined">
         <div *ngFor="let chat of chatList">
-          <div  style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="startChat(chat.receiver_id,chat.company_name,chat.company_online)">
+          <div class="chat_list_div" (click)="startChat(chat.receiver_id,chat.company_name,chat.company_online)">
             <div style="display: flex;align-items: center;">
               <div style="position: relative; margin-right: 15px;">
                 <img class="company_profile" src="{{api.imageUrlString}}{{chat.company_logo}}" alt="">
-                <img style="position: absolute;bottom: 0px;left: 46px;" src="assets/images/icons/active1.svg" alt="" *ngIf="chat.company_online == 'Yes'">
-                <img style="position: absolute;bottom: 0px;left: 46px;" src="assets/images/icons/active2.svg" alt="" *ngIf="chat.company_online == 'No'">
+                <img class="status_icon" src="assets/images/icons/active1.svg" alt="" *ngIf="chat.company_online == 'Yes'">
+                <img class="status_icon" src="assets/images/icons/active2.svg" alt="" *ngIf="chat.company_online == 'No'">
               </div>
               <div>
                 <div class="name">{{chat.company_name}}</div>
@@ -43,84 +43,6 @@
         </div>
       </div>
       
-      
-      
-
-  
-      <!-- --------------------------------copy----------------------------- -->
-      
-      <!-- <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
-        <div style="display: flex;align-items: center;">
-          <div style="position: relative; margin-right: 15px;">
-            <img src="assets/images/message_profile_dummy2.svg" alt="">
-            <img style="position: absolute;bottom: 0px;left: 46px;" src="assets/images/icons/active2.svg" alt="">
-          </div>
-          <div>
-            <div class="name">Miss Mindy Kub</div>
-            <div class="last_message">Subject line comes here</div>
-          </div>
-        </div>
-        
-        <div class="message_time">
-          10 min ago
-        </div>
-      </div>
-      <hr> -->
-      <!-- --------------------------------copy----------------------------- -->
-      <!-- <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
-        <div style="display: flex;align-items: center;">
-          <div style="position: relative; margin-right: 15px;">
-            <img src="assets/images/message_profile_dummy3.svg" alt="">
-            <img style="position: absolute;bottom: 0px;left: 46px;" src="assets/images/icons/active3.svg" alt="">
-          </div>
-          <div>
-            <div class="name">Roxanne Nitzsche</div>
-            <div class="last_message">Subject line comes here</div>
-          </div>
-        </div>
-        
-        <div class="message_time">
-          10 min ago
-        </div>
-      </div>
-      <hr> -->
-      <!-- --------------------------------copy----------------------------- -->
-      <!-- <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
-        <div style="display: flex;align-items: center;">
-          <div style="position: relative; margin-right: 15px;">
-            <img src="assets/images/message_profile_dummy4.svg" alt="">
-            <img style="position: absolute;bottom: 0px;left: 46px;" src="assets/images/icons/active4.svg" alt="">
-          </div>
-          <div>
-            <div class="name">Deanna Stamm</div>
-            <div class="last_message">Subject line comes here</div>
-          </div>
-        </div>
-        
-        <div class="message_time">
-          10 min ago
-        </div>
-      </div>
-      <hr> -->
-      <!-- --------------------------------copy----------------------------- -->
-      <!-- <div style="display: flex;justify-content: space-between;padding: 0px 13px;" (click)="gotoMessageOwnerSide()">
-        <div style="display: flex;align-items: center;">
-          <div style="position: relative; margin-right: 15px;">
-            <img src="assets/images/message_profile_dummy5.svg" alt="">
-            <img style="position: absolute;bottom: 0px;left: 46px;" src="assets/images/icons/active5.svg" alt="">
-          </div>
-          <div>
-            <div class="name">Nettie Dicki V</div>
-            <div class="last_message">Subject line comes here</div>
-          </div>
-        </div>
-        
-        <div class="message_time">
-          10 min ago
-        </div>
-      </div>
-      <hr> -->
-      <!-- --------------------------------copy ----------------------------- -->
     </div>
     <div *ngIf="response == false" class="no_messages">
       No messages yet
@@ -136,7 +58,6 @@
       <ion-tab-button  style="background: white;" (click)="homeTab()">
         <img src="assets/images/tab_icons/home.svg" alt="">
         <ion-label class="btn_label">Home</ion-label>
-        <!-- <ion-badge>6</ion-badge> -->
       </ion-tab-button>
   
       <ion-tab-button  style="background: white;" (click)="messagesTab()">

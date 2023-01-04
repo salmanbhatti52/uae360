@@ -46,21 +46,7 @@ export class FavoritesPage implements OnInit {
       
     })
   }
-  // gotoNotifications(){
-  //   this.navCtrlr.navigateRoot('notifications');
-  // }
-  // homeTab(){
-  //   this.navCtrlr.navigateRoot('home-cars-after-login');
-  // }
-  // messagesTab(){
-  //   this.navCtrlr.navigateRoot('messages');
-  // }
-  // bookingTab(){
-  //   this.navCtrlr.navigateRoot('bookings');
-  // }
-  // favoriteTab(){
-  //   this.navCtrlr.navigateRoot('favorites');
-  // }
+  
   gotoNotifications(){
     this.router.navigate(['/notifications']);
   }
@@ -95,8 +81,6 @@ export class FavoritesPage implements OnInit {
 
   }
   getFavoriteCars(){
-    // this.favoriteCars = [];
-    // this.favorites = 0;
     let data = {
       user_id: this.checkUser.appUserId
     };

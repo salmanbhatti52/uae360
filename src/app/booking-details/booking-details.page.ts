@@ -44,7 +44,7 @@ export class BookingDetailsPage implements OnInit {
 
     console.log("api.allCars: ",this.api.allCars);
     
-    // this.previousTab('previous');
+    
     this.bookingRecordData = JSON.parse(this.activatedRoute.snapshot.params['data']) ;
     console.log('bookingRecordData: ',this.bookingRecordData);
     
@@ -55,7 +55,8 @@ export class BookingDetailsPage implements OnInit {
     this.carTerms.car_type = this.bookingRecordData.cars_details[0].car_type;
     this.carTerms.rent_cost_day = this.bookingRecordData.cars_details[0].rent_cost_day;
     this.carTerms.rent_cost_month = this.bookingRecordData.cars_details[0].rent_cost_month;
-    this.carTerms.favorite_status = this.bookingRecordData.user_favourite_cars[0].status;
+
+    // this.carTerms.favorite_status = this.bookingRecordData.user_favourite_cars[0].status;
     this.carTerms.company_name = this.bookingRecordData.users_company_details[0].company_name;
 
     console.log("Car Terms: ",this.carTerms);
@@ -63,13 +64,28 @@ export class BookingDetailsPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    console.log("Selected Car: ",this.selectedCar);
+    
     for(let i= 0; i<this.api.allCars.length ; i++){
-      // console.log(this.api.allCars[i]);
       if(this.carTerms.car_type == this.api.allCars[i].car_type){
+        //seperate same type cars
         this.sameTypeCars.push(this.api.allCars[i]);
       }
     }
+    console.log("sameTypeCars: ",this.sameTypeCars);
+    
+    if(this.sameTypeCars.length > 0){
+      let arrayLength = this.sameTypeCars.length
+      console.log("arrayLength: ",arrayLength);
+      
+      let randomValue = Math.floor(Math.random() * arrayLength)
+      console.log("randomValue: ",randomValue);
+      this.selectedCar = this.sameTypeCars[randomValue];
+      console.log("Selected Car: ",this.selectedCar);
+      
+    }
   }
+
 
   goBack(){
     this.location.back();
@@ -89,6 +105,7 @@ export class BookingDetailsPage implements OnInit {
       console.log(data);
     }
   }
+  
   async openCancelBookingModal(bookingId){
     console.log(format(parseISO(new Date(this.bookingRecordData.start_date).toISOString()),'yyyy-MM-dd'));
      
@@ -134,8 +151,17 @@ export class BookingDetailsPage implements OnInit {
       this.api.hideLoading();
       console.log("Response: ",res);
       if(res.status == 'success'){
-        this.favorites = res.data;
-        this.bookingRecordData.user_favourite_cars.length = 0;
+        if(this.bookingRecordData.car_id == this.selectedCar.car_id){
+          this.favorites = res.data;
+          this.bookingRecordData.user_favourite_cars.length = 0;
+          this.selectedCar.favourite_status = res.data;
+          
+        }else{
+          
+          this.favorites = res.data;
+          this.bookingRecordData.user_favourite_cars.length = 0;
+        }
+        
       }else if(res.status == 'error'){
         this.api.presentToast(res.message);
       }else{
@@ -146,6 +172,7 @@ export class BookingDetailsPage implements OnInit {
       this.api.hideLoading();
     })
   }
+
   homeTab(){
     this.navCtrlr.navigateRoot('home-cars-after-login');
   }
@@ -158,19 +185,6 @@ export class BookingDetailsPage implements OnInit {
   favoriteTab(){
     this.navCtrlr.navigateRoot('favorites');
   }
-
-  // showDetails(data){
-  //   console.log(data);
-
-  //   if( this.selectedid == data.car_id)
-  //   {
-  //     this.selectedid = 0
-  //   }else{
-  //     this.selectedid = data.car_id
-
-  //   }
-    
-  // }
 
   startCarBooking(){
     let carData  = {
@@ -187,7 +201,7 @@ export class BookingDetailsPage implements OnInit {
       favourite_status: this.bookingRecordData.user_favourite_cars[0].status,
       image1: this.bookingRecordData.cars_details[0].image1,
       rating: this.bookingRecordData.cars_details[0].rating,
-      total_trips: '221',
+      total_bookings: this.bookingRecordData.total_bookings,
     }
     let carDataById = [];
     carDataById[0] = carData;
@@ -195,6 +209,60 @@ export class BookingDetailsPage implements OnInit {
     this.api.carDataById = carDataById;
     
     this.navCtrlr.navigateForward('car-booking');
+  }
+
+  startCarBooking2(){
+    let carData  = {
+      car_id: this.selectedCar.car_id,
+      rent_cost_day: this.selectedCar.rent_cost_day,
+      rent_cost_month: this.selectedCar.rent_cost_month,
+      vehical_name: this.selectedCar.vehical_name,
+      users_company: [
+        {
+          company_location: this.selectedCar.users_company[0].company_location
+        }
+      ]
+      ,
+      favourite_status: this.selectedCar.favourite_status,
+      image1: this.selectedCar.image1,
+      rating: this.selectedCar.rating,
+      total_bookings: this.selectedCar.total_bookings,
+    }
+    let carDataById = [];
+    carDataById[0] = carData;
+    console.log("CAR DATA BY ID ARRAY: ",carDataById);
+    this.api.carDataById = carDataById;
+    
+    this.navCtrlr.navigateForward('car-booking');
+  }
+
+  updateFavoriteStatus2(carId){
+    let data = {
+      favourite_car_id:carId,
+      user_id:this.checkUser.appUserId
+    };
+    this.api.showLoading();
+    this.api.sendRequest('favouriteCars',data).subscribe((res:any)=>{
+      this.api.hideLoading();
+      console.log("Response: ",res);
+      if(res.status == 'success'){
+        if(this.bookingRecordData.car_id == carId){
+          this.selectedCar.favourite_status= res.data;
+          this.bookingRecordData.user_favourite_cars.length = 0;
+          this.favorites = res.data;
+        }else{
+          this.selectedCar.favourite_status= res.data;
+        }
+        
+      }else if(res.status == 'error'){
+        this.api.presentToast(res.message);
+      }else{
+
+      }
+    },(err)=>{
+      console.log("Error: ",err);
+      this.api.hideLoading();
+    })
   }
 
 }

@@ -15,37 +15,37 @@
     <div *ngFor="let data of carData">
       <swiper [pagination]="true" [config]="{ intialSlide: 0, speed: 400, slidesPerView:1 }">
         <ng-template swiperSlide>
-          <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-            <img (click)="makefavorite()" style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
-            <img (click)="makefavorite()" style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+          <div class="car_slide" >
+            <img (click)="makefavorite()" class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+            <img (click)="makefavorite()" class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image1}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
-          <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+          <div class="car_slide" >
+            <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+            <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image2}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
-          <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+          <div class="car_slide" >
+            <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+            <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image3}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
-          <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+          <div class="car_slide" >
+            <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+            <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image4}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
-          <div style="display: flex;justify-content: center;width: 100%; position: relative;">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
-            <img style="position: absolute;right: 5%;top: 8%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+          <div class="car_slide" >
+            <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+            <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image5}}" alt="">
           </div>
         </ng-template>
@@ -101,39 +101,39 @@
             <span class="box_heading" style="margin-right: 10px;">Ratings</span>
             
             <span *ngIf="data.rating == 0 ">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span *ngIf="data.rating >=1 && data.rating < 1.5">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span *ngIf="data.rating >=1.5 && data.rating < 2.5">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span *ngIf="data.rating >=2.5 && data.rating < 3.5">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span *ngIf="data.rating >=3.5 && data.rating < 4.5">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span *ngIf="data.rating >=4.5 && data.rating < 5.1">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">

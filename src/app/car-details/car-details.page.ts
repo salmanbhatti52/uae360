@@ -86,11 +86,9 @@ export class CarDetailsPage implements OnInit {
         if(res.status == 'success'){
           this.favorites = res.data
           this.getCarDataById();
+        }else if(res.status == 'error'){
+          
         }
-        
-        // else if(res.status == 'error'){
-        //   this.api.presentToast()
-        // }
         
       },(err)=>{
         this.api.hideLoading();
@@ -112,10 +110,6 @@ export class CarDetailsPage implements OnInit {
       console.log('api response:',res);
       if(res.status == 'success'){
         this.api.carDataById = res.data;
-        // if(!res.data.favourite_status){
-        //   console.log("Favorite status not found");
-        //   this.api.favorite_status = false;
-        // }
         console.log('carDataById:',this.api.carDataById);
         
       }
@@ -135,7 +129,7 @@ export class CarDetailsPage implements OnInit {
     if(this.checkUser.appUserId == null){
       this.navCtrlr.navigateForward('sign-in');
     }else if(this.checkUser.appUserId != null){
-      // this.router.navigate
+
       this.navCtrlr.navigateForward('ratings');
 
     }else{
@@ -167,13 +161,6 @@ export class CarDetailsPage implements OnInit {
           this.api.companyId = this.company_id;
           console.log("this.api.companyId: ",this.api.companyId);
           
-          // console.log();
-          // let chat_ids = {
-          //   user_id: this.checkUser.appUserId,
-          //   company_id: this.company_id
-          // }
-          // this.api.chat_ids.user_id = this.checkUser.appUserId;
-          // this.api.chat_ids.company_id = this.company_id;
           this.navCtrlr.navigateForward(['/message-owner-side',{
             company_id: this.company_id,
             company_name: this.company_name 

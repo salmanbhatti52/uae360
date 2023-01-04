@@ -39,12 +39,28 @@ ion-footer{
 .wrapper{
     padding:5px 16px 20px;
 }
+.car_card{
+    text-align: center;
+    margin-top: 16px;
+    position: relative;
+}
+.heart_icon{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+.car_image{
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px 10px 0px 0px;
+}
 .btns_bg_css{
     display: flex;
     justify-content: space-between;
-    padding: 15px 16px 5px;
+    padding: 15px 16px 10px;
 }
-.tab_button.md{
+.tab_button{
     font-family: "Urbanist", sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -54,34 +70,14 @@ ion-footer{
     width: 48%;
     margin: 0px;
     text-transform: capitalize;
-    --box-shadow: !important;
+    --box-shadow: none;
     --border-color: #D4DCE1;
     --border-width: 1.5px;
     --border-style: solid;
     --border-radius: 10px !important;
 }
-.tab_active.md{
-    --background:#8000FF;
-    font-weight: 600;
-    --color: white;
-}
-.tab_button.ios{
-    font-family: "Urbanist", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    --color: #B0B0B0;
-    --background: #FBFBFB;
-    height: 48px;
-    width: 48%;
-    margin: 0px;
-    text-transform: capitalize;
-    --box-shadow: !important;
-    --border-color: #D4DCE1;
-    --border-width: 1.5px;
-    --border-style: solid;
-    --border-radius: 10px !important;
-}
-.tab_active.ios{
+
+.tab_active{
     --background:#8000FF;
     font-weight: 600;
     --color: white;
@@ -126,7 +122,16 @@ ion-footer{
     color: white;
 }
 .star_margin{
-    margin-right: 3px;
+    margin-right: 3.8px;
+}
+.left_subdiv{
+    text-align: left;
+    line-height: 1;
+}
+.upcoming_dt{
+    display: flex;
+    justify-content: space-between;
+    height: 185px;
 }
 .rebook_label{
     position: absolute;
@@ -138,6 +143,11 @@ ion-footer{
     font-size: 12px;
     font-weight: 400;
     color: #0F172A;
+}
+.st_end_dts{
+    position: absolute;
+    top: 14px;
+    left: 23px;
 }
 .status_label{
     position: absolute;
@@ -183,6 +193,10 @@ ion-footer{
     --knob-box-shadow: 0px 0px 2px 5px white;
     --knob-size: 11px;
     --bar-height: 1px;
+}
+.mrg_tp{
+    color: #0F172A;
+    margin-top: 11px;
 }
 .box_description{
     margin-top: 7px;

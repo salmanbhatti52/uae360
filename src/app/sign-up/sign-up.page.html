@@ -13,7 +13,7 @@
 
     <div class="profile_div">
       <img (click)="addProfile()" src="assets/images/icons/profile_logo.svg" alt="" *ngIf="profileImg === ''">
-      <img (click)="addProfile()" style="height: 100px;width: 100px; border-radius: 50%;" src="{{profileImg}}" alt="" *ngIf="profileImg !== ''">
+      <img (click)="addProfile()" class="profile_img" src="{{profileImg}}" alt="" *ngIf="profileImg !== ''">
     </div>
     <form [formGroup]="angForm" novalidate>
       <div>

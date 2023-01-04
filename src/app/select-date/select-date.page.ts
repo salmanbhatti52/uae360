@@ -41,8 +41,8 @@ export class SelectDatePage implements OnInit {
     
   // }
 
-  getStartHoures(){
-    console.log('getStartHoures',this.dateRange);
+  getStartHours(){
+    console.log('getStartHours',this.dateRange);
     if (true) {
 
      let sDate = format(parseISO(new Date(this.dateRange?.from).toISOString()),'yyyy-MM-dd');

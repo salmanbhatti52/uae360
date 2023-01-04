@@ -10,43 +10,7 @@ ion-footer{
     font-family: 'Poppins', sans-serif;
     background-color: #FBFBFB !important;
 }
-// =======search result cars css============================
-.car_info_box{
-    display: flex;
-    justify-content: space-between;
-    background: #0F172A;
-    border: 1px solid white;
-    border-radius: 0px 0px 10px 10px;
-    // position: absolute;
-    bottom: 0;
-    padding: 9px 12px 8.5px 16px;
-    width: 100%;
-}
-.car_name{
-    font-weight: 700;
-    font-size: 20px;
-    color: white;
-    line-height: 1;
-    text-align: left;
-}
-.start_margin{
-    margin-right: 3px;
-}
-.rating_value{
-    font-size: 12px;
-    color: #D4DCE1;
-    font-weight: 400;
-}
-.car2_price{
-    font-size: 11px;
-    font-weight: 600;
-    color: white;
-}
-.car2_info_subdiv{
-    display: flex;
-    align-items: center;
-}
-// ==================done===============================
+
 .bgtoolbar{
     --background: #FBFBFB;
 }
@@ -59,6 +23,9 @@ ion-footer{
     align-items: center;
     justify-content: space-between;
     padding: 30px 16px 0px;
+}
+.filter_div{
+    display: flex;padding-left: 13.5px;
 }
 .notifications{
     font-family: "Urbanist", sans-serif;
@@ -88,15 +55,7 @@ ion-footer{
 .wrapper{
     padding: 2px 16px 14px;
 }
-// .search_box{
-//     // display: flex;
-//     // align-items: center; 
-//     // background-color: white;
-//     // border-radius: 5px;
-//     // padding: 0px 20px;
-//     box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
-//     height: 40px;
-// }
+
 .input_field{
     --border-radius: 5px;
     --placeholder-opacity: none;
@@ -112,7 +71,7 @@ ion-footer{
     height: 40px;
     --cancel-button-color: #D4DCE1;
     --clear-button-color: #D4DCE1;
-    padding: 0px;
+    padding: 2px;
     --icon-color: #D4DCE1;
 }
 .our_items{
@@ -155,13 +114,6 @@ ion-footer{
     font-size: 10px;
     font-weight: 500;
 }
-// .categories{
-//     width: 18%;height: 100%;
-//     overflow-x: auto;
-//     white-space: nowrap;
-//     padding: 9px;
-//     padding: 9px 0px 9px 9px;
-// }
 
 .items_wrapper{
     padding-left: 16px;
@@ -212,7 +164,7 @@ ion-footer{
     color: black;
 }
 .star_margin{
-    margin-right: 3px;
+    margin-right: 3.8px;
 }
 .total_trips{
     font-family: 'Poppins', sans-serif;
@@ -221,6 +173,54 @@ ion-footer{
     color: #0F172A;
     text-align: left;
 }
+// =======search result cars css============================
+.car_info_box{
+    display: flex;
+    justify-content: space-between;
+    background: #0F172A;
+    border: 1px solid white;
+    border-radius: 0px 0px 10px 10px;
+    // position: absolute;
+    bottom: 0;
+    padding: 9px 12px 8.5px 16px;
+    width: 100%;
+}
+.car_name{
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+    line-height: 1;
+    text-align: left;
+}
+
+.rating_value{
+    font-size: 12px;
+    color: #D4DCE1;
+    font-weight: 400;
+}
+.car2_price{
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+}
+.car2_info_subdiv{
+    display: flex;
+    align-items: center;
+}
+.car_div{
+    text-align: center; margin-top: 13px; position: relative;
+}
+.car_image{
+    object-fit: cover;width: 100%;height: 200px; border-radius: 10px 10px 0px 0px;
+}
+.heart_icon{
+    position: absolute;right: 5%;top: 5%;
+}
+.left_subdiv{
+    text-align: left;line-height: 1;margin-top: 3px;
+}
+// ==================done===============================
+
 .invite_label{
     font-size: 14px;
     font-weight: 700;

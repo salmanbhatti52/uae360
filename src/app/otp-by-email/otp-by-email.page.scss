@@ -46,6 +46,9 @@ ion-footer{
     font-size: 16px;
     font-weight: 500;
 }
+.otp_div{
+    text-align: center; margin-top: 11px;padding-left: 16px;
+}
 .timer_box{
     background: rgba(255, 0, 0, 0.05);
     width: 240px;
@@ -64,9 +67,6 @@ ion-footer{
     align-items: center;
 }
 .timer_text{
-    // position: absolute;
-    // bottom: 13.5px;
-    // left: 42.5%;
     font-family: "Poppins", sans-serif;
     font-size: 16px;
     font-weight: 400;

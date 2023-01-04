@@ -135,8 +135,8 @@ let SelectDatePage = class SelectDatePage {
     //   console.log('hello');
     //   console.log(ev);
     // }
-    getStartHoures() {
-        console.log('getStartHoures', this.dateRange);
+    getStartHours() {
+        console.log('getStartHours', this.dateRange);
         if (true) {
             let sDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(new Date(this.dateRange?.from).toISOString()), 'yyyy-MM-dd');
             console.log('start date: ', sDate);
@@ -232,7 +232,7 @@ module.exports = "ion-content {\n  --background:#FBFBFB !important;\n}\n\n.wrapp
   \**************************************************************/
 /***/ ((module) => {
 
-module.exports = "\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"date_time_title\">Pick Start/End Dates</div>\n    <div class=\"date_time_box\">\n      <!-- <ion-datetime presentation=\"date\" (ionChange)=\"formattedString()\" size=\"cover\" [(ngModel)]=\"date\"></ion-datetime> -->\n      <ion-datetime  #datetime min=\"{{minDate}}\" max=\"2050\" (ionChange)=\"formattedString(datetime.value)\" presentation=\"date\" size=\"cover\" ></ion-datetime>\n      <!-- <ion-calendar       (click)=\"getStartHoures()\"    (onChange)=\"onChangeDate($event)\"\n      [(ngModel)]=\"dateRange\" [options]=\"optionsRange\" [type]=\"type\" [format]=\"'YYYY-MM-DD'\">\n      </ion-calendar> -->\n    </div>\n    <div *ngIf=\"matched==false\" style=\"height:28px\">\n      \n    </div>\n    <div *ngIf=\"matched==true\" class=\"booked_dates\" >\n      <span class=\"date_value\">Alert: </span>\n       This car is booked from\n       <div><span class=\"date_value\">{{bookedStDate}}</span> to <span class=\"date_value\">{{bookedEndDate}}</span>.</div> \n    </div>\n    <ion-button class=\"login_button\" (click)=\"done()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button>\n  </div>\n</ion-content>\n";
+module.exports = "\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"date_time_title\">Pick Start/End Dates</div>\n    <div class=\"date_time_box\">\n      <!-- <ion-datetime presentation=\"date\" (ionChange)=\"formattedString()\" size=\"cover\" [(ngModel)]=\"date\"></ion-datetime> -->\n      <ion-datetime  #datetime min=\"{{minDate}}\" max=\"2050\" (ionChange)=\"formattedString(datetime.value)\" presentation=\"date\" size=\"cover\" ></ion-datetime>\n      <!-- <ion-calendar       (click)=\"getStartHours()\"    (onChange)=\"onChangeDate($event)\"\n      [(ngModel)]=\"dateRange\" [options]=\"optionsRange\" [type]=\"type\" [format]=\"'YYYY-MM-DD'\">\n      </ion-calendar> -->\n    </div>\n    <div *ngIf=\"matched==false\" style=\"height:28px\">\n      \n    </div>\n    <div *ngIf=\"matched==true\" class=\"booked_dates\" >\n      <span class=\"date_value\">Alert: </span>\n       This car is booked from\n       <div><span class=\"date_value\">{{bookedStDate}}</span> to <span class=\"date_value\">{{bookedEndDate}}</span>.</div> \n    </div>\n    <ion-button class=\"login_button\" (click)=\"done()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button>\n  </div>\n</ion-content>\n";
 
 /***/ })
 

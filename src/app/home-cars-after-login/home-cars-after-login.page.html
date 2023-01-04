@@ -8,7 +8,7 @@
          <div class="notifications" *ngIf="totalNotifications > 0">{{totalNotifications}}</div>
          <img src="assets/images/icons/bell.svg" alt="">
        </div>
-       <div style="display: flex;padding-left: 13.5px;">
+       <div class="filter_div" >
          <img (click)="gotoFilter()" src="assets/images/icons/filter.svg" alt="">
        </div>
       </div>
@@ -27,50 +27,49 @@
 <ion-content>
   <div class="wrapper" *ngIf="result.length > 0">
     <div *ngFor="let res of result">
-      <div style="text-align: center; margin-top: 13px; position: relative;" (click)="gotoCarDetails(res.car_id)" >
-        <img style="object-fit: cover;width: 100%;height: 200px; border-radius: 10px 10px 0px 0px;" src="{{api.imageUrlString}}{{res.image1}}" alt="">
-        <!-- *ngIf="favorites == 'dislike'" -->
-        <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="res.favourite_status != 'liked'">
-        <!-- (click)="makeUnFavorite(favorite.car_id)" -->
-        <img  style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="res.favourite_status == 'liked'">
+      <div class="car_div" (click)="gotoCarDetails(res.car_id)" >
+        <img class="car_image" src="{{api.imageUrlString}}{{res.image1}}" alt="">
+        
+        <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="res.favourite_status != 'liked'">
+        <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="res.favourite_status == 'liked'">
         <div class="car_info_box" >
           <div>
             <div class="car_name poppins">{{res.vehical_name}}</div>
-            <div style="text-align: left;line-height: 1;margin-top: 3px;">
+            <div class="left_subdiv" >
               <span *ngIf="res.rating == 0 ">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
               </span>
               <span *ngIf="res.rating >=1 && res.rating < 1.5">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
               </span>
               <span *ngIf="res.rating >=1.5 && res.rating < 2.5">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
               </span>
               <span *ngIf="res.rating >=2.5 && res.rating < 3.5">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
               </span>
               <span *ngIf="res.rating >=3.5 && res.rating < 4.5">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
               </span>
               <span *ngIf="res.rating >=4.5 && res.rating < 5.1">
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
@@ -92,7 +91,7 @@
     
     
   </div>
-  <!-- <div *ngIf="result.length == 0">No Cars Found</div> -->
+  
   <div *ngIf="showContent == true">
     <div class="items_label">What are you looking for?</div>
     <div style="padding-left: 11px;" >
@@ -134,15 +133,11 @@
         </ng-template>
       </swiper>
     </div>
-    
-    <!-- <div class="items_box">
-    </div> -->
-
 
     <div class="items_wrapper">
       <div class="items_label" style="margin-top: 5px;padding-left: 3px;">Top Rented
       </div>
-      <!-- <div *ngIf="item1==true"> -->
+  
       <swiper [config]="{slidesPerView:1.4 ,spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false" >
         <ng-template swiperSlide *ngFor="let pickup of pickups;" style="width: 58%; height: 100%;">
           <ion-card class="card" (click)="gotoCarDetails(pickup.car_id)">
@@ -155,39 +150,39 @@
                 <div class="row_div">
                   <div>
                     <span *ngIf="pickup.rating == 0 ">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                     </span>
                     <span *ngIf="pickup.rating >=1 && pickup.rating < 1.5">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                     </span>
                     <span *ngIf="pickup.rating >=1.5 && pickup.rating < 2.5">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                     </span>
                     <span *ngIf="pickup.rating >=2.5 && pickup.rating < 3.5">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                     </span>
                     <span *ngIf="pickup.rating >=3.5 && pickup.rating < 4.5">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                      <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                      <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                     </span>
                     <span *ngIf="pickup.rating >=4.5 && pickup.rating < 5.1">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
@@ -196,11 +191,7 @@
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                       <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                     </span>
-                    <!-- <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                    <img class="star_margin" src="assets/images/icons/empty_star.svg" alt=""> -->
+                    
                   </div>
                   <div style="line-height: 1.2;">
                     <span class="price_span" style="font-size: 11px;">$</span>
@@ -219,38 +210,7 @@
         </ng-template>
         
       </swiper>
-      <!-- </div> -->
     
-      <!-- <ion-slides pager="false" [options]="slideOpts" style="padding-bottom: 1px;">
-      <ion-slide *ngFor="let pickup of pickups;" style="width: 48%; height: 100%;">
-        <ion-card class="card" (click)="gotoCarDetails()">
-          <img style="width: 100%;" src="{{pickup.img}}" alt="">
-          <div style="padding: 5px 7px 7.5px 8px;">
-            <div>
-              <div class="card_title">{{pickup.name}}</div>
-            </div>
-            <div class="card_content">
-              <div>
-                <div>
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
-                </div>
-                <div class="total_trips">{{pickup.total_trips}} trips</div>
-              </div>
-              <div>
-                <div style="line-height: 1.2;"><span class="price_span" style="font-size: 11px;">$</span><span class="price_span" style="font-size: 32px;">{{pickup.price}}</span> </div>
-                <div class="per_hour">Per Hour</div>
-              </div>
-            </div>
-          </div>
-          
-        </ion-card>
-      </ion-slide>
-      
-    </ion-slides> -->
     </div>
     
 

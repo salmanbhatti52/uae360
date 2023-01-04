@@ -29,24 +29,7 @@ export class SummaryPage implements OnInit {
     public checkUser:CheckUserService) { }
 
   ngOnInit() {
-    // this.carData = this.api.carDataById;
-    // this.bookingResponse = this.api.bookingResponse;
-    // if(this.bookingResponse !== undefined){
-    //   this.startDate = this.bookingResponse.start_date;
-    //   this.endDate = this.bookingResponse.end_date;
-    //   this.startTime = this.bookingResponse.start_time;
-    //   this.endTime = this.bookingResponse.end_time;
-    //   this.totalCost = this.bookingResponse.total_cost;
-    //   this.drivingLicense = this.bookingResponse.license_img;
-    //   this.getLocation = this.bookingResponse.location;
-    // }
-    // if (this.carData != undefined) {
-    //   for (let data of this.carData) {
-    //     this.vehicleName = data.vehical_name
-    //   }
-    // }
 
-    
   }
   ionViewWillEnter(){
     this.carData = this.api.carDataById;

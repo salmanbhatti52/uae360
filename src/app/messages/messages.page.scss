@@ -66,6 +66,12 @@ ion-footer{
     background: white;
     padding-bottom: 10px;
 }
+.chat_list_div{
+    display: flex;justify-content: space-between;padding: 0px 13px;
+}
+.status_icon{
+    position: absolute;bottom: 0px;left: 46px;
+}
 .name{
     font-family: 'Poppins',sans-serif;
     font-size: 15px;

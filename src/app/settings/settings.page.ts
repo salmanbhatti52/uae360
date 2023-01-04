@@ -21,18 +21,7 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
     
   }
-  // ionViewWillEnter(){
-  //   // this.toggleVal = Boolean(localStorage.getItem('notificationVal')) ;
-  // }
-  // toggleNotifications(){
-    // if(this.toggleVal == true){
-    //   this.toggleVal = false;
-    // }
-    // else{
-    //   this.toggleVal = true;
-    // }
-  // }
-
+  
   onChange(event){
     console.log("Event: ",event);
     console.log(event.detail.checked);

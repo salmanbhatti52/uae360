@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormGroup,Validators,FormBuilder,FormControl } from '@angular/forms';
-import { isPlatform, MenuController } from '@ionic/angular';
+import { isPlatform, MenuController, NavController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { CheckUserService } from '../check-user.service';
 import { AppComponent } from '../app.component';
@@ -41,7 +41,8 @@ export class SignInPage implements OnInit {
     public api:ApiService,
     public checkUser:CheckUserService,
     public appComponent:AppComponent,
-    public http:HttpClient) {
+    public http:HttpClient,
+    public navCtrl:NavController) {
       this.createForm();
    }
    createForm(){
@@ -56,19 +57,9 @@ export class SignInPage implements OnInit {
     console.log('oneSignalUserId: ',this.oneSignalUserId);
     
   }
-  // ionViewWillEnter(){
-  //   this.menuCtrl.enable(false);
-  // }
-  // ionViewWillLeave() {
-  //   // enable the root left menu when leaving this page
-  //   this.menuCtrl.enable(true);
-  // }
-  // ionViewWillEnter(){
-  //   this.menuCtrl.close();
-  // }
+  
   goBack(){
     this.location.back()
-    // this.router.navigate(['/home-before-login']);
   }
   toggleGetType(){
     if(this.getType == 'password'){
@@ -95,9 +86,6 @@ export class SignInPage implements OnInit {
   gotoHome(){
     this.activateEmailField = false;
     this.activatePasswordField = false;
-    
-    console.log(this.angForm.value.email);
-    console.log(this.angForm.value.password);
     
     let data = {
       email: this.angForm.value.email,
@@ -131,7 +119,7 @@ export class SignInPage implements OnInit {
         this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
 
         // =======done============
-        this.router.navigate(['/home-cars-after-login']);
+        this.navCtrl.navigateRoot('home-cars-after-login');
       }else if(res.status == 'error'){
         this.api.presentToast(res.message);
       }else{
@@ -180,8 +168,6 @@ export class SignInPage implements OnInit {
         
       })
     ));
-
-    // console.log("Result: ",result);
     
   }
 
@@ -247,8 +233,8 @@ export class SignInPage implements OnInit {
           this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
 
           // =======done============
-          this.router.navigate(['/home-cars-after-login']);
-        }
+        this.navCtrl.navigateRoot('home-cars-after-login');
+      }
         
       },(err)=>{
         this.api.hideLoading();
@@ -330,7 +316,7 @@ export class SignInPage implements OnInit {
         this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); 
 
         // =======done============
-        this.router.navigate(['/home-cars-after-login']);
+        this.navCtrl.navigateRoot('home-cars-after-login');
       }
       
     },(err)=>{

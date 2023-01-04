@@ -1,5 +1,4 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
-// import { NavController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { CheckUserService } from '../check-user.service';
@@ -20,13 +19,6 @@ export class BookingsPage implements OnInit {
   upcomingBookingRecords = [];
   response = 'true';
 
-  // previousBookingRecords = [];
-  // upcomingBookingRecords = [];
-  // response = 'true';
-  // segmentModel = "previous"
-  // previous_tab = 'true';
-  // upcoming_tab = 'false';
-
   constructor(
     public modalCtrlr:ModalController,
     public api:ApiService,
@@ -44,14 +36,7 @@ export class BookingsPage implements OnInit {
     }
    
   }
-  // ionViewWillEnter(){
-  //   this.getPreviousBookings()
-  //   this.getUpcomingBookings()
-  // }
-  // segmentChanged(event: any) {
-  //   console.log("rrr", this.segmentModel);
-  //   console.log("eee", event);
-  // }
+  
   previousTab(){
   
       this.previous_tab = 'true';
@@ -150,13 +135,7 @@ export class BookingsPage implements OnInit {
   }
 
   showDetails(data){
-    // if(this.segmentModel == "previous"){
-    //   this.previous_tab = "true"
-    //   this.upcoming_tab = "false"
-    // }else{
-    //   this.previous_tab = "false"
-    //   this.upcoming_tab = "true"
-    // }
+
     console.log(data);
     this.router.navigate(['/booking-details',{
       data: JSON.stringify(data) ,

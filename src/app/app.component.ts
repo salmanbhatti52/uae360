@@ -26,7 +26,7 @@ export class AppComponent {
   public navCtrl:NavController,
   public platform:Platform,
   public checkUser:CheckUserService,
-  public api:ApiService,
+  public api:ApiService
   )
   {
     this.initializeApp();
@@ -113,7 +113,8 @@ export class AppComponent {
     console.log(this.checkUser.appPages);
     this.appPages = this.checkUser.appPages;
     // ===================done==================================
-    this.navCtrl.navigateForward('home-before-login');
+    this.navCtrl.navigateRoot('home-before-login');
+
     this.closeMenu();
   }
   closeMenu(){

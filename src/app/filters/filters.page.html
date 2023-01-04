@@ -41,50 +41,49 @@
     </div>
     <div  *ngIf="result.length > 0">
       <div *ngFor="let res of result">
-        <div style="text-align: center; margin-top: 13px; position: relative;" (click)="gotoCarDetails(res.car_id)" >
-          <img style="object-fit: cover;width: 100%;height: 200px; border-radius: 10px 10px 0px 0px;" src="{{api.imageUrlString}}{{res.image1}}" alt="">
-          <!-- *ngIf="favorites == 'dislike'" -->
-          <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="res.favourite_status != 'liked'">
-          <!-- (click)="makeUnFavorite(favorite.car_id)" -->
-          <img  style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="res.favourite_status == 'liked'">
+        <div class="car_div" (click)="gotoCarDetails(res.car_id)" >
+          <img class="car_image" src="{{api.imageUrlString}}{{res.image1}}" alt="">
+          
+          <img class="heart_icon"  src="assets/images/icons/heart.svg" alt="" *ngIf="res.favourite_status != 'liked'">
+          <img class="heart_icon"  src="assets/images/icons/red_heart.svg" alt="" *ngIf="res.favourite_status == 'liked'">
           <div class="car_info_box" >
             <div>
               <div class="car_name poppins">{{res.vehical_name}}</div>
-              <div style="text-align: left;line-height: 1;margin-top: 3px;">
+              <div class="left_subdiv" >
                 <span *ngIf="res.rating == 0 ">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="res.rating >=1 && res.rating < 1.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="res.rating >=1.5 && res.rating < 2.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="res.rating >=2.5 && res.rating < 3.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="res.rating >=3.5 && res.rating < 4.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="res.rating >=4.5 && res.rating < 5.1">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">

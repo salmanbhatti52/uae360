@@ -9,50 +9,49 @@
 
 <ion-content>
   <div class="wrapper">
-    <div style="text-align: center; position: relative;" *ngFor="let data of carData">
-      <img style="object-fit: cover;width: 100%;height: 200px; border-radius: 10px 10px 0px 0px;" src="{{api.imageUrlString}}{{data.image1}}" alt="">
-      <!-- <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="">
-      <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt=""> -->
-      <img (click)="makefavorite()" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
-      <img (click)="makefavorite()" style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+    <div class="car_card" *ngFor="let data of carData">
+      <img class="car_image" src="{{api.imageUrlString}}{{data.image1}}" alt="">
+      
+      <img (click)="makefavorite()" class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
+      <img (click)="makefavorite()" class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
       <div class="car_info_box">
         <div>
           <div class="car_name urbanist">{{data.vehical_name}}</div>
-          <div style="text-align: left;line-height: 1;">
+          <div class="left_subdiv" >
             <span *ngIf="data.rating == 0 ">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span *ngIf="data.rating >=1 && data.rating < 1.5">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span *ngIf="data.rating >=1.5 && data.rating < 2.5">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span *ngIf="data.rating >=2.5 && data.rating < 3.5">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span *ngIf="data.rating >=3.5 && data.rating < 4.5">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-              <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+              <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
             </span>
             <span *ngIf="data.rating >=4.5 && data.rating < 5.1">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
@@ -61,7 +60,7 @@
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
             </span>
-            <span class="rating_value urbanist"> trips</span>
+            <span class="rating_value urbanist">{{data.total_bookings}} trips</span>
           </div>
         </div>
         <div class="car2_info_subdiv">
@@ -76,7 +75,7 @@
     </div>
     
     <div class="start_end_label" >Select Start/End Dates</div>
-    <!-- (click)="newDate($event)" -->
+    
     <ion-calendar style="margin-top: 5px;" (click)="getStartHours()" 
     [(ngModel)]="dateRange" [options]="optionsRange" [type]="type" [format]="'YYYY-MM-DD'">
     </ion-calendar>
@@ -84,16 +83,13 @@
     <div class="booked_dates" *ngIf="getDates==true">
       <div class="date_value"> Minimum trip duration is 1 day</div>
     </div>
-    <!-- <div *ngIf="startDateForSummary!=='' && endDateForSummary!==''">
-      <div>Start Date: <span style="color: green;">{{startDateForSummary}}</span></div> 
-      <div>End Date:  <span style="color: green;">{{endDateForSummary}}</span>  </div> 
-    </div> -->
+    
     <div class="booked_dates" *ngIf="matchedRangeSdate!=='' && matchedRangeEdate!==''">
       <div>
         Car is booked from <span class="date_value">{{matchedRangeSdate}}</span> to <span class="date_value">{{matchedRangeEdate}}</span>.
       </div>
     </div>
-    <div style="display: flex;justify-content: space-between;margin-top: 14px;">
+    <div class="dateTime_css" style="margin-top: 14px;">
       <div style="width: 48.5%;">
         <div class="date_time_label">Start Date</div>
         <div class="bookings_field" >
@@ -112,26 +108,8 @@
       </div>
 
     </div>
-    <!-- <div style="display: flex;justify-content: space-between;margin-top: 14px;">
-      <div style="width: 48.5%;">
-        <div class="date_time_label">Start Date</div>
-        <div class="bookings_field" (click)="openDateModal('startDate')">
-          <img style="margin-right: 10.4px;" src="assets/images/icons/calendar.svg" alt="">
-          <span class="field_text" *ngIf="startDate==undefined">05 Sep, 2022</span>
-          <span class="field_text" style="color: black;" *ngIf="startDate!=''">{{startDate}}</span>
-        </div>
-      </div>
-      <div style="width: 48.5%;">
-        <div class="date_time_label">End Date</div>
-        <div class="bookings_field" (click)="openDateModal('endDate')">
-          <img style="margin-right: 10.4px;" src="assets/images/icons/calendar.svg" alt="">
-          <span class="field_text" *ngIf="endDate==undefined">05 Sep, 2022</span>
-          <span class="field_text" style="color: black;" *ngIf="endDate!=''">{{endDate}}</span>
-        </div>
-      </div>
-
-    </div> -->
-    <div style="display: flex;justify-content: space-between;margin-top: 12px;">
+    
+    <div class="dateTime_css" style="margin-top: 12px;">
       <div style="width: 48.5%;">
         <div class="date_time_label">Start Time</div>
         <div class="bookings_field" (click)="openTimeModal('startTime')">

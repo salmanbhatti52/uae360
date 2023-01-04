@@ -1,10 +1,7 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
-      <ion-content style="--background: black !important; --padding: 60px 23px 40px;">
-        <!-- <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note> -->
+      <ion-content >
           <div>
             <img (click)="closeMenu()" src="assets/images/icons/cancel.svg" alt="">
           </div>
@@ -14,11 +11,11 @@
           <div *ngIf="checkUser.appUserId !== null && api.localUserData !== undefined " (click)="goForEditProfile()">
             <div class="profile_div">
               <img src="assets/images/sm_dummy_profile.svg" alt="" *ngIf="api.localUserData.profile_pic === '' ">
-              <img style="border-radius: 50px;height: 85px;width: 85px;" src="{{api.imageUrlString}}{{api.localUserData.profile_pic}}" alt="" *ngIf="api.localUserData.profile_pic !== '' && api.localUserData.account_type == 'SignupWithApp'">
-              <img style="border-radius: 50px;height: 85px;width: 85px;" src="{{api.localUserData.profile_pic}}" alt="" *ngIf="api.localUserData.profile_pic !== ''  && api.localUserData.account_type !== 'SignupWithApp'" >
+              <img class="profile_img" src="{{api.imageUrlString}}{{api.localUserData.profile_pic}}" alt="" *ngIf="api.localUserData.profile_pic !== '' && api.localUserData.account_type == 'SignupWithApp'">
+              <img class="profile_img" src="{{api.localUserData.profile_pic}}" alt="" *ngIf="api.localUserData.profile_pic !== ''  && api.localUserData.account_type !== 'SignupWithApp'" >
               <img class="edit_icon" src="assets/images/icons/sm_edit_icon.svg" alt="">
             </div>
-            <!-- <div class="user_name" *ngIf="api.googleSignInResponse">{{api.googleSignInResponse.displayName}}</div> -->
+            
             <div class="user_name" >{{api.localUserData.username}}</div>
             <div class="location_box">
               <img style="margin-right: 6.3px;" src="assets/images/icons/sm_location_icon.svg" alt="">
@@ -26,23 +23,7 @@
               <span class="location" *ngIf="api.localUserData.location === null">{{api.fetchLocation}}</span>
             </div>
           </div>
-          <!-- <div style="margin-top: 36px; text-align: center;">
-            <div class="select_language">Choose your language</div>
-            <div class="language_btns">
-              <ion-button style="--background: white; margin-right: 12px;">
-                <img src="assets/images/icons/language_blue.svg" alt="">
-                <span class="english_text">
-                  English
-                </span>
-              </ion-button>
-              <ion-button fill="outline" style="--border-color: #D4DCE1;">
-                <img src="assets/images/icons/language_white.svg" alt="">
-                <span class="arabic_text" style="color: #D4DCE1; font-size: 12px; margin-left: 5.5px;">
-                  العربی
-                </span> 
-              </ion-button>
-            </div>
-          </div> -->
+          
           <div style="height: 50px;"></div>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <div routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected" style="--background: black !important; text-align: center;">
@@ -56,16 +37,7 @@
               </div>
             </div>
           </ion-menu-toggle>
-        <!-- </ion-list> -->
-
-        <!-- <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
-        </ion-list> -->
+        
       </ion-content>
      
       <div style="padding: 20px 23px 30px;">

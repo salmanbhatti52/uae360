@@ -34,7 +34,6 @@ export class HomeBeforeLoginPage implements OnInit {
   rentCategories = [{category:'Day'},{category:'Month'}]
   categoryVal = 'Day';
   pickups = [];
-  // selectedCarID: any = 0;
 
   constructor(public router:Router,
     public api:ApiService,
@@ -61,8 +60,6 @@ export class HomeBeforeLoginPage implements OnInit {
     
   }
   handleChange(event){
-    // this.results = this.data.filter(d => d.toLowerCase().indexOf(query) > -1);
-    // console.log('query1: ',query1);
     
   }
   

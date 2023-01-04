@@ -27,31 +27,19 @@ export class MessageOwnerSidePage implements OnInit {
     public checkUser:CheckUserService,
     public router:Router,
     public acitvatedRoute:ActivatedRoute) { 
-      // in 3 seconds do something
-      // interval(3000).subscribe(x => {
-      //     // this.updateMessages();
-      //     // this.getMessages();
-      // });
 
-      // setTimeout(() => {
-      //   this.getMessages()
-      // },3000);
-
-      
-
-      
-    }
-    ionViewWillEnter(){
-      this.interval = setInterval(() => {
-        this.getMessagesAgain();
-      },3000);
-    }
-    ionViewWillLeave() {
-      clearInterval(this.interval);
-      console.log('leave view');
-    }
+  }
+  ionViewWillEnter(){
+    this.interval = setInterval(() => {
+      this.getMessagesAgain();
+    },3000);
+  }
+  ionViewWillLeave() {
+    clearInterval(this.interval);
+    console.log('leave view');
+  }
   ngOnInit() {
-    // this.chat_ids = this.api.chat_ids;
+    
     this.companyId = this.acitvatedRoute.snapshot.params['company_id'];
     console.log('companyId: ', this.companyId);
     this.companyName = this.acitvatedRoute.snapshot.params['company_name'];
@@ -66,10 +54,7 @@ export class MessageOwnerSidePage implements OnInit {
     this.content.scrollToBottom(0);
   }
   getMessages(){
-    // console.log("this.api.chat_ids",this.api.chat_ids);
-    // console.log("this.api.chat_ids.user_id",this.api.chat_ids.user_id);
-    // console.log("this.api.chat_ids.company_id",this.api.chat_ids.company_id);
-    // this.api.showLoading();
+    
     let data = {
       requestType:"getMessages",
       userId:this.checkUser.appUserId,
@@ -92,19 +77,16 @@ export class MessageOwnerSidePage implements OnInit {
     })
   }
   getMessagesAgain(){
-    // console.log("this.api.chat_ids",this.api.chat_ids);
-    // console.log("this.api.chat_ids.user_id",this.api.chat_ids.user_id);
-    // console.log("this.api.chat_ids.company_id",this.api.chat_ids.company_id);
-    // this.api.showLoading();
+    
     let data = {
       requestType:"getMessages",
       userId:this.checkUser.appUserId,
       otherUserId:this.companyId,
     }
     console.log('Data: ',data);
-    // this.api.showLoading();
+    
     this.api.sendRequest('Chat',data).subscribe((res:any)=>{
-      // this.api.hideLoading();
+      
       console.log("Response: ",res);
       if(res.status == 'success'){
         this.messages = res.data;
@@ -157,10 +139,6 @@ export class MessageOwnerSidePage implements OnInit {
       if(res.status == 'success'){
         console.log("Message updated.");
         this.callFunction();
-        // console.log("Message Array Length: ",this.messages.length);
-        // this.messages.push(res.data.unread_messages);
-        // // this.getMessages();
-        // console.log("Message Array Length: ",this.messages.length);
         
       }
     },(err)=>{
@@ -170,6 +148,5 @@ export class MessageOwnerSidePage implements OnInit {
   }
   goBack(){
     this.router.navigate(['/messages']);
-    // this.location.back();
   }
 }

@@ -35,6 +35,17 @@ ion-footer{
 .wrapper{
     padding:5px 16px 20px;    
 }
+.car_slide{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+.heart_icon{
+    position: absolute;
+    right: 5%;
+    top: 8%;
+}
 .car_image{
     width:100% !important;
     height: 188px !important;
@@ -121,7 +132,7 @@ ion-footer{
     justify-content: space-between;
 }
 .star_margin{
-    margin-right: 3px;
+    margin-right: 3.8px;
 }
 .trips_label{
     margin-left: 5px;

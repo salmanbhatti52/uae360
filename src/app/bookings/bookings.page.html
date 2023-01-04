@@ -6,7 +6,7 @@
     </div>
     
   </ion-toolbar>
-  <div style="display: flex;justify-content: space-between;padding: 15px 16px 5px;">
+  <div class="btn_bg_css" >
     <ion-button class="tab_button" [class.btn_active]="previous_tab=='true'" (click)="previousTab()">Previous</ion-button>
     <ion-button class="tab_button" [class.btn_active]="upcoming_tab=='true'" (click)="upcomingTab()">Upcoming</ion-button>
   </div>
@@ -19,16 +19,16 @@
      
       <div class="no_booking" *ngIf="response == 'false'">Bookings Unavailable  </div>
       <div *ngFor="let data of previousBookingRecords"> 
-        <div style="text-align: center;position: relative;margin-top: 16px;" (click)="showDetails(data)">
-          <img style="width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;object-fit: cover;" src="{{api.imageUrlString}}{{data.cars_details[0].image1}}" alt="">
+        <div class="car_card" (click)="showDetails(data)">
+          <img class="car_image" src="{{api.imageUrlString}}{{data.cars_details[0].image1}}" alt="">
           
           <div *ngIf="data.user_favourite_cars.length>0">
-            <img  style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="data.user_favourite_cars[0].status !='liked'">
-            <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="data.user_favourite_cars[0].status == 'liked'">
+            <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="data.user_favourite_cars[0].status !='liked'">
+            <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="data.user_favourite_cars[0].status == 'liked'">
           </div>
           
           <div *ngIf="data.user_favourite_cars.length==0">
-            <img  style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg">
+            <img class="heart_icon" src="assets/images/icons/heart.svg">
           </div>
          
           <div class="rebook_label poppins" >Rebook</div>
@@ -36,42 +36,42 @@
           <div class="car_info_box" >
             <div>
               <div class="car_name poppins">{{data.cars_details[0].vehical_name}}</div>
-              <!-- (click)="openModal()" -->
-              <div style="text-align: left;line-height: 1;" >
+              
+              <div class="left_subdiv" >
                 <span *ngIf="data.cars_details[0].rating == 0">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="data.cars_details[0].rating >=1 && data.cars_details[0].rating < 1.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="data.cars_details[0].rating >=1.5 && data.cars_details[0].rating < 2.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="data.cars_details[0].rating >=2.5 && data.cars_details[0].rating < 3.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="data.cars_details[0].rating >=3.5 && data.cars_details[0].rating < 4.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="data.cars_details[0].rating >=4.5 && data.cars_details[0].rating < 5.1">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
@@ -97,57 +97,57 @@
     <div *ngIf="upcoming_tab=='true'" >
       <div class="no_booking" *ngIf="response == 'false'">Bookings Unavailable</div>
       <div *ngFor="let data of upcomingBookingRecords">
-        <div style="text-align: center; position: relative;margin-top: 16px;" (click)="showDetails(data)">
-          <img style="width: 100%;height: 200px;border-radius: 10px 10px 0px 0px;object-fit: cover;" src="{{api.imageUrlString}}{{data.cars_details[0].image1}}" alt="">
-          <!-- (click)="updateFavoriteStatus(data.car_id)" -->
+        <div class="car_card"  (click)="showDetails(data)">
+          <img class="car_image" src="{{api.imageUrlString}}{{data.cars_details[0].image1}}" alt="">
+          
           <div *ngIf="data.user_favourite_cars.length>0">
-            <img  style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg" alt="" *ngIf="data.user_favourite_cars[0].status !='liked'">
-            <img style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/red_heart.svg" alt="" *ngIf="data.user_favourite_cars[0].status == 'liked'">
+            <img class="heart_icon"  src="assets/images/icons/heart.svg" alt="" *ngIf="data.user_favourite_cars[0].status !='liked'">
+            <img class="heart_icon"  src="assets/images/icons/red_heart.svg" alt="" *ngIf="data.user_favourite_cars[0].status == 'liked'">
           </div>
           <div *ngIf="data.user_favourite_cars.length==0">
-            <img  style="position: absolute;right: 5%;top: 5%;" src="assets/images/icons/heart.svg">
+            <img class="heart_icon"  src="assets/images/icons/heart.svg">
           </div>
-          <!-- (click)="openCancelBookingModal()" -->
+          
           <div class="rebook_label urbanist" style="background: #E23C3C;color: white;" >Cancel</div>
           <div class="status_label poppins" >{{data.status}}</div>
           <div class="car_info_box">
             <div>
               <div class="car_name urbanist">{{data.cars_details[0].vehical_name}}</div>
-              <div style="text-align: left;line-height: 1;">
+              <div class="left_subdiv" >
                 <span *ngIf="data.cars_details[0].rating == 0">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="data.cars_details[0].rating >=1 && data.cars_details[0].rating < 1.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="data.cars_details[0].rating >=1.5 && data.cars_details[0].rating < 2.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="data.cars_details[0].rating >=2.5 && data.cars_details[0].rating < 3.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="data.cars_details[0].rating >=3.5 && data.cars_details[0].rating < 4.5">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                  <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                 </span>
                 <span *ngIf="data.cars_details[0].rating >=4.5 && data.cars_details[0].rating < 5.1">
                   <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">

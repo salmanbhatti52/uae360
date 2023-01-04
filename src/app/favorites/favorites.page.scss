@@ -76,6 +76,20 @@ ion-footer{
 .wrapper{
     padding: 10px 16px 20px;
 }
+.car_div{
+    text-align: center; 
+    margin-top: 13px; 
+    position: relative;
+}
+.car_image{
+    object-fit: cover;
+    width: 100%;
+    height: 200px; 
+    border-radius: 10px 10px 0px 0px;
+}
+.heart_icon{
+    position: absolute;right: 5%;top: 5%;
+}
 .car_info_box{
     display: flex;
     justify-content: space-between;
@@ -95,7 +109,7 @@ ion-footer{
     text-align: left;
 }
 .star_margin{
-    margin-right: 3px;
+    margin-right: 3.8px;
 }
 .rating_value{
     font-size: 12px;

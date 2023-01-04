@@ -11,13 +11,13 @@
   <div class="wrapper">
     <div class="app_title">360UAE</div>
     
-    <div style="text-align: center;margin-top: 12px;">
+    <div class="otp_image" >
       <img src="assets/images/otp_logo.svg" alt="">
     </div>
     
     <div class="otp_info_label">Enter the 4 digit code that you received on your mobile number</div>
     
-    <div style="text-align: center; margin-top: 11px;padding-left: 16px;">
+    <div class="otp_val_div" >
       <ng-otp-input  (onInputChange)="onOtpChange($event)"   [config]="{length:4,allowNumbersOnly:true,placeholder:'0'}"></ng-otp-input>
     </div>
     

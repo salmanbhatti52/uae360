@@ -5,10 +5,9 @@
       <div class="title">Home</div>
       <div style="display: flex">
        <div class="bell_div" >
-         <!-- <div class="notifications" >{{totalNotifications}}</div> -->
          <img (click)="gotoSignIn()" src="assets/images/icons/bell.svg" alt="">
        </div>
-       <div style="display: flex;padding-left: 13.5px;">
+       <div class="filter_div" >
          <img (click)="gotoSignIn()" src="assets/images/icons/filter.svg" alt="">
        </div>
       </div>
@@ -81,39 +80,39 @@
                   <div class="row_div">
                     <div>
                       <span *ngIf="pickup.rating == 0 ">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                       </span>
                       <span *ngIf="pickup.rating >=1 && pickup.rating < 1.5">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                       </span>
                       <span *ngIf="pickup.rating >=1.5 && pickup.rating < 2.5">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                       </span>
                       <span *ngIf="pickup.rating >=2.5 && pickup.rating < 3.5">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                       </span>
                       <span *ngIf="pickup.rating >=3.5 && pickup.rating < 4.5">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                        <img class="star_margin" style="margin-right: 3.8px;" src="assets/images/icons/empty_star.svg" alt="">
+                        <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                       </span>
                       <span *ngIf="pickup.rating >=4.5 && pickup.rating < 5.1">
                         <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
@@ -126,8 +125,6 @@
                     <div style="line-height: 1.2;">
                       <span class="price_span" style="font-size: 11px;">$</span>
                       <span class="price_span" style="font-size: 32px;line-height: 0.8;" *ngIf="categoryVal=='Day'">{{pickup.rent_cost_day}}</span>
-                      <!-- <span class="price_span" style="font-size: 32px;" *ngIf="categoryVal=='Day'">{{pickup.rent_cost_day}}</span>
-                      <span class="price_span" style="font-size: 32px;" *ngIf="categoryVal=='Month'">{{pickup.rent_cost_month}}</span> -->
                     </div>
                     
                   </div>
@@ -137,15 +134,7 @@
                       <div style="text-align: right;">
                         <span class="price_label" style="margin-right: 5px;">Per Day</span>
                       </div>
-                      <!-- <div (click)="displayCategories(pickup.car_id)" style="display: flex;align-items: baseline;position: relative;justify-content: flex-end;">
-                      <span class="price_label" style="margin-right: 5px;">{{categoryVal}}</span> 
-                      <img [class.rotate_icon]="showCategories==true"  src="assets/images/icons/dropdown_icon.svg" alt="">
-                      <div  class="price_categories">
-                        <div *ngFor="let type of rentCategories" (click)="selectedCategory(type.category,pickup.car_id)">
-                          <span class="price_label" style="font-size: 12px; font-family: 'Poppins',sans-serif;">{{type.category}}</span>
-                        </div> 
-                      </div>
-                      </div> -->
+                      
                   </div>
                 </div>
               </div>

@@ -13,15 +13,12 @@ import { Router } from '@angular/router';
 })
 export class FiltersPage implements OnInit {
   lastEmittedValue: RangeValue;
-  // rentCostDayStart = 20;
-  // rentCostDayEnd = 200;
-  // rentCostMonthStart = 20;
-  // rentCostMonthEnd:any = 1000;
   rentCostDayStart:any;
   rentCostDayEnd:any;
   rentCostMonthStart:any;
   rentCostMonthEnd:any;
   result = [];
+  
   constructor(public location:Location,
     public navCtrlr:NavController,
     public checkUser:CheckUserService,
@@ -63,7 +60,6 @@ export class FiltersPage implements OnInit {
       console.log("rent_cost_day_end",this.rentCostDayEnd);
       console.log("rent_cost_month_start",this.rentCostMonthStart);
       console.log("rent_cost_month_end",this.rentCostMonthEnd);
-      // console.log();
       
       if(this.rentCostDayStart == undefined ){
         this.api.presentToast("Plz specify your range for day");
@@ -95,7 +91,7 @@ export class FiltersPage implements OnInit {
           
         })
       }
-      // this.navCtrlr.navigateRoot('home-cars-after-login');
+     
     }
     else{
       
@@ -103,7 +99,7 @@ export class FiltersPage implements OnInit {
     
   }
   gotoCarDetails(car_id){
-    // this.showContent = false;
+   
     let data = {
       car_id: car_id,
       user_id: this.checkUser.appUserId
@@ -114,10 +110,7 @@ export class FiltersPage implements OnInit {
       console.log('api response:',res);
       if(res.status == 'success'){
         this.api.carDataById = res.data;
-        // if(!res.data.favourite_status){
-        //   console.log("Favorite status not found");
-        //   this.api.favorite_status = false;
-        // }
+        
         console.log('carDataById:',this.api.carDataById);
         this.router.navigate(['/car-details']);
       }
@@ -128,16 +121,4 @@ export class FiltersPage implements OnInit {
       
     })
   }
-  // gotoHomeAfterLogin(){
-  //   if(this.checkUser.appUserId == null){
-  //     this.navCtrlr.navigateRoot('home-before-login');
-  //   }
-  //   else if(this.checkUser.appUserId != null){
-  //     this.navCtrlr.navigateRoot('home-cars-after-login');
-  //   }
-  //   else{
-      
-  //   }
-    
-  // }
 }

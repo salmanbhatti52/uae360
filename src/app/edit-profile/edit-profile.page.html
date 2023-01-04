@@ -10,10 +10,9 @@
 <ion-content>
   <div class="wrapper">
     <div class="profile_div">
-      <img   src="assets/images/dummy_profile.svg" alt="" *ngIf="userProfile === ''">
-      <img  style="height: 160px;width: 160px; border-radius: 50%;" src="{{userProfile}}" alt="" *ngIf="userProfile !== '' ">
-      <!-- <img  style="height: 160px;width: 160px; border-radius: 50%;" src="{{userProfile}}" alt="" *ngIf="userProfile !== '' && api.localUserData.account_type !== 'SignupWithApp'""> -->
-      <img class="edit_icon" (click)="addNewProfile()" src="../../assets/images/icons/edit_profile.svg" alt="">
+      <img src="assets/images/dummy_profile.svg" alt="" *ngIf="userProfile === ''">
+      <img class="profile_img" src="{{userProfile}}" alt="" *ngIf="userProfile !== '' ">
+      <img class="edit_icon" (click)="addNewProfile()" src="assets/images/icons/edit_profile.svg" alt="">
     </div>
     <form [formGroup]="angForm">
       <div style="padding-top: 25px;">
@@ -32,9 +31,6 @@
         <div class="input_label">Email</div>
         <ion-input type="email" formControlName="email" placeholder="rose.matthews@mail.com" [class.active_input]="email == true" (ionInput)="activate('email')"></ion-input>
         <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)">
-          <!-- <div *ngIf="angForm.controls['email'].errors.required" class="alert">
-            Email is required
-          </div> -->
           <div *ngIf="angForm.controls['email'].errors.pattern" class="alert">
             Email is invalid
           </div>

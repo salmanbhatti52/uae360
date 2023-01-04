@@ -35,6 +35,15 @@ ion-footer{
 .wrapper{
     padding:15px 16px 20px;
 }
+.company_side_msg{
+    display: flex; align-items: flex-start;padding-bottom: 14px;width: 85%;
+}
+.user_img{
+    height: 24px; width: 24px; border-radius: 50%;
+}
+.consumer_side_msg{
+    display: flex; justify-content: flex-end;padding-bottom: 14px; float: right;width: 85%;
+}
 .owner_message_box{
     position: relative;
     display: inline-block;
@@ -125,6 +134,9 @@ ion-footer{
     max-height: 100px;
     overflow: scroll;
     --padding-end: 10px;
+}
+.text_area_box{
+    display: flex;align-items: center;padding: 9px 16px 10px; box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
 }
 
   

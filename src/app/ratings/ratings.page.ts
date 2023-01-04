@@ -35,9 +35,7 @@ export class RatingsPage implements OnInit {
   goBack(){
     this.location.back();
   }
-  // gotoNotifications(){
-  //   this.router.navigate(['/notifications']);
-  // }
+  
   homeTab(){
     this.router.navigate(['/home-cars-after-login']);
   }
@@ -50,16 +48,5 @@ export class RatingsPage implements OnInit {
   favoriteTab(){
     this.router.navigate(['/favorites']);
   }
-  // homeTab(){
-  //   this.navCtrlr.navigateRoot('home-cars-after-login');
-  // }
-  // messagesTab(){
-  //   this.navCtrlr.navigateRoot('messages');
-  // }
-  // bookingTab(){
-  //   this.navCtrlr.navigateRoot('bookings');
-  // }
-  // favoriteTab(){
-  //   this.navCtrlr.navigateRoot('favorites');
-  // }
+  
 }

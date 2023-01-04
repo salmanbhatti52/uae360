@@ -20,7 +20,7 @@ export class CancelBookingPopupPage implements OnInit {
     
   }
   ngAfterViewInit(){
-    // console.log("BookingId: ",this.booking_id);
+    
   }
   justCloseModal(){
     return this.modalCtrlr.dismiss(null, 'closeModal');

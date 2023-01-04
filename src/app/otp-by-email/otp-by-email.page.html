@@ -14,7 +14,7 @@
 
     <div class="otp_info_label">Enter the 4 digit code that you received on your registered email address.</div>
 
-    <div style="text-align: center; margin-top: 11px;padding-left: 16px;">
+    <div class="otp_div" >
       <ng-otp-input  (onInputChange)="onOtpChange($event)"   [config]="{length:4,allowNumbersOnly:true,placeholder:'0'}"></ng-otp-input>
     </div>
     

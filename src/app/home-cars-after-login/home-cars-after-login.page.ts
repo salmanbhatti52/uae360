@@ -111,13 +111,13 @@ export class HomeCarsAfterLoginPage implements OnInit {
   handleChange(event){
     this.result = []
     console.log('Event: ',event);
-    // const query = event.detail.value.toLowerCase();
+    
     const query = event.target.value.toLowerCase();
     console.log('query: ',query);
 
     if(query == ''){
       this.showContent = true;
-      // this.api.presentToast('Keyword Required')
+      
     }
     if(query != ''){
       let data = {
@@ -147,31 +147,13 @@ export class HomeCarsAfterLoginPage implements OnInit {
       })
     }
     
-    // this.results = this.data.filter(d => d.toLowerCase().indexOf(query) > -1);
-    // console.log('query1: ',query1);
-    
   }
   
   clearResult(){
     this.result = []
     this.showContent = true;
   }
-  // checkAPI(){
-  //   let data = {
-  //     email: "ali12@gmail.com",
-  //     password: "1234",
-  //     account_type: "SignupWithApp",
-  //     // one_signal_id: localStorage.getItem("onesignaluserid"),
-  //     one_signal_id: "test",
-  //   };
-  //   this.api.sendRequest('signup',data).subscribe((res:any)=>{
-  //     console.log("Res Test: ",res);
-      
-  //   },(err)=>{
-  //     console.log("Error: ",err);
-      
-  //   });
-  // }
+  
 
   async fetchLocation(){
     const getCurrentLocation = await Geolocation.getCurrentPosition({
@@ -185,6 +167,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
     this.fetchAddress();
     
   }
+
   fetchAddress(){
     this.nativeGeoCoder.reverseGeocode(this.latitude,this.longitude,this.options)
     .then((result:NativeGeocoderResult[])=>{
@@ -197,6 +180,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
       
     });
   }
+
   getCarTypes(){
     this.api.showLoading();
     this.api.sendRequest('carType').subscribe((res:any)=>{
@@ -222,6 +206,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.api.hideLoading();
     })
   }
+
   getCars(){
     this.api.showLoading();
     let data = {
@@ -257,10 +242,6 @@ export class HomeCarsAfterLoginPage implements OnInit {
       console.log('api response:',res);
       if(res.status == 'success'){
         this.api.carDataById = res.data;
-        // if(!res.data.favourite_status){
-        //   console.log("Favorite status not found");
-        //   this.api.favorite_status = false;
-        // }
         console.log('carDataById:',this.api.carDataById);
         this.router.navigate(['/car-details']);
       }
@@ -271,6 +252,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
       
     })
   }
+
   selectItem(itemVal){
     if(itemVal == 'all'){
       this.item1 = true;
@@ -391,21 +373,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
       dialogTitle: 'Share with buddies',
     })
   }
-  // gotoNotifications(){
-  //   this.navCtrlr.navigateRoot('notifications');
-  // }
-  // homeTab(){
-  //   this.navCtrlr.navigateRoot('home-cars-after-login');
-  // }
-  // messagesTab(){
-  //   this.navCtrlr.navigateRoot('messages');
-  // }
-  // bookingTab(){
-  //   this.navCtrlr.navigateRoot('bookings');
-  // }
-  // favoriteTab(){
-  //   this.navCtrlr.navigateRoot('favorites');
-  // }
+  
   gotoNotifications(){
     this.router.navigate(['/notifications']);
   }

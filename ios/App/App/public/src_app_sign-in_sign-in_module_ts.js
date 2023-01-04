@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SignInPage = class SignInPage {
-  constructor(location, router, menuCtrl, fb, api, checkUser, appComponent, http) {
+  constructor(location, router, menuCtrl, fb, api, checkUser, appComponent, http, navCtrl) {
     this.location = location;
     this.router = router;
     this.menuCtrl = menuCtrl;
@@ -132,6 +132,7 @@ let SignInPage = class SignInPage {
     this.checkUser = checkUser;
     this.appComponent = appComponent;
     this.http = http;
+    this.navCtrl = navCtrl;
     this.showPassword = false;
     this.getType = 'password';
     this.activateEmailField = false;
@@ -157,20 +158,10 @@ let SignInPage = class SignInPage {
   ngOnInit() {
     this.oneSignalUserId = localStorage.getItem('oneSignalUserId');
     console.log('oneSignalUserId: ', this.oneSignalUserId);
-  } // ionViewWillEnter(){
-  //   this.menuCtrl.enable(false);
-  // }
-  // ionViewWillLeave() {
-  //   // enable the root left menu when leaving this page
-  //   this.menuCtrl.enable(true);
-  // }
-  // ionViewWillEnter(){
-  //   this.menuCtrl.close();
-  // }
-
+  }
 
   goBack() {
-    this.location.back(); // this.router.navigate(['/home-before-login']);
+    this.location.back();
   }
 
   toggleGetType() {
@@ -196,8 +187,6 @@ let SignInPage = class SignInPage {
   gotoHome() {
     this.activateEmailField = false;
     this.activatePasswordField = false;
-    console.log(this.angForm.value.email);
-    console.log(this.angForm.value.password);
     let data = {
       email: this.angForm.value.email,
       password: this.angForm.value.password
@@ -227,7 +216,7 @@ let SignInPage = class SignInPage {
         console.log(localStorage.getItem('appPagesAfterLogin'));
         this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); // =======done============
 
-        this.router.navigate(['/home-cars-after-login']);
+        this.navCtrl.navigateRoot('home-cars-after-login');
       } else if (res.status == 'error') {
         this.api.presentToast(res.message);
       } else {}
@@ -273,7 +262,7 @@ let SignInPage = class SignInPage {
         console.log("Error: ", err);
 
         _this.api.presentToast(err);
-      }); // console.log("Result: ",result);
+      });
     })();
   }
 
@@ -333,7 +322,7 @@ let SignInPage = class SignInPage {
           console.log(localStorage.getItem('appPagesAfterLogin'));
           this.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); // =======done============
 
-          this.router.navigate(['/home-cars-after-login']);
+          this.navCtrl.navigateRoot('home-cars-after-login');
         }
       }, err => {
         this.api.hideLoading();
@@ -418,7 +407,7 @@ let SignInPage = class SignInPage {
           console.log(localStorage.getItem('appPagesAfterLogin'));
           _this2.appComponent.appPages = JSON.parse(localStorage.getItem('appPagesAfterLogin')); // =======done============
 
-          _this2.router.navigate(['/home-cars-after-login']);
+          _this2.navCtrl.navigateRoot('home-cars-after-login');
         }
       }, err => {
         _this2.api.hideLoading();
@@ -448,6 +437,8 @@ SignInPage.ctorParameters = () => [{
   type: _app_component__WEBPACK_IMPORTED_MODULE_5__.AppComponent
 }, {
   type: _angular_common_http__WEBPACK_IMPORTED_MODULE_12__.HttpClient
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.NavController
 }];
 
 SignInPage = (0,tslib__WEBPACK_IMPORTED_MODULE_13__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_14__.Component)({

@@ -3,7 +3,6 @@ ion-menu{
 }
 ion-menu ion-content {
   --background: black !important;
-  // --background: var(--ion-item-background, var(--ion-background-color, #fff));
   padding: 60px 23px 40px !important;
 }
 ion-menu ion-footer{
@@ -139,6 +138,9 @@ ion-item.selected {
   font-size: 35px;
   font-weight: bold;
   color: white;
+}
+.profile_img{
+  border-radius: 50px;height: 85px;width: 85px;
 }
 .select_language{
   font-size: 14px;

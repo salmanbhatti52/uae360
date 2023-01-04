@@ -21,7 +21,7 @@
           <div style="margin-right: 18px;display: flex;">
             <img (click)="selectMethod('master')" src="assets/images/icons/marked.svg" alt="" *ngIf="master == true">
             <img (click)="selectMethod('master')" src="assets/images/icons/unmarked.svg" alt="" *ngIf="master != true">
-            <!-- <ion-checkbox  class="checkbox" checked="true"></ion-checkbox> -->
+            
           </div>
           <div>
             <div class="owner_name">Owner name</div>
@@ -38,7 +38,7 @@
           <div style="margin-right: 18px;display: flex;">
             <img (click)="selectMethod('visa')" src="assets/images/icons/marked.svg" alt="" *ngIf="visa == true">
             <img (click)="selectMethod('visa')" src="assets/images/icons/unmarked.svg" alt="" *ngIf="visa != true">
-            <!-- <ion-checkbox  class="checkbox" ></ion-checkbox> -->
+            
           </div>
           <div>
             <div class="owner_name">Owner name</div>
@@ -55,7 +55,7 @@
           <div style="margin-right: 18px;display: flex;">
             <img (click)="selectMethod('paypal')" src="assets/images/icons/marked.svg" alt="" *ngIf="paypal == true">
             <img (click)="selectMethod('paypal')" src="assets/images/icons/unmarked.svg" alt="" *ngIf="paypal != true">
-            <!-- <ion-checkbox  class="checkbox" ></ion-checkbox> -->
+            
           </div>
           <div>
             <div class="owner_name">PayPal</div>
@@ -67,14 +67,6 @@
         </div>
       </div>
 
-      <!-- <div>
-        <ion-button class="login_button" (click)="startPaymentProcess()">
-          <span class="btn_text">Pay</span>
-        </ion-button>
-        <ion-button class="login_button btn_border" style="--background:#FBFBFB; margin-top: 16px;" (click)="startPaymentProcess()">
-          <span class="btn_text " style="color: #0F172A;">Add New Payment Method</span>
-        </ion-button>
-      </div> -->
     </div>
   </div>
 </ion-content>
