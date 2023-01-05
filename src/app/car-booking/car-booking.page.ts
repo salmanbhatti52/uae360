@@ -92,6 +92,7 @@ export class CarBookingPage implements OnInit {
   olddateRange: any;
   oldDateRange: any;
   company_location: any;
+  break: boolean;
   constructor(public modalCtrlr: ModalController,
     public location: Location,
     public navCtrlr: NavController,
@@ -121,13 +122,16 @@ export class CarBookingPage implements OnInit {
     }
     this.getBooking();
   }
+
   ngOnInit() {
     
     this.loadFiles();
   }
+
   getStartHours(){
     console.log('getStartHours: ',this.dateRange);
     this.getDates = true;
+    
     
     if (this.dateRange !== undefined) {
       this.dates.start_date = '';
@@ -142,7 +146,7 @@ export class CarBookingPage implements OnInit {
       if(sDate === eDate){
         this.dateRange = undefined;
         this.dates = {start_date: '', end_date: ''};
-        this.getDates = true; 
+        // this.getDates = true; 
         this.startDate = undefined;
         this.endDate = undefined;
       }else if(sDate !== eDate){
@@ -157,6 +161,7 @@ export class CarBookingPage implements OnInit {
     }
     
   }
+
   // newDate(ev){
   //   console.log('event is: ssssss: ', ev);
   //   console.log('Date Range: ',this.dateRange);
@@ -206,6 +211,7 @@ export class CarBookingPage implements OnInit {
   //   }
   
   // }
+
   getBooking() {
     this.api.showLoading();
     let data = {
@@ -240,8 +246,9 @@ export class CarBookingPage implements OnInit {
             this.datesArray.push(stDate);
           }
         }
-
-        this.api.datesToDisable = this.datesArray;
+        // =================why api datesToDisable=====================
+        // this.api.datesToDisable = this.datesArray;
+        // ==============================================================
         this.api.hideLoading();
       } else if (res.status == 'error') {
         console.log('Error: ', res);
@@ -251,17 +258,19 @@ export class CarBookingPage implements OnInit {
       }
 
     }, (err) => {
-      console.log('error: ', err);
+      console.log('api error: ', err);
       this.api.hideLoading();
     });
 
   }
+
   checkDates(){
     this.userSelectedDates = [];
     this.matchedRangeSdate = '';
     this.matchedRangeEdate = '';
     this.startDateForSummary = '';
     this.endDateForSummary = '';
+    this.break = false;
     console.log('Dates: ',this.dates);
 
     let st_date = parseISO(new Date(this.dates.start_date).toISOString());
@@ -269,18 +278,23 @@ export class CarBookingPage implements OnInit {
     for (let stDate: any = st_date; stDate <= nd_date; stDate = addDays(stDate, 1)) {
       this.userSelectedDates.push(stDate);
     }
+
+    console.log('userSelectedDates: ',this.userSelectedDates);
     console.log('BookedDates: ',this.datesArray);
     
-    console.log('userSelectedDates: ',this.userSelectedDates);
     console.log('dbBookedDates: ',this.dbBookedDates);
+    
     for(let d of this.dbBookedDates){
+     
       for(let usd of this.userSelectedDates){
         const st_Date = parseISO(new Date(d.start_date).toISOString());
         const nd_Date = parseISO(new Date(d.end_date).toISOString());
-        for(let stDate:any = st_Date; stDate<=nd_Date; stDate = addDays(stDate,1)){
+        
+        for(let stDate:any = st_Date; stDate <= nd_Date; stDate = addDays(stDate,1)){
           let bookedDateDay = getDate(stDate);
-          let bookedDateMonth =  getMonth(stDate);
+          let bookedDateMonth = getMonth(stDate);
           bookedDateMonth++;
+
           let bookedDateYear =  getYear(stDate);
           
           let selectedDateDay = getDate(usd);
@@ -296,9 +310,13 @@ export class CarBookingPage implements OnInit {
             this.matchedRangeEdate = format(parseISO(new Date(d.end_date).toISOString()),'dd MMM, yyyy');
             console.log('MatchedRangeFormattedStDate: ',this.matchedRangeSdate);
             console.log('MatchedRangeFormattedEndDate: ',this.matchedRangeEdate);
+            this.break = true;
             break;
           }
+          
         }
+        if(this.break == true)
+          break;
       }
       
     }
@@ -328,9 +346,9 @@ export class CarBookingPage implements OnInit {
         this.favorites = res.data
         this.getCarDataById();
       }
-      // else if(res.status == 'error'){
-      //   this.api.presentToast()
-      // }
+      else if(res.status == 'error'){
+        
+      }
       
     },(err)=>{
       this.api.hideLoading();
@@ -365,6 +383,7 @@ export class CarBookingPage implements OnInit {
       
     })
   }
+
   async loadFiles() {
     this.image = [];
     this.api.showLoading();
@@ -409,9 +428,11 @@ export class CarBookingPage implements OnInit {
 
     }
   }
+
   goBack() {
     this.location.back();
   }
+
   // async openDateModal(dateVal) {
   //   const modal = await this.modalCtrlr.create({
   //     component: SelectDatePage,
@@ -468,6 +489,7 @@ export class CarBookingPage implements OnInit {
 
   //   }
   // }
+
   async openTimeModal(timeVal) {
     const modal = await this.modalCtrlr.create({
       component: SelectTimePage,
@@ -496,26 +518,6 @@ export class CarBookingPage implements OnInit {
   }
 
   async addLicense() {
-    // const alert  = await this.alertCtrlr.create({
-    //   header: 'Choose From',
-    //   buttons: [
-    //     {
-    //       text: 'Camera',
-    //       role: 'camera',
-    //       handler: ()=>{
-
-    //       },
-    //     },
-    //     {
-    //       text: 'Gallery',
-    //       role: 'upload',
-    //       handler: ()=>{
-
-    //      },
-    //     },
-    //   ],
-    // });
-    // await alert.present();
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
@@ -530,6 +532,7 @@ export class CarBookingPage implements OnInit {
       this.api.presentToast("Please add image in 'JPEG' format.");
     }
   }
+
   async readDir(photo: Photo) {
     await Filesystem.readdir({
       directory: Directory.Data,
@@ -557,6 +560,7 @@ export class CarBookingPage implements OnInit {
 
     });
   }
+
   async saveImage(photo: Photo) {
     let imageBase64 = await this.readAsBase64(photo);
 
@@ -643,16 +647,16 @@ export class CarBookingPage implements OnInit {
         start: new Date(stDateYear, stDateMonth , stDateDay, stDateGetHour, stDateGetMinute),
         end: new Date(endDateYear, endDateMonth, endDateDay, endDateGetHour, endDateGetMinute)
       })
-      console.log('Result: ',result);
+      console.log('Total_Minutes: ',result.length);
 
-      const hours_with_decimal = result.length / 60;
-      console.log('hours_with_decimal:',hours_with_decimal);
+      let hours_with_decimal = result.length / 60;
+      console.log('hours_without_rounding:',hours_with_decimal);
       
-      let hours_without_decimal = Math.trunc(hours_with_decimal);
-      console.log('hours_without_decimal: ',hours_without_decimal);
+       hours_with_decimal = Math.round((hours_with_decimal + Number.EPSILON) * 100) / 100;
+      console.log('hours_rounded: ',hours_with_decimal);
       
       // ===================== selected days ==================
-      let selectedDays_with_decimal = hours_without_decimal / 24;
+      let selectedDays_with_decimal = hours_with_decimal / 24;
       // selectedDays_with_decimal =  Math.round((selectedDays_with_decimal + Number.EPSILON) * 100) / 100;
       console.log('selectedDays_with_decimal: ', selectedDays_with_decimal);
       // =====================================================
@@ -660,17 +664,42 @@ export class CarBookingPage implements OnInit {
       // ============= total_cost based on (total hours) and (cost per day)=============
       let cost_per_hour = this.costPerDay / 24;
       console.log('cost_per_hour: ',cost_per_hour);
-      let t_cost = hours_without_decimal * cost_per_hour;
+      let t_cost = hours_with_decimal * cost_per_hour;
+      console.log("t_cost before round: ",t_cost);
+      
       t_cost =  Math.round((t_cost + Number.EPSILON) * 100) / 100
-      console.log('Total Cost: ',t_cost);
+    
+      this.totalCost = t_cost.toFixed(2);
+      console.log('Total Cost: ',this.totalCost);
       // =============================================================
       
-      if(selectedDays_with_decimal == 30 || selectedDays_with_decimal == 31){
-        this.totalCost = this.costPerMonth;
-        console.log('cost for month: ',this.totalCost);
+      if(selectedDays_with_decimal >= 30){
+       
+        let costPerDayMonthBase =  this.costPerMonth / 30;
+        console.log("costPerDayMonthBase_beforeRound: ",costPerDayMonthBase);
+        costPerDayMonthBase = Math.round((costPerDayMonthBase + Number.EPSILON) * 100) / 100
+        console.log("costPerDayMonthBase: ",costPerDayMonthBase);
+
+
+        let months = selectedDays_with_decimal / 30;
+        console.log('months_with_decimal:',months);
+        let months_without_decimal = Math.trunc(months);
+        console.log('months_without_decimal: ',months_without_decimal);
+
+        let daysMoreThanMonth = selectedDays_with_decimal % 30; 
+        console.log("daysMoreThanMonth_beforeRound: ",daysMoreThanMonth);
+        daysMoreThanMonth = Math.round((daysMoreThanMonth + Number.EPSILON) * 100) / 100
+        console.log("daysMoreThanMonth: ",daysMoreThanMonth);
+
+        let monthBaseCost =  months_without_decimal * this.costPerMonth
+        let dayBaseCost = daysMoreThanMonth * costPerDayMonthBase
+        let monthBaseTotalCost = monthBaseCost + dayBaseCost ;
+        this.totalCost =  monthBaseTotalCost.toFixed(2);
+        console.log("totalCostMonthBasis: ",this.totalCost);
         
+
       }else{  
-        this.totalCost = t_cost;
+
         console.log('cost for days and selected hours: ',this.totalCost);
       }
 

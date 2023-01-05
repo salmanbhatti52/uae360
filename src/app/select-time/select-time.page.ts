@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { format, getTime, parseISO } from 'date-fns';
 import { ModalController } from '@ionic/angular';
 import parse from 'date-fns/parse';
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-select-time',
   templateUrl: './select-time.page.html',
@@ -16,10 +17,10 @@ export class SelectTimePage implements OnInit {
     calendarDateTimeString: ''
   }
   // minTime = format(parseISO(new getTime().toISOString()),'')
-  constructor(public modalCtrlr:ModalController) { }
+  constructor(public modalCtrlr:ModalController,
+    public api:ApiService) { }
 
   ngOnInit() {
-    console.log(this.selectedTime);
     
   }
   formattedString(timeVal){
@@ -37,6 +38,9 @@ export class SelectTimePage implements OnInit {
     console.log(this.selectedTime);
     if(this.selectedTime != undefined){
       return this.modalCtrlr.dismiss(this.dates, 'timeSelected')
+    }
+    else{
+      this.api.presentToast("Plz select star/end time.")
     }
   }
 }

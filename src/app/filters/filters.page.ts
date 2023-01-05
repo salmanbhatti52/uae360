@@ -52,51 +52,40 @@ export class FiltersPage implements OnInit {
   }
   applyFilter(){
     this.result = [];
-    if(this.checkUser.appUserId == null){
-      this.navCtrlr.navigateForward('sign-in');
-    }
-    else if(this.checkUser.appUserId != null){
-      console.log("rent_cost_day_start",this.rentCostDayStart);
-      console.log("rent_cost_day_end",this.rentCostDayEnd);
-      console.log("rent_cost_month_start",this.rentCostMonthStart);
-      console.log("rent_cost_month_end",this.rentCostMonthEnd);
-      
-      if(this.rentCostDayStart == undefined ){
-        this.api.presentToast("Plz specify your range for day");
-      }else if(this.rentCostMonthStart == undefined){
-        this.api.presentToast("Plz specify your range for month");
-      }else{
-        let data = {
-          users_customers_id: this.checkUser.appUserId,
-          rent_cost_day_start: this.rentCostDayStart,
-          rent_cost_day_end: this.rentCostDayEnd,
-          rent_cost_month_start:this.rentCostMonthStart,
-          rent_cost_month_end:this.rentCostMonthEnd
-        };
-        this.api.showLoading();
-        this.api.sendRequest('getCarsByFilters',data).subscribe((res:any)=>{
-          this.api.hideLoading();
-          console.log('Response: ',res);
-          if(res.status == 'success'){
-            this.result = res.data;
-          }else if(res.status == 'error'){
-            if(res.message == 'Cars are empty.'){
-              this.api.presentToast('No car found in this range.')
-            }
-            
-          }
-        },(err)=>{
-          this.api.hideLoading();
-          console.log("API call Error: ",err);
-          
-        })
-      }
-     
-    }
-    else{
-      
-    }
     
+    console.log("rent_cost_day_start",this.rentCostDayStart);
+    console.log("rent_cost_day_end",this.rentCostDayEnd);
+    console.log("rent_cost_month_start",this.rentCostMonthStart);
+    console.log("rent_cost_month_end",this.rentCostMonthEnd);
+    
+    if(this.rentCostDayStart !== undefined || this.rentCostMonthStart !== undefined){
+      let data = {
+        users_customers_id: this.checkUser.appUserId,
+        rent_cost_day_start: this.rentCostDayStart,
+        rent_cost_day_end: this.rentCostDayEnd,
+        rent_cost_month_start:this.rentCostMonthStart,
+        rent_cost_month_end:this.rentCostMonthEnd
+      };
+      this.api.showLoading();
+      this.api.sendRequest('getCarsByFilters',data).subscribe((res:any)=>{
+        this.api.hideLoading();
+        console.log('Response: ',res);
+        if(res.status == 'success'){
+          this.result = res.data;
+        }else if(res.status == 'error'){
+          if(res.message == 'Cars are empty.'){
+            this.api.presentToast('No car found in this range.')
+          }
+          
+        }
+      },(err)=>{
+        this.api.hideLoading();
+        console.log("API call Error: ",err);
+        
+      })
+    }else{
+      this.api.presentToast("Plz specify your range for day or month");
+    }
   }
   gotoCarDetails(car_id){
    
