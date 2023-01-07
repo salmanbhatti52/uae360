@@ -238,13 +238,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SelectTimePage": () => (/* binding */ SelectTimePage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _select_time_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./select-time.page.html?ngResource */ 43602);
 /* harmony import */ var _select_time_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./select-time.page.scss?ngResource */ 90899);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ 86712);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ 86527);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ 86712);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ 86527);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ 5830);
+
 
 
 
@@ -253,8 +255,9 @@ __webpack_require__.r(__webpack_exports__);
 
 let SelectTimePage = class SelectTimePage {
     // minTime = format(parseISO(new getTime().toISOString()),'')
-    constructor(modalCtrlr) {
+    constructor(modalCtrlr, api) {
         this.modalCtrlr = modalCtrlr;
+        this.api = api;
         this.dates = {
             timeForUser: '',
             timeForDB: '',
@@ -262,14 +265,13 @@ let SelectTimePage = class SelectTimePage {
         };
     }
     ngOnInit() {
-        console.log(this.selectedTime);
     }
     formattedString(timeVal) {
         console.log("ionChangeTimeVal", timeVal);
         this.dates.calendarDateTimeString = timeVal;
         // console.log('calendarDateTimeString',this.dates.calendarDateTimeString);
-        this.selectedTime = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(timeVal), "hh:mm aaa");
-        this.selectedTimeForDb = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(timeVal), "HH:mm:ss");
+        this.selectedTime = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(timeVal), "hh:mm aaa");
+        this.selectedTimeForDb = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(timeVal), "HH:mm:ss");
         this.dates.timeForUser = this.selectedTime;
         this.dates.timeForDB = this.selectedTimeForDb;
     }
@@ -278,13 +280,17 @@ let SelectTimePage = class SelectTimePage {
         if (this.selectedTime != undefined) {
             return this.modalCtrlr.dismiss(this.dates, 'timeSelected');
         }
+        else {
+            this.api.presentToast("Plz select star/end time.");
+        }
     }
 };
 SelectTimePage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__.ApiService }
 ];
-SelectTimePage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+SelectTimePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-select-time',
         template: _select_time_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_select_time_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]

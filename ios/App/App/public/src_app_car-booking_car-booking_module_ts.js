@@ -234,8 +234,8 @@ let CarBookingPage = class CarBookingPage {
         this.dates = {
           start_date: '',
           end_date: ''
-        };
-        this.getDates = true;
+        }; // this.getDates = true; 
+
         this.startDate = undefined;
         this.endDate = undefined;
       } else if (sDate !== eDate) {
@@ -315,9 +315,11 @@ let CarBookingPage = class CarBookingPage {
           for (let stDate = st_date; stDate <= end_date; stDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_10__["default"])(stDate, 1)) {
             this.datesArray.push(stDate);
           }
-        }
+        } // =================why api datesToDisable=====================
+        // this.api.datesToDisable = this.datesArray;
+        // ==============================================================
 
-        this.api.datesToDisable = this.datesArray;
+
         this.api.hideLoading();
       } else if (res.status == 'error') {
         console.log('Error: ', res);
@@ -326,7 +328,7 @@ let CarBookingPage = class CarBookingPage {
         this.api.hideLoading();
       }
     }, err => {
-      console.log('error: ', err);
+      console.log('api error: ', err);
       this.api.hideLoading();
     });
   }
@@ -337,6 +339,7 @@ let CarBookingPage = class CarBookingPage {
     this.matchedRangeEdate = '';
     this.startDateForSummary = '';
     this.endDateForSummary = '';
+    this.break = false;
     console.log('Dates: ', this.dates);
     let st_date = (0,date_fns__WEBPACK_IMPORTED_MODULE_9__["default"])(new Date(this.dates.start_date).toISOString());
     let nd_date = (0,date_fns__WEBPACK_IMPORTED_MODULE_9__["default"])(new Date(this.dates.end_date).toISOString());
@@ -345,8 +348,8 @@ let CarBookingPage = class CarBookingPage {
       this.userSelectedDates.push(stDate);
     }
 
-    console.log('BookedDates: ', this.datesArray);
     console.log('userSelectedDates: ', this.userSelectedDates);
+    console.log('BookedDates: ', this.datesArray);
     console.log('dbBookedDates: ', this.dbBookedDates);
 
     for (let d of this.dbBookedDates) {
@@ -371,9 +374,12 @@ let CarBookingPage = class CarBookingPage {
             this.matchedRangeEdate = (0,date_fns__WEBPACK_IMPORTED_MODULE_8__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_9__["default"])(new Date(d.end_date).toISOString()), 'dd MMM, yyyy');
             console.log('MatchedRangeFormattedStDate: ', this.matchedRangeSdate);
             console.log('MatchedRangeFormattedEndDate: ', this.matchedRangeEdate);
+            this.break = true;
             break;
           }
         }
+
+        if (this.break == true) break;
       }
     }
 
@@ -400,10 +406,7 @@ let CarBookingPage = class CarBookingPage {
       if (res.status == 'success') {
         this.favorites = res.data;
         this.getCarDataById();
-      } // else if(res.status == 'error'){
-      //   this.api.presentToast()
-      // }
-
+      } else if (res.status == 'error') {}
     }, err => {
       this.api.hideLoading();
       console.log('Error', err);
@@ -571,24 +574,6 @@ let CarBookingPage = class CarBookingPage {
     var _this4 = this;
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      // const alert  = await this.alertCtrlr.create({
-      //   header: 'Choose From',
-      //   buttons: [
-      //     {
-      //       text: 'Camera',
-      //       role: 'camera',
-      //       handler: ()=>{
-      //       },
-      //     },
-      //     {
-      //       text: 'Gallery',
-      //       role: 'upload',
-      //       handler: ()=>{
-      //      },
-      //     },
-      //   ],
-      // });
-      // await alert.present();
       const image = yield _capacitor_camera__WEBPACK_IMPORTED_MODULE_5__.Camera.getPhoto({
         quality: 90,
         allowEditing: false,
@@ -716,28 +701,44 @@ let CarBookingPage = class CarBookingPage {
           start: new Date(stDateYear, stDateMonth, stDateDay, stDateGetHour, stDateGetMinute),
           end: new Date(endDateYear, endDateMonth, endDateDay, endDateGetHour, endDateGetMinute)
         });
-        console.log('Result: ', result);
-        const hours_with_decimal = result.length / 60;
-        console.log('hours_with_decimal:', hours_with_decimal);
-        let hours_without_decimal = Math.trunc(hours_with_decimal);
-        console.log('hours_without_decimal: ', hours_without_decimal); // ===================== selected days ==================
+        console.log('Total_Minutes: ', result.length);
+        let hours_with_decimal = result.length / 60;
+        console.log('hours_without_rounding:', hours_with_decimal);
+        hours_with_decimal = Math.round((hours_with_decimal + Number.EPSILON) * 100) / 100;
+        console.log('hours_rounded: ', hours_with_decimal); // ===================== selected days ==================
 
-        let selectedDays_with_decimal = hours_without_decimal / 24; // selectedDays_with_decimal =  Math.round((selectedDays_with_decimal + Number.EPSILON) * 100) / 100;
+        let selectedDays_with_decimal = hours_with_decimal / 24; // selectedDays_with_decimal =  Math.round((selectedDays_with_decimal + Number.EPSILON) * 100) / 100;
 
         console.log('selectedDays_with_decimal: ', selectedDays_with_decimal); // =====================================================
         // ============= total_cost based on (total hours) and (cost per day)=============
 
         let cost_per_hour = _this8.costPerDay / 24;
         console.log('cost_per_hour: ', cost_per_hour);
-        let t_cost = hours_without_decimal * cost_per_hour;
+        let t_cost = hours_with_decimal * cost_per_hour;
+        console.log("t_cost before round: ", t_cost);
         t_cost = Math.round((t_cost + Number.EPSILON) * 100) / 100;
-        console.log('Total Cost: ', t_cost); // =============================================================
+        _this8.totalCost = t_cost.toFixed(2);
+        console.log('Total Cost: ', _this8.totalCost); // =============================================================
 
-        if (selectedDays_with_decimal == 30 || selectedDays_with_decimal == 31) {
-          _this8.totalCost = _this8.costPerMonth;
-          console.log('cost for month: ', _this8.totalCost);
+        if (selectedDays_with_decimal >= 30) {
+          let costPerDayMonthBase = _this8.costPerMonth / 30;
+          console.log("costPerDayMonthBase_beforeRound: ", costPerDayMonthBase);
+          costPerDayMonthBase = Math.round((costPerDayMonthBase + Number.EPSILON) * 100) / 100;
+          console.log("costPerDayMonthBase: ", costPerDayMonthBase);
+          let months = selectedDays_with_decimal / 30;
+          console.log('months_with_decimal:', months);
+          let months_without_decimal = Math.trunc(months);
+          console.log('months_without_decimal: ', months_without_decimal);
+          let daysMoreThanMonth = selectedDays_with_decimal % 30;
+          console.log("daysMoreThanMonth_beforeRound: ", daysMoreThanMonth);
+          daysMoreThanMonth = Math.round((daysMoreThanMonth + Number.EPSILON) * 100) / 100;
+          console.log("daysMoreThanMonth: ", daysMoreThanMonth);
+          let monthBaseCost = months_without_decimal * _this8.costPerMonth;
+          let dayBaseCost = daysMoreThanMonth * costPerDayMonthBase;
+          let monthBaseTotalCost = monthBaseCost + dayBaseCost;
+          _this8.totalCost = monthBaseTotalCost.toFixed(2);
+          console.log("totalCostMonthBasis: ", _this8.totalCost);
         } else {
-          _this8.totalCost = t_cost;
           console.log('cost for days and selected hours: ', _this8.totalCost);
         } // ================================================
 
@@ -1235,7 +1236,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \**************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">{{vehicleName}}</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"car_card\" *ngFor=\"let data of carData\">\n      <img class=\"car_image\" src=\"{{api.imageUrlString}}{{data.image1}}\" alt=\"\">\n      \n      <img (click)=\"makefavorite()\" class=\"heart_icon\" src=\"assets/images/icons/heart.svg\" alt=\"\" *ngIf=\"favorites == 'dislike'\">\n      <img (click)=\"makefavorite()\" class=\"heart_icon\" src=\"assets/images/icons/red_heart.svg\" alt=\"\" *ngIf=\"favorites == 'liked'\">\n      <div class=\"car_info_box\">\n        <div>\n          <div class=\"car_name urbanist\">{{data.vehical_name}}</div>\n          <div class=\"left_subdiv\" >\n            <span *ngIf=\"data.rating == 0 \">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span *ngIf=\"data.rating >=1 && data.rating < 1.5\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span *ngIf=\"data.rating >=1.5 && data.rating < 2.5\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span *ngIf=\"data.rating >=2.5 && data.rating < 3.5\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span *ngIf=\"data.rating >=3.5 && data.rating < 4.5\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span *ngIf=\"data.rating >=4.5 && data.rating < 5.1\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n            </span>\n            <span class=\"rating_value urbanist\">{{data.total_bookings}} trips</span>\n          </div>\n        </div>\n        <div class=\"car2_info_subdiv\">\n          <div style=\"line-height: 1;\">\n            <span class=\"car2_price urbanist\">$</span>\n            <span class=\"car2_price urbanist\" style=\"font-size: 32px;margin-right: 8px;\">{{data.rent_cost_day}}</span>\n            <span class=\"car2_price urbanist\" style=\"font-size: 10px;font-weight: 500;\">/Day</span>\n          </div>\n        </div>\n\n      </div>\n    </div>\n    \n    <div class=\"start_end_label\" >Select Start/End Dates</div>\n    \n    <ion-calendar style=\"margin-top: 5px;\" (click)=\"getStartHours()\" \n    [(ngModel)]=\"dateRange\" [options]=\"optionsRange\" [type]=\"type\" [format]=\"'YYYY-MM-DD'\">\n    </ion-calendar>\n\n    <div class=\"booked_dates\" *ngIf=\"getDates==true\">\n      <div class=\"date_value\"> Minimum trip duration is 1 day</div>\n    </div>\n    \n    <div class=\"booked_dates\" *ngIf=\"matchedRangeSdate!=='' && matchedRangeEdate!==''\">\n      <div>\n        Car is booked from <span class=\"date_value\">{{matchedRangeSdate}}</span> to <span class=\"date_value\">{{matchedRangeEdate}}</span>.\n      </div>\n    </div>\n    <div class=\"dateTime_css\" style=\"margin-top: 14px;\">\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">Start Date</div>\n        <div class=\"bookings_field\" >\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/calendar.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"startDate==undefined\">05 Sep, 2022</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"startDate!=''\">{{startDate}}</span>\n        </div>\n      </div>\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">End Date</div>\n        <div class=\"bookings_field\" >\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/calendar.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"endDate==undefined\">05 Sep, 2022</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"endDate!=''\">{{endDate}}</span>\n        </div>\n      </div>\n\n    </div>\n    \n    <div class=\"dateTime_css\" style=\"margin-top: 12px;\">\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">Start Time</div>\n        <div class=\"bookings_field\" (click)=\"openTimeModal('startTime')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/clock.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"startTime==undefined\">06:00 am</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"startTime!=''\">{{startTime}}</span>\n        </div>\n      </div>\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">End Time</div>\n        <div class=\"bookings_field\" (click)=\"openTimeModal('endTime')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/clock.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"endTime==undefined\">06:00 pm</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"endTime!=''\">{{endTime}}</span>\n        </div>\n      </div>\n    </div>\n    <div class=\"license_heading\">Driving License</div>\n    <div style=\"text-align: center;margin: 7px auto 10px;\">\n      <img (click)=\"addLicense()\"  src=\"assets/images/upload_license_img.svg\" alt=\"\" *ngIf=\"imageURL===''\">\n      <img (click)=\"addLicense()\" style=\"height: 200px;width: 300px; border-radius: 10px;object-fit: cover;\" src=\"{{imageURL}}\" alt=\"\" *ngIf=\"imageURL!==''\">\n\n    </div>\n\n  </div>\n\n</ion-content>\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 27px;\">\n    <ion-button class=\"login_button\" (click)=\"showSummary()\">\n      <span class=\"btn_text\">Next</span>\n    </ion-button>\n  </div>\n</ion-footer>";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">{{vehicleName}}</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"car_card\" *ngFor=\"let data of carData\">\n      <img class=\"car_image\" src=\"{{api.imageUrlString}}{{data.image1}}\" alt=\"\">\n      \n      <img (click)=\"makefavorite()\" class=\"heart_icon\" src=\"assets/images/icons/heart.svg\" alt=\"\" *ngIf=\"favorites == 'dislike'\">\n      <img (click)=\"makefavorite()\" class=\"heart_icon\" src=\"assets/images/icons/red_heart.svg\" alt=\"\" *ngIf=\"favorites == 'liked'\">\n      <div class=\"car_info_box\">\n        <div>\n          <div class=\"car_name urbanist\">{{data.vehical_name}}</div>\n          <div class=\"left_subdiv\" >\n            <span *ngIf=\"data.rating == 0 \">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span *ngIf=\"data.rating >=1 && data.rating < 1.5\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span *ngIf=\"data.rating >=1.5 && data.rating < 2.5\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span *ngIf=\"data.rating >=2.5 && data.rating < 3.5\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span *ngIf=\"data.rating >=3.5 && data.rating < 4.5\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/empty_star.svg\" alt=\"\">\n            </span>\n            <span *ngIf=\"data.rating >=4.5 && data.rating < 5.1\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n              <img class=\"star_margin\" src=\"assets/images/icons/rated_star.svg\" alt=\"\">\n            </span>\n            <span class=\"rating_value urbanist\">{{data.total_bookings}} trips</span>\n          </div>\n        </div>\n        <div class=\"car2_info_subdiv\">\n          <div style=\"line-height: 1;\">\n            <span class=\"car2_price urbanist\">$</span>\n            <span class=\"car2_price urbanist\" style=\"font-size: 32px;margin-right: 3px;\">{{data.rent_cost_day}}</span>\n            <span class=\"car2_price urbanist\" style=\"font-size: 10px;font-weight: 500;\">/Day</span>\n          </div>\n        </div>\n\n      </div>\n    </div>\n    \n    <div class=\"start_end_label\" >Select Start/End Dates</div>\n    \n    <ion-calendar style=\"margin-top: 5px;\" (click)=\"getStartHours()\" \n    [(ngModel)]=\"dateRange\" [options]=\"optionsRange\" [type]=\"type\" [format]=\"'YYYY-MM-DD'\">\n    </ion-calendar>\n\n    <div class=\"booked_dates\" *ngIf=\"getDates==true\">\n      <div class=\"date_value\"> Minimum trip duration is 1 day</div>\n    </div>\n    \n    <div class=\"booked_dates\" *ngIf=\"matchedRangeSdate!=='' && matchedRangeEdate!==''\">\n      <div>\n        Car is booked from <span class=\"date_value\">{{matchedRangeSdate}}</span> to <span class=\"date_value\">{{matchedRangeEdate}}</span>.\n      </div>\n    </div>\n    <div class=\"dateTime_css\" style=\"margin-top: 14px;\">\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">Start Date</div>\n        <div class=\"bookings_field\" >\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/calendar.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"startDate==undefined\">05 Sep, 2022</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"startDate!=''\">{{startDate}}</span>\n        </div>\n      </div>\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">End Date</div>\n        <div class=\"bookings_field\" >\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/calendar.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"endDate==undefined\">05 Sep, 2022</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"endDate!=''\">{{endDate}}</span>\n        </div>\n      </div>\n\n    </div>\n    \n    <div class=\"dateTime_css\" style=\"margin-top: 12px;\">\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">Start Time</div>\n        <div class=\"bookings_field\" (click)=\"openTimeModal('startTime')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/clock.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"startTime==undefined\">06:00 am</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"startTime!=''\">{{startTime}}</span>\n        </div>\n      </div>\n      <div style=\"width: 48.5%;\">\n        <div class=\"date_time_label\">End Time</div>\n        <div class=\"bookings_field\" (click)=\"openTimeModal('endTime')\">\n          <img style=\"margin-right: 10.4px;\" src=\"assets/images/icons/clock.svg\" alt=\"\">\n          <span class=\"field_text\" *ngIf=\"endTime==undefined\">06:00 pm</span>\n          <span class=\"field_text\" style=\"color: black;\" *ngIf=\"endTime!=''\">{{endTime}}</span>\n        </div>\n      </div>\n    </div>\n    <div class=\"license_heading\">Driving License</div>\n    <div style=\"text-align: center;margin: 7px auto 10px;\">\n      <img (click)=\"addLicense()\"  src=\"assets/images/upload_license_img.svg\" alt=\"\" *ngIf=\"imageURL===''\">\n      <img (click)=\"addLicense()\" style=\"height: 200px;width: 300px; border-radius: 10px;object-fit: cover;\" src=\"{{imageURL}}\" alt=\"\" *ngIf=\"imageURL!==''\">\n\n    </div>\n\n  </div>\n\n</ion-content>\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 27px;\">\n    <ion-button class=\"login_button\" (click)=\"showSummary()\">\n      <span class=\"btn_text\">Next</span>\n    </ion-button>\n  </div>\n</ion-footer>";
 
 /***/ })
 

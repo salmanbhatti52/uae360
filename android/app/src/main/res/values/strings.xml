@@ -6,6 +6,6 @@
     <string name="custom_url_scheme">com.uae360.app</string>
     <string name="server_client_id">346937437512-cfsv6opbsmusjjmcoccni34i08d3dke5.apps.googleusercontent.com</string>
 
-    <string name="facebook_app_id">1268762053696865</string>
-    <string name="facebook_client_token">1268762053696865</string>
+    <string name="facebook_app_id">1226332351286480</string>
+    <string name="facebook_client_token">1226332351286480</string>
 </resources>

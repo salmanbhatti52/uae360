@@ -68,12 +68,16 @@ export class HomeBeforeLoginPage implements OnInit {
   }
 
   getCars(){
-    this.api.showLoading();
+   
     let data = {
       user_id: ''
     }
+    this.api.showLoading();
     this.api.sendRequest('cars',data).subscribe((res:any)=>{
-      this.api.hideLoading();
+      setTimeout(() => {
+        this.api.hideLoading();
+      }, 1000);
+      
       console.log(res);
       if(res.status == 'success'){
         console.log(res.data);
@@ -81,14 +85,16 @@ export class HomeBeforeLoginPage implements OnInit {
       }
       
     },(err)=>{
-      this.api.hideLoading();
+      setTimeout(() => {
+        this.api.hideLoading();
+      }, 1000);
       console.log(err);
       
     })
   }
 
   getCarTypes(){
-    this.api.showLoading();
+   
     this.api.sendRequest('carType').subscribe((res:any)=>{
       console.log('getCarTypes: ',res);
       if(res.status=='success'){
@@ -102,12 +108,12 @@ export class HomeBeforeLoginPage implements OnInit {
         this.carTypeTwoId = this.carTypes[1].car_type_id;
         this.carTypeThreeId = this.carTypes[2].car_type_id;
         this.carTypeFourId = this.carTypes[3].car_type_id;
-        this.api.hideLoading();
+        
       }
       
     },(err:any)=>{
       console.log('Error',err);
-      this.api.hideLoading();
+      
     })
   }
 

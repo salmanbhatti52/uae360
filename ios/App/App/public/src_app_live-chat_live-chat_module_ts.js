@@ -101,26 +101,41 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let LiveChatPage = class LiveChatPage {
-    constructor(navCtrlr) {
-        this.navCtrlr = navCtrlr;
-    }
-    ngOnInit() {
-    }
-    startLiveChat() {
-        this.navCtrlr.navigateForward('live-chat-screen');
-    }
-};
-LiveChatPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.NavController }
-];
-LiveChatPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
-        selector: 'app-live-chat',
-        template: _live_chat_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
-        styles: [_live_chat_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
-    })
-], LiveChatPage);
+  constructor(navCtrlr) {
+    this.navCtrlr = navCtrlr;
+  }
 
+  ngOnInit() {}
+
+  ionViewWillLeave() {
+    clearInterval(this.interval);
+    console.log('leave view');
+  }
+
+  startLiveChat() {
+    // var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    // (function () {
+    //   var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+    //   s1.async = true;
+    //   s1.src = 'https://embed.tawk.to/63b4123f47425128790b610e/1glrmeic3';
+    //   s1.charset = 'UTF-8';
+    //   s1.setAttribute('crossorigin', '*');
+    //   s0.parentNode.insertBefore(s1, s0);
+    // })();
+    this.navCtrlr.navigateForward('live-chat-screen');
+  }
+
+};
+
+LiveChatPage.ctorParameters = () => [{
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.NavController
+}];
+
+LiveChatPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
+  selector: 'app-live-chat',
+  template: _live_chat_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
+  styles: [_live_chat_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
+})], LiveChatPage);
 
 
 /***/ }),

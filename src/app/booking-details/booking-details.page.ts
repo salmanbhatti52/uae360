@@ -86,7 +86,6 @@ export class BookingDetailsPage implements OnInit {
     }
   }
 
-
   goBack(){
     this.location.back();
   }

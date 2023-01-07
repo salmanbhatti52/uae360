@@ -7,12 +7,8 @@ const config: CapacitorConfig = {
   bundledWebRuntime: false,
   plugins: {
     SplashScreen: {
-      useDialog: false,
-      showSpinner: true,
-      spinnerColor: "#FFFFFF",
-      launchShowDuration: 3000,
-			launchAutoHide: false,
-      backgroundColor: "#000000",
+			launchAutoHide: true,
+      launchShowDuration: 5000,
       androidSplashResourceName: "splash"
     },
     GoogleAuth: {

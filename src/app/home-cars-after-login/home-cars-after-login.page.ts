@@ -54,7 +54,8 @@ export class HomeCarsAfterLoginPage implements OnInit {
     public appComponent:AppComponent,
     public api:ApiService,
     public menuCtrlr:MenuController,
-    public nativeGeoCoder: NativeGeocoder) {}
+    public nativeGeoCoder: NativeGeocoder
+    ) {}
 
   ngOnInit() {
    // =======update appPages===========
@@ -76,6 +77,20 @@ export class HomeCarsAfterLoginPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    // ================notifications status check===================
+    // console.log('notificationVal: ',localStorage.getItem('notificationVal'));
+    let toggleVal =  localStorage.getItem('notificationVal');
+    if(toggleVal == 'true'){
+      this.api.toggleVal = true;
+    }else if(toggleVal == 'false'){
+      this.api.toggleVal = false;
+    }else{
+      this.api.toggleVal = true;
+    }
+    
+    console.log('api.toggleVal',this.api.toggleVal);
+    // ====================done=====================
+
     if(this.result.length > 0){
       this.showContent = false;
     }else{
@@ -182,9 +197,9 @@ export class HomeCarsAfterLoginPage implements OnInit {
   }
 
   getCarTypes(){
-    this.api.showLoading();
+    // this.api.showLoading();
     this.api.sendRequest('carType').subscribe((res:any)=>{
-      this.api.hideLoading();
+      // this.api.hideLoading();
       console.log('getCarTypes: ',res);
       if(res.status=='success'){
         
@@ -203,27 +218,30 @@ export class HomeCarsAfterLoginPage implements OnInit {
       
     },(err:any)=>{
       console.log('Error',err);
-      this.api.hideLoading();
+      // this.api.hideLoading();
     })
   }
 
   getCars(){
-    this.api.showLoading();
     let data = {
       user_id: this.checkUser.appUserId
     }
+    this.api.showLoading();
     this.api.sendRequest('cars',data).subscribe((res:any)=>{
-      this.api.hideLoading();
+      setTimeout(() => {
+        this.api.hideLoading();
+      }, 1000);
       console.log(res);
       if(res.status == 'success'){
-        this.api.hideLoading();
         this.pickups = res.data;
         this.api.allCars = res.data;
         console.log("api.allCars: ",this.api.allCars);
         
       }
     },(err)=>{
-      this.api.hideLoading();
+      setTimeout(() => {
+        this.api.hideLoading();
+      }, 1000);
       console.log(err);
       
     })
