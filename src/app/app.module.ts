@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'ion2-calendar';
-
+// import { PayPal} from '@ionic-native/paypal/ngx'
 import { OneSignal } from "@awesome-cordova-plugins/onesignal/ngx";
 
 @NgModule({
@@ -35,6 +35,7 @@ import { OneSignal } from "@awesome-cordova-plugins/onesignal/ngx";
     },
     NativeGeocoder, 
     OneSignal,
+    // PayPal
   ],
   bootstrap: [AppComponent],
 })

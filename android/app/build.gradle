@@ -39,6 +39,8 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
+    // implementation "com.paypal.sdk:paypal-android-sdk:2.15.3" 
+    // implementation "io.card:android-sdk:5.4.0"
 }
 
 apply from: 'capacitor.build.gradle'

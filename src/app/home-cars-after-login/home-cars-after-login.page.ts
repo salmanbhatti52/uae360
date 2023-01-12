@@ -98,7 +98,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
     }
     
     this.getNotifications();
-
+    this.getCars();
   }
 
   getNotifications(){

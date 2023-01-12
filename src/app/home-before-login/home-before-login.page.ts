@@ -56,7 +56,7 @@ export class HomeBeforeLoginPage implements OnInit {
   }
 
   ionViewWillEnter(){
-  
+    this.getCars();
     
   }
   handleChange(event){

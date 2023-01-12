@@ -159,7 +159,9 @@ let HomeBeforeLoginPage = class HomeBeforeLoginPage {
     this.getCars();
   }
 
-  ionViewWillEnter() {}
+  ionViewWillEnter() {
+    this.getCars();
+  }
 
   handleChange(event) {}
 

@@ -198,6 +198,7 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
     }
 
     this.getNotifications();
+    this.getCars();
   }
 
   getNotifications() {
