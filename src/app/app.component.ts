@@ -64,12 +64,12 @@ export class AppComponent {
   async ngOnInit() {
 
     // ========uncomment ===========================
-    // let userId =  localStorage.getItem('appUserId')
-    // console.log('userId: ',userId);
+    let userId =  localStorage.getItem('appUserId')
+    console.log('userId: ',userId);
     
-    // if(userId !== null){
-    //   this.router.navigate(['/home-cars-after-login']);
-    // }
+    if(userId !== null){
+      this.router.navigate(['/home-cars-after-login']);
+    }
     // ================b/w part=========================
     
     // // ================notifications status check===================

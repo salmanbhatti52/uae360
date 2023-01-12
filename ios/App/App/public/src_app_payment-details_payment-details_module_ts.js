@@ -91,14 +91,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PaymentDetailsPage": () => (/* binding */ PaymentDetailsPage)
 /* harmony export */ });
 /* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _payment_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./payment-details.page.html?ngResource */ 91876);
 /* harmony import */ var _payment_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./payment-details.page.scss?ngResource */ 43057);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 94666);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 94666);
 /* harmony import */ var _new_payment_method_new_payment_method_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../new-payment-method/new-payment-method.page */ 91785);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 93819);
-/* harmony import */ var _paypal_paypal_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @paypal/paypal-js */ 24183);
+/* harmony import */ var _booked_booked_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../booked/booked.page */ 88242);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/api.service */ 5830);
 
 
 
@@ -106,90 +107,111 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
+
 
 
 let PaymentDetailsPage = class PaymentDetailsPage {
-  constructor(location, modalCtrlr) {
+  // currencyIcon: string = '₹';
+  constructor(location, modalCtrlr, api) {
     this.location = location;
     this.modalCtrlr = modalCtrlr;
+    this.api = api;
     this.master = false;
     this.visa = false;
     this.paypal = false;
-    this.paymentAmount = '3.33';
+    this.paymentAmount = this.api.bookingResponse.total_cost;
     this.currency = 'USD';
-    this.currencyIcon = '₹';
   }
 
-  ngOnInit() {}
-
-  ionViewWillEnter() {
+  ngOnInit() {
+    this.paid_username = undefined;
     this.renderPayWithPaypal();
+  }
+
+  ionViewWillEnter() {}
+
+  ionViewWillLeave() {
+    console.log('leave view');
+    this.paid_username = '';
   }
 
   goBack() {
     this.location.back();
   }
 
-  openBookedModal() {// const modal  = await this.modalCtrlr.create({
-    //   component:BookedPage,
-    //   showBackdrop:true,
-    //   cssClass:'booked_modal'
-    // });
-    // modal.present();
-    //   "client-id": 'ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz',
-    //   "data-page-type": "checkout",
-    //   currency: "USD",
-    //   components: "buttons,marks,messages"
+  openBookedModal() {
+    var _this2 = this;
 
-    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {})();
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      console.log("paid_username: ", _this2.paid_username);
+
+      if (_this2.paid_username !== undefined) {
+        const modal = yield _this2.modalCtrlr.create({
+          component: _booked_booked_page__WEBPACK_IMPORTED_MODULE_4__.BookedPage,
+          showBackdrop: true,
+          cssClass: 'booked_modal'
+        });
+        modal.present();
+      } else {
+        _this2.api.presentToast('Hmm! You forgot to pay the amount.');
+      } // const modal  = await this.modalCtrlr.create({
+      //   component:BookedPage,
+      //   showBackdrop:true,
+      //   cssClass:'booked_modal'
+      // });
+      // modal.present();
+      //   "client-id": 'ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz',
+      //   "data-page-type": "checkout",
+      //   currency: "USD",
+      //   components: "buttons,marks,messages"
+
+    })();
   }
 
   renderPayWithPaypal() {
+    var _this3 = this;
+
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      let paypal;
+      let _this = _this3;
+      setTimeout(() => {
+        // Render the PayPal button into #paypal-button-container
+        window['paypal'].Buttons({
+          // Set up the transaction
+          createOrder: function (data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: _this.paymentAmount
+                }
+              }]
+            });
+          },
+          // Finalize the transaction
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+              this.paid_username = details.payer.name.given_name; // Show a success message to the buyer
 
-      try {
-        paypal = yield (0,_paypal_paypal_js__WEBPACK_IMPORTED_MODULE_4__.loadScript)({
-          "client-id": "ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz"
-        });
-      } catch (error) {
-        console.error("failed to load the PayPal JS SDK script", error);
-      }
-
-      if (paypal) {
-        try {
-          yield paypal.Buttons().render("#your-container-element");
-        } catch (error) {
-          console.error("failed to render the PayPal Buttons", error);
-        }
-      }
+              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+            }).catch(err => {
+              console.log(err);
+            });
+          }
+        }).render('#your-container-element');
+      }, 500); // let paypal;
+      // try {
+      //     paypal = await loadScript({ "client-id": "ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz" });
+      // } catch (error) {
+      //     console.error("failed to load the PayPal JS SDK script", error);
+      // }
+      // if (paypal) {
+      //     try {
+      //         await paypal.Buttons().render("#your-container-element");
+      //     } catch (error) {
+      //         console.error("failed to render the PayPal Buttons", error);
+      //     }
+      // }
     })();
-  } // payWithPaypal() {
-  //   this.payPal.init({
-  //     PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
-  //     PayPalEnvironmentSandbox: 'ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz'
-  //   }).then(() => {
-  //     // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
-  //     this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
-  //       // Only needed if you get an "Internal Service Error" after PayPal login!
-  //       //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
-  //     })).then(() => {
-  //       let payment = new PayPalPayment(this.paymentAmount, this.currency, 'Description', 'sale');
-  //       this.payPal.renderSinglePaymentUI(payment).then((res) => {
-  //         console.log(res);
-  //         // Successfully paid
-  //       }, () => {
-  //         // Error or render dialog closed without being successful
-  //       });
-  //     }, () => {
-  //       // Error in configuration
-  //     });
-  //   }, () => {
-  //     // Error in initialization, maybe PayPal isn't supported or something else
-  //   });
-  // }
-
+  }
 
   selectMethod(val) {
     if (val == 'master') {
@@ -226,10 +248,10 @@ let PaymentDetailsPage = class PaymentDetailsPage {
   }
 
   addPaymentMethod() {
-    var _this = this;
+    var _this4 = this;
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const modal = yield _this.modalCtrlr.create({
+      const modal = yield _this4.modalCtrlr.create({
         component: _new_payment_method_new_payment_method_page__WEBPACK_IMPORTED_MODULE_3__.NewPaymentMethodPage,
         showBackdrop: true,
         cssClass: 'add_payment_method'
@@ -250,307 +272,18 @@ let PaymentDetailsPage = class PaymentDetailsPage {
 };
 
 PaymentDetailsPage.ctorParameters = () => [{
-  type: _angular_common__WEBPACK_IMPORTED_MODULE_5__.Location
+  type: _angular_common__WEBPACK_IMPORTED_MODULE_6__.Location
 }, {
-  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ModalController
+}, {
+  type: _services_api_service__WEBPACK_IMPORTED_MODULE_5__.ApiService
 }];
 
-PaymentDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+PaymentDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
   selector: 'app-payment-details',
   template: _payment_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_payment_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
 })], PaymentDetailsPage);
-
-
-/***/ }),
-
-/***/ 24183:
-/*!**************************************************************!*\
-  !*** ./node_modules/@paypal/paypal-js/dist/esm/paypal-js.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "loadCustomScript": () => (/* binding */ loadCustomScript),
-/* harmony export */   "loadScript": () => (/* binding */ loadScript),
-/* harmony export */   "version": () => (/* binding */ version)
-/* harmony export */ });
-/*!
- * paypal-js v5.1.4 (2022-11-29T23:08:21.847Z)
- * Copyright 2020-present, PayPal, Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-function findScript(url, attributes) {
-  var currentScript = document.querySelector("script[src=\"".concat(url, "\"]"));
-  if (currentScript === null) return null;
-  var nextScript = createScriptElement(url, attributes); // ignore the data-uid-auto attribute that gets auto-assigned to every script tag
-
-  var currentScriptClone = currentScript.cloneNode();
-  delete currentScriptClone.dataset.uidAuto; // check if the new script has the same number of data attributes
-
-  if (Object.keys(currentScriptClone.dataset).length !== Object.keys(nextScript.dataset).length) {
-    return null;
-  }
-
-  var isExactMatch = true; // check if the data attribute values are the same
-
-  Object.keys(currentScriptClone.dataset).forEach(function (key) {
-    if (currentScriptClone.dataset[key] !== nextScript.dataset[key]) {
-      isExactMatch = false;
-    }
-  });
-  return isExactMatch ? currentScript : null;
-}
-
-function insertScriptElement(_a) {
-  var url = _a.url,
-      attributes = _a.attributes,
-      onSuccess = _a.onSuccess,
-      onError = _a.onError;
-  var newScript = createScriptElement(url, attributes);
-  newScript.onerror = onError;
-  newScript.onload = onSuccess;
-  document.head.insertBefore(newScript, document.head.firstElementChild);
-}
-
-function processOptions(options) {
-  var sdkBaseURL = "https://www.paypal.com/sdk/js";
-
-  if (options.sdkBaseURL) {
-    sdkBaseURL = options.sdkBaseURL;
-    delete options.sdkBaseURL;
-  }
-
-  processMerchantID(options);
-
-  var _a = Object.keys(options).filter(function (key) {
-    return typeof options[key] !== "undefined" && options[key] !== null && options[key] !== "";
-  }).reduce(function (accumulator, key) {
-    var value = options[key].toString();
-
-    if (key.substring(0, 5) === "data-") {
-      accumulator.dataAttributes[key] = value;
-    } else {
-      accumulator.queryParams[key] = value;
-    }
-
-    return accumulator;
-  }, {
-    queryParams: {},
-    dataAttributes: {}
-  }),
-      queryParams = _a.queryParams,
-      dataAttributes = _a.dataAttributes;
-
-  return {
-    url: "".concat(sdkBaseURL, "?").concat(objectToQueryString(queryParams)),
-    dataAttributes: dataAttributes
-  };
-}
-
-function objectToQueryString(params) {
-  var queryString = "";
-  Object.keys(params).forEach(function (key) {
-    if (queryString.length !== 0) queryString += "&";
-    queryString += key + "=" + params[key];
-  });
-  return queryString;
-}
-/**
- * Parse the error message code received from the server during the script load.
- * This function search for the occurrence of this specific string "/* Original Error:".
- *
- * @param message the received error response from the server
- * @returns the content of the message if the string string was found.
- *          The whole message otherwise
- */
-
-
-function parseErrorMessage(message) {
-  var originalErrorText = message.split("/* Original Error:")[1];
-  return originalErrorText ? originalErrorText.replace(/\n/g, "").replace("*/", "").trim() : message;
-}
-
-function createScriptElement(url, attributes) {
-  if (attributes === void 0) {
-    attributes = {};
-  }
-
-  var newScript = document.createElement("script");
-  newScript.src = url;
-  Object.keys(attributes).forEach(function (key) {
-    newScript.setAttribute(key, attributes[key]);
-
-    if (key === "data-csp-nonce") {
-      newScript.setAttribute("nonce", attributes["data-csp-nonce"]);
-    }
-  });
-  return newScript;
-}
-
-function processMerchantID(options) {
-  var merchantID = options["merchant-id"],
-      dataMerchantID = options["data-merchant-id"];
-  var newMerchantID = "";
-  var newDataMerchantID = "";
-
-  if (Array.isArray(merchantID)) {
-    if (merchantID.length > 1) {
-      newMerchantID = "*";
-      newDataMerchantID = merchantID.toString();
-    } else {
-      newMerchantID = merchantID.toString();
-    }
-  } else if (typeof merchantID === "string" && merchantID.length > 0) {
-    newMerchantID = merchantID;
-  } else if (typeof dataMerchantID === "string" && dataMerchantID.length > 0) {
-    newMerchantID = "*";
-    newDataMerchantID = dataMerchantID;
-  }
-
-  options["merchant-id"] = newMerchantID;
-  options["data-merchant-id"] = newDataMerchantID;
-  return options;
-}
-/**
- * Load the Paypal JS SDK script asynchronously.
- *
- * @param {Object} options - used to configure query parameters and data attributes for the JS SDK.
- * @param {PromiseConstructor} [PromisePonyfill=window.Promise] - optional Promise Constructor ponyfill.
- * @return {Promise<Object>} paypalObject - reference to the global window PayPal object.
- */
-
-
-function loadScript(options, PromisePonyfill) {
-  if (PromisePonyfill === void 0) {
-    PromisePonyfill = getDefaultPromiseImplementation();
-  }
-
-  validateArguments(options, PromisePonyfill); // resolve with null when running in Node
-
-  if (typeof window === "undefined") return PromisePonyfill.resolve(null);
-
-  var _a = processOptions(options),
-      url = _a.url,
-      dataAttributes = _a.dataAttributes;
-
-  var namespace = dataAttributes["data-namespace"] || "paypal";
-  var existingWindowNamespace = getPayPalWindowNamespace(namespace); // resolve with the existing global paypal namespace when a script with the same params already exists
-
-  if (findScript(url, dataAttributes) && existingWindowNamespace) {
-    return PromisePonyfill.resolve(existingWindowNamespace);
-  }
-
-  return loadCustomScript({
-    url: url,
-    attributes: dataAttributes
-  }, PromisePonyfill).then(function () {
-    var newWindowNamespace = getPayPalWindowNamespace(namespace);
-
-    if (newWindowNamespace) {
-      return newWindowNamespace;
-    }
-
-    throw new Error("The window.".concat(namespace, " global variable is not available."));
-  });
-}
-/**
- * Load a custom script asynchronously.
- *
- * @param {Object} options - used to set the script url and attributes.
- * @param {PromiseConstructor} [PromisePonyfill=window.Promise] - optional Promise Constructor ponyfill.
- * @return {Promise<void>} returns a promise to indicate if the script was successfully loaded.
- */
-
-
-function loadCustomScript(options, PromisePonyfill) {
-  if (PromisePonyfill === void 0) {
-    PromisePonyfill = getDefaultPromiseImplementation();
-  }
-
-  validateArguments(options, PromisePonyfill);
-  var url = options.url,
-      attributes = options.attributes;
-
-  if (typeof url !== "string" || url.length === 0) {
-    throw new Error("Invalid url.");
-  }
-
-  if (typeof attributes !== "undefined" && typeof attributes !== "object") {
-    throw new Error("Expected attributes to be an object.");
-  }
-
-  return new PromisePonyfill(function (resolve, reject) {
-    // resolve with undefined when running in Node
-    if (typeof window === "undefined") return resolve();
-    insertScriptElement({
-      url: url,
-      attributes: attributes,
-      onSuccess: function () {
-        return resolve();
-      },
-      onError: function () {
-        var defaultError = new Error("The script \"".concat(url, "\" failed to load."));
-
-        if (!window.fetch) {
-          return reject(defaultError);
-        } // Fetch the error reason from the response body for validation errors
-
-
-        return fetch(url).then(function (response) {
-          if (response.status === 200) {
-            reject(defaultError);
-          }
-
-          return response.text();
-        }).then(function (message) {
-          var parseMessage = parseErrorMessage(message);
-          reject(new Error(parseMessage));
-        }).catch(function (err) {
-          reject(err);
-        });
-      }
-    });
-  });
-}
-
-function getDefaultPromiseImplementation() {
-  if (typeof Promise === "undefined") {
-    throw new Error("Promise is undefined. To resolve the issue, use a Promise polyfill.");
-  }
-
-  return Promise;
-}
-
-function getPayPalWindowNamespace(namespace) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return window[namespace];
-}
-
-function validateArguments(options, PromisePonyfill) {
-  if (typeof options !== "object" || options === null) {
-    throw new Error("Expected an options object.");
-  }
-
-  if (typeof PromisePonyfill !== "undefined" && typeof PromisePonyfill !== "function") {
-    throw new Error("Expected PromisePonyfill to be a function.");
-  }
-} // replaced with the package.json version at build time
-
-
-var version = "5.1.4";
 
 
 /***/ }),
@@ -571,7 +304,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \**********************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">Payment</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center;\">\n      <img src=\"assets/images/payment Info_img.svg\" alt=\"\">\n    </div>\n    <div class=\"content_heading\">Select payment method</div>\n\n    <!-- <div>\n\n      <div class=\"payment_method_box\" style=\"margin-top: 15.4px;\">\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"master == true\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"master != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/master_card.svg\" alt=\"\">\n        </div>\n      </div>\n      \n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"visa == true\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"visa != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/visa_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"paypal == true\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"paypal != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">PayPal</div>\n            <div class=\"owner_info\">Arslan********mail.com</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/paypal_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n    </div> -->\n\n    <div style=\"margin-top: 20px;\" id=\"your-container-element\"></div>\n  </div>\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 25px;\">\n    <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Pay</span>\n    </ion-button>\n    <ion-button class=\"login_button btn_border\" style=\"--background:#FBFBFB; margin-top: 16px;\" (click)=\"addPaymentMethod()\">\n      <span class=\"btn_text \" style=\"color: #0F172A;\">Add New Payment Method</span>\n    </ion-button>\n  </div>\n</ion-footer>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">Payment</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center;\">\n      <img src=\"assets/images/payment Info_img.svg\" alt=\"\">\n    </div>\n    <div class=\"content_heading\">Select payment method</div>\n\n    <!-- <div>\n\n      <div class=\"payment_method_box\" style=\"margin-top: 15.4px;\">\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"master == true\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"master != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/master_card.svg\" alt=\"\">\n        </div>\n      </div>\n      \n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"visa == true\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"visa != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/visa_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"paypal == true\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"paypal != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">PayPal</div>\n            <div class=\"owner_info\">Arslan********mail.com</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/paypal_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n    </div> -->\n\n    <div style=\"margin-top: 20px;\" id=\"your-container-element\"></div>\n  </div>\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 25px;\">\n    <!-- <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button> -->\n    <!-- <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Pay</span>\n    </ion-button>\n    <ion-button class=\"login_button btn_border\" style=\"--background:#FBFBFB; margin-top: 16px;\" (click)=\"addPaymentMethod()\">\n      <span class=\"btn_text \" style=\"color: #0F172A;\">Add New Payment Method</span>\n    </ion-button> -->\n  </div>\n</ion-footer>\n";
 
 /***/ })
 

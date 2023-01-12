@@ -3,8 +3,8 @@ import { Location } from '@angular/common';
 import { NewPaymentMethodPage } from '../new-payment-method/new-payment-method.page';
 import { BookedPage } from '../booked/booked.page';
 import { ModalController } from '@ionic/angular';
-// import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
 import { loadScript } from "@paypal/paypal-js";
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-payment-details',
   templateUrl: './payment-details.page.html',
@@ -14,24 +14,43 @@ export class PaymentDetailsPage implements OnInit {
   master = false;
   visa = false;
   paypal = false;
-
-  paymentAmount: string = '3.33';
+  paymentAmount: string = this.api.bookingResponse.total_cost;
   currency: string = 'USD';
-  currencyIcon: string = '₹';
+  paid_username:any;
+  // currencyIcon: string = '₹';
   constructor(public location:Location,
     public modalCtrlr:ModalController,
-    // public payPal:PayPal
+    public api:ApiService
     ) { }
 
   ngOnInit() {
+    this.paid_username = undefined
+    this.renderPayWithPaypal();
   }
   ionViewWillEnter(){
-    this.renderPayWithPaypal();
+    
+
+  }
+  ionViewWillLeave(){
+    console.log('leave view');
+    this.paid_username = '';
   }
   goBack(){
     this.location.back();
   }
   async openBookedModal(){
+    console.log("paid_username: ",this.paid_username);
+    
+    if(this.paid_username !== undefined){
+      const modal  = await this.modalCtrlr.create({
+        component:BookedPage,
+        showBackdrop:true,
+        cssClass:'booked_modal'
+      });
+      modal.present();
+    }else{
+      this.api.presentToast('Hmm! You forgot to pay the amount.')
+    }
     // const modal  = await this.modalCtrlr.create({
     //   component:BookedPage,
     //   showBackdrop:true,
@@ -46,47 +65,57 @@ export class PaymentDetailsPage implements OnInit {
   }
 
   async renderPayWithPaypal(){
-    let paypal;
+    let _this = this;
+    setTimeout(() => {
+      // Render the PayPal button into #paypal-button-container
+      <any>window['paypal'].Buttons({
 
-    try {
-        paypal = await loadScript({ "client-id": "ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz" });
-    } catch (error) {
-        console.error("failed to load the PayPal JS SDK script", error);
-    }
+        // Set up the transaction
+        createOrder: function (data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: _this.paymentAmount
+              }
+            }]
+          });
+        },
 
-    if (paypal) {
-        try {
-            await paypal.Buttons().render("#your-container-element");
-        } catch (error) {
-            console.error("failed to render the PayPal Buttons", error);
+        // Finalize the transaction
+        onApprove: function (data, actions) {
+          return actions.order.capture()
+            .then(function (details) {
+              this.paid_username = details.payer.name.given_name
+              // Show a success message to the buyer
+              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+            })
+            .catch(err => {
+              console.log(err);
+            })
         }
-    }
+      }).render('#your-container-element');
+    }, 500)
+
+    
+  
+    // let paypal;
+
+    // try {
+    //     paypal = await loadScript({ "client-id": "ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz" });
+    // } catch (error) {
+    //     console.error("failed to load the PayPal JS SDK script", error);
+    // }
+
+    // if (paypal) {
+    //     try {
+    //         await paypal.Buttons().render("#your-container-element");
+    //     } catch (error) {
+    //         console.error("failed to render the PayPal Buttons", error);
+    //     }
+    // }
   }
 
-  // payWithPaypal() {
-  //   this.payPal.init({
-  //     PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
-  //     PayPalEnvironmentSandbox: 'ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz'
-  //   }).then(() => {
-  //     // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
-  //     this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
-  //       // Only needed if you get an "Internal Service Error" after PayPal login!
-  //       //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
-  //     })).then(() => {
-  //       let payment = new PayPalPayment(this.paymentAmount, this.currency, 'Description', 'sale');
-  //       this.payPal.renderSinglePaymentUI(payment).then((res) => {
-  //         console.log(res);
-  //         // Successfully paid
-  //       }, () => {
-  //         // Error or render dialog closed without being successful
-  //       });
-  //     }, () => {
-  //       // Error in configuration
-  //     });
-  //   }, () => {
-  //     // Error in initialization, maybe PayPal isn't supported or something else
-  //   });
-  // }
+  
 
   selectMethod(val){
     if(val == 'master'){

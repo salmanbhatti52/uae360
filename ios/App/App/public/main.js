@@ -121,7 +121,7 @@ const routes = [
     },
     {
         path: 'payment-details',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("src_app_payment-details_payment-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./payment-details/payment-details.module */ 76472)).then(m => m.PaymentDetailsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_payment-details_payment-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./payment-details/payment-details.module */ 76472)).then(m => m.PaymentDetailsPageModule)
     },
     {
         path: 'new-payment-method',
@@ -129,7 +129,7 @@ const routes = [
     },
     {
         path: 'booked',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_booked_booked_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./booked/booked.module */ 3615)).then(m => m.BookedPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_booked_booked_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./booked/booked.module */ 3615)).then(m => m.BookedPageModule)
     },
     {
         path: 'ratings',
@@ -255,27 +255,31 @@ let AppComponent = class AppComponent {
     });
   }
 
-  ngOnInit() {// ========uncomment ===========================
-    // let userId =  localStorage.getItem('appUserId')
-    // console.log('userId: ',userId);
-    // if(userId !== null){
-    //   this.router.navigate(['/home-cars-after-login']);
-    // }
-    // ================b/w part=========================
-    // // ================notifications status check===================
-    // console.log('notificationVal: ',localStorage.getItem('notificationVal'));
-    // let toggleVal =  localStorage.getItem('notificationVal');
-    // if(toggleVal == 'true'){
-    //   this.api.toggleVal = true;
-    // }else if(toggleVal == 'false'){
-    //   this.api.toggleVal = false;
-    // }else{
-    //   this.api.toggleVal = true;
-    // }
-    // console.log('api.toggleVal',this.api.toggleVal);
-    // // ====================done=====================
+  ngOnInit() {
+    var _this = this;
 
-    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {})();
+    return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      // ========uncomment ===========================
+      let userId = localStorage.getItem('appUserId');
+      console.log('userId: ', userId);
+
+      if (userId !== null) {
+        _this.router.navigate(['/home-cars-after-login']);
+      } // ================b/w part=========================
+      // // ================notifications status check===================
+      // console.log('notificationVal: ',localStorage.getItem('notificationVal'));
+      // let toggleVal =  localStorage.getItem('notificationVal');
+      // if(toggleVal == 'true'){
+      //   this.api.toggleVal = true;
+      // }else if(toggleVal == 'false'){
+      //   this.api.toggleVal = false;
+      // }else{
+      //   this.api.toggleVal = true;
+      // }
+      // console.log('api.toggleVal',this.api.toggleVal);
+      // // ====================done=====================
+
+    })();
   }
 
   refresh() {
@@ -286,11 +290,11 @@ let AppComponent = class AppComponent {
   }
 
   signOutForGoogle() {
-    var _this = this;
+    var _this2 = this;
 
     return (0,D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       yield _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_5__.GoogleAuth.signOut();
-      _this.googleUserData = null;
+      _this2.googleUserData = null;
     })();
   }
 
