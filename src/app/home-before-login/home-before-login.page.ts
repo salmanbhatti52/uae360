@@ -59,6 +59,20 @@ export class HomeBeforeLoginPage implements OnInit {
     this.getCars();
     
   }
+
+  handleRefresh(event) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.item1 = true;
+      this.item2 = false;
+      this.item3 = false;
+      this.item4 = false;
+      this.item5 = false;
+      this.ngOnInit();
+      event.target.complete();
+    }, 2000);
+  };
+
   handleChange(event){
     
   }

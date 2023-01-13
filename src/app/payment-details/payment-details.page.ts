@@ -51,13 +51,7 @@ export class PaymentDetailsPage implements OnInit {
     }else{
       this.api.presentToast('Hmm! You forgot to pay the amount.')
     }
-    // const modal  = await this.modalCtrlr.create({
-    //   component:BookedPage,
-    //   showBackdrop:true,
-    //   cssClass:'booked_modal'
-    // });
-    // modal.present();
-
+    
     //   "client-id": 'ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz',
     //   "data-page-type": "checkout",
     //   currency: "USD",
@@ -85,7 +79,7 @@ export class PaymentDetailsPage implements OnInit {
         onApprove: function (data, actions) {
           return actions.order.capture()
             .then(function (details) {
-              this.paid_username = details.payer.name.given_name
+              _this.paid_username = details.payer.name.given_name
               // Show a success message to the buyer
               alert('Transaction completed by ' + details.payer.name.given_name + '!');
             })

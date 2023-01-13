@@ -43,8 +43,8 @@ export class HomeCarsAfterLoginPage implements OnInit {
     useLocale: true,
     maxResults: 5
   };
-  public data = ['Amsterdam', 'Buenos Aires', 'Cairo', 'Geneva', 'Hong Kong', 'Istanbul', 'London', 'Madrid', 'New York', 'Panama City'];
-  public results = [...this.data];
+  // public data = ['Amsterdam', 'Buenos Aires', 'Cairo', 'Geneva', 'Hong Kong', 'Istanbul', 'London', 'Madrid', 'New York', 'Panama City'];
+  // public results = [...this.data];
   result = [];
   showContent = true;
   pickups = [];
@@ -75,6 +75,20 @@ export class HomeCarsAfterLoginPage implements OnInit {
    this.getCars();
    this.fetchLocation();
   }
+
+  handleRefresh(event) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.item1 = true;
+      this.item2 = false;
+      this.item3 = false;
+      this.item4 = false;
+      this.item5 = false;
+      this.ngOnInit();
+      this.ionViewWillEnter();
+      event.target.complete();
+    }, 2000);
+  };
 
   ionViewWillEnter(){
     // ================notifications status check===================

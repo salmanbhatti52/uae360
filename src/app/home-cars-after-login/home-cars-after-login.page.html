@@ -25,6 +25,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="wrapper" *ngIf="result.length > 0">
     <div *ngFor="let res of result">
       <div class="car_div" (click)="gotoCarDetails(res.car_id)" >
