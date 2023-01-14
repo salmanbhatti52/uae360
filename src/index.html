@@ -26,6 +26,7 @@
   <script data-page-type="checkout"
    src="https://www.paypal.com/sdk/js?client-id=ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz&currency=USD&components=buttons,marks,messages">
   </script>
+
   
   <!-- <script src="https://www.paypal.com/sdk/js?client-id=ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz"></script> -->
   <!-- <script type="text/javascript" src="js/paypal-mobile-js-helper.js"></script> -->
@@ -42,30 +43,32 @@
       s0.parentNode.insertBefore(s1, s0);
     })();
     // Custom styling of Offset starts here
-  Tawk_API.customStyle = {
-    visibility: {
-    //for desktop only
-      desktop: {
-        position: 'br', // bottom-right
-        xOffset: 15, // 15px away from right
-        yOffset: 40 // 40px up from bottom
-      },
-      // for mobile only
-      mobile: {
-        position: 'br', // bottom-left
-        xOffset: 6, // 5px away from left
-        yOffset: 100 // 50px up from bottom
-      },
-      // change settings of bubble if necessary
-      bubble: {
-        rotate: '0deg',
-        xOffset: -20,
-        yOffset: 0
+    Tawk_API.customStyle = {
+      visibility: {
+      //for desktop only
+        desktop: {
+          position: 'br', // bottom-right
+          xOffset: 15, // 15px away from right
+          yOffset: 40 // 40px up from bottom
+        },
+        // for mobile only
+        mobile: {
+          position: 'br', // bottom-left
+          xOffset: 6, // 5px away from left
+          yOffset: 100 // 50px up from bottom
+        },
+        // change settings of bubble if necessary
+        bubble: {
+          rotate: '0deg',
+          xOffset: -20,
+          yOffset: 0
+        }
       }
     }
-  }
   </script>
   <!--End of Tawk.to Script-->
+
+  <script src="https://js.stripe.com/v3" async></script>
 </head>
 
 <body>
