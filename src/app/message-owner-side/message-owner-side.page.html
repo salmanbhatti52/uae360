@@ -14,12 +14,12 @@
 
 <ion-content #IonContent>
   <div class="wrapper" >
-    <div  *ngFor="let msg of messages; let last = last">
+    <div  *ngFor="let msg of messages;">
       <div class="company_side_msg"  *ngIf="msg.sender_type === 'Companies'">
         <img class="user_img" style="margin-right: 12px;"  src="{{api.imageUrlString}}{{msg.users_data.company_logo}}" alt="">
         <div class="owner_message_box">
           <div class="owner_message">{{msg.message}}</div>
-          <!-- {{last? callFunction() : ''}} -->
+          
           <div class="message_time" style="opacity: 50%;"><span>{{msg.time}}</span><span> {{msg.date}} </span></div>
         </div>
       </div>
@@ -27,7 +27,7 @@
       <div class="consumer_side_msg"  *ngIf="msg.sender_type === 'Users'">
         <div class="consumer_message_box">
           <div class="consumer_message">{{msg.message}}</div>
-          <!-- {{last? callFunction() : ''}} -->
+          
           <div class="message_time" style="color: #B1A8B9;"><span>{{msg.time}}</span><span> {{msg.date}} </span></div>
         </div>
         <img class="user_img" style="margin-left: 12px;"  src="{{api.imageUrlString}}{{msg.users_data.profile_pic}}" alt="">

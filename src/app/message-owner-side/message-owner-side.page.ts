@@ -50,7 +50,7 @@ export class MessageOwnerSidePage implements OnInit {
     this.getMessages();
     this.updateMessages(); 
   }
-  callFunction(){
+  scrollToBottom(){
     this.content.scrollToBottom(0);
   }
   getMessages(){
@@ -68,7 +68,7 @@ export class MessageOwnerSidePage implements OnInit {
       if(res.status == 'success'){
         this.messages = res.data;
         this.previousMsgsCount = res.data.length
-        this.callFunction();
+        this.scrollToBottom();
       }
     },(err)=>{
       this.api.hideLoading();
@@ -92,7 +92,7 @@ export class MessageOwnerSidePage implements OnInit {
         this.messages = res.data;
         this.NewMsgsCount = res.data.length;
         if(this.previousMsgsCount < this.NewMsgsCount){
-          this.callFunction();
+          this.scrollToBottom();
           this.previousMsgsCount = this.NewMsgsCount
         }
         
@@ -138,7 +138,7 @@ export class MessageOwnerSidePage implements OnInit {
       console.log('upadteMessagesApiResponse: ',res);
       if(res.status == 'success'){
         console.log("Message updated.");
-        this.callFunction();
+        this.scrollToBottom();
         
       }
     },(err)=>{

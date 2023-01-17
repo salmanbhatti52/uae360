@@ -7,23 +7,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content #IonContent>
   <div class="wrapper">
-    <div style="display: flex; align-items: flex-start;">
-      <img style="margin-right: 12px;"  src="assets/images/icons/owner_pic.svg" alt="">
-      <div class="owner_message_box">
-        <div class="owner_message">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-           nonumy eirmod tempor invidunt ut labore et</div>
-        <div class="message_time" style="opacity: 50%;"><span>6:08pm</span><span> Today</span></div>
+    <div *ngFor="let msg of messages;">
+      <div class="admin_side_msg" *ngIf="msg.sender_type === 'Admin'">
+        <img class="user_img" style="margin-right: 12px;"  src="{{api.imageUrlString}}{{msg.users_data.user_image}}" alt="">
+        <div class="owner_message_box">
+          <div class="owner_message">{{msg.message}}</div>
+          <div class="message_time" style="opacity: 50%;"><span>{{msg.time}}</span><span> {{msg.date}} </span></div>
+        </div>
       </div>
-    </div>
-
-    <div style="display: flex; align-items: flex-start;margin-top: 18px;float: right;">
-      <div class="consumer_message_box">
-        <div class="consumer_message">Lorem ipsum dolor sit amet</div>
-        <div class="message_time" style="color: #B1A8B9;"><span>6:08pm</span><span> Today</span></div>
+  
+      <div class="consumer_side_msg"  *ngIf="msg.sender_type === 'Users'">
+        <div class="consumer_message_box">
+          <div class="consumer_message">{{msg.message}}</div>
+          <div class="message_time" style="color: #B1A8B9;"><span>{{msg.time}}</span><span> {{msg.date}} </span></div>
+        </div>
+        <img class="user_img" style="margin-left: 12px;"  src="{{api.imageUrlString}}{{msg.users_data.profile_pic}}" alt="">
       </div>
-      <img style="margin-left: 12px;"  src="assets/images/icons/consumer_pic.svg" alt="">
     </div>
     
     
@@ -31,9 +32,9 @@
 
 </ion-content>
 <ion-footer class="ion-no-border">
-  <div style="display: flex;align-items: center;padding: 9px 16px 10px; box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);">
-    <ion-textarea class="textarea" auto-grow="true" placeholder="Type your message here....."></ion-textarea>
-    <div><img src="assets/images/icons/send_message.svg" alt=""></div>
+  <div class="text_area_box">
+    <ion-textarea #textarea class="textarea" auto-grow="true" placeholder="Type your message here....."></ion-textarea>
+    <div><img (click)="sendMessagesLive(textarea.value)" src="assets/images/icons/send_message.svg" alt=""></div>
   </div>
 
 </ion-footer>

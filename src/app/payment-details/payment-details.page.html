@@ -69,18 +69,40 @@
 
     </div> -->
 
-    <div style="margin-top: 20px;" id="your-container-element"></div>
 
     <div style="margin-top: 20px;">
+      <!-- <section> -->
+        <div>Pay with your Debit/Credit card</div>
+        <!-- <div class="product">
+          <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
+          <div class="description">
+            <h3>Stubborn Attachments</h3>
+            <h5>$20.00</h5>
+          </div>
+        </div> -->
+        <form action="/create-checkout-session" method="POST">
+          <button type="submit" id="checkout-button">Checkout</button>
+        </form>
+      <!-- </section> -->
+    </div>
+
+    <div style="margin-top: 20px;">
+      <div>Pay with Paypal</div>
+      <div id="your-container-element"></div>
+    </div>
+    
+
+
+    <!-- <div style="margin-top: 20px;">
       <form action="/" method="post" id="payment-form">
         <div class="form-row">
-          <div id="card-element" style="display: block;margin-top: 20px;"> <!-- a Stripe Element will be inserted here. --> </div>
-          <!-- Used to display Element errors -->
+          <div id="card-element" style="display: block;margin-top: 20px;"></div>
+          
           <div id="card-errors" role="alert"></div>
         </div>
         <ion-button type="submit" color="success" expand="full">Make Payment</ion-button>
       </form>
-    </div>
+    </div> -->
   </div>
 </ion-content>
 

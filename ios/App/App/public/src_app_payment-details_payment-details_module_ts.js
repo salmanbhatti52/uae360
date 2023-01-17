@@ -91,15 +91,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PaymentDetailsPage": () => (/* binding */ PaymentDetailsPage)
 /* harmony export */ });
 /* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _payment_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./payment-details.page.html?ngResource */ 91876);
 /* harmony import */ var _payment_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./payment-details.page.scss?ngResource */ 43057);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 22560);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 94666);
 /* harmony import */ var _new_payment_method_new_payment_method_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../new-payment-method/new-payment-method.page */ 91785);
 /* harmony import */ var _booked_booked_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../booked/booked.page */ 88242);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 93819);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/api.service */ 5830);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ 58987);
+
 
 
 
@@ -111,24 +113,75 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let PaymentDetailsPage = class PaymentDetailsPage {
-  // currencyIcon: string = '₹';
-  constructor(location, modalCtrlr, api) {
+  constructor(location, modalCtrlr, api, http) {
     this.location = location;
     this.modalCtrlr = modalCtrlr;
     this.api = api;
+    this.http = http;
     this.master = false;
     this.visa = false;
     this.paypal = false;
     this.paymentAmount = this.api.bookingResponse.total_cost;
-    this.currency = 'USD';
+    this.currency = 'USD'; // currencyIcon: string = '₹';
+
+    this.stripe = Stripe('pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1');
   }
 
   ngOnInit() {
     this.paid_username = undefined;
     this.renderPayWithPaypal();
+    this.setupStripe();
   }
 
   ionViewWillEnter() {}
+
+  setupStripe() {
+    let elements = this.stripe.elements();
+    var style = {
+      base: {
+        color: '#32325d',
+        lineHeight: '24px',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#aab7c4'
+        }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    };
+    this.card = elements.create('card', {
+      style: style
+    });
+    console.log(this.card);
+    this.card.mount('#card-element');
+    this.card.addEventListener('change', event => {
+      var displayError = document.getElementById('card-errors');
+
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      console.log(event);
+      this.stripe.createSource(this.card).then(result => {
+        if (result.error) {
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+        } else {
+          console.log(result);
+          this.makePayment(result.id);
+        }
+      });
+    });
+  }
 
   ionViewWillLeave() {
     console.log('leave view');
@@ -271,9 +324,11 @@ PaymentDetailsPage.ctorParameters = () => [{
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ModalController
 }, {
   type: _services_api_service__WEBPACK_IMPORTED_MODULE_5__.ApiService
+}, {
+  type: _angular_common_http__WEBPACK_IMPORTED_MODULE_8__.HttpClient
 }];
 
-PaymentDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+PaymentDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
   selector: 'app-payment-details',
   template: _payment_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_payment_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -298,7 +353,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \**********************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">Payment</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center;\">\n      <img src=\"assets/images/payment Info_img.svg\" alt=\"\">\n    </div>\n    <div class=\"content_heading\">Select payment method</div>\n\n    <!-- <div>\n\n      <div class=\"payment_method_box\" style=\"margin-top: 15.4px;\">\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"master == true\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"master != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/master_card.svg\" alt=\"\">\n        </div>\n      </div>\n      \n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"visa == true\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"visa != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/visa_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"paypal == true\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"paypal != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">PayPal</div>\n            <div class=\"owner_info\">Arslan********mail.com</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/paypal_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n    </div> -->\n\n    <div style=\"margin-top: 20px;\" id=\"your-container-element\"></div>\n  </div>\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 25px;\">\n    <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button>\n    <!-- <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Pay</span>\n    </ion-button>\n    <ion-button class=\"login_button btn_border\" style=\"--background:#FBFBFB; margin-top: 16px;\" (click)=\"addPaymentMethod()\">\n      <span class=\"btn_text \" style=\"color: #0F172A;\">Add New Payment Method</span>\n    </ion-button> -->\n  </div>\n</ion-footer>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">Payment</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center;\">\n      <img src=\"assets/images/payment Info_img.svg\" alt=\"\">\n    </div>\n    <div class=\"content_heading\">Select payment method</div>\n\n    <!-- <div>\n\n      <div class=\"payment_method_box\" style=\"margin-top: 15.4px;\">\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"master == true\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"master != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/master_card.svg\" alt=\"\">\n        </div>\n      </div>\n      \n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"visa == true\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"visa != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/visa_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"paypal == true\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"paypal != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">PayPal</div>\n            <div class=\"owner_info\">Arslan********mail.com</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/paypal_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n    </div> -->\n\n\n    <div style=\"margin-top: 20px;\">\n      <!-- <section> -->\n        <div>Pay with your Debit/Credit card</div>\n        <!-- <div class=\"product\">\n          <img src=\"https://i.imgur.com/EHyR2nP.png\" alt=\"The cover of Stubborn Attachments\" />\n          <div class=\"description\">\n            <h3>Stubborn Attachments</h3>\n            <h5>$20.00</h5>\n          </div>\n        </div> -->\n        <form action=\"/create-checkout-session\" method=\"POST\">\n          <button type=\"submit\" id=\"checkout-button\">Checkout</button>\n        </form>\n      <!-- </section> -->\n    </div>\n\n    <div style=\"margin-top: 20px;\">\n      <div>Pay with Paypal</div>\n      <div id=\"your-container-element\"></div>\n    </div>\n    \n\n\n    <!-- <div style=\"margin-top: 20px;\">\n      <form action=\"/\" method=\"post\" id=\"payment-form\">\n        <div class=\"form-row\">\n          <div id=\"card-element\" style=\"display: block;margin-top: 20px;\"></div>\n          \n          <div id=\"card-errors\" role=\"alert\"></div>\n        </div>\n        <ion-button type=\"submit\" color=\"success\" expand=\"full\">Make Payment</ion-button>\n      </form>\n    </div> -->\n  </div>\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 25px;\">\n    <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button>\n    <!-- <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Pay</span>\n    </ion-button>\n    <ion-button class=\"login_button btn_border\" style=\"--background:#FBFBFB; margin-top: 16px;\" (click)=\"addPaymentMethod()\">\n      <span class=\"btn_text \" style=\"color: #0F172A;\">Add New Payment Method</span>\n    </ion-button> -->\n  </div>\n</ion-footer>\n";
 
 /***/ })
 

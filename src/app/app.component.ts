@@ -70,21 +70,7 @@ export class AppComponent {
     if(userId !== null){
       this.router.navigate(['/home-cars-after-login']);
     }
-    // ================b/w part=========================
-    
-    // // ================notifications status check===================
-    // console.log('notificationVal: ',localStorage.getItem('notificationVal'));
-    // let toggleVal =  localStorage.getItem('notificationVal');
-    // if(toggleVal == 'true'){
-    //   this.api.toggleVal = true;
-    // }else if(toggleVal == 'false'){
-    //   this.api.toggleVal = false;
-    // }else{
-    //   this.api.toggleVal = true;
-    // }
-    
-    // console.log('api.toggleVal',this.api.toggleVal);
-    // // ====================done=====================
+    // ================b/w part========================
   }
 
   async refresh(){
