@@ -88,20 +88,22 @@ export class HomeBeforeLoginPage implements OnInit {
     }
     this.api.showLoading();
     this.api.sendRequest('cars',data).subscribe((res:any)=>{
-      setTimeout(() => {
-        this.api.hideLoading();
-      }, 1000);
+      
       
       console.log(res);
       if(res.status == 'success'){
         console.log(res.data);
         this.pickups = res.data;
       }
+
+      setTimeout(() => {
+        this.api.hideLoading();
+      }, 2000);
       
     },(err)=>{
       setTimeout(() => {
         this.api.hideLoading();
-      }, 1000);
+      }, 2000);
       console.log(err);
       
     })

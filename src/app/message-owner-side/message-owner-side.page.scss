@@ -36,13 +36,20 @@ ion-footer{
     padding:15px 16px 20px;
 }
 .company_side_msg{
-    display: flex; align-items: flex-start;padding-bottom: 14px;width: 85%;
+    display: flex; 
+    align-items: flex-start;
+    padding-bottom: 14px;
+    width: 85%;
 }
 .user_img{
     height: 24px; width: 24px; border-radius: 50%;
 }
 .consumer_side_msg{
-    display: flex; justify-content: flex-end;padding-bottom: 14px; float: right;width: 85%;
+    display: flex; 
+    justify-content: flex-end;
+    padding-bottom: 14px; 
+    float: right;
+    width: 85%;
 }
 .owner_message_box{
     position: relative;
@@ -76,7 +83,7 @@ ion-footer{
     font-weight: 400;
     color: white;
     width: auto;
-    max-width: 260px;
+    max-width: 205px;
 }
 .message_time{
     margin-top: 6px;
@@ -118,7 +125,7 @@ ion-footer{
     font-weight: 400;
     color: #000000;
     width: auto;
-    max-width: 260px;
+    max-width: 205px;
 }
 .textarea{
     --background: #FBFBFB;

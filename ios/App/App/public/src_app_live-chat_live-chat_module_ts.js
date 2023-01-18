@@ -90,34 +90,105 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LiveChatPage": () => (/* binding */ LiveChatPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _live_chat_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./live-chat.page.html?ngResource */ 14043);
 /* harmony import */ var _live_chat_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./live-chat.page.scss?ngResource */ 43665);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 60124);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _check_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../check-user.service */ 47852);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/api.service */ 5830);
+
+
+
 
 
 
 
 
 let LiveChatPage = class LiveChatPage {
-    constructor(navCtrlr) {
+    constructor(navCtrlr, api, checkUser, router) {
         this.navCtrlr = navCtrlr;
+        this.api = api;
+        this.checkUser = checkUser;
+        this.router = router;
     }
     ngOnInit() {
+    }
+    ionViewWillEnter() {
+        this.getAdminsList();
+        this.getAllChatLive();
     }
     ionViewWillLeave() {
         console.log('leave view');
     }
+    getAdminsList() {
+        this.api.getData("GetAdmins").subscribe((res) => {
+            console.log("Resposne: ", res);
+            if (res.status == 'success') {
+                this.adminsList = res.data;
+                console.log("adminsList: ", this.adminsList);
+            }
+        }, (err) => {
+            console.log("Api Error: ", err);
+        });
+    }
+    getAllChatLive() {
+        let data = {
+            appUserId: this.checkUser.appUserId
+        };
+        this.api.sendRequest("getAllChatLive", data).subscribe((res) => {
+            console.log("Resposne: ", res);
+            if (res.status == 'success') {
+                if (res.data.length > 0) {
+                    this.adminId = res.data[0].sender_id;
+                    console.log("Admin Id: ", this.adminId);
+                }
+            }
+        }, (err) => {
+            console.log("Api Error: ", err);
+        });
+    }
     startLiveChat() {
-        this.navCtrlr.navigateForward('live-chat-screen');
+        console.log("Admin Id: ", this.adminId);
+        if (this.adminId === undefined) {
+            let arrayLength = this.adminsList.length;
+            console.log("arrayLength: ", arrayLength);
+            let randomValue = Math.floor(Math.random() * arrayLength);
+            console.log("randomValue: ", randomValue);
+            this.selectedAdmin = this.adminsList[randomValue];
+            console.log("Selected Admin: ", this.selectedAdmin);
+            let data = {
+                requestType: "startChat",
+                userId: this.checkUser.appUserId,
+                otherUserId: this.selectedAdmin.users_system_id
+            };
+            this.api.sendRequest("ChatLive", data).subscribe((res) => {
+                console.log("Resposne: ", res);
+                if (res.status == 'success') {
+                    this.router.navigate(['/live-chat-screen', {
+                            selected_admin: this.selectedAdmin.users_system_id
+                        }]);
+                }
+            }, (err) => {
+                console.log("Api Error: ", err);
+            });
+        }
+        else {
+            this.router.navigate(['/live-chat-screen', {
+                    selected_admin: this.adminId
+                }]);
+        }
     }
 };
 LiveChatPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.NavController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.NavController },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__.ApiService },
+    { type: _check_user_service__WEBPACK_IMPORTED_MODULE_2__.CheckUserService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router }
 ];
-LiveChatPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
+LiveChatPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-live-chat',
         template: _live_chat_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_live_chat_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]

@@ -242,9 +242,6 @@ export class HomeCarsAfterLoginPage implements OnInit {
     }
     this.api.showLoading();
     this.api.sendRequest('cars',data).subscribe((res:any)=>{
-      setTimeout(() => {
-        this.api.hideLoading();
-      }, 1000);
       console.log(res);
       if(res.status == 'success'){
         this.pickups = res.data;
@@ -252,10 +249,13 @@ export class HomeCarsAfterLoginPage implements OnInit {
         console.log("api.allCars: ",this.api.allCars);
         
       }
+      setTimeout(() => {
+        this.api.hideLoading();
+      }, 2000);
     },(err)=>{
       setTimeout(() => {
         this.api.hideLoading();
-      }, 1000);
+      }, 2000);
       console.log(err);
       
     })

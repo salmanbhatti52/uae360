@@ -5,12 +5,11 @@ import com.codetrixstudio.capacitor.GoogleAuth.GoogleAuth;
 import com.getcapacitor.BridgeActivity;
 
 public class MainActivity extends BridgeActivity {
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
+  public void onCreate(Bundle savedInstanceState){
+    super.onCreate(savedInstanceState);
 
-        registerPlugin(GoogleAuth.class);
-        registerPlugin(
-      com.getcapacitor.community.facebooklogin.FacebookLogin.class
-    );
-    }
+    registerPlugin(GoogleAuth.class);
+    registerPlugin(com.getcapacitor.community.facebooklogin.FacebookLogin.class);
+    registerPlugin(com.getcapacitor.community.stripe.StripePlugin.class);
+  }
 }
