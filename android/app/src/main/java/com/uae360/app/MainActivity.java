@@ -10,6 +10,6 @@ public class MainActivity extends BridgeActivity {
 
     registerPlugin(GoogleAuth.class);
     registerPlugin(com.getcapacitor.community.facebooklogin.FacebookLogin.class);
-    registerPlugin(com.getcapacitor.community.stripe.StripePlugin.class);
+    // registerPlugin(com.getcapacitor.community.stripe.StripePlugin.class);
   }
 }

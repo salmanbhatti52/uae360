@@ -16,23 +16,26 @@
 
     <div>
 
-      <div class="payment_method_box" style="margin-top: 15.4px;">
+      <div class="payment_method_box" style="margin-top: 15.4px;position: relative;" *ngFor="let data of cardsList;">
         <div style="display: flex;align-items: center;">
           <div>
-            <div class="owner_name">Owner name</div>
-            <div class="owner_info">4162 **** **** ****</div>
+            <div class="owner_name">{{data.holder_name}}</div>
+            <div class="owner_info">{{data.sm_card_number}} **** **** ****</div>
           </div>
         </div>
-        <div style="position: relative;">
-          <span class="delete_btn">
+        <div >
+          <span class="delete_btn" (click)="deletePaymentMethod(data.appUsers_cards_id)">
             <img style="margin-right: 4px;" src="assets/images/icons/recycle_bin.svg" alt="">
             <span class="delete_label urbanist">Delete</span>
           </span>
-          <img src="assets/images/icons/master_card.svg" alt="">
+          <img src="assets/images/icons/master_card.svg" alt="" *ngIf="data.card_type == 'mastercard'">
+          <img src="assets/images/icons/visa_icon.svg" alt="" *ngIf="data.card_type == 'visa'">
+          <img class="card_icon" src="assets/images/icons/am_ex.png" alt="" *ngIf="data.card_type == 'american-express'">
+          <img class="card_icon" src="assets/images/icons/discover.png" alt="" *ngIf="data.card_type == 'discover'">
         </div>
       </div>
       
-      <div class="payment_method_box" >
+      <!-- <div class="payment_method_box" >
         <div style="display: flex;align-items: center;">
           <div>
             <div class="owner_name">Owner name</div>
@@ -62,7 +65,7 @@
           </span>
           <img src="assets/images/icons/paypal_icon.svg" alt="">
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>

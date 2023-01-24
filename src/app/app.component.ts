@@ -9,7 +9,6 @@ import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { FacebookLogin, FacebookLoginResponse } from '@capacitor-community/facebook-login';
 import OneSignal from "onesignal-cordova-plugin";
 
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -35,6 +34,9 @@ export class AppComponent {
   initializeApp() { 
     this.platform.ready().then(() => {
       this.pushNotification();
+      // Stripe.initialize({
+      //   publishableKey: 'pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1',
+      // });
     });
     
   }

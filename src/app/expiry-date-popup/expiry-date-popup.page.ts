@@ -8,6 +8,7 @@ import { format, parseISO } from 'date-fns';
 })
 export class ExpiryDatePopupPage implements OnInit {
   date: any;
+  minDate = format(parseISO(new Date().toISOString()),'yyyy-MM-dd');
   constructor(public modalCtrlr:ModalController) { }
 
   ngOnInit() {

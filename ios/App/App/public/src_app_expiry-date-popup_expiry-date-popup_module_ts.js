@@ -106,6 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 let ExpiryDatePopupPage = class ExpiryDatePopupPage {
     constructor(modalCtrlr) {
         this.modalCtrlr = modalCtrlr;
+        this.minDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(new Date().toISOString()), 'yyyy-MM-dd');
     }
     ngOnInit() {
     }
@@ -155,7 +156,7 @@ module.exports = "ion-content {\n  --background:#FBFBFB !important;\n}\n\n.wrapp
   \**************************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"date_label\">Select Date  </div>\n    <ion-datetime #datetime (ionCancel)=\"cancel(ev)\" [showDefaultButtons]=\"true\"  presentation=\"date\" (ionChange)=\"formattedString(datetime.value)\" size=\"cover\" ></ion-datetime>\n  </div>\n</ion-content>\n";
+module.exports = "<ion-content>\n  <div class=\"wrapper\">\n    <div class=\"date_label\">Select Date  </div>\n    <ion-datetime #datetime min=\"{{minDate}}\" max=\"2050\" (ionCancel)=\"cancel(ev)\" [showDefaultButtons]=\"true\" presentation=\"month-year\" (ionChange)=\"formattedString(datetime.value)\" size=\"cover\" ></ion-datetime>\n  </div>\n</ion-content>\n";
 
 /***/ })
 

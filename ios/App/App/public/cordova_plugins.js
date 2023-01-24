@@ -2,6 +2,14 @@
   cordova.define('cordova/plugin_list', function(require, exports, module) {
     module.exports = [
       {
+          "id": "cordova-plugin-stripe.stripe",
+          "file": "plugins/cordova-plugin-stripe/www/CordovaStripe.js",
+          "pluginId": "cordova-plugin-stripe",
+        "clobbers": [
+          "cordova.plugins.stripe"
+        ]
+        },
+      {
           "id": "cordova-plugin-nativegeocoder.NativeGeocoder",
           "file": "plugins/cordova-plugin-nativegeocoder/www/NativeGeocoder.js",
           "pluginId": "cordova-plugin-nativegeocoder",
@@ -37,6 +45,7 @@
     // TOP OF METADATA
     {
       "cordova-plugin-nativegeocoder": "3.4.1",
+      "cordova-plugin-stripe": "1.5.3",
       "onesignal-cordova-plugin": "3.3.0"
     };
     // BOTTOM OF METADATA

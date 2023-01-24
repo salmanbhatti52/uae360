@@ -5,9 +5,9 @@ import { BookedPage } from '../booked/booked.page';
 import { ModalController } from '@ionic/angular';
 import { loadScript } from "@paypal/paypal-js";
 import { ApiService } from '../services/api.service';
-import {loadStripe} from '@stripe/stripe-js';
-import { HttpClient } from "@angular/common/http";
-import { Stripe } from '@capacitor-community/stripe';
+import { Stripe } from '@awesome-cordova-plugins/stripe/ngx';
+import { CheckUserService } from '../check-user.service';
+import Cleave from 'node_modules/cleave.js/dist/cleave-esm.min.js';
 @Component({
   selector: 'app-payment-details',
   templateUrl: './payment-details.page.html',
@@ -19,18 +19,21 @@ export class PaymentDetailsPage implements OnInit {
   visa = false;
   paypal = false;
   paymentAmount: string = this.api.bookingResponse.total_cost;
+  // paymentAmount: string = '10';
   currency: string = 'USD';
   paid_username:any;
-  // currencyIcon: string = '₹';
   card: any;
+  cardType = '';
+  cardNumber = '';
+  cardsList = [];
+  selected = 0;
   constructor(public location:Location,
     public modalCtrlr:ModalController,
     public api:ApiService,
-    private http: HttpClient
+    private stripe: Stripe,
+    public checkUser:CheckUserService
     ) {
-      Stripe.initialize({
-        publishableKey: 'pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1',
-      });
+      this.stripe.setPublishableKey('pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1');
      }
 
   ngOnInit() {
@@ -38,36 +41,68 @@ export class PaymentDetailsPage implements OnInit {
     this.renderPayWithPaypal();
   }
   ionViewWillEnter(){
-
-    // (async () => {
-    //   // be able to get event of PaymentSheet
-    //   Stripe.addListener(PaymentSheetEventsEnum.Completed, () => {
-    //     console.log('PaymentSheetEventsEnum.Completed');
-    //   });
-      
-    //   // Connect to your backend endpoint, and get every key.
-    //   const { paymentIntent, ephemeralKey, customer } = await this.http.post<{
-    //     paymentIntent: string;
-    //     ephemeralKey: string;
-    //     customer: string;
-    //   }>(environment.api + 'payment-sheet', {}).pipe(first()).toPromise(Promise);
-
-    //   // prepare PaymentSheet with CreatePaymentSheetOption.
-    //   await Stripe.createPaymentSheet({
-    //     paymentIntentClientSecret: paymentIntent,
-    //     customerId: customer,
-    //     customerEphemeralKeySecret: ephemeralKey,
-    //   });
-
-    //   // present PaymentSheet and get result.
-    //   const result = await Stripe.presentPaymentSheet();
-    //   if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
-    //     // Happy path
-    //   }
-    // })();
-
+    this.getToken();
+    this.getCardsList();
   }
   
+  getCardsList(){
+    let data = {
+      appuser_id:this.checkUser.appUserId
+    }
+    this.api.showLoading();
+    this.api.sendRequest('get_cards_list',data).subscribe((res:any)=>{
+      console.log("Response: ",res);
+      if(res.status == 'success'){
+        this.cardsList = res.data;
+        console.log("card list: ",this.cardsList);
+        
+        var creditCardType = require("credit-card-type");
+       
+        for(let data of this.cardsList){
+          data.sm_card_number = data.card_number.substring(0,4)
+          let visaCards = creditCardType(data.card_number);
+          console.log(visaCards);
+          if(visaCards.length != 0){
+            data.card_type = visaCards[0].type;
+          }else{
+            data.card_type = 'unknown'
+          }
+        }
+        console.log("card list: ",this.cardsList);
+        this.api.hideLoading();
+      }
+      
+    },(err)=>{
+      this.api.hideLoading();
+      console.log("Api error",err);
+      
+    })
+     
+  }
+
+  getToken(){
+    let card = {
+      number: '4242424242424242',
+      expMonth: 12,
+      expYear: 2025,
+      cvc: '220'
+    }
+     
+    this.stripe.createCardToken(card).then(token => {
+      console.log("token.id: ",token.id);
+      this.makePayment(token.id);
+    })
+    .catch(error => {
+      console.error("error: ",error);
+      this.api.presentToast(error);
+    });
+  }
+
+  makePayment(tokenId){
+    // remove tokenId from console after testing
+    console.log(tokenId);
+    
+  }
   ionViewWillLeave(){
     console.log('leave view');
     this.paid_username = '';
@@ -116,6 +151,8 @@ export class PaymentDetailsPage implements OnInit {
         onApprove: function (data, actions) {
           return actions.order.capture()
             .then(function (details) {
+              console.log("PayPal Payment Details: ",details);
+              
               _this.paid_username = details.payer.name.given_name
               // Show a success message to the buyer
               alert('Transaction completed by ' + details.payer.name.given_name + '!');
@@ -149,39 +186,9 @@ export class PaymentDetailsPage implements OnInit {
   
 
   selectMethod(val){
-    if(val == 'master'){
-      if(this.master == false){
-        this.master = true;
-        this.visa = false;
-        this.paypal = false;
-      }else{
-        this.master = false;
-        this.visa = false;
-        this.paypal = false;
-      }
-    }else if(val == 'visa'){
-      if(this.visa == false){
-        this.visa = true;
-        this.master = false;
-        this.paypal = false;
-      }else{
-        this.master = false;
-        this.visa = false;
-        this.paypal = false;
-      }
-    }else if(val == 'paypal'){
-      if(this.paypal == false){
-        this.paypal = true;
-        this.master = false;
-        this.visa = false;
-      }else{
-        this.master = false;
-        this.visa = false;
-        this.paypal = false;
-      }
-    }else{
-
-    }
+    console.log(val);
+    this.selected = val;
+    
 
   }
   async addPaymentMethod(){

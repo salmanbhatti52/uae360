@@ -91,18 +91,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PaymentDetailsPage": () => (/* binding */ PaymentDetailsPage)
 /* harmony export */ });
 /* harmony import */ var D_Github_Projects_360UAE_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 71670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _payment_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./payment-details.page.html?ngResource */ 91876);
 /* harmony import */ var _payment_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./payment-details.page.scss?ngResource */ 43057);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 22560);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ 94666);
 /* harmony import */ var _new_payment_method_new_payment_method_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../new-payment-method/new-payment-method.page */ 91785);
 /* harmony import */ var _booked_booked_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../booked/booked.page */ 88242);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 93819);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/api.service */ 5830);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/http */ 58987);
-/* harmony import */ var _capacitor_community_stripe__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @capacitor-community/stripe */ 49377);
-
+/* harmony import */ var _awesome_cordova_plugins_stripe_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @awesome-cordova-plugins/stripe/ngx */ 62381);
 
 
 
@@ -115,19 +113,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let PaymentDetailsPage = class PaymentDetailsPage {
-  constructor(location, modalCtrlr, api, http) {
+  constructor(location, modalCtrlr, api, stripe // private http: HttpClient
+  ) {
     this.location = location;
     this.modalCtrlr = modalCtrlr;
     this.api = api;
-    this.http = http;
+    this.stripe = stripe;
     this.master = false;
     this.visa = false;
     this.paypal = false;
-    this.paymentAmount = this.api.bookingResponse.total_cost;
-    this.currency = 'USD';
-    _capacitor_community_stripe__WEBPACK_IMPORTED_MODULE_6__.Stripe.initialize({
-      publishableKey: 'pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1'
-    });
+    this.paymentAmount = this.api.bookingResponse.total_cost; // paymentAmount: string = '10';
+
+    this.currency = 'USD'; // Stripe.initialize({
+    //   publishableKey: 'pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1',
+    // });
+
+    this.stripe.setPublishableKey('pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1');
   }
 
   ngOnInit() {
@@ -135,30 +136,23 @@ let PaymentDetailsPage = class PaymentDetailsPage {
     this.renderPayWithPaypal();
   }
 
-  ionViewWillEnter() {// (async () => {
-    //   // be able to get event of PaymentSheet
-    //   Stripe.addListener(PaymentSheetEventsEnum.Completed, () => {
-    //     console.log('PaymentSheetEventsEnum.Completed');
-    //   });
-    //   // Connect to your backend endpoint, and get every key.
-    //   const { paymentIntent, ephemeralKey, customer } = await this.http.post<{
-    //     paymentIntent: string;
-    //     ephemeralKey: string;
-    //     customer: string;
-    //   }>(environment.api + 'payment-sheet', {}).pipe(first()).toPromise(Promise);
-    //   // prepare PaymentSheet with CreatePaymentSheetOption.
-    //   await Stripe.createPaymentSheet({
-    //     paymentIntentClientSecret: paymentIntent,
-    //     customerId: customer,
-    //     customerEphemeralKeySecret: ephemeralKey,
-    //   });
-    //   // present PaymentSheet and get result.
-    //   const result = await Stripe.presentPaymentSheet();
-    //   if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
-    //     // Happy path
-    //   }
-    // })();
+  ionViewWillEnter() {
+    let card = {
+      number: '4242424242424242',
+      expMonth: 12,
+      expYear: 2025,
+      cvc: '220'
+    };
+    this.stripe.createCardToken(card).then(token => {
+      console.log("token.id: ", token.id);
+      this.makePayment(token.id);
+    }).catch(error => {
+      console.error("error: ", error);
+      this.api.presentToast(error);
+    });
   }
+
+  makePayment(tokenId) {}
 
   ionViewWillLeave() {
     console.log('leave view');
@@ -213,6 +207,7 @@ let PaymentDetailsPage = class PaymentDetailsPage {
           // Finalize the transaction
           onApprove: function (data, actions) {
             return actions.order.capture().then(function (details) {
+              console.log("PayPal Payment Details: ", details);
               _this.paid_username = details.payer.name.given_name; // Show a success message to the buyer
 
               alert('Transaction completed by ' + details.payer.name.given_name + '!');
@@ -302,280 +297,14 @@ PaymentDetailsPage.ctorParameters = () => [{
 }, {
   type: _services_api_service__WEBPACK_IMPORTED_MODULE_5__.ApiService
 }, {
-  type: _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HttpClient
+  type: _awesome_cordova_plugins_stripe_ngx__WEBPACK_IMPORTED_MODULE_6__.Stripe
 }];
 
-PaymentDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_10__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.Component)({
+PaymentDetailsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_9__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
   selector: 'app-payment-details',
   template: _payment_details_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_payment_details_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
 })], PaymentDetailsPage);
-
-
-/***/ }),
-
-/***/ 11859:
-/*!*******************************************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/applepay/apple-pay-difinitions.interface.js ***!
-  \*******************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-
-
-/***/ }),
-
-/***/ 61744:
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/applepay/apple-pay-events.enum.js ***!
-  \*********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApplePayEventsEnum": () => (/* binding */ ApplePayEventsEnum)
-/* harmony export */ });
-var ApplePayEventsEnum;
-
-(function (ApplePayEventsEnum) {
-  ApplePayEventsEnum["Loaded"] = "applePayLoaded";
-  ApplePayEventsEnum["FailedToLoad"] = "applePayFailedToLoad";
-  ApplePayEventsEnum["Completed"] = "applePayCompleted";
-  ApplePayEventsEnum["Canceled"] = "applePayCanceled";
-  ApplePayEventsEnum["Failed"] = "applePayFailed";
-  ApplePayEventsEnum["DidSelectShippingContact"] = "applePayDidSelectShippingContact";
-  ApplePayEventsEnum["DidCreatePaymentMethod"] = "applePayDidCreatePaymentMethod";
-})(ApplePayEventsEnum || (ApplePayEventsEnum = {}));
-
-/***/ }),
-
-/***/ 37084:
-/*!*****************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/applepay/index.js ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApplePayEventsEnum": () => (/* reexport safe */ _apple_pay_events_enum__WEBPACK_IMPORTED_MODULE_0__.ApplePayEventsEnum)
-/* harmony export */ });
-/* harmony import */ var _apple_pay_events_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./apple-pay-events.enum */ 61744);
-/* harmony import */ var _apple_pay_difinitions_interface__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./apple-pay-difinitions.interface */ 11859);
-
-
-
-/***/ }),
-
-/***/ 53073:
-/*!**************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/definitions.js ***!
-  \**************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApplePayEventsEnum": () => (/* reexport safe */ _applepay_index__WEBPACK_IMPORTED_MODULE_0__.ApplePayEventsEnum),
-/* harmony export */   "GooglePayEventsEnum": () => (/* reexport safe */ _googlepay_index__WEBPACK_IMPORTED_MODULE_1__.GooglePayEventsEnum),
-/* harmony export */   "PaymentFlowEventsEnum": () => (/* reexport safe */ _paymentflow_index__WEBPACK_IMPORTED_MODULE_2__.PaymentFlowEventsEnum),
-/* harmony export */   "PaymentSheetEventsEnum": () => (/* reexport safe */ _paymentsheet_index__WEBPACK_IMPORTED_MODULE_3__.PaymentSheetEventsEnum)
-/* harmony export */ });
-/* harmony import */ var _applepay_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./applepay/index */ 37084);
-/* harmony import */ var _googlepay_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./googlepay/index */ 58367);
-/* harmony import */ var _paymentflow_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./paymentflow/index */ 35119);
-/* harmony import */ var _paymentsheet_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./paymentsheet/index */ 31793);
-/* harmony import */ var _shared_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shared/index */ 10934);
-
-
-
-
-
-
-/***/ }),
-
-/***/ 53771:
-/*!*********************************************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/googlepay/google-pay-difinitions.interface.js ***!
-  \*********************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-
-
-/***/ }),
-
-/***/ 28523:
-/*!***********************************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/googlepay/google-pay-events.enum.js ***!
-  \***********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GooglePayEventsEnum": () => (/* binding */ GooglePayEventsEnum)
-/* harmony export */ });
-var GooglePayEventsEnum;
-
-(function (GooglePayEventsEnum) {
-  GooglePayEventsEnum["Loaded"] = "googlePayLoaded";
-  GooglePayEventsEnum["FailedToLoad"] = "googlePayFailedToLoad";
-  GooglePayEventsEnum["Completed"] = "googlePayCompleted";
-  GooglePayEventsEnum["Canceled"] = "googlePayCanceled";
-  GooglePayEventsEnum["Failed"] = "googlePayFailed";
-})(GooglePayEventsEnum || (GooglePayEventsEnum = {}));
-
-/***/ }),
-
-/***/ 58367:
-/*!******************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/googlepay/index.js ***!
-  \******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GooglePayEventsEnum": () => (/* reexport safe */ _google_pay_events_enum__WEBPACK_IMPORTED_MODULE_0__.GooglePayEventsEnum)
-/* harmony export */ });
-/* harmony import */ var _google_pay_events_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./google-pay-events.enum */ 28523);
-/* harmony import */ var _google_pay_difinitions_interface__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./google-pay-difinitions.interface */ 53771);
-
-
-
-/***/ }),
-
-/***/ 49377:
-/*!********************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/index.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApplePayEventsEnum": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.ApplePayEventsEnum),
-/* harmony export */   "GooglePayEventsEnum": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.GooglePayEventsEnum),
-/* harmony export */   "PaymentFlowEventsEnum": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.PaymentFlowEventsEnum),
-/* harmony export */   "PaymentSheetEventsEnum": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.PaymentSheetEventsEnum),
-/* harmony export */   "Stripe": () => (/* binding */ Stripe)
-/* harmony export */ });
-/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 26549);
-/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 53073);
-
-const Stripe = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('Stripe', {
-  web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor-community_stripe_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 48802)).then(m => new m.StripeWeb())
-});
-
-
-
-/***/ }),
-
-/***/ 35119:
-/*!********************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/paymentflow/index.js ***!
-  \********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PaymentFlowEventsEnum": () => (/* reexport safe */ _payment_flow_events_enum__WEBPACK_IMPORTED_MODULE_0__.PaymentFlowEventsEnum)
-/* harmony export */ });
-/* harmony import */ var _payment_flow_events_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./payment-flow-events.enum */ 98485);
-/* harmony import */ var _payment_flow_definitions_interface__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./payment-flow-definitions.interface */ 41880);
-
-
-
-/***/ }),
-
-/***/ 41880:
-/*!*************************************************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/paymentflow/payment-flow-definitions.interface.js ***!
-  \*************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-
-
-/***/ }),
-
-/***/ 98485:
-/*!***************************************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/paymentflow/payment-flow-events.enum.js ***!
-  \***************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PaymentFlowEventsEnum": () => (/* binding */ PaymentFlowEventsEnum)
-/* harmony export */ });
-var PaymentFlowEventsEnum;
-
-(function (PaymentFlowEventsEnum) {
-  PaymentFlowEventsEnum["Loaded"] = "paymentFlowLoaded";
-  PaymentFlowEventsEnum["FailedToLoad"] = "paymentFlowFailedToLoad";
-  PaymentFlowEventsEnum["Opened"] = "paymentFlowOpened";
-  PaymentFlowEventsEnum["Created"] = "paymentFlowCreated";
-  PaymentFlowEventsEnum["Completed"] = "paymentFlowCompleted";
-  PaymentFlowEventsEnum["Canceled"] = "paymentFlowCanceled";
-  PaymentFlowEventsEnum["Failed"] = "paymentFlowFailed";
-})(PaymentFlowEventsEnum || (PaymentFlowEventsEnum = {}));
-
-/***/ }),
-
-/***/ 31793:
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/paymentsheet/index.js ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PaymentSheetEventsEnum": () => (/* reexport safe */ _payment_sheet_events_enum__WEBPACK_IMPORTED_MODULE_0__.PaymentSheetEventsEnum)
-/* harmony export */ });
-/* harmony import */ var _payment_sheet_events_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./payment-sheet-events.enum */ 27707);
-/* harmony import */ var _payment_sheet_definitions_interface__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./payment-sheet-definitions.interface */ 72482);
-
-
-
-/***/ }),
-
-/***/ 72482:
-/*!***************************************************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/paymentsheet/payment-sheet-definitions.interface.js ***!
-  \***************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-
-
-/***/ }),
-
-/***/ 27707:
-/*!*****************************************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/paymentsheet/payment-sheet-events.enum.js ***!
-  \*****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PaymentSheetEventsEnum": () => (/* binding */ PaymentSheetEventsEnum)
-/* harmony export */ });
-var PaymentSheetEventsEnum;
-
-(function (PaymentSheetEventsEnum) {
-  PaymentSheetEventsEnum["Loaded"] = "paymentSheetLoaded";
-  PaymentSheetEventsEnum["FailedToLoad"] = "paymentSheetFailedToLoad";
-  PaymentSheetEventsEnum["Completed"] = "paymentSheetCompleted";
-  PaymentSheetEventsEnum["Canceled"] = "paymentSheetCanceled";
-  PaymentSheetEventsEnum["Failed"] = "paymentSheetFailed";
-})(PaymentSheetEventsEnum || (PaymentSheetEventsEnum = {}));
-
-/***/ }),
-
-/***/ 10934:
-/*!***************************************************************************!*\
-  !*** ./node_modules/@capacitor-community/stripe/dist/esm/shared/index.js ***!
-  \***************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
 
 
 /***/ }),
@@ -596,7 +325,7 @@ module.exports = "ion-header {\n  font-family: \"Poppins\", sans-serif;\n  backg
   \**********************************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">Payment</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center;\">\n      <img src=\"assets/images/payment Info_img.svg\" alt=\"\">\n    </div>\n    <div class=\"content_heading\">Select payment method</div>\n\n    <!-- <div>\n\n      <div class=\"payment_method_box\" style=\"margin-top: 15.4px;\">\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"master == true\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"master != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/master_card.svg\" alt=\"\">\n        </div>\n      </div>\n      \n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"visa == true\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"visa != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/visa_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"paypal == true\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"paypal != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">PayPal</div>\n            <div class=\"owner_info\">Arslan********mail.com</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/paypal_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n    </div> -->\n\n\n    \n\n    <div style=\"margin-top: 20px;\">\n      <div class=\"payment_method\">Pay with Paypal</div>\n      <div id=\"your-container-element\"></div>\n    </div>\n    \n  </div>\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 25px;\">\n    <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button>\n    <!-- <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Pay</span>\n    </ion-button>\n    <ion-button class=\"login_button btn_border\" style=\"--background:#FBFBFB; margin-top: 16px;\" (click)=\"addPaymentMethod()\">\n      <span class=\"btn_text \" style=\"color: #0F172A;\">Add New Payment Method</span>\n    </ion-button> -->\n  </div>\n</ion-footer>\n";
+module.exports = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar class=\"bgtoolbar\">\n    <div class=\"header\">\n      <img (click)=\"goBack()\" style=\"position: absolute;\" src=\"assets/images/icons/back_arrow.svg\" alt=\"\">\n      <div class=\"header_title\">Payment</div>\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"wrapper\">\n    <div style=\"text-align: center;\">\n      <img src=\"assets/images/payment Info_img.svg\" alt=\"\">\n    </div>\n    <div class=\"content_heading\">Select payment method</div>\n\n    <!-- <div>\n\n      <div class=\"payment_method_box\" style=\"margin-top: 15.4px;\">\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"master == true\">\n            <img (click)=\"selectMethod('master')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"master != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/master_card.svg\" alt=\"\">\n        </div>\n      </div>\n      \n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"visa == true\">\n            <img (click)=\"selectMethod('visa')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"visa != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">Owner name</div>\n            <div class=\"owner_info\">4162 **** **** ****</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/visa_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n      <div class=\"payment_method_box\" >\n        <div style=\"display: flex;align-items: center;\">\n          <div style=\"margin-right: 18px;display: flex;\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/marked.svg\" alt=\"\" *ngIf=\"paypal == true\">\n            <img (click)=\"selectMethod('paypal')\" src=\"assets/images/icons/unmarked.svg\" alt=\"\" *ngIf=\"paypal != true\">\n            \n          </div>\n          <div>\n            <div class=\"owner_name\">PayPal</div>\n            <div class=\"owner_info\">Arslan********mail.com</div>\n          </div>\n        </div>\n        <div>\n          <img src=\"assets/images/icons/paypal_icon.svg\" alt=\"\">\n        </div>\n      </div>\n\n    </div> -->\n\n\n    \n\n    <div style=\"margin-top: 20px;\">\n      <div class=\"payment_method\">Pay with Paypal</div>\n      <div id=\"your-container-element\"></div>\n    </div>\n    \n  </div>\n</ion-content>\n\n<ion-footer class=\"ion-no-border\">\n  <div style=\"padding: 0px 16px 25px;\">\n    <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Done</span>\n    </ion-button>\n    <!-- <ion-button class=\"login_button\" (click)=\"openBookedModal()\">\n      <span class=\"btn_text\">Pay</span>\n    </ion-button> -->\n    <ion-button class=\"login_button btn_border\" style=\"--background:#FBFBFB; margin-top: 16px;\" (click)=\"addPaymentMethod()\">\n      <span class=\"btn_text \" style=\"color: #0F172A;\">Add New Payment Method</span>\n    </ion-button>\n  </div>\n</ion-footer>\n";
 
 /***/ })
 

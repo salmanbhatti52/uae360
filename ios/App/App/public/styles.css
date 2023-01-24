@@ -5110,13 +5110,13 @@ ion-input, ion-textarea, ion-label {
 }
 .add_payment_method {
   --width: 90%;
-  --height: 505px;
+  --height: 355px;
   background: rgba(15, 23, 42, 0.5);
   --border-radius: 20px 20px 20px 20px;
 }
 .expiry_date {
   --width: 90%;
-  --height: 505px;
+  --height: 355px;
   --border-radius: 20px 20px 20px 20px;
 }
 .delete_account {

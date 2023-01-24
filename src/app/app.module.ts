@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'ion2-calendar';
 // import { PayPal} from '@ionic-native/paypal/ngx'
 import { OneSignal } from "@awesome-cordova-plugins/onesignal/ngx";
-
+import { Stripe } from '@awesome-cordova-plugins/stripe/ngx';
 @NgModule({
   
   declarations: [AppComponent],
@@ -36,6 +36,7 @@ import { OneSignal } from "@awesome-cordova-plugins/onesignal/ngx";
     NativeGeocoder, 
     OneSignal,
     // PayPal
+    Stripe
   ],
   bootstrap: [AppComponent],
 })

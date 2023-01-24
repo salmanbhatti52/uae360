@@ -13,4 +13,6 @@
     s.dependency 'CapacitorCordova'
     s.swift_version  = '5.1'
     s.frameworks = 'CoreLocation'
+    s.vendored_frameworks = 'sources\CordovaPluginStripe\src\ios\Stripe.framework'
+    s.exclude_files = 'sources/**/*.framework/Headers/*.h'
   end
