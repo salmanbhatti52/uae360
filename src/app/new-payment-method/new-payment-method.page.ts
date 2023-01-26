@@ -39,18 +39,18 @@ export class NewPaymentMethodPage implements OnInit {
   }
   
   getUserName(ev){
-    console.log(ev);
+    // console.log(ev);
     
     this.userName = ev.detail.value;
-    console.log("username:",this.userName);
+    // console.log("username:",this.userName);
     
   }
 
   getCvc(ev){
-    console.log(ev);
+    // console.log(ev);
     
     this.cvc = ev.detail.value;
-    console.log("cvc:",this.cvc);
+    // console.log("cvc:",this.cvc);
   }
 
   async openDateModal(){
@@ -71,9 +71,9 @@ export class NewPaymentMethodPage implements OnInit {
   }
 
   checkCardType(ev){
-    console.log(ev);
+    // console.log(ev);
     this.cardNumber = ev.detail.value
-    console.log("Card Number:",this.cardNumber);
+    // console.log("Card Number:",this.cardNumber);
     console.log("checkCarType Called");
     let _this = this;
     
@@ -83,11 +83,11 @@ export class NewPaymentMethodPage implements OnInit {
       onCreditCardTypeChanged: function (type) {
         // update UI ...
         _this.card_type = type
-        console.log("card_type: ",_this.card_type);
+        // console.log("card_type: ",_this.card_type);
         
       }
     });
-    console.log("Cleave: ",cleave);
+    // console.log("Cleave: ",cleave);
     
   }
 
@@ -134,16 +134,16 @@ export class NewPaymentMethodPage implements OnInit {
     this.email_box_active = false;
 
     let cardArray = this.cardNumber.split(' ');
-    console.log(cardArray);
+    // console.log(cardArray);
     let cardNumWithoutSpace = '';
 
     for(let i = 0; i<cardArray.length; i++){
-      console.log(cardArray[i]);
+      // console.log(cardArray[i]);
       cardNumWithoutSpace =  cardNumWithoutSpace.concat(cardArray[i])
     }
-    console.log("cardNumWithoutSpace: ",cardNumWithoutSpace);
+    // console.log("cardNumWithoutSpace: ",cardNumWithoutSpace);
     this.cardNumber = cardNumWithoutSpace;
-    console.log("Card Number: ",this.cardNumber);
+    // console.log("Card Number: ",this.cardNumber);
 
     if(this.userName == ''){
       this.api.presentToast('Please enter username')
@@ -165,7 +165,7 @@ export class NewPaymentMethodPage implements OnInit {
         cvv:this.cvc
       }
       this.api.sendRequest('store_cards_list',data).subscribe((res:any)=>{
-        console.log(res);
+        // console.log(res);
         if(res.status == 'success'){
           this.api.presentToast("Success!")
           //  this.modalCtrlr.dismiss();

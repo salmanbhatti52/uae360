@@ -11,34 +11,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "BookedPage": () => (/* binding */ BookedPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 34929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 34929);
 /* harmony import */ var _booked_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./booked.page.html?ngResource */ 2167);
 /* harmony import */ var _booked_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./booked.page.scss?ngResource */ 48525);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 22560);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 22560);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 93819);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ 5830);
+
 
 
 
 
 
 let BookedPage = class BookedPage {
-    constructor(modalCtrlr, navCtrlr) {
+    constructor(modalCtrlr, navCtrlr, api) {
         this.modalCtrlr = modalCtrlr;
         this.navCtrlr = navCtrlr;
+        this.api = api;
     }
     ngOnInit() {
     }
     closeModal() {
         this.modalCtrlr.dismiss();
+        this.api.showNewBookings = 'true';
         this.navCtrlr.navigateForward('bookings');
     }
 };
 BookedPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ModalController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.NavController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.ModalController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.NavController },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_2__.ApiService }
 ];
-BookedPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
+BookedPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-booked',
         template: _booked_page_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_booked_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]

@@ -121,7 +121,7 @@ const routes = [
     },
     {
         path: 'payment-details',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_payment-details_payment-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./payment-details/payment-details.module */ 76472)).then(m => m.PaymentDetailsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("default-node_modules_credit-card-type_dist_index_js"), __webpack_require__.e("common"), __webpack_require__.e("src_app_payment-details_payment-details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./payment-details/payment-details.module */ 76472)).then(m => m.PaymentDetailsPageModule)
     },
     {
         path: 'new-payment-method',
@@ -145,7 +145,7 @@ const routes = [
     },
     {
         path: 'saved-payment-methods',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("src_app_saved-payment-methods_saved-payment-methods_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./saved-payment-methods/saved-payment-methods.module */ 27135)).then(m => m.SavedPaymentMethodsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_date-fns_esm_format_index_js-node_modules_date-fns_esm_parseISO_index_js"), __webpack_require__.e("default-src_app_new-payment-method_new-payment-method_page_ts"), __webpack_require__.e("default-node_modules_credit-card-type_dist_index_js"), __webpack_require__.e("src_app_saved-payment-methods_saved-payment-methods_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./saved-payment-methods/saved-payment-methods.module */ 27135)).then(m => m.SavedPaymentMethodsPageModule)
     },
     {
         path: 'edit-profile',

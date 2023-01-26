@@ -171,7 +171,8 @@ let CarBookingPage = class CarBookingPage {
       end_time: '',
       license_img: '',
       location: '',
-      total_cost: ''
+      total_cost: '',
+      booking_id: ''
     };
     this.startDateForDB = '';
     this.startDateForSummary = '';
@@ -775,19 +776,15 @@ let CarBookingPage = class CarBookingPage {
             _this8.bookingObj.total_cost = _this8.totalCost;
             _this8.bookingObj.license_img = _this8.imageURL;
             _this8.bookingObj.location = _this8.company_location;
+            _this8.bookingObj.booking_id = res.data.booking_id;
             console.log('BookingObject: ', _this8.bookingObj);
-            _this8.api.bookingResponse = _this8.bookingObj;
-
-            _this8.api.hideLoading();
+            _this8.api.bookingResponse = _this8.bookingObj; // this.api.hideLoading();
 
             _this8.navCtrlr.navigateForward('summary');
-          } else if (res.status == 'error') {
-            _this8.api.hideLoading();
+          } else if (res.status == 'error') {// this.api.hideLoading();
           } else {}
         }, err => {
-          console.log('Error: ', err);
-
-          _this8.api.hideLoading();
+          console.log('Error: ', err); // this.api.hideLoading();
         });
       }
     })();

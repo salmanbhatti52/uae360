@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { CheckUserService } from '../check-user.service';
 import { format, parseISO } from 'date-fns';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-bookings',
@@ -17,25 +17,36 @@ export class BookingsPage implements OnInit {
   
   previousBookingRecords = [];
   upcomingBookingRecords = [];
+  topPreviousBookingRecords = [];
+  topUpcomingBookingRecords = [];
   response = 'true';
 
   constructor(
     public modalCtrlr:ModalController,
     public api:ApiService,
     public checkUser:CheckUserService,
-    public router:Router) { }
+    public router:Router,
+    public activatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
     
   }
   ionViewWillEnter(){
-    if(this.previous_tab == 'true'){
-      this.previousTab();
-    }else{
+
+    if(this.api.showNewBookings == 'true'){
+      this.api.showNewBookings = ''
       this.upcomingTab();
+    }else{
+      if(this.previous_tab == 'true'){
+        this.previousTab();
+      }else{
+        this.upcomingTab();
+      }
     }
+    
    
   }
+  
   
   previousTab(){
   
@@ -64,7 +75,12 @@ export class BookingsPage implements OnInit {
         }
         this.api.hideLoading();
         console.log('previousBookingRecords: ',this.previousBookingRecords);
-        
+
+        for(let i = this.previousBookingRecords.length - 1; i>=0; i--){
+          this.topPreviousBookingRecords.push(this.previousBookingRecords[i]);
+        }
+        console.log("NF. List: ",this.topPreviousBookingRecords);
+
       }else if(res.status == 'error'){
         this.api.hideLoading();
         this.response = 'false';
@@ -105,7 +121,10 @@ export class BookingsPage implements OnInit {
         }
         this.api.hideLoading();
         console.log('upcomingBookingRecords: ',this.upcomingBookingRecords);
-        
+        for(let i = this.upcomingBookingRecords.length - 1; i>=0; i--){
+          this.topUpcomingBookingRecords.push(this.upcomingBookingRecords[i]);
+        }
+        console.log("NF. List: ",this.topUpcomingBookingRecords);
       }else if(res.status == 'error'){
         this.api.hideLoading();
         this.response = 'false';

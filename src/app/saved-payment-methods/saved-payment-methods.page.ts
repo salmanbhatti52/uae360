@@ -33,10 +33,10 @@ export class SavedPaymentMethodsPage implements OnInit {
     }
     this.api.showLoading();
     this.api.sendRequest('get_cards_list',data).subscribe((res:any)=>{
-      console.log("Response: ",res);
+      // console.log("Response: ",res);
       if(res.status == 'success'){
         this.cardsList = res.data;
-        console.log("card list: ",this.cardsList);
+        // console.log("card list: ",this.cardsList);
         
         var creditCardType = require("credit-card-type");
        
@@ -50,7 +50,7 @@ export class SavedPaymentMethodsPage implements OnInit {
             data.card_type = 'unknown'
           }
         }
-        console.log("card list: ",this.cardsList);
+        // console.log("card list: ",this.cardsList);
         this.api.hideLoading();
       }
       
@@ -68,10 +68,10 @@ export class SavedPaymentMethodsPage implements OnInit {
     }
     // this.api.showLoading();
     this.api.sendRequest('get_cards_list',data).subscribe((res:any)=>{
-      console.log("Response: ",res);
+      // console.log("Response: ",res);
       if(res.status == 'success'){
         this.cardsList = res.data;
-        console.log("card list: ",this.cardsList);
+        // console.log("card list: ",this.cardsList);
         
         var creditCardType = require("credit-card-type");
        
@@ -85,7 +85,7 @@ export class SavedPaymentMethodsPage implements OnInit {
             data.card_type = 'unknown'
           }
         }
-        console.log("card list: ",this.cardsList);
+        // console.log("card list: ",this.cardsList);
         // this.api.hideLoading();
       }
       
@@ -105,7 +105,7 @@ export class SavedPaymentMethodsPage implements OnInit {
     this.api.sendRequest('delete_cards_list',data).subscribe((res:any)=>{
       console.log("Response: ",res);
       if(res.status == 'success'){
-        console.log("card list: ",this.cardsList);
+        // console.log("card list: ",this.cardsList);
         this.getCardsList2();
         this.api.hideLoading();
       }

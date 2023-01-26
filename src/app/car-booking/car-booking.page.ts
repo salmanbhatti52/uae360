@@ -71,7 +71,8 @@ export class CarBookingPage implements OnInit {
     end_time: '',
     license_img: '',
     location: '',
-    total_cost: ''
+    total_cost: '',
+    booking_id: ''
   }
   drivingLicense: any;
   selectedTimeForDb: string;
@@ -736,16 +737,17 @@ export class CarBookingPage implements OnInit {
           this.bookingObj.end_time = this.endTime;
           this.bookingObj.total_cost = this.totalCost;
           this.bookingObj.license_img = this.imageURL;
-          this.bookingObj.location = this.company_location
+          this.bookingObj.location = this.company_location;
+          this.bookingObj.booking_id = res.data.booking_id;
           console.log('BookingObject: ', this.bookingObj);
 
           this.api.bookingResponse = this.bookingObj;
-          this.api.hideLoading();
+          // this.api.hideLoading();
           this.navCtrlr.navigateForward('summary');
 
         }else if(res.status == 'error'){
           
-          this.api.hideLoading();
+          // this.api.hideLoading();
         
         }else{
 
@@ -753,7 +755,7 @@ export class CarBookingPage implements OnInit {
 
         }, (err: any) => {
           console.log('Error: ', err);
-          this.api.hideLoading();
+          // this.api.hideLoading();
       });
     }
     

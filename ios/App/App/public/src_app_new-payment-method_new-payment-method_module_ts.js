@@ -62,6 +62,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let NewPaymentMethodPageModule = class NewPaymentMethodPageModule {
 };
 NewPaymentMethodPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
@@ -70,6 +71,7 @@ NewPaymentMethodPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
             _angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule,
             _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormsModule,
             _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_5__.ReactiveFormsModule,
             _new_payment_method_routing_module__WEBPACK_IMPORTED_MODULE_0__.NewPaymentMethodPageRoutingModule
         ],
         declarations: [_new_payment_method_page__WEBPACK_IMPORTED_MODULE_1__.NewPaymentMethodPage]

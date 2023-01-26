@@ -12,15 +12,21 @@
     <div style="text-align: center;">
       <img src="assets/images/payment Info_img.svg" alt="">
     </div>
-    <div class="content_heading">Select payment method</div>
+    <!-- <div class="content_heading">Select payment method</div> -->
+
+    <div style="margin-top: 15.4px;">
+      <div class="content_heading" >Pay with Paypal</div>
+      <div id="your-container-element"></div>
+    </div>
 
     <div>
-
+      <div class="content_heading" style="text-align: center;margin-top: 10px;" *ngIf="cardsList.length > 0">OR</div>
+      <div class="content_heading" style="margin-top: 10px;" *ngIf="cardsList.length > 0">Select payment method</div>
       <div class="payment_method_box" style="margin-top: 15.4px;" *ngFor="let data of cardsList; let i = index">
         <div style="display: flex;align-items: center;">
           <div style="margin-right: 18px;display: flex;">
-            <img (click)="selectMethod(i)" src="assets/images/icons/marked.svg" alt="" *ngIf="selected == i">
-            <img (click)="selectMethod(i)" src="assets/images/icons/unmarked.svg" alt="" *ngIf="selected != i">
+            <img (click)="selectMethod(i,data)" src="assets/images/icons/marked.svg" alt="" *ngIf="selected == i">
+            <img (click)="selectMethod(i,data)" src="assets/images/icons/unmarked.svg" alt="" *ngIf="selected != i">
             
           </div>
           <div>
@@ -35,62 +41,17 @@
           <img class="card_icon" src="assets/images/icons/discover.png" alt="" *ngIf="data.card_type == 'discover'">
         </div>
       </div>
-      
-      <!-- <div class="payment_method_box" >
-        <div style="display: flex;align-items: center;">
-          <div style="margin-right: 18px;display: flex;">
-            <img (click)="selectMethod('visa')" src="assets/images/icons/marked.svg" alt="" *ngIf="visa == true">
-            <img (click)="selectMethod('visa')" src="assets/images/icons/unmarked.svg" alt="" *ngIf="visa != true">
-            
-          </div>
-          <div>
-            <div class="owner_name">Owner name</div>
-            <div class="owner_info">4162 **** **** ****</div>
-          </div>
-        </div>
-        <div>
-          <img src="assets/images/icons/visa_icon.svg" alt="">
-        </div>
-      </div> -->
-
-      <!-- <div class="payment_method_box" >
-        <div style="display: flex;align-items: center;">
-          <div style="margin-right: 18px;display: flex;">
-            <img (click)="selectMethod('paypal')" src="assets/images/icons/marked.svg" alt="" *ngIf="paypal == true">
-            <img (click)="selectMethod('paypal')" src="assets/images/icons/unmarked.svg" alt="" *ngIf="paypal != true">
-            
-          </div>
-          <div>
-            <div class="owner_name">PayPal</div>
-            <div class="owner_info">Arslan********mail.com</div>
-          </div>
-        </div>
-        <div>
-          <img src="assets/images/icons/paypal_icon.svg" alt="">
-        </div>
-      </div> -->
 
     </div>
 
-
-    
-
-    <div style="margin-top: 20px;">
-      <div class="payment_method">Pay with Paypal</div>
-      <div id="your-container-element"></div>
-    </div>
-    
   </div>
 </ion-content>
 
 <ion-footer class="ion-no-border">
   <div style="padding: 0px 16px 25px;">
-    <ion-button class="login_button" (click)="openBookedModal()">
-      <span class="btn_text">Done</span>
-    </ion-button>
-    <!-- <ion-button class="login_button" (click)="openBookedModal()">
+    <ion-button class="login_button" (click)="makePayment()" *ngIf="cardsList.length > 0">
       <span class="btn_text">Pay</span>
-    </ion-button> -->
+    </ion-button>
     <ion-button class="login_button btn_border" style="--background:#FBFBFB; margin-top: 16px;" (click)="addPaymentMethod()">
       <span class="btn_text " style="color: #0F172A;">Add New Payment Method</span>
     </ion-button>

@@ -27,6 +27,11 @@ export class PaymentDetailsPage implements OnInit {
   cardNumber = '';
   cardsList = [];
   selected = 0;
+  payPalPaymentDetails: any;
+  bookingId:any;
+  tokenId:any;
+  selectedCard:any;
+  errorMessage = 'Transaction for this booking already exists.';
   constructor(public location:Location,
     public modalCtrlr:ModalController,
     public api:ApiService,
@@ -43,32 +48,42 @@ export class PaymentDetailsPage implements OnInit {
   ionViewWillEnter(){
     this.getToken();
     this.getCardsList();
+    console.log(this.api.bookingResponse);
+    
+    this.bookingId = this.api.bookingResponse.booking_id;
+    console.log('Booking Id: ',this.bookingId);
+    
   }
   
+  goBack(){
+    this.location.back();
+  }
+
   getCardsList(){
     let data = {
       appuser_id:this.checkUser.appUserId
     }
     this.api.showLoading();
     this.api.sendRequest('get_cards_list',data).subscribe((res:any)=>{
-      console.log("Response: ",res);
+      // console.log("Response: ",res);
       if(res.status == 'success'){
         this.cardsList = res.data;
-        console.log("card list: ",this.cardsList);
+        // console.log("card list: ",this.cardsList);
         
         var creditCardType = require("credit-card-type");
        
         for(let data of this.cardsList){
           data.sm_card_number = data.card_number.substring(0,4)
           let visaCards = creditCardType(data.card_number);
-          console.log(visaCards);
+          // console.log(visaCards);
           if(visaCards.length != 0){
             data.card_type = visaCards[0].type;
           }else{
             data.card_type = 'unknown'
           }
         }
-        console.log("card list: ",this.cardsList);
+        // console.log("card list: ",this.cardsList);
+        this.selectedCard = this.cardsList[0]
         this.api.hideLoading();
       }
       
@@ -89,8 +104,9 @@ export class PaymentDetailsPage implements OnInit {
     }
      
     this.stripe.createCardToken(card).then(token => {
-      console.log("token.id: ",token.id);
-      this.makePayment(token.id);
+      // console.log("token.id: ",token.id);
+      this.tokenId = token.id
+      // console.log("this.tokenId: ",this.tokenId);
     })
     .catch(error => {
       console.error("error: ",error);
@@ -98,31 +114,60 @@ export class PaymentDetailsPage implements OnInit {
     });
   }
 
-  makePayment(tokenId){
-    // remove tokenId from console after testing
-    console.log(tokenId);
-    
+  selectMethod(val,cardData){
+    console.log(val);
+    this.selected = val;
+    this.selectedCard = cardData
   }
-  ionViewWillLeave(){
-    console.log('leave view');
-    this.paid_username = '';
-  }
-  goBack(){
-    this.location.back();
-  }
-  async openBookedModal(){
-    console.log("paid_username: ",this.paid_username);
-    
-    if(this.paid_username !== undefined){
-      const modal  = await this.modalCtrlr.create({
-        component:BookedPage,
-        showBackdrop:true,
-        cssClass:'booked_modal'
-      });
-      modal.present();
+  makePayment(){
+    if(this.paymentAmount != '0'){
+      let data = {
+        booking_id:this.bookingId,
+        payment_gateways:"Credit Card",
+        payer_name:this.selectedCard.holder_name,
+        paid_amount:this.paymentAmount,
+        token_id:this.tokenId,
+        currency:"USD",
+        gateway_status:"Pending",
+        transactions_status:"Pending"
+      }
+      // console.log("Data: ",data);
+  
+      this.api.sendRequest("storeCarsBookingTransactions",data).subscribe((res:any)=>{
+        // console.log("Response: ",res);
+        if(res.status == 'success'){
+          this.paymentAmount = '0';
+          this.openBookedModal();
+        }else if(res.status == 'error'){
+          this.api.presentToast(res.message)
+          this.paymentAmount = '0';
+          this.openBookedModal();
+        }else{
+          
+        }
+      },(err)=>{
+        console.log("Api Error: ",err);
+        
+      })
     }else{
-      this.api.presentToast('Hmm! You forgot to pay the amount.')
+      this.api.presentToast(this.errorMessage);
+      this.openBookedModal();
     }
+   
+    
+  }
+ 
+  async openBookedModal(){
+    
+    const modal  = await this.modalCtrlr.create({
+      component:BookedPage,
+      showBackdrop:true,
+      cssClass:'booked_modal'
+    });
+    modal.present();
+    // else{
+    //   this.api.presentToast('Hmm! You forgot to pay the amount.')
+    // }
     
     //   "client-id": 'ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz',
     //   "data-page-type": "checkout",
@@ -132,12 +177,17 @@ export class PaymentDetailsPage implements OnInit {
 
   async renderPayWithPaypal(){
     let _this = this;
-    setTimeout(() => {
+    setTimeout(async () => {
+      
       // Render the PayPal button into #paypal-button-container
       <any>window['paypal'].Buttons({
 
         // Set up the transaction
         createOrder: function (data, actions) {
+          if(_this.paymentAmount == '0'){
+            _this.api.presentToast(_this.errorMessage);
+            _this.openBookedModal();
+          }
           return actions.order.create({
             purchase_units: [{
               amount: {
@@ -151,46 +201,67 @@ export class PaymentDetailsPage implements OnInit {
         onApprove: function (data, actions) {
           return actions.order.capture()
             .then(function (details) {
-              console.log("PayPal Payment Details: ",details);
-              
-              _this.paid_username = details.payer.name.given_name
-              // Show a success message to the buyer
-              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+              // console.log("PayPal Payment Details: ",details);
+              _this.payPalPaymentDetails = details;
+             
+              // if(_this.paymentAmount != '0'){
+                // Show a success message to the buyer
+                alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                // console.log('amount: ',_this.paymentAmount);
+                _this.paymentAmount = '0'
+                // console.log('amount: ',_this.paymentAmount);
+              // }
+              // else{
+              //   this.api.presentToast(_this.errorMessage);
+              // }
+              _this.sendPayPalDetails();
             })
             .catch(err => {
               console.log(err);
             })
         }
       }).render('#your-container-element');
+      
+      
     }, 500)
-
-    
-  
-    // let paypal;
-
-    // try {
-    //     paypal = await loadScript({ "client-id": "ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz" });
-    // } catch (error) {
-    //     console.error("failed to load the PayPal JS SDK script", error);
-    // }
-
-    // if (paypal) {
-    //     try {
-    //         await paypal.Buttons().render("#your-container-element");
-    //     } catch (error) {
-    //         console.error("failed to render the PayPal Buttons", error);
-    //     }
-    // }
+   
+    // this.api.presentToast(_this.errorMessage);
   }
 
+  sendPayPalDetails(){
+      
+    let data = {
+      booking_id:this.bookingId,
+      payment_gateways:"Paypal",
+      payer_paypal_email:this.payPalPaymentDetails.payer.eamil_address,
+      payer_name:this.payPalPaymentDetails.payer.name.given_name,
+      paid_amount:this.payPalPaymentDetails.purchase_units[0].amount.value,
+      payee_paypal_email:this.payPalPaymentDetails.purchase_units[0].payee.email_address,
+      gateway_status:this.payPalPaymentDetails.purchase_units[0].payments.captures[0].status,
+      transactions_status:this.payPalPaymentDetails.status
+    }
+    // console.log("Data: ",data);
+    this.api.showLoading();
+    this.api.sendRequest("storeCarsBookingTransactions",data).subscribe((res:any)=>{
+      // console.log("Response: ",res);
+      this.api.hideLoading();
+      if(res.status == 'success'){
+        this.openBookedModal();
+      }else if(res.status == 'error'){
+        this.openBookedModal();
+        this.api.presentToast(res.message)
+      }else{
+
+      }
+    },(err)=>{
+      this.api.hideLoading();
+      console.log("Api Error: ",err);
+      
+    })
+  }
   
 
-  selectMethod(val){
-    console.log(val);
-    this.selected = val;
-    
-
-  }
+  
   async addPaymentMethod(){
     const modal = await this.modalCtrlr.create({
       component:NewPaymentMethodPage,
@@ -199,10 +270,16 @@ export class PaymentDetailsPage implements OnInit {
     });
     modal.present();
     const {data,role} = await modal.onWillDismiss();
-    if(role == 'new_method_data'){
-      const new_method_data = data;
-      console.log(new_method_data);
+    if(role == 'status'){
+      const status = data;
+      // console.log(status);
+      this.getCardsList();
       
     }
+  }
+
+  ionViewWillLeave(){
+    console.log('leave view');
+    this.paid_username = '';
   }
 }

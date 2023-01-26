@@ -19,6 +19,7 @@ export class ApiService {
   companyId: any;
   toggleVal:any;
   allCars: any;
+  showNewBookings: string;
   constructor(private http:HttpClient, 
     public toastController:ToastController,
     public loadingCtrl:LoadingController) { }
