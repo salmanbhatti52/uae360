@@ -21,6 +21,7 @@ export class SignUpPage implements OnInit {
   activatePasswordField= false;
   profileImg = '';
   base64String: string = '';
+  checked:boolean;
   constructor(public  location:Location,
     public router:Router,
     public api:ApiService,
@@ -124,7 +125,12 @@ export class SignUpPage implements OnInit {
     this.profileImg = `data:image/jpeg;base64,${image.base64String}`
     this.base64String = image.base64String;
   }
-
+  sendChkBoxVal(ev){
+    console.log(ev);
+    this.checked = ev.detail.checked;
+    console.log(this.checked);
+    
+  }
   gotoVerifyPhoneOtp(){
     this.activateUserNameField = false;
     this.activateUserNumberField = false;

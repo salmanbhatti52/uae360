@@ -76,13 +76,13 @@
   
       <div style="margin-top: 24px;">
         <div style="display: flex;">
-          <ion-checkbox slot="start" class="checkbox"></ion-checkbox>
+          <ion-checkbox slot="start" (ionChange)="sendChkBoxVal($event)" class="checkbox"></ion-checkbox>
           <span class="rem_fg_lablel" >I agree to the terms of service and privacy policy</span>
         </div>
         <div class="view_terms_link">View terms of service and privacy policy</div>
       </div>
-  
-      <ion-button type="submit" [disabled]="angForm.pristine || angForm.invalid" class="login_button" (click)="gotoVerifyPhoneOtp()">
+      <!-- checked == false -->
+      <ion-button type="submit" [disabled]="angForm.pristine || angForm.invalid || checked != true" class="login_button" (click)="gotoVerifyPhoneOtp()">
         <span class="btn_text">Sign up</span>
       </ion-button>
     </form>

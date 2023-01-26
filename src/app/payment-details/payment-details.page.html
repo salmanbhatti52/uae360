@@ -20,8 +20,9 @@
     </div>
 
     <div>
-      <div class="content_heading" style="text-align: center;margin-top: 10px;" *ngIf="cardsList.length > 0">OR</div>
-      <div class="content_heading" style="margin-top: 10px;" *ngIf="cardsList.length > 0">Select payment method</div>
+      <div class="content_heading" style="text-align: center;margin-top: 0px;margin-bottom: 0px;" >OR</div>
+      <div class="content_heading" style="margin-top: 5px;" >Select payment method</div>
+      <div *ngIf="paymentMethodsData == false" class="no_methods">No payment method found.</div>
       <div class="payment_method_box" style="margin-top: 15.4px;" *ngFor="let data of cardsList; let i = index">
         <div style="display: flex;align-items: center;">
           <div style="margin-right: 18px;display: flex;">
@@ -49,7 +50,7 @@
 
 <ion-footer class="ion-no-border">
   <div style="padding: 0px 16px 25px;">
-    <ion-button class="login_button" (click)="makePayment()" *ngIf="cardsList.length > 0">
+    <ion-button class="login_button" (click)="makePayment()" *ngIf="paymentMethodsData == true">
       <span class="btn_text">Pay</span>
     </ion-button>
     <ion-button class="login_button btn_border" style="--background:#FBFBFB; margin-top: 16px;" (click)="addPaymentMethod()">

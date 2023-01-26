@@ -11,6 +11,7 @@ import { CheckUserService } from '../check-user.service';
 })
 export class SavedPaymentMethodsPage implements OnInit {
   cardsList = [];
+  paymentMethodsData = true;
   constructor(public location:Location,
     public modalCtrlr:ModalController,
     public api:ApiService,
@@ -28,12 +29,13 @@ export class SavedPaymentMethodsPage implements OnInit {
   }
 
   getCardsList(){
+    this.paymentMethodsData = true;
     let data = {
       appuser_id:this.checkUser.appUserId
     }
     this.api.showLoading();
     this.api.sendRequest('get_cards_list',data).subscribe((res:any)=>{
-      // console.log("Response: ",res);
+      console.log("Response: ",res);
       if(res.status == 'success'){
         this.cardsList = res.data;
         // console.log("card list: ",this.cardsList);
@@ -52,6 +54,9 @@ export class SavedPaymentMethodsPage implements OnInit {
         }
         // console.log("card list: ",this.cardsList);
         this.api.hideLoading();
+        if(this.cardsList.length == 0){
+          this.paymentMethodsData = false
+        }
       }
       
     },(err)=>{
@@ -63,6 +68,7 @@ export class SavedPaymentMethodsPage implements OnInit {
   }
   
   getCardsList2(){
+    this.paymentMethodsData = true
     let data = {
       appuser_id:this.checkUser.appUserId
     }
@@ -87,6 +93,9 @@ export class SavedPaymentMethodsPage implements OnInit {
         }
         // console.log("card list: ",this.cardsList);
         // this.api.hideLoading();
+        if(this.cardsList.length == 0){
+          this.paymentMethodsData = false
+        }
       }
       
     },(err)=>{
@@ -108,6 +117,7 @@ export class SavedPaymentMethodsPage implements OnInit {
         // console.log("card list: ",this.cardsList);
         this.getCardsList2();
         this.api.hideLoading();
+        
       }
       
     },(err)=>{

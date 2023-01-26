@@ -48,6 +48,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
   result = [];
   showContent = true;
   pickups = [];
+  pickupsData = true;
   constructor(public router:Router,
     public navCtrlr:NavController,
     public checkUser:CheckUserService,
@@ -72,7 +73,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
     
   // ================================================
    this.getCarTypes();
-   this.getCars();
+  //  this.getCars();
    this.fetchLocation();
   }
 
@@ -237,21 +238,25 @@ export class HomeCarsAfterLoginPage implements OnInit {
   }
 
   getCars(){
+    this.pickupsData = true
     let data = {
       user_id: this.checkUser.appUserId
     }
     this.api.showLoading();
     this.api.sendRequest('cars',data).subscribe((res:any)=>{
-      console.log(res);
+      console.log("Response get cars:",res);
       if(res.status == 'success'){
         this.pickups = res.data;
         this.api.allCars = res.data;
         console.log("api.allCars: ",this.api.allCars);
-        
+       
+      }else if(res.status == 'error'){
+        if(this.pickups.length == 0){
+          this.pickupsData = false
+        }
+      }else{
+
       }
-      // else if(res.staus == 'error'){
-      //   this.api.presentToast(res.message);
-      // }
       setTimeout(() => {
         this.api.hideLoading();
       }, 2000);
@@ -297,6 +302,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item5 = false; 
       this.getCars();
     }else if(itemVal == 'Sports'){
+      this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
       this.item2 = true;
@@ -314,6 +320,13 @@ export class HomeCarsAfterLoginPage implements OnInit {
           if(res.status == 'success'){
             
             this.pickups = res.data;
+            
+          }else if(res.status == 'error'){
+            if(this.pickups.length == 0){
+              this.pickupsData = false
+            }
+          }else{
+
           }
         },(err)=>{
           this.api.hideLoading();
@@ -321,6 +334,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
           
         })
     }else if(itemVal == 'Luxury'){
+      this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
       this.item2 = false;
@@ -339,6 +353,13 @@ export class HomeCarsAfterLoginPage implements OnInit {
           if(res.status == 'success'){
             
             this.pickups = res.data;
+            
+          }else if(res.status == 'error'){
+            if(this.pickups.length == 0){
+              this.pickupsData = false
+            }
+          }else{
+
           }
         },(err)=>{
           this.api.hideLoading();
@@ -346,6 +367,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
           
         })
     }else if(itemVal == 'Pickup'){
+      this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
       this.item2 = false;
@@ -364,6 +386,13 @@ export class HomeCarsAfterLoginPage implements OnInit {
           if(res.status == 'success'){
             
             this.pickups = res.data;
+            
+          }else if(res.status == 'error'){
+            if(this.pickups.length == 0){
+              this.pickupsData = false
+            }
+          }else{
+
           }
         },(err)=>{
           this.api.hideLoading();
@@ -371,13 +400,13 @@ export class HomeCarsAfterLoginPage implements OnInit {
           
         })
     }else if(itemVal == 'SUV'){
+      this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
       this.item2 = false;
       this.item3 = false;
       this.item4 = false;
       this.item5 = true;
-
       
         let data = {
           car_type_id: this.carTypeFourId
@@ -389,6 +418,13 @@ export class HomeCarsAfterLoginPage implements OnInit {
           if(res.status == 'success'){
             
             this.pickups = res.data;
+            
+          }else if(res.status == 'error'){
+            if(this.pickups.length == 0){
+              this.pickupsData = false
+            }
+          }else{
+
           }
         },(err)=>{
           this.api.hideLoading();

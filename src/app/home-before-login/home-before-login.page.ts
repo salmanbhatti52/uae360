@@ -34,7 +34,7 @@ export class HomeBeforeLoginPage implements OnInit {
   rentCategories = [{category:'Day'},{category:'Month'}]
   categoryVal = 'Day';
   pickups = [];
-
+  pickupsData = true;
   constructor(public router:Router,
     public api:ApiService,
     public checkUser:CheckUserService,
@@ -51,7 +51,7 @@ export class HomeBeforeLoginPage implements OnInit {
     this.appComponent.appPages = this.checkUser.appPages; 
     
     this.getCarTypes();
-    this.getCars();
+    // this.getCars();
 
   }
 
@@ -82,7 +82,7 @@ export class HomeBeforeLoginPage implements OnInit {
   }
 
   getCars(){
-   
+    this.pickupsData = true
     let data = {
       user_id: ''
     }
@@ -94,10 +94,13 @@ export class HomeBeforeLoginPage implements OnInit {
       if(res.status == 'success'){
         console.log(res.data);
         this.pickups = res.data;
+      }else if(res.staus == 'error'){
+        if(this.pickups.length == 0){
+          this.pickupsData = false
+        }
+      }else{
+
       }
-      // else if(res.staus == 'error'){
-      //   this.api.presentToast(res.message);
-      // }
 
       setTimeout(() => {
         this.api.hideLoading();
@@ -157,6 +160,7 @@ export class HomeBeforeLoginPage implements OnInit {
       this.item5 = false;
       this.getCars();
     }else if(itemVal == 'Sports'){
+      this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
       this.item2 = true;
@@ -173,6 +177,12 @@ export class HomeBeforeLoginPage implements OnInit {
           if(res.status == 'success'){
             this.api.hideLoading();
             this.pickups = res.data;
+          }else if(res.status == 'error'){
+            if(this.pickups.length == 0){
+              this.pickupsData = false
+            }
+          }else{
+
           }
         },(err)=>{
           this.api.hideLoading();
@@ -180,6 +190,7 @@ export class HomeBeforeLoginPage implements OnInit {
           
         })
     }else if(itemVal == 'Luxury'){
+      this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
       this.item2 = false;
@@ -196,6 +207,12 @@ export class HomeBeforeLoginPage implements OnInit {
           if(res.status == 'success'){
             this.api.hideLoading();
             this.pickups = res.data;
+          }else if(res.status == 'error'){
+            if(this.pickups.length == 0){
+              this.pickupsData = false
+            }
+          }else{
+
           }
         },(err)=>{
           this.api.hideLoading();
@@ -203,6 +220,7 @@ export class HomeBeforeLoginPage implements OnInit {
           
         })
     }else if(itemVal == 'Pickup'){
+      this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
       this.item2 = false;
@@ -219,6 +237,12 @@ export class HomeBeforeLoginPage implements OnInit {
           if(res.status == 'success'){
             this.api.hideLoading();
             this.pickups = res.data;
+          }else if(res.status == 'error'){
+            if(this.pickups.length == 0){
+              this.pickupsData = false
+            }
+          }else{
+
           }
         },(err)=>{
           this.api.hideLoading();
@@ -226,6 +250,7 @@ export class HomeBeforeLoginPage implements OnInit {
           
         })
     }else if(itemVal == 'SUV'){
+      this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
       this.item2 = false;
@@ -242,6 +267,12 @@ export class HomeBeforeLoginPage implements OnInit {
           if(res.status == 'success'){
             this.api.hideLoading();
             this.pickups = res.data;
+          }else if(res.status == 'error'){
+            if(this.pickups.length == 0){
+              this.pickupsData = false
+            }
+          }else{
+
           }
         },(err)=>{
           this.api.hideLoading();

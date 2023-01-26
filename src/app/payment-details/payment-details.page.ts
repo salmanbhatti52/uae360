@@ -18,6 +18,7 @@ export class PaymentDetailsPage implements OnInit {
   master = false;
   visa = false;
   paypal = false;
+  paymentMethodsData = true;
   paymentAmount: string = this.api.bookingResponse.total_cost;
   // paymentAmount: string = '10';
   currency: string = 'USD';
@@ -60,6 +61,7 @@ export class PaymentDetailsPage implements OnInit {
   }
 
   getCardsList(){
+    this.paymentMethodsData = true
     let data = {
       appuser_id:this.checkUser.appUserId
     }
@@ -85,6 +87,9 @@ export class PaymentDetailsPage implements OnInit {
         // console.log("card list: ",this.cardsList);
         this.selectedCard = this.cardsList[0]
         this.api.hideLoading();
+        if(this.cardsList.length == 0){
+          this.paymentMethodsData = false
+        }
       }
       
     },(err)=>{

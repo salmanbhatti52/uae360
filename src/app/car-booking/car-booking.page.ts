@@ -619,15 +619,7 @@ export class CarBookingPage implements OnInit {
     }else if(this.base64Data == undefined){
       this.api.presentToast('Plz Select Image');
     }else{
-      // this.api.showLoading();
-      // async showLoading() {
-        const loading = await this.loadingCtrl.create({
-          message: 'Please wait...',
-          duration: 5000,
-        });
-    
-        loading.present();
-      // }
+      
       console.log('calendarStartDateTimeString',this.calendarStartDateTimeString);
       console.log('calendarEndDateTimeString',this.calendarEndDateTimeString);
       // ========================dates conversion================
@@ -659,6 +651,8 @@ export class CarBookingPage implements OnInit {
       })
       console.log('Total_Minutes: ',result.length);
 
+      this.api.showLoading();
+      
       let hours_with_decimal = result.length / 60;
       console.log('hours_without_rounding:',hours_with_decimal);
       
@@ -751,12 +745,12 @@ export class CarBookingPage implements OnInit {
           console.log('BookingObject: ', this.bookingObj);
 
           this.api.bookingResponse = this.bookingObj;
-          // this.api.hideLoading();
+          this.api.hideLoading();
           this.navCtrlr.navigateForward('summary');
 
         }else if(res.status == 'error'){
           
-          // this.api.hideLoading();
+          this.api.hideLoading();
         
         }else{
 
@@ -764,7 +758,7 @@ export class CarBookingPage implements OnInit {
 
         }, (err: any) => {
           console.log('Error: ', err);
-          // this.api.hideLoading();
+          this.api.hideLoading();
       });
     }
     
