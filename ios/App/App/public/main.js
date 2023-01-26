@@ -501,9 +501,11 @@ let ApiService = class ApiService {
   constructor(http, toastController, loadingCtrl) {
     this.http = http;
     this.toastController = toastController;
-    this.loadingCtrl = loadingCtrl;
-    this.imageUrlString = 'https://360uae.eigix.net/public/';
-    this.baseURL = 'https://360uae.eigix.net/api';
+    this.loadingCtrl = loadingCtrl; // imageUrlString = 'https://360uae.eigix.net/public/';
+    // baseURL:any = 'https://360uae.eigix.net/api';
+
+    this.imageUrlString = 'https://360uae.net/public/';
+    this.baseURL = 'https://360uae.net/api';
     this.datesToDisable = [];
     this.bookedDates = [];
   }

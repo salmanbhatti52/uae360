@@ -7,8 +7,10 @@ import { LoadingController } from '@ionic/angular';
 })
 export class ApiService {
   carDataById:any;
-  imageUrlString = 'https://360uae.eigix.net/public/';
-  baseURL:any = 'https://360uae.eigix.net/api';
+  // imageUrlString = 'https://360uae.eigix.net/public/';
+  // baseURL:any = 'https://360uae.eigix.net/api';
+  imageUrlString = 'https://360uae.net/public/';
+  baseURL:any = 'https://360uae.net/api';
   datesToDisable = [];
   bookedDates = [];
   bookingResponse:any;

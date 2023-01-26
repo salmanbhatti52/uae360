@@ -335,7 +335,10 @@ let HomeCarsAfterLoginPage = class HomeCarsAfterLoginPage {
         this.pickups = res.data;
         this.api.allCars = res.data;
         console.log("api.allCars: ", this.api.allCars);
-      }
+      } // else if(res.staus == 'error'){
+      //   this.api.presentToast(res.message);
+      // }
+
 
       setTimeout(() => {
         this.api.hideLoading();

@@ -249,6 +249,9 @@ export class HomeCarsAfterLoginPage implements OnInit {
         console.log("api.allCars: ",this.api.allCars);
         
       }
+      // else if(res.staus == 'error'){
+      //   this.api.presentToast(res.message);
+      // }
       setTimeout(() => {
         this.api.hideLoading();
       }, 2000);

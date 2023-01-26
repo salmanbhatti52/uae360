@@ -136,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const IMAGE_DIR = 'stored-image';
 let CarBookingPage = class CarBookingPage {
-  constructor(modalCtrlr, location, navCtrlr, api, alertCtrlr, checkUser, platform) {
+  constructor(modalCtrlr, location, navCtrlr, api, alertCtrlr, checkUser, platform, loadingCtrl) {
     this.modalCtrlr = modalCtrlr;
     this.location = location;
     this.navCtrlr = navCtrlr;
@@ -144,6 +144,7 @@ let CarBookingPage = class CarBookingPage {
     this.alertCtrlr = alertCtrlr;
     this.checkUser = checkUser;
     this.platform = platform;
+    this.loadingCtrl = loadingCtrl;
     this.favorites = '';
     this.dates = {
       start_date: '',
@@ -674,7 +675,13 @@ let CarBookingPage = class CarBookingPage {
       } else if (_this8.base64Data == undefined) {
         _this8.api.presentToast('Plz Select Image');
       } else {
-        _this8.api.showLoading();
+        // this.api.showLoading();
+        // async showLoading() {
+        const loading = yield _this8.loadingCtrl.create({
+          message: 'Please wait...',
+          duration: 5000
+        });
+        loading.present(); // }
 
         console.log('calendarStartDateTimeString', _this8.calendarStartDateTimeString);
         console.log('calendarEndDateTimeString', _this8.calendarEndDateTimeString); // ========================dates conversion================
@@ -806,6 +813,8 @@ CarBookingPage.ctorParameters = () => [{
   type: _check_user_service__WEBPACK_IMPORTED_MODULE_7__.CheckUserService
 }, {
   type: _ionic_angular__WEBPACK_IMPORTED_MODULE_17__.Platform
+}, {
+  type: _ionic_angular__WEBPACK_IMPORTED_MODULE_17__.LoadingController
 }];
 
 CarBookingPage = (0,tslib__WEBPACK_IMPORTED_MODULE_19__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_20__.Component)({

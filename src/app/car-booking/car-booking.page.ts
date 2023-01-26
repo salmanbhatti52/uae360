@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import {MatDatepickerModule} from '@angular/material/datepicker';
-import { ModalController, NavController, Platform } from '@ionic/angular';
+import { LoadingController, ModalController, NavController, Platform } from '@ionic/angular';
 import { SelectDatePage } from '../select-date/select-date.page';
 import { SelectTimePage } from '../select-time/select-time.page';
 import { Location } from '@angular/common';
@@ -100,7 +100,8 @@ export class CarBookingPage implements OnInit {
     public api: ApiService,
     public alertCtrlr: AlertController,
     public checkUser: CheckUserService,
-    private platform: Platform) { }
+    private platform: Platform,
+    private loadingCtrl: LoadingController) { }
 
   ionViewWillEnter(){
     this.carData = this.api.carDataById;
@@ -618,7 +619,15 @@ export class CarBookingPage implements OnInit {
     }else if(this.base64Data == undefined){
       this.api.presentToast('Plz Select Image');
     }else{
-      this.api.showLoading();
+      // this.api.showLoading();
+      // async showLoading() {
+        const loading = await this.loadingCtrl.create({
+          message: 'Please wait...',
+          duration: 5000,
+        });
+    
+        loading.present();
+      // }
       console.log('calendarStartDateTimeString',this.calendarStartDateTimeString);
       console.log('calendarEndDateTimeString',this.calendarEndDateTimeString);
       // ========================dates conversion================

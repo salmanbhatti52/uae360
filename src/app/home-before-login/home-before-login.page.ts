@@ -95,6 +95,9 @@ export class HomeBeforeLoginPage implements OnInit {
         console.log(res.data);
         this.pickups = res.data;
       }
+      // else if(res.staus == 'error'){
+      //   this.api.presentToast(res.message);
+      // }
 
       setTimeout(() => {
         this.api.hideLoading();
