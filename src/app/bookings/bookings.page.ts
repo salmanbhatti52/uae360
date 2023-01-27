@@ -59,6 +59,7 @@ export class BookingsPage implements OnInit {
   }
   
   getPreviousBookings(){
+    this.topPreviousBookingRecords = [];
     let data = {
       appuser_id: this.checkUser.appUserId
     };
@@ -104,6 +105,7 @@ export class BookingsPage implements OnInit {
   
   }
   getUpcomingBookings(){
+    this.topUpcomingBookingRecords = []
     let data = {
       appuser_id: this.checkUser.appUserId
     };

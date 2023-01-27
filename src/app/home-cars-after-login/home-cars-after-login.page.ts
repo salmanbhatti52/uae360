@@ -246,20 +246,22 @@ export class HomeCarsAfterLoginPage implements OnInit {
     this.api.sendRequest('cars',data).subscribe((res:any)=>{
       console.log("Response get cars:",res);
       if(res.status == 'success'){
+        this.api.hideLoading()
         this.pickups = res.data;
         this.api.allCars = res.data;
         console.log("api.allCars: ",this.api.allCars);
        
       }else if(res.status == 'error'){
+        this.api.hideLoading()
         if(this.pickups.length == 0){
           this.pickupsData = false
         }
       }else{
 
       }
-      setTimeout(() => {
-        this.api.hideLoading();
-      }, 2000);
+      // setTimeout(() => {
+      //   this.api.hideLoading();
+      // }, 2000);
     },(err)=>{
       setTimeout(() => {
         this.api.hideLoading();
@@ -318,10 +320,11 @@ export class HomeCarsAfterLoginPage implements OnInit {
           this.api.hideLoading();
           console.log(res);
           if(res.status == 'success'){
-            
+            this.api.hideLoading()
             this.pickups = res.data;
             
           }else if(res.status == 'error'){
+            this.api.hideLoading()
             if(this.pickups.length == 0){
               this.pickupsData = false
             }
@@ -351,10 +354,11 @@ export class HomeCarsAfterLoginPage implements OnInit {
           this.api.hideLoading();
           console.log(res);
           if(res.status == 'success'){
-            
+            this.api.hideLoading()
             this.pickups = res.data;
             
           }else if(res.status == 'error'){
+            this.api.hideLoading()
             if(this.pickups.length == 0){
               this.pickupsData = false
             }
@@ -381,13 +385,14 @@ export class HomeCarsAfterLoginPage implements OnInit {
         }
         this.api.showLoading();
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
-          this.api.hideLoading();
+          
           console.log(res);
           if(res.status == 'success'){
-            
+            this.api.hideLoading();
             this.pickups = res.data;
             
           }else if(res.status == 'error'){
+            this.api.hideLoading();
             if(this.pickups.length == 0){
               this.pickupsData = false
             }
@@ -416,10 +421,11 @@ export class HomeCarsAfterLoginPage implements OnInit {
           this.api.hideLoading();
           console.log(res);
           if(res.status == 'success'){
-            
+            this.api.hideLoading();
             this.pickups = res.data;
             
           }else if(res.status == 'error'){
+            this.api.hideLoading();
             if(this.pickups.length == 0){
               this.pickupsData = false
             }

@@ -140,7 +140,7 @@
     <div class="items_wrapper">
       <div class="items_label" style="margin-top: 5px;padding-left: 3px;">Top Rented
       </div>
-      <div *ngIf="pickupsData == false" class="no_cars">No car listed yet by admin</div>
+      <div *ngIf="pickupsData == false" class="no_cars">No car listed</div>
       <swiper [config]="{slidesPerView:1.4 ,spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false" >
         <ng-template swiperSlide *ngFor="let pickup of pickups;" style="width: 58%; height: 100%;">
           <ion-card class="card" (click)="gotoCarDetails(pickup.car_id)">

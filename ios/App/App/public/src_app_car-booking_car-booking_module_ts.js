@@ -675,14 +675,6 @@ let CarBookingPage = class CarBookingPage {
       } else if (_this8.base64Data == undefined) {
         _this8.api.presentToast('Plz Select Image');
       } else {
-        // this.api.showLoading();
-        // async showLoading() {
-        const loading = yield _this8.loadingCtrl.create({
-          message: 'Please wait...',
-          duration: 5000
-        });
-        loading.present(); // }
-
         console.log('calendarStartDateTimeString', _this8.calendarStartDateTimeString);
         console.log('calendarEndDateTimeString', _this8.calendarEndDateTimeString); // ========================dates conversion================
 
@@ -710,6 +702,9 @@ let CarBookingPage = class CarBookingPage {
           end: new Date(endDateYear, endDateMonth, endDateDay, endDateGetHour, endDateGetMinute)
         });
         console.log('Total_Minutes: ', result.length);
+
+        _this8.api.showLoading();
+
         let hours_with_decimal = result.length / 60;
         console.log('hours_without_rounding:', hours_with_decimal);
         hours_with_decimal = Math.round((hours_with_decimal + Number.EPSILON) * 100) / 100;
@@ -785,13 +780,18 @@ let CarBookingPage = class CarBookingPage {
             _this8.bookingObj.location = _this8.company_location;
             _this8.bookingObj.booking_id = res.data.booking_id;
             console.log('BookingObject: ', _this8.bookingObj);
-            _this8.api.bookingResponse = _this8.bookingObj; // this.api.hideLoading();
+            _this8.api.bookingResponse = _this8.bookingObj;
+
+            _this8.api.hideLoading();
 
             _this8.navCtrlr.navigateForward('summary');
-          } else if (res.status == 'error') {// this.api.hideLoading();
+          } else if (res.status == 'error') {
+            _this8.api.hideLoading();
           } else {}
         }, err => {
-          console.log('Error: ', err); // this.api.hideLoading();
+          console.log('Error: ', err);
+
+          _this8.api.hideLoading();
         });
       }
     })();

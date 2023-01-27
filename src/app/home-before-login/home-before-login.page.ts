@@ -92,9 +92,11 @@ export class HomeBeforeLoginPage implements OnInit {
       
       console.log(res);
       if(res.status == 'success'){
+        this.api.hideLoading()
         console.log(res.data);
         this.pickups = res.data;
       }else if(res.staus == 'error'){
+        this.api.hideLoading();
         if(this.pickups.length == 0){
           this.pickupsData = false
         }
@@ -102,9 +104,9 @@ export class HomeBeforeLoginPage implements OnInit {
 
       }
 
-      setTimeout(() => {
-        this.api.hideLoading();
-      }, 2000);
+      // setTimeout(() => {
+      //   this.api.hideLoading();
+      // }, 2000);
       
     },(err)=>{
       setTimeout(() => {
@@ -173,11 +175,13 @@ export class HomeBeforeLoginPage implements OnInit {
           car_type_id: this.carTypeOneId
         }
         this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
+          
           console.log(res);
           if(res.status == 'success'){
             this.api.hideLoading();
             this.pickups = res.data;
           }else if(res.status == 'error'){
+            this.api.hideLoading()
             if(this.pickups.length == 0){
               this.pickupsData = false
             }
@@ -208,6 +212,7 @@ export class HomeBeforeLoginPage implements OnInit {
             this.api.hideLoading();
             this.pickups = res.data;
           }else if(res.status == 'error'){
+            this.api.hideLoading()
             if(this.pickups.length == 0){
               this.pickupsData = false
             }
@@ -238,6 +243,7 @@ export class HomeBeforeLoginPage implements OnInit {
             this.api.hideLoading();
             this.pickups = res.data;
           }else if(res.status == 'error'){
+            this.api.hideLoading()
             if(this.pickups.length == 0){
               this.pickupsData = false
             }
@@ -268,6 +274,7 @@ export class HomeBeforeLoginPage implements OnInit {
             this.api.hideLoading();
             this.pickups = res.data;
           }else if(res.status == 'error'){
+            this.api.hideLoading()
             if(this.pickups.length == 0){
               this.pickupsData = false
             }

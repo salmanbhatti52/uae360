@@ -165,7 +165,7 @@ let EditProfilePage = class EditProfilePage {
     this.userProfile = this.api.localUserData.profile_pic;
 
     if (this.api.localUserData.account_type == 'SignupWithApp') {
-      this.userProfile = `https://360uae.eigix.net/public/${this.userProfile}`;
+      this.userProfile = `${this.api.imageUrlString}${this.userProfile}`;
     }
 
     this.userEmail = this.api.localUserData.email;
