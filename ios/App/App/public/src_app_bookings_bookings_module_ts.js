@@ -148,6 +148,7 @@ let BookingsPage = class BookingsPage {
         this.getPreviousBookings();
     }
     getPreviousBookings() {
+        this.topPreviousBookingRecords = [];
         let data = {
             appuser_id: this.checkUser.appUserId
         };
@@ -187,6 +188,7 @@ let BookingsPage = class BookingsPage {
         this.getUpcomingBookings();
     }
     getUpcomingBookings() {
+        this.topUpcomingBookingRecords = [];
         let data = {
             appuser_id: this.checkUser.appUserId
         };
