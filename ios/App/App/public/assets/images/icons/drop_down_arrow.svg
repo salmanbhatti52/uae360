@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <g id="vuesax_bold_arrow-circle-down" data-name="vuesax/bold/arrow-circle-down" transform="translate(-556 -252)">
-    <g id="arrow-circle-down">
-      <path id="Vector" d="M10,0A10,10,0,1,0,20,10,10.016,10.016,0,0,0,10,0Zm4.06,9.27L10.53,12.8a.748.748,0,0,1-1.06,0L5.94,9.27A.75.75,0,0,1,7,8.21l3,3,3-3a.75.75,0,0,1,1.06,1.06Z" transform="translate(558 254)" fill="#ffdf00"/>
-      <path id="Vector-2" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(580 276) rotate(180)" fill="none" opacity="0"/>
-    </g>
-  </g>
-</svg>
