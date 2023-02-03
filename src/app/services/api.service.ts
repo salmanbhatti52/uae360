@@ -22,9 +22,10 @@ export class ApiService {
   toggleVal:any;
   allCars: any;
   showNewBookings: string;
+  socialLoginStaus:any;
   constructor(private http:HttpClient, 
-    public toastController:ToastController,
-    public loadingCtrl:LoadingController) { }
+  public toastController:ToastController,
+  public loadingCtrl:LoadingController) { }
 
   sendRequest(action, data?){
     let header;

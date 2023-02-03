@@ -54,17 +54,19 @@
       </ion-button>
     </form>
     
-
-    <div class="or_choice">
-      <hr style="width: 35%;">
-      <span class="or_label">or</span>
-      <hr style="width: 35%;">
+    <div *ngIf="api.socialLoginStaus == 'Yes'">
+      <div class="or_choice">
+        <hr style="width: 35%;">
+        <span class="or_label">or</span>
+        <hr style="width: 35%;">
+      </div>
+      
+      <div class="fb_gmail_box">
+        <ion-button (click)="signInWithFacebook()" style="--background:#3245B8;" class="fb_gmail_btns"><img  src="assets/images/icons/facebook.svg" alt=""></ion-button>
+        <ion-button (click)="signInWithGoogle()" style="--background:#F04336;" class="fb_gmail_btns"><img  src="assets/images/icons/google.svg" alt=""></ion-button>
+      </div>
     </div>
     
-    <div class="fb_gmail_box">
-      <ion-button (click)="signInWithFacebook()" style="--background:#3245B8;" class="fb_gmail_btns"><img  src="assets/images/icons/facebook.svg" alt=""></ion-button>
-      <ion-button (click)="signInWithGoogle()" style="--background:#F04336;" class="fb_gmail_btns"><img  src="assets/images/icons/google.svg" alt=""></ion-button>
-    </div>
 
     <div class="last_div"><span style="font-weight: 400;">Don't have an account? </span> <span (click)="gotoSignUp()" style="font-weight: 700;text-decoration: underline;">Sign up</span> </div>
   </div>

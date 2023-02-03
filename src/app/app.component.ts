@@ -33,12 +33,31 @@ export class AppComponent {
 
   initializeApp() { 
     this.platform.ready().then(() => {
+      this.getSystemSettings();
       this.pushNotification();
-      // Stripe.initialize({
-      //   publishableKey: 'pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1',
-      // });
+      
     });
     
+  }
+
+
+  getSystemSettings(){
+    
+    this.api.getData('system_settings').subscribe((res:any)=>{
+      // console.log("Setting Api Response: ",res);
+      if(res.status == 'success'){
+        for (let data of res.data){
+          if(data.type == 'social_login_status'){
+            this.api.socialLoginStaus = data.description;
+            console.log("socialLoginStaus",this.api.socialLoginStaus);
+            
+          }
+        }
+      }
+    },(err)=>{
+      console.log("Setting Api Error: ",err);
+      
+    })
   }
 
   pushNotification() {
