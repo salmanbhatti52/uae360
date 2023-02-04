@@ -15,7 +15,7 @@ import OneSignal from "onesignal-cordova-plugin";
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-
+  interval:any;
   appUserId:any;
   appPages = [];
   appUserData: any;
@@ -33,7 +33,10 @@ export class AppComponent {
 
   initializeApp() { 
     this.platform.ready().then(() => {
-      this.getSystemSettings();
+      this.interval = setInterval(() => {
+        this.getSystemSettings();
+      },2000);
+      
       this.pushNotification();
       
     });
