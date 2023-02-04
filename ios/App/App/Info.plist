@@ -18,6 +18,26 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
+	<!-- fb ios configuration -->
+	<key>CFBundleURLTypes</key>
+	<array>
+	<dict>
+		<key>CFBundleURLSchemes</key>
+		<array>
+		<string>fb1226332351286480</string>
+		</array>
+	</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1226332351286480</string>
+	<key>FacebookDisplayName</key>
+	<string>360UAE</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	<string>fbapi</string>
+	<string>fbauth2</string>
+	</array>
+	<!-- fb done -->
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -30,6 +50,12 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<!-- oneSignal configuration -->
+	<key>UIBackgroundModes</key>
+	<array>
+	<string>remote-notification</string>
+	</array>
+	<!-- oneSignal done -->
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -49,5 +75,18 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+
+	<!-- camera, filesystem configuration -->
+	<key>NSCameraUsageDescription</key>
+	<string>To capture images</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To add images</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To store images</string>
+	<!-- done -->
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>To get your location while using app</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To get your location while using app</string>
 </dict>
 </plist>
