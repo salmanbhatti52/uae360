@@ -8,7 +8,7 @@ import { ApiService } from './services/api.service';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { FacebookLogin, FacebookLoginResponse } from '@capacitor-community/facebook-login';
 import OneSignal from "onesignal-cordova-plugin";
-
+import { StatusBar, Style } from '@capacitor/status-bar';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -38,12 +38,28 @@ export class AppComponent {
       },2000);
       
       this.pushNotification();
-      
+      this.setStatuBar();
     });
     
   }
 
-
+  setStatuBar(){
+    const setStatusBarStyleDark = async () => {
+      await StatusBar.setStyle({ style: Style.Dark });
+    };
+    
+    const setStatusBarStyleLight = async () => {
+      await StatusBar.setStyle({ style: Style.Light });
+    };
+    
+    // const hideStatusBar = async () => {
+    //   await StatusBar.hide();
+    // };
+    
+    const showStatusBar = async () => {
+      await StatusBar.show();
+    };
+  }
   getSystemSettings(){
     
     this.api.getData('system_settings').subscribe((res:any)=>{

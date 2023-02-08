@@ -25,6 +25,16 @@
     font-family: 'Poppins', sans-serif;
     --placeholder-opacity: 0px !important;
   }
+
+  ion-datetime{
+
+    --ion-color-base: none !important;
+    --ion-color-base-rgb: none !important;
+    --ion-color-contrast: none !important;
+    --ion-color-contrast-rgb: none !important;
+    --ion-color-shade: none !important;
+    --ion-color-tint: none !important;
+  }
   .swiper-pagination-bullet {
     margin: 0 4px;
     width: 24px;

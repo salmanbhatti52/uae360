@@ -619,7 +619,7 @@ export class CarBookingPage implements OnInit {
     }else if(this.base64Data == undefined){
       this.api.presentToast('Plz Select Image');
     }else{
-      
+      this.api.showLoading('5000');
       console.log('calendarStartDateTimeString',this.calendarStartDateTimeString);
       console.log('calendarEndDateTimeString',this.calendarEndDateTimeString);
       // ========================dates conversion================
@@ -651,7 +651,7 @@ export class CarBookingPage implements OnInit {
       })
       console.log('Total_Minutes: ',result.length);
 
-      this.api.showLoading();
+      // this.api.showLoading();
       
       let hours_with_decimal = result.length / 60;
       console.log('hours_without_rounding:',hours_with_decimal);
@@ -727,7 +727,7 @@ export class CarBookingPage implements OnInit {
         driving_liscence: this.base64Data,
         total_cost:this.totalCost
       }
-
+      
       this.api.sendRequest('storeCarsBooking', data).subscribe((res: any) => {
     
         console.log('StoredCarBooking: ', res);

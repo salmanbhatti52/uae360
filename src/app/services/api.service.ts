@@ -61,13 +61,23 @@ export class ApiService {
     toast.present();
   }
 
-  async showLoading(){
-    const loading = await this.loadingCtrl.create({
-      duration:3000,
-      message:'Please wait...'
+  async showLoading(val?){
+    if(val !== 'undefined'){
+      const loading = await this.loadingCtrl.create({
+        // duration:8000,
+        message:'Please wait...'
+      
+      });
+      loading.present();
+    }else{
+      const loading = await this.loadingCtrl.create({
+        duration:3000,
+        message:'Please wait...'
+      
+      });
+      loading.present();
+    }
     
-    });
-    loading.present();
   }
 
   hideLoading(){
