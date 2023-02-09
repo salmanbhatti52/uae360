@@ -215,15 +215,16 @@ export class CarBookingPage implements OnInit {
   // }
 
   getBooking() {
-    this.api.showLoading();
+    
     let data = {
       appuser_id: this.checkUser.appUserId,
       car_id: this.carId,
     };
-
+    this.api.showLoading();
     this.api.sendRequest('getCarsBooking', data).subscribe((res: any) => {
-
+      this.api.hideLoading();
       if (res.status == 'success') {
+        
         console.log('Api Response: ', res);
         let booked = res.data;
         this.dbBookedDates = res.data;
@@ -251,17 +252,18 @@ export class CarBookingPage implements OnInit {
         // =================why api datesToDisable=====================
         // this.api.datesToDisable = this.datesArray;
         // ==============================================================
-        this.api.hideLoading();
+        
       } else if (res.status == 'error') {
         console.log('Error: ', res);
-        this.api.hideLoading();
+        // this.api.hideLoading();
       } else {
-        this.api.hideLoading();
+        // this.api.hideLoading();
       }
 
     }, (err) => {
-      console.log('api error: ', err);
       this.api.hideLoading();
+      console.log('api error: ', err);
+      
     });
 
   }
@@ -393,9 +395,11 @@ export class CarBookingPage implements OnInit {
       directory: Directory.Data,
       path: IMAGE_DIR
     }).then(result => {
+      this.api.hideLoading();
       console.log('Files on load: ', result);
       this.loadFileData(result.files);
     }, (err) => {
+      this.api.hideLoading();
       console.log(err);
       Filesystem.mkdir({
         directory: Directory.Data,
@@ -619,7 +623,7 @@ export class CarBookingPage implements OnInit {
     }else if(this.base64Data == undefined){
       this.api.presentToast('Plz Select Image');
     }else{
-      this.api.showLoading('5000');
+      this.api.showLoadWd();
       console.log('calendarStartDateTimeString',this.calendarStartDateTimeString);
       console.log('calendarEndDateTimeString',this.calendarEndDateTimeString);
       // ========================dates conversion================
@@ -650,8 +654,6 @@ export class CarBookingPage implements OnInit {
         end: new Date(endDateYear, endDateMonth, endDateDay, endDateGetHour, endDateGetMinute)
       })
       console.log('Total_Minutes: ',result.length);
-
-      // this.api.showLoading();
       
       let hours_with_decimal = result.length / 60;
       console.log('hours_without_rounding:',hours_with_decimal);

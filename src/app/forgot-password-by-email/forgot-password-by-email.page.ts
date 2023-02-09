@@ -38,8 +38,11 @@ export class ForgotPasswordByEmailPage implements OnInit {
       console.log(res);
       if(res.status=='success'){
         let id = res.data.appUserId
-        this.api.presentToast('Your OTP is ' + res.data.forgotPasswrodOtp);
-        this.router.navigate(['/otp-by-email'], id);
+        // this.api.presentToast('Your OTP is ' + res.data.forgotPasswrodOtp);
+        this.router.navigate(['/otp-by-email',{
+          user_email: this.angForm.value.email,
+        }]);
+        // this.router.navigate(['/otp-by-email'], id);
         localStorage.setItem('appUserId',id);
       }else if(res.status=='error'){
         this.api.presentToast(res.message);
