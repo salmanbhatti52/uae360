@@ -266,7 +266,7 @@ export class SignInPage implements OnInit {
       console.log("Error: ",err);
       
     });
-    // console.log('GoogleUserResponse: ',this.googleUserData);
+    console.log('GoogleUserResponse: ',this.googleUserData);
     this.api.googleSignInResponse = this.googleUserData;
     
     let data={
