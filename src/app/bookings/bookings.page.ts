@@ -31,6 +31,16 @@ export class BookingsPage implements OnInit {
   ngOnInit() {
     
   }
+
+  handleRefresh(event) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.ngOnInit();
+      this.ionViewWillEnter();
+      event.target.complete();
+    }, 2000);
+  };
+
   ionViewWillEnter(){
 
     if(this.api.showNewBookings == 'true'){
