@@ -35,7 +35,7 @@ export class BookingsPage implements OnInit {
   handleRefresh(event) {
     setTimeout(() => {
       // Any calls to load data go here
-      this.ngOnInit();
+      // this.ngOnInit();
       this.ionViewWillEnter();
       event.target.complete();
     }, 2000);

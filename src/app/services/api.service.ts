@@ -64,16 +64,16 @@ export class ApiService {
   async showLoading(){
     const loading = await this.loadingCtrl.create({
       duration:3000,
-      message:'Please wait...'
-    
+      message:'Please wait...',
+      cssClass: 'custom-loading',
     });
     loading.present(); 
   }
 
   async showLoadWd(){
     const loading = await this.loadingCtrl.create({
-      message:'Please wait...'
-    
+      message:'Please wait...',
+      cssClass: 'custom-loading',
     });
     loading.present(); 
   }

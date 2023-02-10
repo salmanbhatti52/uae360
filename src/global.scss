@@ -25,7 +25,15 @@
     font-family: 'Poppins', sans-serif;
     --placeholder-opacity: 0px !important;
   }
-
+  // ion-loading.custom-loading {
+  //   --background: white;
+  //   --spinner-color: #8000FF;
+  //   // color: #1c6dff;
+  // }
+  ion-refresher.ios{
+    background: #FBFBFB;
+  }
+  
   ion-datetime{
 
     --ion-color-base: none !important;
