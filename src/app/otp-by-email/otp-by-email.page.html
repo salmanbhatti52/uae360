@@ -21,12 +21,12 @@
     <div class="timer_box">
       <div class="position_content">
         <img class="timer_icon" src="assets/images/icons/timer.svg" alt="">
-        <span class="timer_text">Expire in 02:00</span>
+        <span class="timer_text">Expire in 0{{minutes}}:{{seconds}}</span>
       </div>
       
     </div>
 
-    <div class="resend_otp_link" (click)="getNewOtp()">Resend OPT(4)</div>
+    <div class="resend_otp_link" (click)="getNewOtp()">Resend OTP</div>
 
     <ion-button class="login_button" (click)="gotoSignIn()">
       <span class="btn_text">Next</span>

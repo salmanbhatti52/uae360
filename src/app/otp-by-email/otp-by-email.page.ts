@@ -9,7 +9,10 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./otp-by-email.page.scss'],
 })
 export class OtpByEmailPage implements OnInit {
-
+  timer:any = '2:00' 
+  interval:any;
+  minutes: any; 
+  seconds: any;
   appUserId:any;
   otpValue:any;
   user_email: any;
@@ -24,8 +27,49 @@ export class OtpByEmailPage implements OnInit {
     console.log(this.appUserId);
     this.user_email = this.activatedRoute.snapshot.params['user_email'];
     console.log('user_email: ',this.user_email);
-    
+    this.countdown();
   }
+
+  countdown() {
+  
+    clearInterval(this.interval);
+  
+    let timer = this.timer.split(':');
+    console.log(timer);
+    
+    this.minutes = timer[0];
+    this.seconds = timer[1];
+    console.log(this.minutes);
+    console.log(this.seconds);
+      
+    this.interval = setInterval(()=>{
+      if(this.seconds > 0){
+        this.seconds--;
+        console.log(this.seconds);
+      }
+      
+      if(this.seconds == 0 && this.minutes > 0 ){
+        this.seconds = 59;
+        this.minutes--;
+      } 
+        if (this.seconds < 10 && this.seconds.length != 2){
+        this.seconds = '0' + this.seconds;
+        console.log(this.seconds);
+      }
+      
+
+      if (this.minutes == 0 && this.seconds == 0){
+        clearInterval(this.interval);
+      } 
+      
+    },1000)
+  }
+
+  ionViewWillLeave(){
+    clearInterval(this.interval);
+    console.log('leave view');
+  }
+  
   onOtpChange(otp){
     console.log(otp);
     this.otpValue = otp
@@ -58,15 +102,22 @@ export class OtpByEmailPage implements OnInit {
    
   }
   getNewOtp(){
+    
     console.log(this.user_email);
     
     let data = {
       email: this.user_email
     }
+    this.api.showLoading();
     this.api.sendRequest('forgotPasswordApi',data).subscribe((res:any)=>{
+      this.api.hideLoading();
       console.log(res);
       if(res.status=='success'){
         let id = res.data.appUserId
+        console.log("this.timer: ",this.timer);
+        this.timer = '2:00'
+        console.log("this.timer: ",this.timer);
+        this.countdown();
         // this.api.presentToast('Your OTP is ' + res.data.forgotPasswrodOtp);
         // this.router.navigate(['/otp-by-email'], id);
         // localStorage.setItem('appUserId',id);
@@ -76,6 +127,7 @@ export class OtpByEmailPage implements OnInit {
         
       }
     },(err)=>{
+      this.api.hideLoading();
       console.log(err);
       
     })
