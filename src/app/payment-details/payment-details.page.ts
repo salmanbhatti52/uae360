@@ -39,9 +39,7 @@ export class PaymentDetailsPage implements OnInit {
     private stripe: Stripe,
     public checkUser:CheckUserService
     ) {
-      // My_test_key: pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1
-      // client_test_key: pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4
-      this.stripe.setPublishableKey('pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4');
+      this.stripe.setPublishableKey('pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1');
      }
 
   ngOnInit() {
@@ -119,7 +117,7 @@ export class PaymentDetailsPage implements OnInit {
      this.stripe.createCardToken(card).then(token => {
       // console.log("token.id: ",token.id);
       this.tokenId = token.id
-      console.log("this.tokenId: ",this.tokenId);
+      // console.log("this.tokenId: ",this.tokenId);
     })
     .catch(error => {
       console.error("error: ",error);
@@ -157,11 +155,11 @@ export class PaymentDetailsPage implements OnInit {
         gateway_status:"Pending",
         transactions_status:"Pending"
       }
-      console.log("Make Payment Data: ",data);
+      // console.log("Make Payment Data: ",data);
       
       this.api.sendRequest("storeCarsBookingTransactions",data).subscribe((res:any)=>{
         this.api.hideLoading();
-        console.log("Response: ",res);
+        // console.log("Response: ",res);
         if(res.status == 'success'){
           this.paymentAmount = '0';
           this.openBookedModal();
