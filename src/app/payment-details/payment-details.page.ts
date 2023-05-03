@@ -26,7 +26,7 @@ export class PaymentDetailsPage implements OnInit {
   card: any;
   cardType = '';
   cardNumber = '';
-  cardsList = [];
+  cardsList:any = [];
   selected = 0;
   payPalPaymentDetails: any;
   bookingId:any;
@@ -39,7 +39,9 @@ export class PaymentDetailsPage implements OnInit {
     private stripe: Stripe,
     public checkUser:CheckUserService
     ) {
-      this.stripe.setPublishableKey('pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1');
+      // My_test_key: pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1
+      // client_test_key: pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4
+      this.stripe.setPublishableKey('pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4');
      }
 
   ngOnInit() {
@@ -47,7 +49,6 @@ export class PaymentDetailsPage implements OnInit {
     this.renderPayWithPaypal();
   }
   ionViewWillEnter(){
-    this.getToken();
     this.getCardsList();
     console.log(this.api.bookingResponse);
     
@@ -67,7 +68,7 @@ export class PaymentDetailsPage implements OnInit {
     }
     this.api.showLoading();
     this.api.sendRequest('get_cards_list',data).subscribe((res:any)=>{
-      // console.log("Response: ",res);
+      console.log("Response: ",res);
       if(res.status == 'success'){
         this.cardsList = res.data;
         // console.log("card list: ",this.cardsList);
@@ -85,7 +86,8 @@ export class PaymentDetailsPage implements OnInit {
           }
         }
         // console.log("card list: ",this.cardsList);
-        this.selectedCard = this.cardsList[0]
+        this.selectedCard = this.cardsList[0];
+        this.getToken();
         this.api.hideLoading();
         if(this.cardsList.length == 0){
           this.paymentMethodsData = false
@@ -100,18 +102,24 @@ export class PaymentDetailsPage implements OnInit {
      
   }
 
-  getToken(){
+   getToken(){
+    this.tokenId = undefined;
     let card = {
-      number: '4242424242424242',
-      expMonth: 12,
-      expYear: 2025,
-      cvc: '220'
+      // number: '4242424242424242',
+      // expMonth: 12,
+      // expYear: 2025,
+      // cvc: '220'
+      number: this.selectedCard.card_number,
+      expMonth: this.selectedCard.expiry_month,
+      expYear: this.selectedCard.expiry_year,
+      cvc: this.selectedCard.cvv
     }
+     console.log("selected Card: ", card );
      
-    this.stripe.createCardToken(card).then(token => {
+     this.stripe.createCardToken(card).then(token => {
       // console.log("token.id: ",token.id);
       this.tokenId = token.id
-      // console.log("this.tokenId: ",this.tokenId);
+      console.log("this.tokenId: ",this.tokenId);
     })
     .catch(error => {
       console.error("error: ",error);
@@ -120,11 +128,24 @@ export class PaymentDetailsPage implements OnInit {
   }
 
   selectMethod(val,cardData){
+    this.selectedCard = cardData;
+    this.getToken();
     console.log(val);
     this.selected = val;
-    this.selectedCard = cardData
   }
+
+  
+
+  pay(){
+    this.api.showLoadWd();
+    setTimeout(() => {
+      this.makePayment();
+    }, 2000);
+  }
+
   makePayment(){
+    console.log("Payment Amount: ",this.paymentAmount);
+    
     if(this.paymentAmount != '0'){
       let data = {
         booking_id:this.bookingId,
@@ -136,10 +157,11 @@ export class PaymentDetailsPage implements OnInit {
         gateway_status:"Pending",
         transactions_status:"Pending"
       }
-      // console.log("Data: ",data);
-  
+      console.log("Make Payment Data: ",data);
+      
       this.api.sendRequest("storeCarsBookingTransactions",data).subscribe((res:any)=>{
-        // console.log("Response: ",res);
+        this.api.hideLoading();
+        console.log("Response: ",res);
         if(res.status == 'success'){
           this.paymentAmount = '0';
           this.openBookedModal();
@@ -151,10 +173,12 @@ export class PaymentDetailsPage implements OnInit {
           
         }
       },(err)=>{
+        this.api.hideLoading();
         console.log("Api Error: ",err);
-        
+        this.api.presentToast(`Error is: ${err}`);
       })
     }else{
+      this.api.hideLoading();
       this.api.presentToast(this.errorMessage);
       this.openBookedModal();
     }
