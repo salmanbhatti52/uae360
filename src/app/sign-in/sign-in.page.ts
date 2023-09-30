@@ -9,7 +9,6 @@ import { AppComponent } from '../app.component';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { Capacitor } from '@capacitor/core';
 import { FacebookLogin, FacebookLoginResponse } from '@capacitor-community/facebook-login';
-import { Plugins } from 'protractor/built/plugins';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-sign-in',

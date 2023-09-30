@@ -4,6 +4,7 @@ import { NewPaymentMethodPage } from '../new-payment-method/new-payment-method.p
 import { ModalController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { CheckUserService } from '../check-user.service';
+import * as creditCardType from 'credit-card-type';
 @Component({
   selector: 'app-saved-payment-methods',
   templateUrl: './saved-payment-methods.page.html',
@@ -40,7 +41,7 @@ export class SavedPaymentMethodsPage implements OnInit {
         this.cardsList = res.data;
         // console.log("card list: ",this.cardsList);
         
-        var creditCardType = require("credit-card-type");
+        //  creditCardType = require("credit-card-type");
        
         for(let data of this.cardsList){
           data.sm_card_number = data.card_number.substring(0,4)
@@ -79,7 +80,7 @@ export class SavedPaymentMethodsPage implements OnInit {
         this.cardsList = res.data;
         // console.log("card list: ",this.cardsList);
         
-        var creditCardType = require("credit-card-type");
+        // var creditCardType = require("credit-card-type");
        
         for(let data of this.cardsList){
           data.sm_card_number = data.card_number.substring(0,4)

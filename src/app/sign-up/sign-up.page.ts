@@ -41,30 +41,31 @@ export class SignUpPage implements OnInit {
     });
   }
   // =======================international phone input code =====================
-  // onCountryChange(event){
+    // onCountryChange(event){
 
-  //   console.log(event.dialCode);
-  //   console.log(event.name);
-  //   console.log(event.iso2);
-  //   }
-  //   telInputObject(obj) {
-  //     console.log('testing')
-  //     console.log(obj);
-  //     obj.setCountry('ae');
-  //     console.log(obj.s.dialCode);
+    //   console.log(event.dialCode);
+    //   console.log(event.name);
+    //   console.log(event.iso2);
+    // }
+
+    // telInputObject(obj) {
+    //   console.log('testing')
+    //   console.log(obj);
+    //   obj.setCountry('ae');
+    //   console.log(obj.s.dialCode);
       
-  //   }
-  //   hasError(err){
-  //     console.log(err);
-  //   }
-  //   getNumber(number){
-  //     console.log(number);
-  //     this.number = number;
+    // }
+    // hasError(err){
+    //   console.log(err);
+    // }
+    // getNumber(number){
+    //   console.log(number);
+    //   this.number = number;
 
-  //   }
-  //   focus(){
-  //     this.getFocus=true;
-  //   }
+    // }
+    // focus(){
+    //   this.getFocus=true;
+    // }
   // ===========================done========================================
   goBack(){
     this.location.back();

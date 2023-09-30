@@ -12,7 +12,6 @@ import { CheckUserService } from '../check-user.service';
 import { format, parseISO, addDays, setDate, getDate, isDate, getTime, getMonth, getYear, eachHourOfInterval, getHours, getMinutes, eachMinuteOfInterval  } from 'date-fns';
 // import { format,parseISO} from 'date-fns';
 import { CalendarComponentOptions } from 'ion2-calendar';
-// import { logging } from 'protractor';
 
 
 const IMAGE_DIR = 'stored-image'

@@ -52,10 +52,10 @@ export class LiveChatPage implements OnInit {
       appUserId: this.checkUser.appUserId
     }
     this.api.sendRequest("getAllChatLive",data).subscribe((res:any)=>{
-      console.log("Resposne: ",res);
+      console.log("getAllChatLive Resposne: ",res);
       if(res.status == 'success'){
         if(res.data.length > 0){
-          this.adminId = res.data[0].sender_id
+          this.adminId = res.data[0].receiver_id;
           console.log("Admin Id: ",this.adminId);
         }
         
@@ -69,13 +69,14 @@ export class LiveChatPage implements OnInit {
   }
 
   startLiveChat(){
-    console.log("Admin Id: ",this.adminId);
     
     if(this.adminId === undefined){
+
+      console.log("Admin Id: ",this.adminId);
       let arrayLength = this.adminsList.length
       console.log("arrayLength: ",arrayLength);
       let randomValue = Math.floor(Math.random() * arrayLength)
-      console.log("randomValue: ",randomValue);
+      console.log("randomIndex: ",randomValue);
       this.selectedAdmin = this.adminsList[randomValue];
       console.log("Selected Admin: ",this.selectedAdmin);
       
@@ -99,6 +100,8 @@ export class LiveChatPage implements OnInit {
         
       })
     }else{
+      console.log("admin id: ",this.adminId);
+      
       this.router.navigate(['/live-chat-screen',{   
         selected_admin: this.adminId
       }]);

@@ -7,6 +7,7 @@ import { loadScript } from "@paypal/paypal-js";
 import { ApiService } from '../services/api.service';
 import { Stripe } from '@awesome-cordova-plugins/stripe/ngx';
 import { CheckUserService } from '../check-user.service';
+import * as creditCardType from 'credit-card-type';
 import Cleave from 'node_modules/cleave.js/dist/cleave-esm.min.js';
 @Component({
   selector: 'app-payment-details',
@@ -39,7 +40,9 @@ export class PaymentDetailsPage implements OnInit {
     private stripe: Stripe,
     public checkUser:CheckUserService
     ) {
-      this.stripe.setPublishableKey('pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1');
+      // client_test_key: pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4
+      // My_test_key: pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1
+      this.stripe.setPublishableKey('pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4');
      }
 
   ngOnInit() {
@@ -71,7 +74,7 @@ export class PaymentDetailsPage implements OnInit {
         this.cardsList = res.data;
         // console.log("card list: ",this.cardsList);
         
-        var creditCardType = require("credit-card-type");
+        // var creditCardType = require("credit-card-type");
        
         for(let data of this.cardsList){
           data.sm_card_number = data.card_number.substring(0,4)
@@ -155,12 +158,13 @@ export class PaymentDetailsPage implements OnInit {
         gateway_status:"Pending",
         transactions_status:"Pending"
       }
-      // console.log("Make Payment Data: ",data);
+      console.log("Make Payment Data: ",data);
       
       this.api.sendRequest("storeCarsBookingTransactions",data).subscribe((res:any)=>{
         this.api.hideLoading();
-        // console.log("Response: ",res);
+        console.log("Response: ",res);
         if(res.status == 'success'){
+          this.api.presentToast(`Transaction Status: ${res.data.bookings_txns.transactions_status}`);
           this.paymentAmount = '0';
           this.openBookedModal();
         }else if(res.status == 'error'){
