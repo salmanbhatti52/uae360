@@ -43,6 +43,35 @@
     --ion-color-shade: none !important;
     --ion-color-tint: none !important;
   }
+
+  .searchbar-input.sc-ion-searchbar-md {
+    // font-family: inherit;
+    // font-size: inherit;
+    // font-style: inherit;
+    // font-weight: inherit;
+    // letter-spacing: inherit;
+    // text-decoration: inherit;
+    // text-indent: inherit;
+    // text-overflow: inherit;
+    // text-transform: inherit;
+    // text-align: inherit;
+    // white-space: inherit;
+    // color: inherit;
+     border-radius: none !important;
+    display: block;
+    /* width: 100%; */
+     border: none !important; 
+    outline: none;
+     background: none !important;
+    font-family: inherit;
+    // -webkit-box-shadow: var(--box-shadow);
+    // /* box-shadow: var(--box-shadow); */
+    // -webkit-box-sizing: border-box;
+    // box-sizing: border-box;
+    // -webkit-appearance: none;
+    // -moz-appearance: none;
+    // appearance: none;
+}
   .swiper-pagination-bullet {
     margin: 0 4px;
     width: 24px;
