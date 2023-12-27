@@ -5,7 +5,8 @@ import { BookedPage } from '../booked/booked.page';
 import { ModalController } from '@ionic/angular';
 import { loadScript } from "@paypal/paypal-js";
 import { ApiService } from '../services/api.service';
-import { Stripe } from '@awesome-cordova-plugins/stripe/ngx';
+// import { Stripe } from '@awesome-cordova-plugins/stripe/ngx';
+import { Stripe } from '@capacitor-community/stripe';
 import { CheckUserService } from '../check-user.service';
 import * as creditCardType from 'credit-card-type';
 import Cleave from 'node_modules/cleave.js/dist/cleave-esm.min.js';
@@ -15,7 +16,7 @@ import Cleave from 'node_modules/cleave.js/dist/cleave-esm.min.js';
   styleUrls: ['./payment-details.page.scss'],
 })
 export class PaymentDetailsPage implements OnInit {
-  [x: string]: any;
+  // [x: string]: any;
   master = false;
   visa = false;
   paypal = false;
@@ -37,18 +38,22 @@ export class PaymentDetailsPage implements OnInit {
   constructor(public location:Location,
     public modalCtrlr:ModalController,
     public api:ApiService,
-    private stripe: Stripe,
+    // private stripe: Stripe,
     public checkUser:CheckUserService
     ) {
       // client_test_key: pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4
       // My_test_key: pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1
-      this.stripe.setPublishableKey('pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4');
-     }
+      // this.stripe.setPublishableKey('pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4');
+      Stripe.initialize({
+        publishableKey: 'pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4',
+      }); 
+    }
 
   ngOnInit() {
     this.paid_username = undefined
     this.renderPayWithPaypal();
   }
+
   ionViewWillEnter(){
     this.getCardsList();
     console.log(this.api.bookingResponse);
@@ -117,16 +122,162 @@ export class PaymentDetailsPage implements OnInit {
     }
      console.log("selected Card: ", card );
      
-     this.stripe.createCardToken(card).then(token => {
-      // console.log("token.id: ",token.id);
-      this.tokenId = token.id
-      // console.log("this.tokenId: ",this.tokenId);
-    })
-    .catch(error => {
-      console.error("error: ",error);
-      this.api.presentToast(error);
-    });
+    // //  this.stripe.createCardToken(card).then(token => {
+    // //   // console.log("token.id: ",token.id);
+    // //   this.tokenId = token.id
+    // //   // console.log("this.tokenId: ",this.tokenId);
+    // // })
+    // .catch(error => {
+    //   console.error("error: ",error);
+    //   this.api.presentToast(error);
+    // });
   }
+
+  // httpPost(){
+  //   // let amount = String(this.rest.billDetails.total_bill * 100)
+  //   console.log("Amount before multiply by 100: ", this.rest.billDetails.pre_pay_amount);
+  //   this.amount = this.rest.billDetails.pre_pay_amount * 100
+  //   this.amount = this.convertInDecimal(this.amount);
+  //   console.log("Amount after multiply by 100: ", this.amount);
+   
+  //   let data = {
+  //     name:this.userName,
+  //     email:this.userEmail,
+  //     amount:this.amount,
+  //     currency:"USD"
+  //   }
+  //   console.log("payload for payment sheet api: ",data);
+    
+  //   this.rest.sendRequest('payment_sheet',data).subscribe((res:any)=>{
+  //     console.log("Ress: ",res);
+  //     this.customerId = res.customer;
+  //     this.ephemeralKey = res.ephemeralkey?.secret;
+  //     this.paymentIntent = res.paymentintent?.client_secret;
+  //     console.log("customerId: ",this.customerId);
+  //     console.log("ephemeralKey: ",this.ephemeralKey);
+  //     console.log("paymentIntent: ",this.paymentIntent);
+      
+  //   })
+  
+    
+  // }
+
+  // convertInDecimal(x:any) {
+  //   let decimalString =  Number.parseFloat(x).toFixed(2);
+  //   console.log("dec str: ", decimalString);
+  //   return Number.parseFloat(decimalString);
+  // }
+
+  // payCash(paymentType:any){
+  //   let discountStatus = 'pending';
+  //   if(this.rest.claimDiscount == true){
+  //     discountStatus = 'claimed';
+  //   }
+  //   if(this.rest.discountedAmount == undefined){
+  //     this.rest.discountedAmount = 0
+  //   }
+  //   let data = {
+  //     events_id:this.rest.billDetails.event_id,
+  //     user_id:this.userId,
+  //     user_business_id:this.rest.billDetails.user_business_id,
+  //     number_of_ticket:this.rest.billDetails.ticket_requested,
+  //     package_name:this.rest.billDetails.package_name,
+  //     package_type:this.rest.billDetails.package_type,
+  //     package_price: this.rest.billDetails.package_price,
+  //     booking_percentage: this.rest.booking_percentage,
+  //     price_per_ticket:this.rest.billDetails.price_per_ticket,
+  //     total_amount:this.rest.billDetails.total_bill,
+  //     paid_amount:this.rest.billDetails.pre_pay_amount,
+  //     remaining_amount: this.rest.billDetails.remaining_amount,
+  //     transiction_id:this.txnsId,
+  //     transiction_status:"Paid",
+  //     payment_type:paymentType,
+  //     claim_discounts:discountStatus,
+  //     discounted_amount:this.rest.discountedAmount
+  //   }
+  //   console.log('pay with cash dataaa: ',data);
+  //   this.rest.presentLoader();
+  //   this.rest.sendRequest('event_bookings',data).subscribe((res:any)=>{
+  //     this.rest.dismissLoader();
+  //     console.log("Resssss: ",res);
+  //     if(res.status == 'success'){
+  //       this.rest.ticketTokens = res.data.tickets;
+  //       this.rest.eventBookingId = res.data.event_booking_id;
+  //       this.rest.eventId = res.data.events_id;
+  //       this.rest.bookingStatus = res.data.status;
+  //       this.rest.transactionStatus = res.data.transiction_status;
+
+  //       this.rest.presentToast('Success');
+  //       this.paynow();
+  //     }
+      
+  //   }
+  //   // ,(err)=>{
+  //   //   this.rest.dismissLoader();
+  //   //   console.log("Errr: ",err );
+      
+  //   // }
+  //   )
+    
+  // }
+
+  // async paymentSheet() {
+  //   if(this.userName){
+  //     try {
+  //       this.paymentIntent = undefined;
+  //       this.customerId = undefined;
+  //       this.ephemeralKey = undefined;
+  //       // be able to get event of PaymentSheet
+  //       this.rest.presentLoader();
+  //       this.httpPost();
+        
+  //       Stripe.addListener(PaymentSheetEventsEnum.Completed, () => {
+  //         console.log('PaymentSheetEventsEnum.Completed');
+  //       });
+        
+  //       // Connect to your backend endpoint, and get every key.
+  
+  //       setTimeout(async () => {
+  //         console.log("If PaymentIntent: ",this.paymentIntent);
+  //         // prepare PaymentSheet with CreatePaymentSheetOption.
+  //         await Stripe.createPaymentSheet({
+  //           enableGooglePay:true,
+  //           enableApplePay:true,
+  //           paymentIntentClientSecret: this.paymentIntent,
+  //           customerId: this.customerId,
+  //           customerEphemeralKeySecret: this.ephemeralKey,
+  //           merchantDisplayName: 'Getbootstrap'
+  //         });
+  //         this.rest.dismissLoader();
+  //         console.log("createPaymentSheet");
+  //       }, 3000);
+        
+  //       setTimeout(async () => {
+  //         // present PaymentSheet and get result.
+  //         const result = await Stripe.presentPaymentSheet();
+  //         console.log('Result: ',result);
+          
+  //         if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
+  //           this.splitAndJoin(this.paymentIntent);
+  //           console.log("paymentIntent",this.paymentIntent);
+  //           this.payCash('Stripe');
+  //           // Happy path
+  //         }
+  //       }, 3000);
+        
+        
+          
+  //     } catch (error) {
+  //       console.log("Error catched: ",error);
+        
+  //     }
+  //   }else{
+  //     this.rest.presentToast("Plz set your name in Profile section.");
+  //   }
+   
+    
+
+  // }
 
   selectMethod(val,cardData){
     this.selectedCard = cardData;
