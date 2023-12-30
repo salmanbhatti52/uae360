@@ -45,7 +45,7 @@ export class PaymentDetailsPage implements OnInit {
       // My_test_key: pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1
       // this.stripe.setPublishableKey('pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4');
       Stripe.initialize({
-        publishableKey: 'pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4',
+        publishableKey: 'pk_test_51NLjiSCq21ty1Wx6S2nBXtuBtmDqGwwAbCPA4rt1oXxlr9sTRamGNjF5KpTZfrWbDsVwPDhqaNwAJDOA9pKz80cF00IgQ0c5Yn',
       }); 
     }
 
@@ -304,10 +304,13 @@ export class PaymentDetailsPage implements OnInit {
         payment_gateways:"Credit Card",
         payer_name:this.selectedCard.holder_name,
         paid_amount:this.paymentAmount,
-        token_id:this.tokenId,
+        token_id:this.tokenId, 
         currency:"USD",
         gateway_status:"Pending",
         transactions_status:"Pending"
+        // transiction_id:this.txnsId,
+  //     transiction_status:"Paid",
+
       }
       console.log("Make Payment Data: ",data);
       
