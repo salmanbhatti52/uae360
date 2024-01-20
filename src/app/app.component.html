@@ -42,7 +42,8 @@
      
       <div style="padding: 20px 23px 30px;">
         <ion-row >
-          <ion-col style="padding: 0px;" size="2"><img src="assets/images/icons/log_in_out_sm.svg" alt=""></ion-col>
+          <ion-col style="padding: 0px;" size="2" *ngIf="checkUser.appUserId==null"><img src="assets/images/icons/log_in_out_sm.svg" alt=""></ion-col>
+          <ion-col style="padding: 0px;" size="2" *ngIf="checkUser.appUserId!=null"><img src="assets/images/icons/logout.svg" alt=""></ion-col>
           <ion-col style="padding: 0px;" size="7">
             <span (click)="gotoSignIn()" class="item_label" *ngIf="checkUser.appUserId==null">Login or Signup</span>
             <span (click)="logout()" class="item_label" *ngIf="checkUser.appUserId!=null">Logout</span>

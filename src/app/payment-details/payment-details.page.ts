@@ -6,7 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { loadScript } from "@paypal/paypal-js";
 import { ApiService } from '../services/api.service';
 // import { Stripe } from '@awesome-cordova-plugins/stripe/ngx';
-import { Stripe } from '@capacitor-community/stripe';
+import { PaymentSheetEventsEnum, Stripe } from '@capacitor-community/stripe';
 import { CheckUserService } from '../check-user.service';
 import * as creditCardType from 'credit-card-type';
 import Cleave from 'node_modules/cleave.js/dist/cleave-esm.min.js';
@@ -21,7 +21,11 @@ export class PaymentDetailsPage implements OnInit {
   visa = false;
   paypal = false;
   paymentMethodsData = true;
-  paymentAmount: string = this.api.bookingResponse.total_cost;
+  paymentAmount:any = this.api.bookingResponse.total_cost;
+  amount:any = 0;
+  customerId: any;
+  ephemeralKey: any;
+  paymentIntent: any;
   // paymentAmount: string = '10';
   currency: string = 'USD';
   paid_username:any;
@@ -33,6 +37,7 @@ export class PaymentDetailsPage implements OnInit {
   payPalPaymentDetails: any;
   bookingId:any;
   tokenId:any;
+  txnsId: any;
   selectedCard:any;
   errorMessage = 'Transaction for this booking already exists.';
   constructor(public location:Location,
@@ -93,7 +98,7 @@ export class PaymentDetailsPage implements OnInit {
         }
         // console.log("card list: ",this.cardsList);
         this.selectedCard = this.cardsList[0];
-        this.getToken();
+        // this.getToken();
         this.api.hideLoading();
         if(this.cardsList.length == 0){
           this.paymentMethodsData = false
@@ -108,65 +113,65 @@ export class PaymentDetailsPage implements OnInit {
      
   }
 
-   getToken(){
-    this.tokenId = undefined;
-    let card = {
-      // number: '4242424242424242',
-      // expMonth: 12,
-      // expYear: 2025,
-      // cvc: '220'
-      number: this.selectedCard.card_number,
-      expMonth: this.selectedCard.expiry_month,
-      expYear: this.selectedCard.expiry_year,
-      cvc: this.selectedCard.cvv
-    }
-     console.log("selected Card: ", card );
-     
-    // //  this.stripe.createCardToken(card).then(token => {
-    // //   // console.log("token.id: ",token.id);
-    // //   this.tokenId = token.id
-    // //   // console.log("this.tokenId: ",this.tokenId);
-    // // })
-    // .catch(error => {
-    //   console.error("error: ",error);
-    //   this.api.presentToast(error);
-    // });
-  }
-
-  // httpPost(){
-  //   // let amount = String(this.rest.billDetails.total_bill * 100)
-  //   console.log("Amount before multiply by 100: ", this.rest.billDetails.pre_pay_amount);
-  //   this.amount = this.rest.billDetails.pre_pay_amount * 100
-  //   this.amount = this.convertInDecimal(this.amount);
-  //   console.log("Amount after multiply by 100: ", this.amount);
-   
-  //   let data = {
-  //     name:this.userName,
-  //     email:this.userEmail,
-  //     amount:this.amount,
-  //     currency:"USD"
+  //  getToken(){
+  //   this.tokenId = undefined;
+  //   let card = {
+  //     // number: '4242424242424242',
+  //     // expMonth: 12,
+  //     // expYear: 2025,
+  //     // cvc: '220'
+  //     number: this.selectedCard.card_number,
+  //     expMonth: this.selectedCard.expiry_month,
+  //     expYear: this.selectedCard.expiry_year,
+  //     cvc: this.selectedCard.cvv
   //   }
-  //   console.log("payload for payment sheet api: ",data);
+  //    console.log("selected Card: ", card );
+     
+  //   // //  this.stripe.createCardToken(card).then(token => {
+  //   // //   // console.log("token.id: ",token.id);
+  //   // //   this.tokenId = token.id
+  //   // //   // console.log("this.tokenId: ",this.tokenId);
+  //   // // })
+  //   // .catch(error => {
+  //   //   console.error("error: ",error);
+  //   //   this.api.presentToast(error);
+  //   // });
+  // }
+
+  httpPost(){
+    // let amount = String(this.rest.billDetails.total_bill * 100)
+    console.log("Amount before multiply by 100: ", this.paymentAmount);
+    this.amount = this.paymentAmount * 100
+    this.amount = this.convertInDecimal(this.amount);
+    console.log("Amount after multiply by 100: ", this.amount);
+   
+    let data = {
+      name:this.api.localUserData.username,
+      email:this.api.localUserData.email,
+      amount:this.amount,
+      currency:"USD"
+    }
+    console.log("payload for payment sheet api: ",data);
     
-  //   this.rest.sendRequest('payment_sheet',data).subscribe((res:any)=>{
-  //     console.log("Ress: ",res);
-  //     this.customerId = res.customer;
-  //     this.ephemeralKey = res.ephemeralkey?.secret;
-  //     this.paymentIntent = res.paymentintent?.client_secret;
-  //     console.log("customerId: ",this.customerId);
-  //     console.log("ephemeralKey: ",this.ephemeralKey);
-  //     console.log("paymentIntent: ",this.paymentIntent);
+    this.api.sendRequest('payment_sheet',data).subscribe((res:any)=>{
+      console.log("Ress: ",res);
+      this.customerId = res.customer;
+      this.ephemeralKey = res.ephemeralkey?.secret;
+      this.paymentIntent = res.paymentintent?.client_secret;
+      console.log("customerId: ",this.customerId);
+      console.log("ephemeralKey: ",this.ephemeralKey);
+      console.log("paymentIntent: ",this.paymentIntent);
       
-  //   })
+    })
   
     
-  // }
+  }
 
-  // convertInDecimal(x:any) {
-  //   let decimalString =  Number.parseFloat(x).toFixed(2);
-  //   console.log("dec str: ", decimalString);
-  //   return Number.parseFloat(decimalString);
-  // }
+  convertInDecimal(x:any) {
+    let decimalString =  Number.parseFloat(x).toFixed(2);
+    console.log("dec str: ", decimalString);
+    return Number.parseFloat(decimalString);
+  }
 
   // payCash(paymentType:any){
   //   let discountStatus = 'pending';
@@ -221,67 +226,76 @@ export class PaymentDetailsPage implements OnInit {
     
   // }
 
-  // async paymentSheet() {
-  //   if(this.userName){
-  //     try {
-  //       this.paymentIntent = undefined;
-  //       this.customerId = undefined;
-  //       this.ephemeralKey = undefined;
-  //       // be able to get event of PaymentSheet
-  //       this.rest.presentLoader();
-  //       this.httpPost();
+  async paymentSheet() {
+    if(this.api.localUserData.username != ''){
+      try {
+        this.paymentIntent = undefined;
+        this.customerId = undefined;
+        this.ephemeralKey = undefined;
+        // be able to get event of PaymentSheet
+        this.api.showLoading();
+        this.httpPost();
         
-  //       Stripe.addListener(PaymentSheetEventsEnum.Completed, () => {
-  //         console.log('PaymentSheetEventsEnum.Completed');
-  //       });
+        Stripe.addListener(PaymentSheetEventsEnum.Completed, () => {
+          console.log('PaymentSheetEventsEnum.Completed');
+        });
         
-  //       // Connect to your backend endpoint, and get every key.
+        // Connect to your backend endpoint, and get every key.
   
-  //       setTimeout(async () => {
-  //         console.log("If PaymentIntent: ",this.paymentIntent);
-  //         // prepare PaymentSheet with CreatePaymentSheetOption.
-  //         await Stripe.createPaymentSheet({
-  //           enableGooglePay:true,
-  //           enableApplePay:true,
-  //           paymentIntentClientSecret: this.paymentIntent,
-  //           customerId: this.customerId,
-  //           customerEphemeralKeySecret: this.ephemeralKey,
-  //           merchantDisplayName: 'Getbootstrap'
-  //         });
-  //         this.rest.dismissLoader();
-  //         console.log("createPaymentSheet");
-  //       }, 3000);
+        setTimeout(async () => {
+          console.log("If PaymentIntent: ",this.paymentIntent);
+          // prepare PaymentSheet with CreatePaymentSheetOption.
+          await Stripe.createPaymentSheet({
+            // enableGooglePay:true,
+            // enableApplePay:true,
+            paymentIntentClientSecret: this.paymentIntent,
+            customerId: this.customerId,
+            customerEphemeralKeySecret: this.ephemeralKey,
+            merchantDisplayName: 'Getbootstrap'
+          });
+          this.api.hideLoading();
+          console.log("createPaymentSheet");
+        }, 3000);
         
-  //       setTimeout(async () => {
-  //         // present PaymentSheet and get result.
-  //         const result = await Stripe.presentPaymentSheet();
-  //         console.log('Result: ',result);
+        setTimeout(async () => {
+          // present PaymentSheet and get result.
+          const result = await Stripe.presentPaymentSheet();
+          console.log('Result: ',result);
           
-  //         if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
-  //           this.splitAndJoin(this.paymentIntent);
-  //           console.log("paymentIntent",this.paymentIntent);
-  //           this.payCash('Stripe');
-  //           // Happy path
-  //         }
-  //       }, 3000);
+          if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
+            this.splitAndJoin(this.paymentIntent);
+            console.log("paymentIntent",this.paymentIntent);
+            this.pay();
+            // Happy path
+          }
+        }, 3000);
         
         
           
-  //     } catch (error) {
-  //       console.log("Error catched: ",error);
+      } catch (error) {
+        console.log("Error catched: ",error);
         
-  //     }
-  //   }else{
-  //     this.rest.presentToast("Plz set your name in Profile section.");
-  //   }
+      }
+    }else{
+      this.api.presentToast("Plz add your name in Profile section.");
+    }
    
     
 
-  // }
+  }
+
+  splitAndJoin(paymentIntent:any){
+    const result = paymentIntent.split('_').slice(0,2).join('_');
+    this.txnsId = result;
+    console.log("txnsId: ",this.txnsId);
+    console.log("Result: ",result);
+    return result;
+    
+  }
 
   selectMethod(val,cardData){
     this.selectedCard = cardData;
-    this.getToken();
+    // this.getToken();
     console.log(val);
     this.selected = val;
   }
@@ -304,13 +318,10 @@ export class PaymentDetailsPage implements OnInit {
         payment_gateways:"Credit Card",
         payer_name:this.selectedCard.holder_name,
         paid_amount:this.paymentAmount,
-        token_id:this.tokenId, 
+        token_id:this.txnsId, 
         currency:"USD",
-        gateway_status:"Pending",
-        transactions_status:"Pending"
-        // transiction_id:this.txnsId,
-  //     transiction_status:"Paid",
-
+        // gateway_status:"Pending",
+        transactions_status:"Paid"
       }
       console.log("Make Payment Data: ",data);
       
