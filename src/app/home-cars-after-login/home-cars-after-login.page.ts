@@ -11,6 +11,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { AwesomeCordovaNativePlugin } from '@awesome-cordova-plugins/core';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
 import { Share } from '@capacitor/share';
+// import { Browser } from '@capacitor/browser';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 @Component({
@@ -19,8 +20,8 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
   styleUrls: ['./home-cars-after-login.page.scss'],
 })
 export class HomeCarsAfterLoginPage implements OnInit {
-  totalNotifications:Number;
-  interval:any;
+  totalNotifications: Number;
+  interval: any;
   item1 = true;
   item2 = false;
   item3 = false;
@@ -31,7 +32,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
   carTypeTwo = '';
   carTypeThree = '';
   carTypeFour = '';
-  carTypeOneId= '';
+  carTypeOneId = '';
   carTypeTwoId = '';
   carTypeThreeId = '';
   carTypeFourId = '';
@@ -49,32 +50,32 @@ export class HomeCarsAfterLoginPage implements OnInit {
   showContent = true;
   pickups = [];
   pickupsData = true;
-  constructor(public router:Router,
-    public navCtrlr:NavController,
-    public checkUser:CheckUserService,
-    public appComponent:AppComponent,
-    public api:ApiService,
-    public menuCtrlr:MenuController,
+  constructor(public router: Router,
+    public navCtrlr: NavController,
+    public checkUser: CheckUserService,
+    public appComponent: AppComponent,
+    public api: ApiService,
+    public menuCtrlr: MenuController,
     public nativeGeoCoder: NativeGeocoder
-    ) {}
+  ) { }
 
   ngOnInit() {
-   // =======update appPages===========
-   console.log('AppUserId: ',this.checkUser.appUserId);
-   this.checkUser.checkUser();
-   console.log("AppPages: ",this.checkUser.appPages);
-   this.appComponent.appPages = this.checkUser.appPages;
-   // =======done============
+    // =======update appPages===========
+    console.log('AppUserId: ', this.checkUser.appUserId);
+    this.checkUser.checkUser();
+    console.log("AppPages: ", this.checkUser.appPages);
+    this.appComponent.appPages = this.checkUser.appPages;
+    // =======done============
 
-  // ==============localUserData====================
- 
-   this.api.localUserData = JSON.parse(localStorage.getItem('localUserData'));
-    console.log('localUserData: ',this.api.localUserData);
-    
-  // ================================================
-   this.getCarTypes();
-  //  this.getCars();
-   this.fetchLocation();
+    // ==============localUserData====================
+
+    this.api.localUserData = JSON.parse(localStorage.getItem('localUserData'));
+    console.log('localUserData: ', this.api.localUserData);
+
+    // ================================================
+    this.getCarTypes();
+    //  this.getCars();
+    this.fetchLocation();
   }
 
   handleRefresh(event) {
@@ -91,133 +92,133 @@ export class HomeCarsAfterLoginPage implements OnInit {
     }, 2000);
   };
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     // ================notifications status check===================
     // console.log('notificationVal: ',localStorage.getItem('notificationVal'));
-    let toggleVal =  localStorage.getItem('notificationVal');
-    if(toggleVal == 'true'){
+    let toggleVal = localStorage.getItem('notificationVal');
+    if (toggleVal == 'true') {
       this.api.toggleVal = true;
-    }else if(toggleVal == 'false'){
+    } else if (toggleVal == 'false') {
       this.api.toggleVal = false;
-    }else{
+    } else {
       this.api.toggleVal = true;
     }
-    
-    console.log('api.toggleVal',this.api.toggleVal);
+
+    console.log('api.toggleVal', this.api.toggleVal);
     // ====================done=====================
 
-    if(this.result.length > 0){
+    if (this.result.length > 0) {
       this.showContent = false;
-    }else{
+    } else {
       this.showContent = true;
     }
-    
+
     this.getNotifications();
     this.getCars();
   }
 
-  getNotifications(){
+  getNotifications() {
     let data = {
-      users_id:this.checkUser.appUserId
+      users_id: this.checkUser.appUserId
     };
-    this.api.sendRequest('notifications_unread',data).subscribe((res:any)=>{
-      console.log("Notification Respone: ",res);
-      if(res.status == 'success'){
-        if(res.data.length > 0){
+    this.api.sendRequest('notifications_unread', data).subscribe((res: any) => {
+      console.log("Notification Respone: ", res);
+      if (res.status == 'success') {
+        if (res.data.length > 0) {
           this.totalNotifications = res.data.length
-        }else if(res.data.length == 0){
+        } else if (res.data.length == 0) {
           this.totalNotifications = 0;
         }
-        
-      }else if(res.status == 'error'){
+
+      } else if (res.status == 'error') {
 
       }
-      
-    },(err)=>{
-      console.log("Api Error: ",err);
-      
+
+    }, (err) => {
+      console.log("Api Error: ", err);
+
     })
   }
-  handleChange(event){
+  handleChange(event) {
     this.result = []
-    console.log('Event: ',event);
-    
-    const query = event.target.value.toLowerCase();
-    console.log('query: ',query);
+    console.log('Event: ', event);
 
-    if(query == ''){
+    const query = event.target.value.toLowerCase();
+    console.log('query: ', query);
+
+    if (query == '') {
       this.showContent = true;
-      
+
     }
-    if(query != ''){
+    if (query != '') {
       let data = {
-        users_customers_id:this.checkUser.appUserId,
-        keyword:query
+        users_customers_id: this.checkUser.appUserId,
+        keyword: query
       };
       this.api.showLoading();
-      this.api.sendRequest('getCarsByFiltersByName',data).subscribe((res:any)=>{
-        console.log("Response: ",res);
+      this.api.sendRequest('getCarsByFiltersByName', data).subscribe((res: any) => {
+        console.log("Response: ", res);
         this.api.hideLoading();
-        if(res.status == 'success'){
+        if (res.status == 'success') {
           this.showContent = false;
           this.result = res.data;
 
-        }else if(res.status == 'error'){
-          if(res.message != 'Keyword Required'){
+        } else if (res.status == 'error') {
+          if (res.message != 'Keyword Required') {
             this.api.presentToast(res.message);
           }
-        }else{
-  
+        } else {
+
         }
-        
-      },(err)=>{
+
+      }, (err) => {
         this.api.hideLoading();
-        console.log("API Call Error: ",err);
-        
+        console.log("API Call Error: ", err);
+
       })
     }
-    
+
   }
-  
-  clearResult(){
+
+  clearResult() {
     this.result = []
     this.showContent = true;
   }
-  
 
-  async fetchLocation(){
+
+  async fetchLocation() {
     const getCurrentLocation = await Geolocation.getCurrentPosition({
-      enableHighAccuracy:true
+      enableHighAccuracy: true
     });
-    console.log('Current Location: ',getCurrentLocation);
+    console.log('Current Location: ', getCurrentLocation);
     this.latitude = getCurrentLocation.coords.latitude;
     this.longitude = getCurrentLocation.coords.longitude;
-    console.log('Latitude: ',this.latitude);
-    console.log('Longitude: ',this.longitude);
+    console.log('Latitude: ', this.latitude);
+    console.log('Longitude: ', this.longitude);
     this.fetchAddress();
-    
+
   }
 
-  fetchAddress(){
-    this.nativeGeoCoder.reverseGeocode(this.latitude,this.longitude,this.options)
-    .then((result:NativeGeocoderResult[])=>{
-      console.log('Result: ', result);
-      console.log('Result 0: ', result[0]);
-      
-      this.api.fetchLocation= result[0].countryName;
-    },(err)=>{
-      console.log('Error:', err);
-      
-    });
+  fetchAddress() {
+    this.nativeGeoCoder.reverseGeocode(this.latitude, this.longitude, this.options)
+      .then((result: NativeGeocoderResult[]) => {
+        console.log('Result: ', result);
+        console.log('Result 0: ', result[0]);
+
+        this.api.fetchLocation = result[0].countryName;
+      }, (err) => {
+        console.log('Error:', err);
+
+      });
   }
 
-  getCarTypes(){
+  getCarTypes() {
     // this.api.showLoading();
-    this.api.sendRequest('carType').subscribe((res:any)=>{
+    this.api.sendRequest('carType').subscribe((res: any) => {
       // this.api.hideLoading();
-      console.log('getCarTypes: ',res);
-      if(res.status=='success'){
-        
+      console.log('getCarTypes: ', res);
+      if (res.status == 'success') {
+
         this.carTypes = res.data;
         this.carTypeOne = this.carTypes[0].car_type;
         this.carTypeTwo = this.carTypes[1].car_type;
@@ -228,82 +229,82 @@ export class HomeCarsAfterLoginPage implements OnInit {
         this.carTypeTwoId = this.carTypes[1].car_type_id;
         this.carTypeThreeId = this.carTypes[2].car_type_id;
         this.carTypeFourId = this.carTypes[3].car_type_id;
-        
+
       }
-      
-    },(err:any)=>{
-      console.log('Error',err);
+
+    }, (err: any) => {
+      console.log('Error', err);
       // this.api.hideLoading();
     })
   }
 
-  getCars(){
+  getCars() {
     this.pickupsData = true
     let data = {
       user_id: this.checkUser.appUserId
     }
     this.api.showLoading();
-    this.api.sendRequest('cars',data).subscribe((res:any)=>{
-      console.log("Response get cars:",res);
-      if(res.status == 'success'){
+    this.api.sendRequest('cars', data).subscribe((res: any) => {
+      console.log("Response get cars:", res);
+      if (res.status == 'success') {
         this.api.hideLoading()
         this.pickups = res.data;
         this.api.allCars = res.data;
-        console.log("api.allCars: ",this.api.allCars);
-       
-      }else if(res.status == 'error'){
+        console.log("api.allCars: ", this.api.allCars);
+
+      } else if (res.status == 'error') {
         this.api.hideLoading()
-        if(this.pickups.length == 0){
+        if (this.pickups.length == 0) {
           this.pickupsData = false
         }
-      }else{
+      } else {
 
       }
       // setTimeout(() => {
       //   this.api.hideLoading();
       // }, 2000);
-    },(err)=>{
+    }, (err) => {
       setTimeout(() => {
         this.api.hideLoading();
       }, 2000);
       console.log(err);
-      
+
     })
   }
-  gotoFilter(){
+  gotoFilter() {
     this.router.navigate(['/filters']);
   }
-  gotoCarDetails(car_id){
+  gotoCarDetails(car_id) {
     let data = {
       car_id: car_id,
       user_id: this.checkUser.appUserId
     }
     this.api.showLoading();
-    this.api.sendRequest('getCarsById',data).subscribe((res:any)=>{
+    this.api.sendRequest('getCarsById', data).subscribe((res: any) => {
       this.api.hideLoading();
-      console.log('api response:',res);
-      if(res.status == 'success'){
+      console.log('api response:', res);
+      if (res.status == 'success') {
         this.api.carDataById = res.data;
-        console.log('carDataById:',this.api.carDataById);
+        console.log('carDataById:', this.api.carDataById);
         this.router.navigate(['/car-details']);
       }
-      
-    },(err)=>{
+
+    }, (err) => {
       this.api.hideLoading();
       console.log(err);
-      
+
     })
   }
 
-  selectItem(itemVal){
-    if(itemVal == 'all'){
+  selectItem(itemVal) {
+    if (itemVal == 'all') {
       this.item1 = true;
       this.item2 = false;
       this.item3 = false;
       this.item4 = false;
-      this.item5 = false; 
+      this.item5 = false;
       this.getCars();
-    }else if(itemVal == 'Sports'){
+    } else if (itemVal == 'Sports') {
       this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
@@ -311,32 +312,32 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item3 = false;
       this.item4 = false;
       this.item5 = false;
-      
-        let data = {
-          car_type_id: this.carTypeOneId
-        }
-        this.api.showLoading();
-        this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
-          this.api.hideLoading();
-          console.log(res);
-          if(res.status == 'success'){
-            this.api.hideLoading()
-            this.pickups = res.data;
-            
-          }else if(res.status == 'error'){
-            this.api.hideLoading()
-            if(this.pickups.length == 0){
-              this.pickupsData = false
-            }
-          }else{
 
+      let data = {
+        car_type_id: this.carTypeOneId
+      }
+      this.api.showLoading();
+      this.api.sendRequest('getCarsByCarType', data).subscribe((res: any) => {
+        this.api.hideLoading();
+        console.log(res);
+        if (res.status == 'success') {
+          this.api.hideLoading()
+          this.pickups = res.data;
+
+        } else if (res.status == 'error') {
+          this.api.hideLoading()
+          if (this.pickups.length == 0) {
+            this.pickupsData = false
           }
-        },(err)=>{
-          this.api.hideLoading();
-          console.log(err);
-          
-        })
-    }else if(itemVal == 'Luxury'){
+        } else {
+
+        }
+      }, (err) => {
+        this.api.hideLoading();
+        console.log(err);
+
+      })
+    } else if (itemVal == 'Luxury') {
       this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
@@ -345,32 +346,32 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item4 = false;
       this.item5 = false;
 
-      
-        let data = {
-          car_type_id: this.carTypeTwoId
-        }
-        this.api.showLoading();
-        this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
-          this.api.hideLoading();
-          console.log(res);
-          if(res.status == 'success'){
-            this.api.hideLoading()
-            this.pickups = res.data;
-            
-          }else if(res.status == 'error'){
-            this.api.hideLoading()
-            if(this.pickups.length == 0){
-              this.pickupsData = false
-            }
-          }else{
 
+      let data = {
+        car_type_id: this.carTypeTwoId
+      }
+      this.api.showLoading();
+      this.api.sendRequest('getCarsByCarType', data).subscribe((res: any) => {
+        this.api.hideLoading();
+        console.log(res);
+        if (res.status == 'success') {
+          this.api.hideLoading()
+          this.pickups = res.data;
+
+        } else if (res.status == 'error') {
+          this.api.hideLoading()
+          if (this.pickups.length == 0) {
+            this.pickupsData = false
           }
-        },(err)=>{
-          this.api.hideLoading();
-          console.log(err);
-          
-        })
-    }else if(itemVal == 'Pickup'){
+        } else {
+
+        }
+      }, (err) => {
+        this.api.hideLoading();
+        console.log(err);
+
+      })
+    } else if (itemVal == 'Pickup') {
       this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
@@ -379,32 +380,32 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item4 = true;
       this.item5 = false;
 
-      
-        let data = {
-          car_type_id: this.carTypeThreeId
-        }
-        this.api.showLoading();
-        this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
-          
-          console.log(res);
-          if(res.status == 'success'){
-            this.api.hideLoading();
-            this.pickups = res.data;
-            
-          }else if(res.status == 'error'){
-            this.api.hideLoading();
-            if(this.pickups.length == 0){
-              this.pickupsData = false
-            }
-          }else{
 
-          }
-        },(err)=>{
+      let data = {
+        car_type_id: this.carTypeThreeId
+      }
+      this.api.showLoading();
+      this.api.sendRequest('getCarsByCarType', data).subscribe((res: any) => {
+
+        console.log(res);
+        if (res.status == 'success') {
           this.api.hideLoading();
-          console.log(err);
-          
-        })
-    }else if(itemVal == 'SUV'){
+          this.pickups = res.data;
+
+        } else if (res.status == 'error') {
+          this.api.hideLoading();
+          if (this.pickups.length == 0) {
+            this.pickupsData = false
+          }
+        } else {
+
+        }
+      }, (err) => {
+        this.api.hideLoading();
+        console.log(err);
+
+      })
+    } else if (itemVal == 'SUV') {
       this.pickupsData = true
       this.pickups = [];
       this.item1 = false;
@@ -412,37 +413,47 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.item3 = false;
       this.item4 = false;
       this.item5 = true;
-      
-        let data = {
-          car_type_id: this.carTypeFourId
-        }
-        this.api.showLoading();
-        this.api.sendRequest('getCarsByCarType',data).subscribe((res:any)=>{
-          this.api.hideLoading();
-          console.log(res);
-          if(res.status == 'success'){
-            this.api.hideLoading();
-            this.pickups = res.data;
-            
-          }else if(res.status == 'error'){
-            this.api.hideLoading();
-            if(this.pickups.length == 0){
-              this.pickupsData = false
-            }
-          }else{
 
-          }
-        },(err)=>{
+      let data = {
+        car_type_id: this.carTypeFourId
+      }
+      this.api.showLoading();
+      this.api.sendRequest('getCarsByCarType', data).subscribe((res: any) => {
+        this.api.hideLoading();
+        console.log(res);
+        if (res.status == 'success') {
           this.api.hideLoading();
-          console.log(err);
-          
-        })
-    }else{
-      
+          this.pickups = res.data;
+
+        } else if (res.status == 'error') {
+          this.api.hideLoading();
+          if (this.pickups.length == 0) {
+            this.pickupsData = false
+          }
+        } else {
+
+        }
+      }, (err) => {
+        this.api.hideLoading();
+        console.log(err);
+
+      })
+    } else {
+
     }
   }
 
-  async inviteOthers(){
+  async sendEmail() {
+    // const email = 'example@example.com'; // Specify the recipient's email address
+    // const subject = encodeURIComponent('Your Subject Here'); // URL encode the subject
+    // const body = encodeURIComponent('Your email body text here'); // URL encode the body text
+
+    // const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
+
+    // await Browser.open({ url: mailtoLink });
+  }
+
+  async inviteOthers() {
     await Share.share({
       title: 'Book Cars Online at 360UAE',
       text: 'Really awesome cars you can book',
@@ -450,20 +461,20 @@ export class HomeCarsAfterLoginPage implements OnInit {
       dialogTitle: 'Share with buddies',
     })
   }
-  
-  gotoNotifications(){
+
+  gotoNotifications() {
     this.router.navigate(['/notifications']);
   }
-  homeTab(){
+  homeTab() {
     this.router.navigate(['/home-cars-after-login']);
   }
-  messagesTab(){
+  messagesTab() {
     this.router.navigate(['/messages']);
   }
-  bookingTab(){
+  bookingTab() {
     this.router.navigate(['/bookings']);
   }
-  favoriteTab(){
+  favoriteTab() {
     this.router.navigate(['/favorites']);
   }
 }

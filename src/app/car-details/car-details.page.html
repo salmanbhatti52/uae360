@@ -3,8 +3,9 @@
     <div class="header">
       <img (click)="goBack()" src="assets/images/icons/back_arrow.svg" alt="">
       <div class="title">{{vehicleName}}</div>
-      <div>
-        <img (click)="startChatwithOwner()" src="assets/images/icons/chat.svg" alt="">
+      <div style="background: white;
+      opacity: 0.0;">
+        <img src="assets/images/icons/chat.svg" alt="">
       </div>
     </div>
   </ion-toolbar>
@@ -15,72 +16,75 @@
     <div *ngFor="let data of carData">
       <swiper [pagination]="true" [config]="{ intialSlide: 0, speed: 400, slidesPerView:1 }">
         <ng-template swiperSlide>
-          <div class="car_slide" >
-            <img (click)="makefavorite()" class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
-            <img (click)="makefavorite()" class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
+          <div class="car_slide">
+            <img (click)="makefavorite()" class="heart_icon" src="assets/images/icons/heart.svg" alt=""
+              *ngIf="favorites == 'dislike'">
+            <img (click)="makefavorite()" class="heart_icon" src="assets/images/icons/red_heart.svg" alt=""
+              *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image1}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
-          <div class="car_slide" >
+          <div class="car_slide">
             <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image2}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
-          <div class="car_slide" >
+          <div class="car_slide">
             <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image3}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
-          <div class="car_slide" >
+          <div class="car_slide">
             <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image4}}" alt="">
           </div>
         </ng-template>
         <ng-template swiperSlide>
-          <div class="car_slide" >
+          <div class="car_slide">
             <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image5}}" alt="">
           </div>
         </ng-template>
       </swiper>
-        
-  
+
+
       <div class="name_price_box">
-            <div class="car_name">{{data.vehical_name}}</div>
+        <div class="car_name">{{data.vehical_name}}</div>
         <div style="display: flex;align-items: baseline;">
           <span class="price_val" style="font-size:11px">$</span>
           <span class="price_val" style="font-size:32px" *ngIf="categoryVal=='Day'">{{data.rent_cost_day}}</span>
           <span class="price_val" style="font-size:32px" *ngIf="categoryVal=='Month'">{{data.rent_cost_month}}</span>
           <!-- <span class="price_val" style="font-size:32px">26</span> -->
           <span class="category_label" style="font-size: 10px;">/</span>
-          
+
           <div (click)="displayCategories()" style="display: flex;align-items: baseline;position: relative;">
-            <span class="category_label" style="margin-right: 5px;">{{categoryVal}}</span> 
-            <img [class.rotate_icon]="showCategories==true"  src="assets/images/icons/dropdown_icon.svg" alt="">
+            <span class="category_label" style="margin-right: 5px;">{{categoryVal}}</span>
+            <img [class.rotate_icon]="showCategories==true" src="assets/images/icons/dropdown_icon.svg" alt="">
             <div *ngIf="showCategories==true" class="categories">
               <div *ngFor="let type of rentCategories" (click)="selectedCategory(type.category)">
-                <span class="category_label" style="font-size: 12px; font-family: 'Poppins',sans-serif;">{{type.category}}</span>
-              </div> 
-            </div>  
+                <span class="category_label"
+                  style="font-size: 12px; font-family: 'Poppins',sans-serif;">{{type.category}}</span>
+              </div>
+            </div>
           </div>
         </div>
-  
+
       </div>
-  
+
       <div class="box_styling">
         <div class="box_heading">Description</div>
         <div class="box_description">
           {{data.description}}
         </div>
       </div>
-      
+
       <div class="box_styling">
         <div class="box_heading">Owner's Details</div>
         <div class="box_sub_heading">About</div>
@@ -88,7 +92,7 @@
           {{data.users_company[0].about}}
         </div>
       </div>
-  
+
       <div class="box_styling">
         <div class="box_sub_heading" style="margin-top: 0px;">Location</div>
         <div class="box_description" style="margin-top: 4px;">
@@ -99,7 +103,7 @@
         <div class="inner_box">
           <div>
             <span class="box_heading" style="margin-right: 10px;">Ratings</span>
-            
+
             <span *ngIf="data.rating == 0 ">
               <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
@@ -142,7 +146,7 @@
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
             </span>
-              
+
             <span class="trips_label">{{data.total_bookings}} trips</span>
           </div>
           <div>
@@ -151,22 +155,33 @@
         </div>
       </div>
     </div>
-    
 
-    
 
-    
+
+
+
 
   </div>
 
 </ion-content>
 
 <ion-footer class="ion-no-border" [class.header_footer_bg]="checkUser.appUserId != null">
-    <div style="margin: 10px 0px 15px;">
-      <div style="text-align: center;">
-        <ion-button class="invite_btn" (click)="startCarBooking()">
-          <span class="btn-text">Book Now</span>
-        </ion-button>
-      </div>
+  <!-- <div style="margin: 10px 0px 15px;">
+    <div style="text-align: center;">
+      <ion-button class="invite_btn" (click)="startCarBooking()">
+        <span class="btn-text">Book Now</span>
+      </ion-button>
     </div>
+  </div> -->
+  <div style="display: flex;justify-content: space-evenly;align-items: center;margin: 5% 0% 5%;;">
+    <div class="bg">
+      <ion-icon name="call" class="iconcls"></ion-icon>
+    </div>
+    <div class="bg2">
+      <ion-icon name="logo-whatsapp" class="iconcls"></ion-icon>
+    </div>
+    <div class="bg3">
+      <ion-icon name="paper-plane" class="iconcls"></ion-icon>
+    </div>
+  </div>
 </ion-footer>

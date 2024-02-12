@@ -33,7 +33,7 @@ ion-footer{
     font-family: 'Poppins', sans-serif;
 }
 .wrapper{
-    padding:5px 16px 20px;    
+    padding:5px 16px 20px;
 }
 .car_slide{
     display: flex;
@@ -63,6 +63,28 @@ ion-footer{
     border-radius: 5px;
     height: 62px;
 }
+.iconcls{
+  font-size: 22px;
+  color: #FCF6FF;
+}
+.bg{
+  background: #FBC505;
+  padding: 12px 15px 7px;
+  text-align: center;
+  border-radius: 10px;
+}
+.bg2{
+  background: #5CB85C;
+  padding: 12px 15px 7px;
+  text-align: center;
+  border-radius: 10px;
+}
+.bg3{
+  background: #4D4D4D;
+  padding: 12px 15px 7px;
+  text-align: center;
+  border-radius: 10px;
+}
 .car_name{
     font-size: 20px;
     font-weight: 700;
@@ -70,7 +92,7 @@ ion-footer{
     font-family: "Poppins", sans-serif;
 }
 .price_val{
-    color: #8000FF;
+    color: #FBC505;
     font-family: "Urbanist", sans-serif;
     font-weight: 600;
 }
