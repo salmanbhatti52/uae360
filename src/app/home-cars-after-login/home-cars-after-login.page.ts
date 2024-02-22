@@ -242,6 +242,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
     this.pickupsData = true
     let data = {
       user_id: this.checkUser.appUserId
+      // user_id: 2
     }
     this.api.showLoading();
     this.api.sendRequest('cars', data).subscribe((res: any) => {

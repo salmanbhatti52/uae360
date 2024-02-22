@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { FiltersPageRoutingModule } from './filters-routing.module';
 
 import { FiltersPage } from './filters.page';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SwiperModule,
     FiltersPageRoutingModule
   ],
   declarations: [FiltersPage]
 })
-export class FiltersPageModule {}
+export class FiltersPageModule { }

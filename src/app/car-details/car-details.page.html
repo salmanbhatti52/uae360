@@ -17,6 +17,7 @@
       <swiper [pagination]="true" [config]="{ intialSlide: 0, speed: 400, slidesPerView:1 }">
         <ng-template swiperSlide>
           <div class="car_slide">
+            <ion-icon class="share_icon" name="share-social-outline" (click)="share()"></ion-icon>
             <img (click)="makefavorite()" class="heart_icon" src="assets/images/icons/heart.svg" alt=""
               *ngIf="favorites == 'dislike'">
             <img (click)="makefavorite()" class="heart_icon" src="assets/images/icons/red_heart.svg" alt=""
@@ -26,6 +27,7 @@
         </ng-template>
         <ng-template swiperSlide>
           <div class="car_slide">
+            <ion-icon class="share_icon" name="share-social-outline" (click)="share()"></ion-icon>
             <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image2}}" alt="">
@@ -33,6 +35,7 @@
         </ng-template>
         <ng-template swiperSlide>
           <div class="car_slide">
+            <ion-icon class="share_icon" name="share-social-outline" (click)="share()"></ion-icon>
             <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image3}}" alt="">
@@ -40,6 +43,7 @@
         </ng-template>
         <ng-template swiperSlide>
           <div class="car_slide">
+            <ion-icon class="share_icon" name="share-social-outline" (click)="share()"></ion-icon>
             <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image4}}" alt="">
@@ -47,6 +51,7 @@
         </ng-template>
         <ng-template swiperSlide>
           <div class="car_slide">
+            <ion-icon class="share_icon" name="share-social-outline" (click)="share()"></ion-icon>
             <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="favorites == 'dislike'">
             <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt="" *ngIf="favorites == 'liked'">
             <img class="car_image" src="{{api.imageUrlString}}{{data.image5}}" alt="">
@@ -79,6 +84,31 @@
       </div>
 
       <div class="box_styling">
+        <div class="box_heading">Requirements</div>
+        <div class="box_sub_heading">Minimun age</div>
+        <div class="box_description">
+          21 years old
+        </div>
+        <div style="margin-bottom:1%;"></div>
+        <div class="box_sub_heading">Security deposit</div>
+        <div class="box_description">
+          AED 2000
+        </div>
+      </div>
+
+      <div class="d_styling" (click)="documentrequired()">
+        <div style="display: flex;align-items: center;justify-content: space-evenly;">
+          <div>
+            <img src="assets/images/idcard.png">
+          </div>
+          <div class="dtext">Documents Required</div>
+          <div>
+            <img src="assets/images/doublearrow.png">
+          </div>
+        </div>
+      </div>
+
+      <div class="box_styling">
         <div class="box_heading">Description</div>
         <div class="box_description">
           {{data.description}}
@@ -89,16 +119,85 @@
         <div class="box_heading">Owner's Details</div>
         <div class="box_sub_heading">About</div>
         <div class="box_description">
-          {{data.users_company[0].about}}
+          {{about}}
         </div>
       </div>
 
+
       <div class="box_styling">
+        <div class="box_heading">Delivery & Pick-up Services</div>
+        <div style="display: flex;justify-content: space-around;">
+          <ion-popover trigger="click-trigger" triggerAction="click" side="top">
+            <ng-template>
+              <ion-content class="ion-padding" [class.content_background]="checkUser.appUserId != null">
+                <div>
+                  <p class="para">Feel free tp pick-up this car from the branch location during working hours.</p>
+                  <div style="text-align: center;">
+                    <ion-button class="btn1" (click)="viewtimings()">View Shop timings</ion-button>
+                  </div>
+
+                </div>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+          <div class="bxd" (click)="presentModal('branchPickup')" id="click-trigger">
+            <img src="assets/images/buildings.png">
+            <div class="box_description" style="font-size: 11px !important;">
+              Branch Pick-up
+            </div>
+          </div>
+          <ion-popover trigger="click-trigger1" triggerAction="click" side="top">
+            <ng-template>
+              <ion-content class="ion-padding" [class.content_background]="checkUser.appUserId != null">
+                <div>
+                  <p class="para">This car can be delivered to you anywhere across the emirate. Extra charges may apply.
+                  </p>
+                  <div style="text-align: center;">
+                    <ion-button class="btn1" (click)="delieverycharges()">View Delievery charges</ion-button>
+                  </div>
+
+                </div>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+          <div class="bxd" id="click-trigger1">
+            <img src="assets/images/buildings.png">
+            <div class="box_description" style="font-size: 11px !important;">
+              Delivery To You
+            </div>
+          </div>
+
+          <ion-popover trigger="click-trigger2" triggerAction="click" side="top">
+            <ng-template>
+              <ion-content class="ion-padding" [class.content_background]="checkUser.appUserId != null">
+                <div>
+                  <p class="para">This car can be booked in advance for delievery at the airport. Delievery and airport
+                    parking charges may apply.
+                  </p>
+                  <div style="text-align: center;">
+                    <ion-button class="btn1" (click)="delieverycharges()">View Delievery charges</ion-button>
+                  </div>
+
+                </div>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+          <div class="bxd" id="click-trigger2">
+            <img src="assets/images/buildings.png">
+            <div class="box_description" style="font-size: 11px !important;">
+              Airpot Delivery
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <div class="box_styling">
         <div class="box_sub_heading" style="margin-top: 0px;">Location</div>
         <div class="box_description" style="margin-top: 4px;">
           {{data.users_company[0].company_location}}
         </div>
-      </div>
+      </div> -->
       <div class="box_styling" style="padding: 14px 14px 15px;" (click)="gotoRatings()">
         <div class="inner_box">
           <div>
@@ -174,14 +273,14 @@
     </div>
   </div> -->
   <div style="display: flex;justify-content: space-evenly;align-items: center;margin: 5% 0% 5%;;">
-    <div class="bg">
+    <a class="bg" href="tel:923366277746">
       <ion-icon name="call" class="iconcls"></ion-icon>
-    </div>
-    <div class="bg2">
+    </a>
+    <a class="bg2" href="https://wa.me/+923057819889?text=Hello%20World">
       <ion-icon name="logo-whatsapp" class="iconcls"></ion-icon>
-    </div>
-    <div class="bg3">
+    </a>
+    <a class="bg3" href="mailto:ali.gharsheen1072@gmail.com">
       <ion-icon name="paper-plane" class="iconcls"></ion-icon>
-    </div>
+    </a>
   </div>
 </ion-footer>

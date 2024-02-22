@@ -61,21 +61,21 @@ export class AppComponent {
   }
   getSystemSettings() {
 
-    this.api.getData('system_settings').subscribe((res: any) => {
-      // console.log("Setting Api Response: ",res);
-      if (res.status == 'success') {
-        for (let data of res.data) {
-          if (data.type == 'social_login_status') {
-            this.api.socialLoginStaus = data.description;
-            console.log("socialLoginStaus", this.api.socialLoginStaus);
+    // this.api.getData('system_settings').subscribe((res: any) => {
+    //   // console.log("Setting Api Response: ",res);
+    //   if (res.status == 'success') {
+    //     for (let data of res.data) {
+    //       if (data.type == 'social_login_status') {
+    //         this.api.socialLoginStaus = data.description;
+    //         console.log("socialLoginStaus", this.api.socialLoginStaus);
 
-          }
-        }
-      }
-    }, (err) => {
-      console.log("Setting Api Error: ", err);
+    //       }
+    //     }
+    //   }
+    // }, (err) => {
+    //   console.log("Setting Api Error: ", err);
 
-    })
+    // })
   }
 
   pushNotification() {
@@ -106,9 +106,9 @@ export class AppComponent {
     let userId = localStorage.getItem('appUserId')
     console.log('userId: ', userId);
 
-    // if(userId !== null){
-    //   this.router.navigate(['/home-cars-after-login']);
-    // }
+    if (userId !== null) {
+      this.router.navigate(['/home-cars-after-login']);
+    }
     // ================b/w part========================
   }
 
@@ -152,7 +152,8 @@ export class AppComponent {
     this.navCtrl.navigateForward('sign-in');
   }
   goForEditProfile() {
-    this.navCtrl.navigateForward('edit-profile');
+    // this.navCtrl.navigateForward('edit-profile');
+    this.navCtrl.navigateForward('profile');
     this.closeMenu();
   }
 

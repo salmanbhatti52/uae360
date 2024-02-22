@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EditProfilePageRoutingModule } from './edit-profile-routing.module';
 
 import { EditProfilePage } from './edit-profile.page';
+// import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -14,8 +15,10 @@ import { EditProfilePage } from './edit-profile.page';
     FormsModule,
     IonicModule,
     EditProfilePageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // Ng2SearchPipeModule
+
   ],
   declarations: [EditProfilePage]
 })
-export class EditProfilePageModule {}
+export class EditProfilePageModule { }

@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bgtoolbar">
+    <div class="header">
+      <img (click)="goBack()" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="header_title">Profile</div>
+      <ion-icon name="create-outline" style="font-size: 22px;" (click)="editprofile()"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <div class="profile_div">
+      <img src="assets/images/icons/profile_logo.svg" *ngIf="userProfile === '' ">
+      <img class="profile_img" src="{{userProfile}}" *ngIf="userProfile !== '' ">
+      <div class="userName">{{username}}</div>
+    </div>
+    <div class="bg">
+      <div class="para">Hey {{username}}, what kind of car you looking for?</div>
+      <div style="text-align: center;margin-top:2%;" (click)="goto()">
+        <ion-button class="btn1">Share Requirements</ion-button>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="f1">
+        <div class="flexc">
+          <div class="txt">0</div>
+
+          <ion-icon name="eye-outline" class="iconcls"></ion-icon>
+
+        </div>
+        <div class="txt1">Viewed</div>
+      </div>
+      <div class="f2" (click)="fav()">
+        <div class="flexc">
+          <div class="txt">{{favorites}}</div>
+
+          <ion-icon name="heart-outline" class="iconcls"></ion-icon>
+
+        </div>
+        <div class="txt1">Wishlist</div>
+      </div>
+      <div class="f1">
+        <div class="flexc">
+          <div class="txt">0</div>
+
+          <ion-icon name="person" class="iconcls"></ion-icon>
+
+        </div>
+        <div class="txt1">Contacted</div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

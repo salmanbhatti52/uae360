@@ -3,96 +3,102 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { CheckUserService } from '../check-user.service';
 import { ApiService } from '../services/api.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.page.html',
   styleUrls: ['./favorites.page.scss'],
 })
 export class FavoritesPage implements OnInit {
-  totalNotifications:Number;
-  favorites:any;
+  totalNotifications: Number;
+  favorites: any;
   favoriteCars = [];
   // imageUrlString = 'https://360uae.eigix.net/public/';
-  constructor(public navCtrlr:NavController,
-    public checkUser:CheckUserService,
-    public api:ApiService,
-    public router:Router) { }
+  constructor(public navCtrlr: NavController,
+    public checkUser: CheckUserService,
+    public api: ApiService,
+    public location: Location,
+    public router: Router) { }
 
   ngOnInit() {
     this.getFavoriteCars();
   }
-  ionViewWillEnter(){
+
+  ionViewWillEnter() {
     this.getNotifications();
   }
-  getNotifications(){
+  goBack() {
+    this.location.back();
+  }
+  getNotifications() {
     let data = {
-      users_id:this.checkUser.appUserId
+      users_id: this.checkUser.appUserId
     };
-    this.api.sendRequest('notifications_unread',data).subscribe((res:any)=>{
-      console.log("Notification Respone: ",res);
-      if(res.status == 'success'){
-        if(res.data.length > 0){
+    this.api.sendRequest('notifications_unread', data).subscribe((res: any) => {
+      console.log("Notification Respone: ", res);
+      if (res.status == 'success') {
+        if (res.data.length > 0) {
           this.totalNotifications = res.data.length
-        }else if(res.data.length == 0){
+        } else if (res.data.length == 0) {
           this.totalNotifications = 0;
         }
-        
-      }else if(res.status == 'error'){
+
+      } else if (res.status == 'error') {
 
       }
-      
-    },(err)=>{
-      console.log("Api Error: ",err);
-      
+
+    }, (err) => {
+      console.log("Api Error: ", err);
+
     })
   }
-  
-  gotoNotifications(){
+
+  gotoNotifications() {
     this.router.navigate(['/notifications']);
   }
-  homeTab(){
+  homeTab() {
     this.router.navigate(['/home-cars-after-login']);
   }
-  messagesTab(){
+  messagesTab() {
     this.router.navigate(['/messages']);
   }
-  bookingTab(){
+  bookingTab() {
     this.router.navigate(['/bookings']);
   }
-  favoriteTab(){
+  favoriteTab() {
     this.router.navigate(['/favorites']);
   }
-  makeUnFavorite(carId){
+  makeUnFavorite(carId) {
     let data = {
-      favourite_car_id:carId,
-      user_id:this.checkUser.appUserId
+      favourite_car_id: carId,
+      user_id: this.checkUser.appUserId
     };
     this.api.showLoading();
-    this.api.sendRequest('favouriteCars',data).subscribe((res:any)=>{
+    this.api.sendRequest('favouriteCars', data).subscribe((res: any) => {
       this.getFavoriteCars();
       this.api.hideLoading();
-      console.log('res: ',res);
-      
-    },(err)=>{
+      console.log('res: ', res);
+
+    }, (err) => {
       this.api.hideLoading();
       console.log(err);
-      
+
     })
 
   }
-  getFavoriteCars(){
+  getFavoriteCars() {
     let data = {
       user_id: this.checkUser.appUserId
     };
     this.api.showLoading();
-    this.api.sendRequest("getFavouriteCars",data).subscribe((res:any)=>{
+    this.api.sendRequest("getFavouriteCars", data).subscribe((res: any) => {
       this.api.hideLoading();
-      console.log('Favorite cars are: ',res);
-      if(res.status == 'success'){
+      console.log('Favorite cars are: ', res);
+      if (res.status == 'success') {
         this.favoriteCars = res.data;
         this.favorites = res.data.length
       }
-    },(err)=>{
+    }, (err) => {
       this.api.hideLoading();
       console.log(err);
     })

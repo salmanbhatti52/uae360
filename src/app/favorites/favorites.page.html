@@ -1,7 +1,8 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="bgtoolbar">
     <div class="header">
-      <ion-menu-button class="menuicon"></ion-menu-button>
+      <!-- <ion-menu-button class="menuicon"></ion-menu-button> -->
+      <img (click)="goBack()" src="assets/images/icons/back_arrow.svg" alt="">
       <div class="title">Favorite</div>
       <div class="bell_div" (click)="gotoNotifications()" *ngIf="api.toggleVal == true">
         <div class="notifications" *ngIf="totalNotifications > 0">{{totalNotifications}}</div>
@@ -12,7 +13,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding  [class.background]="favorites == 0">
+<ion-content padding [class.background]="favorites == 0">
   <div class="wrapper">
     <div *ngIf="favorites == 0">
       <div class="no_favorite">
@@ -23,8 +24,9 @@
     <div *ngIf="favorites !== 0">
       <div class="car_div" *ngFor="let favorite of favoriteCars">
         <img class="car_image" src="{{api.imageUrlString}}{{favorite.image1}}" alt="">
-        <img (click)="makeUnFavorite(favorite.car_id)" class="heart_icon" src="assets/images/icons/red_heart.svg" alt="">
-        <div class="car_info_box" >
+        <img (click)="makeUnFavorite(favorite.car_id)" class="heart_icon" src="assets/images/icons/red_heart.svg"
+          alt="">
+        <div class="car_info_box">
           <div>
             <div class="car_name poppins">{{favorite.vehical_name}}</div>
             <div style="text-align: left;line-height: 1;">
@@ -74,16 +76,18 @@
             </div>
           </div>
           <div class="car2_info_subdiv">
-            <div style="line-height: 1;"><span class="car2_price poppins" >$</span><span class="car2_price poppins" style="font-size: 32px;margin-right: 3px;">{{favorite.rent_cost_day}}</span><span class="car2_price poppins" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+            <div style="line-height: 1;"><span class="car2_price poppins">$</span><span class="car2_price poppins"
+                style="font-size: 32px;margin-right: 3px;">{{favorite.rent_cost_day}}</span><span
+                class="car2_price poppins" style="font-size: 10px;font-weight: 500;">/Day</span></div>
           </div>
-          
+
         </div>
       </div>
       <!-- ==================================================================== -->
     </div>
   </div>
 </ion-content>
-<ion-footer>
+<!-- <ion-footer>
   <ion-tabs style="display:contents ;">
 
     <ion-tab-bar class="ion_tab_bar" slot="bottom">
@@ -92,17 +96,17 @@
         <img src="assets/images/tab_icons/home.svg" alt="">
         <ion-label class="btn_label">Home</ion-label>
       </ion-tab-button>
-  
+
       <ion-tab-button  style="background: white;" (click)="messagesTab()">
         <img style="height: 32px;width: 32px;"  src="assets/images/tab_icons/messages.svg" alt="">
         <ion-label class="btn_label">Messages</ion-label>
       </ion-tab-button>
-  
+
       <ion-tab-button  style="background: white;" (click)="bookingTab()">
         <img src="assets/images/tab_icons/booking.svg" alt="">
         <ion-label class="btn_label">Booking</ion-label>
       </ion-tab-button>
-  
+
       <ion-tab-button  style="background: white;" (click)="favoriteTab()">
         <img src="assets/images/tab_icons/favorite_active.svg" alt="">
         <ion-label class="btnActive_label">Favorities</ion-label>
@@ -111,4 +115,4 @@
     </ion-tab-bar>
 
   </ion-tabs>
-</ion-footer>
+</ion-footer> -->

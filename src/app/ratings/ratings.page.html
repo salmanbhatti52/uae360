@@ -13,9 +13,9 @@
       <div class="rating_item" *ngFor="let rating of carRatings">
         <img class="user_img" src="{{api.imageUrlString}}{{rating.profile_pic}}" alt="">
         <div>
-          <div >
-            <div class="user_title" >{{rating.username}}</div>
-            
+          <div>
+            <div class="user_title">{{rating.username}}</div>
+
             <div class="star_div">
               <div *ngIf="rating.rate_stars == 0 ">
                 <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
@@ -60,10 +60,10 @@
                 <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
               </div>
             </div>
-            
-            
+
+
           </div>
-          <div class="item_text" >
+          <div class="item_text">
             {{rating.comments}}
           </div>
         </div>
@@ -73,12 +73,12 @@
     <div *ngIf="carRatings === undefined" class="no_ratings">
       No ratings yet
     </div>
-    
-   
+
+
   </div>
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<!-- <ion-footer class="ion-no-border">
   <ion-tabs style="display:contents ;">
 
     <ion-tab-bar class="ion_tab_bar" slot="bottom">
@@ -87,17 +87,17 @@
         <img src="assets/images/tab_icons/home.svg" alt="">
         <ion-label class="btn_label">Home</ion-label>
       </ion-tab-button>
-  
+
       <ion-tab-button  style="background: white;" (click)="messagesTab()">
         <img style="height: 32px;width: 32px;"  src="assets/images/tab_icons/messages.svg" alt="">
         <ion-label class="btn_label">Messages</ion-label>
       </ion-tab-button>
-  
+
       <ion-tab-button  style="background: white;" (click)="bookingTab()">
         <img src="assets/images/tab_icons/booking.svg" alt="">
         <ion-label class="btn_label">Booking</ion-label>
       </ion-tab-button>
-  
+
       <ion-tab-button  style="background: white;" (click)="favoriteTab()">
         <img src="assets/images/tab_icons/favorite.svg" alt="">
         <ion-label class="btn_label">Favorities</ion-label>
@@ -106,4 +106,4 @@
     </ion-tab-bar>
 
   </ion-tabs>
-</ion-footer>
+</ion-footer> -->

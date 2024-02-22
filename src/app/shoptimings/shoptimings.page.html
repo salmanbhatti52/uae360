@@ -1,0 +1,23 @@
+<ion-header class="ion-no-border" [class.header_footer_bg]="checkUser.appUserId != null">
+  <ion-toolbar class="bgtoolbar" [class.content_background]="checkUser.appUserId != null">
+    <div class="header">
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="title">Shop Timings</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [class.content_background]="checkUser.appUserId != null">
+  <div class="wrapper">
+
+
+
+
+    <ion-row *ngFor="let schedule of timings">
+      <ion-col size="5" class="col1">{{ schedule.day }}</ion-col>
+      <ion-col size="7" class="col2">{{ schedule.timing }}</ion-col>
+    </ion-row>
+
+  </div>
+
+</ion-content>

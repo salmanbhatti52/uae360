@@ -45,6 +45,14 @@ ion-footer{
     position: absolute;
     right: 5%;
     top: 8%;
+
+}
+.share_icon{
+  position: absolute;
+  right: 15%;
+  top: 8%;
+  color: white;
+  font-size: 22px;
 }
 .car_image{
     width:100% !important;
@@ -125,11 +133,24 @@ ion-footer{
     padding: 8px 9px;
     border-radius: 5px;
 }
+.d_styling{
+  padding: 8px 9px;
+    border-radius: 12px;
+    width: 70%;
+    margin: 5% auto;
+    border: 1px solid yellow;
+}
 .box_heading{
-    font-size: 14px;
-    font-weight: 700;
-    color: black;
-    font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: black;
+  font-family: "Poppins", sans-serif;
+}
+.dtext{
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+  font-family: "Poppins", sans-serif;
 }
 .box_description{
     margin-top: 5px;
@@ -145,8 +166,26 @@ ion-footer{
     margin-top: 3px;
     font-size: 12px;
     font-weight: 600;
-    color: #8000FF;
+    color: #FBC505;
     font-family: "Poppins", sans-serif;
+}
+.bxd{
+  text-align: center;
+  padding: 8px;
+}
+.para{
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
+  font-family: 'Poppins', sans-serif;
+}
+.btn1{
+  --background:#FBC505;
+    --border-radius:0px;
+    margin-top: 9px;
+    --box-shadow:none;
+    text-transform: capitalize;
+    font-size: 13px;
 }
 .inner_box{
     display: flex;

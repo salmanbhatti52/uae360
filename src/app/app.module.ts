@@ -13,7 +13,7 @@ import { CalendarModule } from 'ion2-calendar';
 import { OneSignal } from "@awesome-cordova-plugins/onesignal/ngx";
 // import { Stripe } from '@awesome-cordova-plugins/stripe/ngx';
 @NgModule({
-  
+
   declarations: [AppComponent],
   imports: [
     BrowserModule,
@@ -21,19 +21,19 @@ import { OneSignal } from "@awesome-cordova-plugins/onesignal/ngx";
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    
+
     CalendarModule.forRoot({
       doneLabel: 'Save',
       closeIcon: true
     })
   ],
   providers: [
-  
+
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
     },
-    NativeGeocoder, 
+    NativeGeocoder,
     OneSignal,
     // PayPal
     // Stripe

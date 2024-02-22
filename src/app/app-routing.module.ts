@@ -150,7 +150,27 @@ const routes: Routes = [
   {
     path: 'booking-details',
     loadChildren: () => import('./booking-details/booking-details.module').then( m => m.BookingDetailsPageModule)
+  },  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'sharerequirment',
+    loadChildren: () => import('./sharerequirment/sharerequirment.module').then( m => m.SharerequirmentPageModule)
+  },
+  {
+    path: 'shoptimings',
+    loadChildren: () => import('./shoptimings/shoptimings.module').then( m => m.ShoptimingsPageModule)
+  },
+  {
+    path: 'deliveryterms',
+    loadChildren: () => import('./deliveryterms/deliveryterms.module').then( m => m.DeliverytermsPageModule)
+  },
+  {
+    path: 'documentrequired',
+    loadChildren: () => import('./documentrequired/documentrequired.module').then( m => m.DocumentrequiredPageModule)
+  },
+
 ];
 
 @NgModule({

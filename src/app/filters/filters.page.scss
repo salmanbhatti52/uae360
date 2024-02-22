@@ -97,13 +97,13 @@ hr{
 .ion_range{
     --bar-height: 4px;
     --bar-border-radius: 5.5px;
-    --bar-background-active: #8000FF;
+    --bar-background-active: #FBC505;
     padding: 0px;
     margin-top: 5px;
 }
 .ion_range.md{
-    --pin-background: #8000FF;
-    --knob-background: #8000FF;
+    --pin-background: #FBC505;
+    --knob-background: #FBC505;
 }
 .prices_div{
     display: flex;
@@ -167,9 +167,84 @@ hr{
     text-align: left;line-height: 1;margin-top: 3px;
 }
 // ==================done===============================
+.bg{
+  border-radius: 25px;
+  overflow: hidden;
+  border: 2px solid #FBC505;
+  background-color: #fff;
+  width: 100%;
+  padding: 10px 10px;
+  transition:background-color 0.3s ease;
+}
+.selected {
+  background-color: rgba(251, 197, 5, 0.5) !important;
+}
+.bg img{
+  width: 20px;
+}
+.bg2{
+  border-radius: 25px;
+  overflow: hidden;
+  border: 2px solid #FBC505;
+  background-color: #fff;
+  padding: 10px 20px;
+  margin-right: 10%;
+}
+.badge{
+  --background: white;
+  color: #191919;
+  border-color: #191919;
+  border-radius: 20px;
+  border: 1.5px solid #FBC505;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Urbanist", sans-serif;
+  padding: 12px 0px;
+  width: 100%;
+  transition:background-color 0.3s ease;
+
+}
+.txt{
+  font-size: 14px;margin-left: 5px;
+}
+
+.carItem_box{
+  height: 50px;
+  text-align: center;
+  background-color: white;
+  border-radius: 5px;
+  padding: 4px 8px 8px;
+  width: 100%;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+  transition:background-color 0.3s ease;
+  // margin-right: 8px;
+}
+.selected_item{
+  text-align: center;
+  // background-color: #FBC505;
+  background-color: rgba(251, 197, 5, 0.5) !important;
+
+  border-radius: 10px;
+  padding: 4px 8px 8px;
+  width: 100%;
+  // margin-right: 8px;
+}
+.fontActive{
+  color: #191919 !important;
+  font-family: "Urbanist", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+}
+.cars_label{
+  // color: #D4DCE1;
+  color: #000;
+  font-family: "Urbanist", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+}
 
 .invite_btn{
-    --background:#8000FF;
+    --background:#FBC505;
     --border-radius:0px;
     width:60%;
     height: 44px;

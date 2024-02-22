@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border" [class.header_footer_bg]="checkUser.appUserId != null">
+  <ion-toolbar class="bgtoolbar" [class.content_background]="checkUser.appUserId != null">
+    <div class="header">
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="title">Delivery Terms</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [class.content_background]="checkUser.appUserId != null">
+  <div class="wrapper">
+    <ion-table>
+
+      <ion-row class="rowcls">
+        <ion-col></ion-col>
+        <ion-col>Delivery charge</ion-col>
+        <ion-col>Pickup charge</ion-col>
+      </ion-row>
+
+
+      <ion-row *ngFor="let row of rows" style="border-bottom: 1px solid #8D8D8D;">
+        <ion-col class="col1">{{ row.city }}</ion-col>
+        <ion-col class="align-end col2">{{ row.dcharge }}</ion-col>
+        <ion-col class="align-end col2">{{ row.pcharge }}</ion-col>
+      </ion-row>
+    </ion-table>
+  </div>
+
+</ion-content>

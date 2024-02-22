@@ -9,47 +9,167 @@
 
 <ion-content [class.content_background]="checkUser.appUserId != null">
   <div class="wrapper">
-    <!-- <div class="date_alignment">
-      <ion-datetime size="cover" class="date_box" presentation="date"></ion-datetime> 
-    </div> -->
+    <div>Car Brand/Model</div>
+    <swiper [config]="{slidesPerView:2.1, spaceBetween:10, initialSlide:0, speed:400}" [pagination]="false"
+      style="margin: 3% 0% 7% 0%;">
+      <ng-template swiperSlide *ngFor="let car of cars; let i = index;">
+
+
+        <div class="bg" [ngClass]="{'selected': i === selectedCarIndex}" (click)="selectCar(i,car)">
+          <div style="display: flex;align-items: center;justify-content: space-around;">
+            <div>
+              <img [src]="api.imageUrlString+car.image">
+            </div>
+
+            <div class="txt"> {{ car.name }}</div>
+          </div>
+
+        </div>
+
+      </ng-template>
+    </swiper>
+
+    <div>Model Year</div>
+    <swiper [config]="{slidesPerView:4.8, spaceBetween:10, initialSlide:0, speed:400}" [pagination]="false"
+      style="margin: 3% 0% 7% 0%;">
+      <ng-template swiperSlide *ngFor="let y of years; let i = index;">
+
+        <ion-badge class="badge" [ngClass]="{'selected': i === selectedYearIndex}" (click)="selectYear(i)">
+          {{y}}
+
+        </ion-badge>
+
+      </ng-template>
+    </swiper>
+
+    <div>No. of seats</div>
+    <swiper [config]="{slidesPerView:4.8, spaceBetween:10, initialSlide:0, speed:400}" [pagination]="false"
+      style="margin: 3% 0% 7% 0%;">
+      <ng-template swiperSlide *ngFor="let seat of seats; let i = index;">
+
+        <ion-badge class="badge" [ngClass]="{'selected': i === selectedSeatIndex}" (click)="selectSeat(i)">
+          {{seat}}
+
+        </ion-badge>
+
+      </ng-template>
+    </swiper>
+
+    <div class="htext">Car Type</div>
+    <div style="margin: 2% 0% 7% 0%;">
+
+      <ion-row class="categories">
+        <ion-col size="6">
+          <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem('all')">
+            <img src="assets/images/icons/car_grey.svg" alt="" *ngIf="item1 == false">
+            <img src="assets/images/icons/car_white.svg" alt="" *ngIf="item1 == true">
+            <div class="cars_label" [class.fontActive]="item1 == true">All Cars</div>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem('Sports')">
+            <img src="assets/images/icons/sports_car_grey.svg" alt="" *ngIf="item2 == false">
+            <img src="assets/images/icons/sports_car_white.svg" alt="" *ngIf="item2 == true">
+            <div class="cars_label" [class.fontActive]="item2 == true">{{carTypeOne}}</div>
+          </div>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem('Luxury')">
+            <img src="assets/images/icons/luxury_car_grey.svg" alt="" *ngIf="item3 == false">
+            <img src="assets/images/icons/luxury_car_white.svg" alt="" *ngIf="item3 == true">
+            <div class="cars_label" [class.fontActive]="item3 == true">{{carTypeTwo}}</div>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem('Pickup')">
+            <img src="assets/images/icons/taxi_grey.svg" alt="" *ngIf="item4 == false">
+            <img src="assets/images/icons/taxi_white.svg" alt="" *ngIf="item4 == true">
+            <div class="cars_label" [class.fontActive]="item4 == true">{{carTypeThree}}</div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <div class="categories">
+        <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;"
+          (click)="selectItem('SUV')">
+          <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
+          <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">
+          <div class="cars_label" [class.fontActive]="item5 == true">{{carTypeFour}}</div>
+        </div>
+      </div>
+
+    </div>
+
     <div class="price_box">
       <div><span class="price_label">Price</span><span class="per_hour_span">/day</span></div>
       <hr>
-      <ion-range (ionChange)="onIonChangePerDay($event)" [pin]="true" [pinFormatter]="pinFormatter" class="ion_range" 
-      min="10" max="500" [dualKnobs]="true" 
-      [value]="{ lower: 20, upper: 200 }">
-    </ion-range>
-    
-    <div class="selected_range" *ngIf="rentCostDayStart != undefined && rentCostDayEnd  != undefined"> ${{rentCostDayStart}} - ${{rentCostDayEnd}}</div>
+      <ion-range (ionChange)="onIonChangePerDay($event)" [pin]="true" [pinFormatter]="pinFormatter" class="ion_range"
+        min="10" max="500" [dualKnobs]="true" [value]="{ lower: 20, upper: 200 }">
+      </ion-range>
+
+      <div class="selected_range" *ngIf="rentCostDayStart != undefined && rentCostDayEnd  != undefined">
+        ${{rentCostDayStart}} - ${{rentCostDayEnd}}</div>
       <div class="prices_div">
         <div class="price">$10</div>
         <div class="price">$500</div>
       </div>
     </div>
-    <div class="price_box" style="margin-bottom: 0px;">
+    <div class="price_box">
       <div><span class="price_label">Price</span><span class="per_hour_span">/month</span></div>
       <hr>
-      <ion-range (ionChange)="onIonChangePerMonth($event)" [pin]="true" [pinFormatter]="pinFormatter" class="ion_range" 
-      min="50" max="3000" [dualKnobs]="true" 
-      [value]="{ lower: 100, upper: 1000 }">
-    </ion-range>
-    <div class="selected_range" *ngIf="rentCostMonthStart != undefined && rentCostMonthEnd  != undefined"> ${{rentCostMonthStart}} - ${{rentCostMonthEnd}}</div>
-    <div class="prices_div">
+      <ion-range (ionChange)="onIonChangePerMonth($event)" [pin]="true" [pinFormatter]="pinFormatter" class="ion_range"
+        min="50" max="3000" [dualKnobs]="true" [value]="{ lower: 100, upper: 1000 }">
+      </ion-range>
+      <div class="selected_range" *ngIf="rentCostMonthStart != undefined && rentCostMonthEnd  != undefined">
+        ${{rentCostMonthStart}} - ${{rentCostMonthEnd}}</div>
+      <div class="prices_div">
         <div class="price">$50</div>
         <div class="price">$3000</div>
       </div>
     </div>
-    <div  *ngIf="result.length > 0">
+
+    <div>Rental Period</div>
+    <div style="margin: 3% 0% 7% 0%;">
+      <div style="display: flex;align-items: center;">
+        <div class="bg2" [class.selected]="selectedOption=='day'" (click)="selectOption('day')">
+
+          <div class="txt">Per Day</div>
+        </div>
+        <div class="bg2" [class.selected]="selectedOption=='month'" (click)="selectOption('month')">
+
+          <div class="txt">Per Month</div>
+        </div>
+      </div>
+    </div>
+
+    <div>Minimum age required</div>
+    <swiper [config]="{slidesPerView:4.8, spaceBetween:10, initialSlide:0, speed:400}" [pagination]="false"
+      style="margin: 3% 0% 7% 0%;">
+      <ng-template swiperSlide *ngFor="let age of agerequired; let i = index;">
+        <ion-badge class="badge" [ngClass]="{'selected': i === selectedAgeIndex}" (click)="selectAge(i)">
+          {{age}}
+
+        </ion-badge>
+      </ng-template>
+    </swiper>
+
+
+    <div *ngIf="result.length > 0">
       <div *ngFor="let res of result">
-        <div class="car_div" (click)="gotoCarDetails(res.car_id)" >
+        <div class="car_div" (click)="gotoCarDetails(res.car_id)">
           <img class="car_image" src="{{api.imageUrlString}}{{res.image1}}" alt="">
-          
-          <img class="heart_icon"  src="assets/images/icons/heart.svg" alt="" *ngIf="res.favourite_status != 'liked'">
-          <img class="heart_icon"  src="assets/images/icons/red_heart.svg" alt="" *ngIf="res.favourite_status == 'liked'">
-          <div class="car_info_box" >
+
+          <img class="heart_icon" src="assets/images/icons/heart.svg" alt="" *ngIf="res.favourite_status != 'liked'">
+          <img class="heart_icon" src="assets/images/icons/red_heart.svg" alt=""
+            *ngIf="res.favourite_status == 'liked'">
+          <div class="car_info_box">
             <div>
               <div class="car_name poppins">{{res.vehical_name}}</div>
-              <div class="left_subdiv" >
+              <div class="left_subdiv">
                 <span *ngIf="res.rating == 0 ">
                   <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                   <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
@@ -96,14 +216,16 @@
               </div>
             </div>
             <div class="car2_info_subdiv">
-              <div style="line-height: 1;"><span class="car2_price poppins" >$</span><span class="car2_price poppins" style="font-size: 32px;margin-right: 3px;">{{res.rent_cost_day}}</span><span class="car2_price poppins" style="font-size: 10px;font-weight: 500;">/Day</span></div>
+              <div style="line-height: 1;"><span class="car2_price poppins">$</span><span class="car2_price poppins"
+                  style="font-size: 32px;margin-right: 3px;">{{res.rent_cost_day}}</span><span
+                  class="car2_price poppins" style="font-size: 10px;font-weight: 500;">/Day</span></div>
             </div>
-            
+
           </div>
         </div>
       </div>
-      
-      
+
+
     </div>
 
   </div>

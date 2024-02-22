@@ -17,20 +17,25 @@
     <form [formGroup]="angForm">
       <div style="padding-top: 25px;">
         <div class="input_label">First Name</div>
-        <ion-input type="text" formControlName="fName"  placeholder="John" [class.active_input]="firstName == true" (ionInput)="activate('first_name')"></ion-input>
+        <ion-input type="text" formControlName="fName" placeholder="John" [class.active_input]="firstName == true"
+          (ionInput)="activate('first_name')"></ion-input>
       </div>
       <div style="padding-top: 12.5px;">
         <div class="input_label">Last Name</div>
-        <ion-input type="text" formControlName="lName" placeholder="Doe" [class.active_input]="lastName == true" (ionInput)="activate('last_name')"></ion-input>
+        <ion-input type="text" formControlName="lName" placeholder="Doe" [class.active_input]="lastName == true"
+          (ionInput)="activate('last_name')"></ion-input>
       </div>
       <div style="padding-top: 12.5px;">
         <div class="input_label">About</div>
-        <ion-textarea auto-grow="true" formControlName="about" rows="2" cols="20" type="text" placeholder="Lorem ipsum" [class.active_input]="about == true" (ionInput)="activate('about')"></ion-textarea>
+        <ion-textarea auto-grow="true" formControlName="about" rows="2" cols="20" type="text" placeholder="Lorem ipsum"
+          [class.active_input]="about == true" (ionInput)="activate('about')"></ion-textarea>
       </div>
       <div style="padding-top: 12.5px;">
         <div class="input_label">Email</div>
-        <ion-input type="email" formControlName="email" placeholder="rose.matthews@mail.com" [class.active_input]="email == true" (ionInput)="activate('email')"></ion-input>
-        <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)">
+        <ion-input type="email" formControlName="email" placeholder="rose.matthews@mail.com"
+          [class.active_input]="email == true" (ionInput)="activate('email')"></ion-input>
+        <div
+          *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)">
           <div *ngIf="angForm.controls['email'].errors.pattern" class="alert">
             Email is invalid
           </div>
@@ -38,11 +43,51 @@
       </div>
       <div style="padding-top: 12.5px;">
         <div class="input_label">Location</div>
-        <ion-input type="text" formControlName="location" placeholder="Enter your location here" [class.active_input]="address == true" (ionInput)="activate('address')"></ion-input>
+        <ion-input type="text" formControlName="location" placeholder="Enter your location here"
+          [class.active_input]="address == true" (ionInput)="activate('address')"></ion-input>
+      </div>
+
+      <div style="padding-top: 12.5px;">
+        <div class="input_label">Mobile No</div>
+        <ion-input type="tel" formControlName="number" placeholder="Enter your number here"
+          [class.active_input]="num == true" (ionInput)="activate('num')"></ion-input>
+      </div>
+
+      <div style="padding-top: 12.5px;">
+        <div class="input_label">Nationality</div>
+        <ion-input type="tel" formControlName="nationality" placeholder="Select your nationality"
+          [class.active_input]="nationval == true" (ionInput)="activate('nationval')" readonly id="open-modal"
+          [(ngModel)]="userNationality" (click)="openmodal()"></ion-input>
+      </div>
+
+      <div style="padding-top: 12.5px;">
+        <div class="input_label">Date of Birth</div>
+        <ion-input type="tel" formControlName="dob" placeholder="Select date" [class.active_input]="date == true"
+          (ionInput)="activate('birthdate')" [(ngModel)]="dateofbirth" readonly
+          (click)="showPicker = !showPicker"></ion-input>
       </div>
     </form>
-    
+    <ion-datetime class="item-picker" style="margin: 10px auto 0px; color: black" presentation="date" *ngIf="showPicker"
+      #datetime [value]="dateformat" size="cover" displayFormat="DD-MM-YYYY" (ionChange)="dateChanged(datetime.value)"
+      showDefaultButtons="true" (ionCancel)="showPicker=false"></ion-datetime>
 
+
+
+    <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.75" [isOpen]="isModalOpen">
+      <ng-template>
+        <ion-content>
+          <!-- <ion-searchbar placeholder="Search" [(ngModel)]="term"></ion-searchbar> -->
+          <ion-list>
+            <ion-item *ngFor="let item of checkUser.nationalities;let i=index;" (click)="closemodal(item)">
+              <ion-label>
+                <h2>{{item.Nationality}}</h2>
+              </ion-label>
+            </ion-item>
+
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
   </div>
 </ion-content>
 

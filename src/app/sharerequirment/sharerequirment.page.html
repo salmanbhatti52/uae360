@@ -1,0 +1,100 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bgtoolbar">
+    <div class="header">
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="header_title">Share Requirements</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <div class="htext">Brand</div>
+    <swiper [config]="{slidesPerView:3.6, spaceBetween:20, initialSlide:0, speed:400}" [pagination]="false"
+      style="margin: 3% 0% 7% 0%;">
+      <ng-template swiperSlide *ngFor="let car of cars; let i = index;">
+        <div>
+
+          <div class="bg" [ngClass]="{'selected-car': isSelected(i), 'bg': !isSelected(i)}" (click)="selectCar(i)">
+            <img [src]="car.image">
+          </div>
+          <div class="para"> {{ car.name }}</div>
+
+        </div>
+      </ng-template>
+    </swiper>
+
+    <div class="htext">Car Type</div>
+    <div style="margin: 2% 0% 7% 0%;">
+      <swiper [config]="{slidesPerView:4.4, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false">
+        <ng-template swiperSlide class="categories">
+          <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem('all')">
+            <img src="assets/images/icons/car_grey.svg" alt="" *ngIf="item1 == false">
+            <img src="assets/images/icons/car_white.svg" alt="" *ngIf="item1 == true">
+            <div class="cars_label" [class.fontActive]="item1 == true">All Cars</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide class="categories">
+          <div class="carItem_box" [class.selected_item]="item2 == true" (click)="selectItem('Sports')">
+            <img src="assets/images/icons/sports_car_grey.svg" alt="" *ngIf="item2 == false">
+            <img src="assets/images/icons/sports_car_white.svg" alt="" *ngIf="item2 == true">
+            <div class="cars_label" [class.fontActive]="item2 == true">{{carTypeOne}}</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide class="categories">
+          <div class="carItem_box" [class.selected_item]="item3 == true" (click)="selectItem('Luxury')">
+            <img src="assets/images/icons/luxury_car_grey.svg" alt="" *ngIf="item3 == false">
+            <img src="assets/images/icons/luxury_car_white.svg" alt="" *ngIf="item3 == true">
+            <div class="cars_label" [class.fontActive]="item3 == true">{{carTypeTwo}}</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide class="categories">
+          <div class="carItem_box" [class.selected_item]="item4 == true" (click)="selectItem('Pickup')">
+            <img src="assets/images/icons/taxi_grey.svg" alt="" *ngIf="item4 == false">
+            <img src="assets/images/icons/taxi_white.svg" alt="" *ngIf="item4 == true">
+            <div class="cars_label" [class.fontActive]="item4 == true">{{carTypeThree}}</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide class="categories">
+          <div class="carItem_box" [class.selected_item]="item5 == true" style="margin-right: 0px;"
+            (click)="selectItem('SUV')">
+            <img src="assets/images/icons/suv's_grey.svg" alt="" *ngIf="item5 == false">
+            <img src="assets/images/icons/suv's_white.svg" alt="" *ngIf="item5 == true">
+            <div class="cars_label" [class.fontActive]="item5 == true">{{carTypeFour}}</div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+
+
+
+    <div class="htext">Passengers</div>
+    <div class="badges">
+      <ion-badge class="badge" *ngFor="let p of passengers" [class.active]="p.status=='checked'"
+        (click)="selectpassengers(p)">
+        {{p.value}}
+
+      </ion-badge>
+      <hr>
+    </div>
+
+    <div style="margin: 5px 0px 10px;">
+      <div style="text-align: center;">
+        <ion-button class="invite_btn" (click)="post()">
+          <span class="btn-text">Post Requirments</span>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- <ion-modal id="example-modal" #modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <div class="container">
+
+
+      </div>
+    </ng-template>
+  </ion-modal> -->
+</ion-content>

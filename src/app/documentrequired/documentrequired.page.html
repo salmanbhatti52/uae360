@@ -1,0 +1,68 @@
+<ion-header class="ion-no-border" [class.header_footer_bg]="checkUser.appUserId != null">
+  <ion-toolbar class="bgtoolbar" [class.content_background]="checkUser.appUserId != null">
+    <div class="header">
+      <img (click)="goBack()" style="position: absolute;" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="title">Document Required</div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [class.content_background]="checkUser.appUserId != null">
+  <div class="wrapper">
+    <p class="para">
+      You are eligible to rent a car across the UAE provided you have the below mentioned documents valid with you:
+    </p>
+
+    <div class="main">
+      <div class="htext">For UAE Residents</div>
+      <div class="inner-main">
+
+        <img src="assets/images/uaevisa.png">
+
+        <div class="icon-text-wrapper">
+          <img src="assets/images/check.png" class="tick-icon">
+          <span class="text-after-icon">UAE Driving License</span>
+        </div>
+        <div class="icon-text-wrapper">
+          <img src="assets/images/check.png" class="tick-icon">
+          <span class="text-after-icon">Emirates ID (Residential Visa may be acceptable)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="htext">For Tourists visiting the UAE</div>
+      <div class="inner-main">
+
+        <img src="assets/images/visiting.png">
+
+        <div class="icon-text-wrapper">
+          <img src="assets/images/check.png" class="tick-icon">
+          <span class="text-after-icon">Passport</span>
+        </div>
+
+        <div class="icon-text-wrapper">
+          <img src="assets/images/check.png" class="tick-icon">
+          <span class="text-after-icon">Visit Visa</span>
+        </div>
+
+        <div class="icon-text-wrapper">
+          <img src="assets/images/check.png" class="tick-icon">
+          <span class="text-after-icon">Home Country Driving License</span>
+        </div>
+
+        <div class="icon-text-wrapper">
+          <img src="assets/images/check.png" class="tick-icon">
+          <span class="text-after-icon">International Driving Permit (IDP)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="para2">
+      Visitors form the GCC,US,UK,Canada,Europe and certain other countries can drive with their home country driving
+      license, without the need of an IDP.
+    </div>
+  </div>
+
+</ion-content>
