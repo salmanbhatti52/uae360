@@ -12,6 +12,8 @@ export class ProfilePage implements OnInit {
   favorites: any;
   userProfile: any = '';
   username: any;
+  contacted: any = 0;
+  viewed: any;
   constructor(public navCtrlr: NavController,
     public checkUser: CheckUserService,
     public api: ApiService,
@@ -28,6 +30,20 @@ export class ProfilePage implements OnInit {
       this.userProfile = `${this.api.imageUrlString}${this.userProfile}`
     }
     this.username = this.api.localUserData.username
+
+    if (localStorage.getItem('contactedCount') == null) {
+      this.contacted = 0;
+    } else {
+      this.contacted = localStorage.getItem('contactedCount');
+    }
+
+    if (localStorage.getItem('viewedCount') == null) {
+      this.viewed = 0;
+    } else {
+      this.viewed = localStorage.getItem('viewedCount');
+    }
+    console.log('count contacted', this.contacted);
+
   }
 
   goBack() {

@@ -81,6 +81,7 @@ export class EditProfilePage implements OnInit {
 
     }
     this.userProfile = this.api.localUserData.profile_pic;
+
     if (this.api.localUserData.account_type == 'SignupWithApp') {
       this.userProfile = `${this.api.imageUrlString}${this.userProfile}`
     }
@@ -88,12 +89,33 @@ export class EditProfilePage implements OnInit {
     this.userEmail = this.api.localUserData.email;
     this.userAbout = this.api.localUserData.about;
     this.userLocation = this.api.localUserData.location;
+    if (this.phoneNumber == undefined) {
+      this.phoneNumber = '';
+    } else {
+      this.phoneNumber = this.api.localUserData.number;
+    }
+    if (this.dateofbirth == undefined) {
+      this.dateofbirth = '';
+    } else {
+      this.dateofbirth = this.api.localUserData.dob
+    }
+    if (this.userNationality == undefined) {
+      this.userNationality = '';
+    }
+    else {
+      this.userNationality = this.api.localUserData.nationality
+    }
     if (this.userAbout == null) {
       this.userAbout = '';
+    }
+    else {
+      this.userAbout = this.api.localUserData.about
     }
     if (this.userLocation == null) {
       this.userLocation == this.api.fetchLocation;
     }
+
+
 
     this.angForm.setValue({
       fName: this.fName,
@@ -182,7 +204,7 @@ export class EditProfilePage implements OnInit {
 
     // Format the date as "DD-MM-YYYY"
     // Note: getMonth() returns 0 for January, 1 for February, etc., so we add 1.
-    this.dateofbirth = `${dateObj.getDate().toString().padStart(2, '0')}-${(dateObj.getMonth() + 1).toString().padStart(2, '0')}-${dateObj.getFullYear()}`;
+    this.dateofbirth = `${dateObj.getFullYear().toString().padStart(2, '0')}-${(dateObj.getMonth() + 1).toString().padStart(2, '0')}-${dateObj.getDate()}`;
     // this.formattedString = format(parseISO(value), ' MMM d, yyyy')
     this.showPicker = false;
   }
@@ -208,20 +230,26 @@ export class EditProfilePage implements OnInit {
     this.email = false;
     this.address = false;
     this.num = false;
+    this.nationval = false;
+    this.birthdate = false;
     let data = {
       username: `${this.angForm.value.fName} ${this.angForm.value.lName}`,
       email: this.angForm.value.email,
       location: this.angForm.value.location,
       about: this.angForm.value.about,
       user_id: this.checkUser.appUserId,
-      profile: this.base64String
+      profile: this.base64String,
+      birth_date: this.angForm.value.dob,
+      nationality: this.angForm.value.nationality,
+      phone: this.angForm.value.number
     }
     console.log(this.angForm.value.fName + " " + this.angForm.value.lName);
     console.log("email: ", this.angForm.value.email);
     console.log("location: ", this.angForm.value.location);
     console.log("about: ", this.angForm.value.about);
     console.log("appUserId: ", this.checkUser.appUserId);
-    console.log("base64String: ", this.base64String);
+    console.log("appUserId: ", this.checkUser.appUserId);
+    console.log("dob: ", this.angForm.value.dob);
 
     this.api.showLoading();
     this.api.sendRequest('updateAppUserProfile', data).subscribe((res: any) => {
@@ -234,6 +262,9 @@ export class EditProfilePage implements OnInit {
         this.api.localUserData.profile_pic = res.data[0].profile_pic;
         this.api.localUserData.email = res.data[0].email;
         this.api.localUserData.location = res.data[0].location;
+        this.api.localUserData.number = res.data[0].phone;
+        this.api.localUserData.dob = res.data[0].birth_date;
+        this.api.localUserData.nationality = res.data[0].nationality;
         console.log('api Local User Data: ', this.api.localUserData);
         localStorage.setItem('localUserData', JSON.stringify(this.api.localUserData));
         this.navCtrlr.navigateForward('settings');

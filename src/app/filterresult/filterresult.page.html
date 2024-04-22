@@ -1,0 +1,117 @@
+<ion-header class="ion-no-border" [class.header_footer_bg]>
+  <ion-toolbar class="bgtoolbar" [class.content_background]>
+    <div class="header">
+      <img (click)="goBack()" src="assets/images/icons/back_arrow.svg" alt="">
+      <div class="title">{{resultlength}} CARS IN DUBAI</div>
+      <div style="background: white;
+      opacity: 0.0;">
+        <img src="assets/images/icons/chat.svg" alt="">
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [class.content_background]>
+  <div class="wrapper">
+    <div *ngFor="let pickup of pickups" style="width: 100%; height: 100%;margin-bottom: 5%;">
+      <ion-card class="card">
+        <img class="car_img" src="{{api.imageUrlString}}{{pickup.image1}}" alt=""
+          (click)="gotoCarDetails(pickup.car_id)">
+        <div style="padding: 5px 7px 7.5px 8px; display: flex;
+          align-items: center;
+          justify-content: space-between;">
+          <div>
+            <div class="card_title">{{pickup.vehical_name}}</div>
+          </div>
+
+        </div>
+        <div style="padding: 0px 7px 15px 7px; display: flex;
+        justify-content: space-between;">
+          <div>
+            <span class="price_val">AED {{pickup.rent_cost_day}}</span>
+            <span class="category_label"> /</span> <span class="category_label">
+              day</span>
+            <div style="display: flex;
+              margin-top: 5%;align-items: center;">
+              <img src="assets/images/sidewalk.png">
+              <div class="limit_title">
+                {{pickup.mileage_limit_day}} Km
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class="price_val">AED {{pickup.rent_cost_month}}</span>
+            <span class="category_label"> /</span> <span class="category_label">
+              month</span>
+            <div style="display: flex;
+             margin-top: 5%;;align-items: center;">
+              <img src="assets/images/sidewalk.png">
+              <div class="limit_title">
+                {{pickup.mileage_limit_month}} Km
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div style="display: flex;">
+          <ion-badge class="cardbadge" style="padding: 9px 15px;
+          height: 32px;">
+            {{pickup.cars_types.car_type}}
+          </ion-badge>
+          <div *ngFor="let item of pickup.cars_attributes">
+            <div *ngIf="item.attributes.attribute_type=='Specification'">
+              <ion-badge class="cardbadge">
+                <div style="display: flex;align-items: center;">
+                  <div>
+                    <img src="{{api.imageUrlString}}{{item.attributes.image}}" style="width: 20px;height: 20px;">
+                  </div>
+                  <div>
+                    {{item.attribute_value}}
+                  </div>
+                </div>
+
+              </ion-badge>
+            </div>
+
+          </div>
+        </div>
+
+        <ion-row style="margin: 2% 0% 0% 4%;">
+          <ion-col size="5">
+            <img src="{{api.imageUrlString}}{{pickup.users_company.company_logo}}" width="120">
+          </ion-col>
+          <ion-col size="7">
+            <div class="flex-c2" *ngIf="pickup.rent_duration">
+              <ion-icon name="information-circle" class="icon-cls"></ion-icon>
+              <div class="txt">{{pickup.rent_duration}} day rental available</div>
+            </div>
+            <div class="flex-c2" *ngIf="pickup.security_deposit">
+              <ion-icon name="information-circle" class="icon-cls"></ion-icon>
+              <div class="txt">Deposit: AED {{pickup.security_deposit}}</div>
+            </div>
+            <div class="flex-c2" *ngIf="pickup.insurance">
+              <ion-icon name="checkmark-circle" class="icon-cls1"></ion-icon>
+              <div class="txt">1 day rental available</div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+      <div style="display: flex;">
+        <a class="bg" href="tel:923366277746" (click)=onCarClick(pickup.car_id)>
+          <ion-icon name="call" class="iconcls"></ion-icon>
+        </a>
+        <a class="bg2" href="https://wa.me/+923057819889?text=Hello%20World" (click)=onCarClick(pickup.car_id)>
+          <ion-icon name="logo-whatsapp" class="iconcls"></ion-icon>
+        </a>
+        <a class="bg3" href="mailto:ali.gharsheen1072@gmail.com" (click)=onCarClick(pickup.car_id)>
+          <ion-icon name="paper-plane" class="iconcls"></ion-icon>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+
+</ion-content>

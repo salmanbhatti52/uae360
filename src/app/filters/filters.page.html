@@ -11,17 +11,17 @@
   <div class="wrapper">
     <div>Car Brand/Model</div>
     <swiper [config]="{slidesPerView:2.1, spaceBetween:10, initialSlide:0, speed:400}" [pagination]="false"
-      style="margin: 3% 0% 7% 0%;">
-      <ng-template swiperSlide *ngFor="let car of cars; let i = index;">
+      style="margin: 3% 0% 5% 0%;">
+      <ng-template swiperSlide *ngFor="let b of cars; let i = index;">
 
 
-        <div class="bg" [ngClass]="{'selected': i === selectedCarIndex}" (click)="selectCar(i,car)">
+        <div class="bg" [ngClass]="{'selected': i === selectedCarIndex}" (click)="selectCar(i,b)">
           <div style="display: flex;align-items: center;justify-content: space-around;">
             <div>
-              <img [src]="api.imageUrlString+car.image">
+              <img [src]="api.imageUrlString+b.image">
             </div>
 
-            <div class="txt"> {{ car.name }}</div>
+            <div class="txt"> {{ b.name }}</div>
           </div>
 
         </div>
@@ -29,13 +29,20 @@
       </ng-template>
     </swiper>
 
+
+    <div class="horizontal-scroll" *ngIf="brandcars==true">
+      <div class="scroll-item" *ngFor="let car of modalcars; let i = index;"
+        [ngClass]="{'selected': i === selectedBrandCarIndex}" (click)="selectBrandCar(i,car)"> {{car.vehical_name}}
+      </div>
+    </div>
+
     <div>Model Year</div>
     <swiper [config]="{slidesPerView:4.8, spaceBetween:10, initialSlide:0, speed:400}" [pagination]="false"
       style="margin: 3% 0% 7% 0%;">
       <ng-template swiperSlide *ngFor="let y of years; let i = index;">
 
-        <ion-badge class="badge" [ngClass]="{'selected': i === selectedYearIndex}" (click)="selectYear(i)">
-          {{y}}
+        <ion-badge class="badge" [ngClass]="{'selected': i === selectedYearIndex}" (click)="selectYear(i,y)">
+          {{y.model_year}}
 
         </ion-badge>
 
@@ -48,7 +55,7 @@
       <ng-template swiperSlide *ngFor="let seat of seats; let i = index;">
 
         <ion-badge class="badge" [ngClass]="{'selected': i === selectedSeatIndex}" (click)="selectSeat(i)">
-          {{seat}}
+          {{seat.attribute_value}}
 
         </ion-badge>
 
@@ -56,7 +63,18 @@
     </swiper>
 
     <div class="htext">Car Type</div>
-    <div style="margin: 2% 0% 7% 0%;">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let car of carTypes; let i = index" (click)="selectItem(car,i)">
+          <div class="carItem_box" [class.selected_item]="selectedItem === i">
+            <img [src]="selectedItem === i ? 'assets/images/icons/car_grey.svg' : 'assets/images/icons/car_grey.svg'"
+              alt="">
+            <div class="cars_label" [class.fontActive]="selectedItem === i">{{car.car_type}}</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- <div style="margin: 2% 0% 7% 0%;">
 
       <ion-row class="categories">
         <ion-col size="6">
@@ -102,7 +120,7 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
 
     <div class="price_box">
       <div><span class="price_label">Price</span><span class="per_hour_span">/day</span></div>
@@ -133,6 +151,19 @@
     </div>
 
     <div>Rental Period</div>
+    <swiper [config]="{slidesPerView:4, spaceBetween:10, initialSlide:0, speed:400}" [pagination]="false"
+      style="margin: 3% 0% 7% 0%;">
+      <ng-template swiperSlide *ngFor="let rent of rentduration; let i = index;">
+
+        <ion-badge class="badge" [ngClass]="{'selected': i === selecteddurationIndex}" (click)="selectduration(i)">
+          {{rent.rent_duration >= 30 ? 'Monthly' : rent.rent_duration}}
+
+        </ion-badge>
+
+      </ng-template>
+    </swiper>
+
+    <!-- <div>Rental Period</div>
     <div style="margin: 3% 0% 7% 0%;">
       <div style="display: flex;align-items: center;">
         <div class="bg2" [class.selected]="selectedOption=='day'" (click)="selectOption('day')">
@@ -144,7 +175,37 @@
           <div class="txt">Per Month</div>
         </div>
       </div>
-    </div>
+    </div> -->
+
+    <div class="box_heading" style="margin: 12px 0px 0px 5px;">Payment Mode</div>
+
+    <swiper [config]="{slidesPerView:2.5, spaceBetween:0, initialSlide:0, speed:400}" [pagination]="false"
+      style="margin: 3% 0% 7% 0%;">
+      <ng-template swiperSlide *ngFor="let py of paymentmodes; let i = index;">
+
+        <div class="py-badge" [ngClass]="{'isselected': isSelected(i), 'unselected': !isSelected(i)}"
+          (click)="SelectPayemt(i)">
+          <div style="display: flex;align-items: center;">
+            <div>
+              <img src="{{api.imageUrlString}}{{py.image}}" style="width:20px;height: 20px;">
+            </div>
+            <div>
+              {{py.name}}
+            </div>
+          </div>
+
+        </div>
+
+      </ng-template>
+    </swiper>
+
+    <div class="box_heading" style="margin: 12px 0px 0px 5px;">Colors</div>
+    <ion-row>
+      <ion-col size="2.7" [style.background-color]="clr.code" class="clrcls"
+        *ngFor="let clr of colorsmodes;let i = index;"
+        [ngClass]="{'isselected': clrSelected(i), 'unselected': !clrSelected(i)}" (click)="SelectColor(i)"></ion-col>
+    </ion-row>
+
 
     <div>Minimum age required</div>
     <swiper [config]="{slidesPerView:4.8, spaceBetween:10, initialSlide:0, speed:400}" [pagination]="false"
@@ -234,7 +295,7 @@
   <div style="margin: 5px 0px 10px;">
     <div style="text-align: center;">
       <ion-button class="invite_btn" (click)="applyFilter()">
-        <span class="btn-text">Apply</span>
+        <span class="btn-text">Show Results</span>
       </ion-button>
     </div>
   </div>

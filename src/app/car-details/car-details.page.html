@@ -62,11 +62,10 @@
 
       <div class="name_price_box">
         <div class="car_name">{{data.vehical_name}}</div>
-        <div style="display: flex;align-items: baseline;">
+        <!-- <div style="display: flex;align-items: baseline;">
           <span class="price_val" style="font-size:11px">$</span>
           <span class="price_val" style="font-size:32px" *ngIf="categoryVal=='Day'">{{data.rent_cost_day}}</span>
           <span class="price_val" style="font-size:32px" *ngIf="categoryVal=='Month'">{{data.rent_cost_month}}</span>
-          <!-- <span class="price_val" style="font-size:32px">26</span> -->
           <span class="category_label" style="font-size: 10px;">/</span>
 
           <div (click)="displayCategories()" style="display: flex;align-items: baseline;position: relative;">
@@ -79,21 +78,102 @@
               </div>
             </div>
           </div>
+        </div> -->
+      </div>
+
+      <ion-row class="time-container">
+        <ion-col size="4" [class]="selected === 'day' ? 'priceselected' : 'not-selected'" (click)="select('day')">
+          <div class="price_val">AED {{data.rent_cost_day}}</div>
+          <span>/ day</span>
+        </ion-col>
+        <ion-col size="4" [class]="selected === 'week' ? 'priceselected' : 'not-selected'" (click)="select('week')">
+          <div class="price_val">AED {{data.mileage_limit_week}}</div>
+          <span>/ week</span>
+        </ion-col>
+        <ion-col size="4" [class]="selected === 'month' ? 'priceselected' : 'not-selected'" (click)="select('month')">
+          <div class="price_val">AED {{data.rent_cost_month}}</div>
+          <span>/ month</span>
+        </ion-col>
+      </ion-row>
+
+      <div class="box_styling">
+        <div class="box_heading">Rental Include</div>
+        <div class="flex-c1">
+          <div class="box_sub_heading">Mileage limit</div>
+          <div class="box_description" *ngIf="selected=='day'">
+            {{data.mileage_limit_day}} Km
+          </div>
+          <div class="box_description" *ngIf="selected=='week'">
+            {{data.mileage_limit_week}} Km
+          </div>
+          <div class="box_description" *ngIf="selected=='month'">
+            {{data.mileage_limit_month}} Km
+          </div>
+        </div>
+
+        <div style="margin-bottom:1%;"></div>
+
+        <div class="flex-c1">
+          <div class="box_sub_heading">Car Color</div>
+          <div>
+            <div class="flex-c">
+              <div class="box_description">Exterior</div>
+              <div [style.background-color]="data.car_color_exterior.code" class="clrcls"></div>
+            </div>
+
+            <div class="flex-c">
+              <div class="box_description">Interior</div>
+              <div [style.background-color]="data.car_color_interior.code" class="clrcls"></div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <div class="box_styling">
+        <div class="box_heading">Extras</div>
+        <div class="flex-c1">
+          <div class="box_sub_heading">Additional mileage charge</div>
+          <div class="box_description">
+            AED {{data.additional_mileage_charges}} / Km
+          </div>
+        </div>
+        <div style="margin-bottom:1%;"></div>
+        <div class="flex-c1">
+          <div class="box_sub_heading">Excess claim</div>
+          <div class="box_description">
+            AED {{data.excess_claim}}
+          </div>
+        </div>
+        <div style="margin-bottom:1%;"></div>
+        <div class="flex-c1">
+          <div class="box_sub_heading">Salik/Toll charges</div>
+          <div class="box_description">
+            AED {{data.toll_charges}}
+          </div>
         </div>
 
       </div>
 
       <div class="box_styling">
         <div class="box_heading">Requirements</div>
-        <div class="box_sub_heading">Minimun age</div>
-        <div class="box_description">
-          21 years old
+        <div class="flex-c1">
+          <div class="box_sub_heading">Minimun age</div>
+          <div class="box_description">
+            {{driverage}} years old
+          </div>
         </div>
+
         <div style="margin-bottom:1%;"></div>
-        <div class="box_sub_heading">Security deposit</div>
-        <div class="box_description">
-          AED 2000
+        <div class="flex-c1">
+          <div class="box_sub_heading">Security deposit</div>
+          <div class="box_description">
+            AED {{security}}
+          </div>
         </div>
+
       </div>
 
       <div class="d_styling" (click)="documentrequired()">
@@ -192,13 +272,220 @@
       </div>
 
 
-      <!-- <div class="box_styling">
+      <div class="box_styling">
         <div class="box_sub_heading" style="margin-top: 0px;">Location</div>
         <div class="box_description" style="margin-top: 4px;">
-          {{data.users_company[0].company_location}}
+          {{data.users_company.company_location}}
         </div>
-      </div> -->
-      <div class="box_styling" style="padding: 14px 14px 15px;" (click)="gotoRatings()">
+      </div>
+
+      <div *ngIf="dellocation!=undefined">
+        <div class="box_heading" style="margin: 12px 0px 0px 5px;">Fast Delivery Location</div>
+        <swiper [config]="{slidesPerView:2.5, spaceBetween:10, initialSlide:0, speed:400}" [pagination]="false"
+          style="margin: 3% 0% 7% 0%;">
+          <ng-template swiperSlide *ngFor="let fdl of dellocation; let i = index;">
+
+            <ion-badge class="badge" [ngClass]="{'selected': SelectLocation(i), 'unselected': !SelectLocation(i)}"
+              (click)="Selectedlocation(i)">
+              {{fdl.location}}
+
+            </ion-badge>
+
+          </ng-template>
+        </swiper>
+      </div>
+
+
+      <div class="box_heading" style="margin: 12px 0px 0px 5px;">Payment Mode</div>
+
+      <swiper [config]="{slidesPerView:2.9, spaceBetween:0, initialSlide:0, speed:400}" [pagination]="false"
+        style="margin: 3% 0% 7% 0%;">
+        <ng-template swiperSlide *ngFor="let py of data.users_company.users_company_payment_gateways; let i = index;">
+
+          <div class="py-badge" [ngClass]="{'pyselected': i === selectedPaymentIndex}" (click)="selectPaymentmode(i)">
+            <div style="display: flex;align-items: center;">
+              <div>
+                <img src="{{api.imageUrlString}}{{py.payment_gateways.image}}" style="width:20px;height: 20px;">
+              </div>
+              <div>
+                {{py.payment_gateways.name}}
+              </div>
+            </div>
+
+          </div>
+
+        </ng-template>
+      </swiper>
+
+      <div *ngIf="languages!=undefined">
+        <div class="box_heading" style="margin: 12px 0px 0px 5px;">Language Spoken</div>
+
+        <swiper [config]="{slidesPerView:4, spaceBetween:10, initialSlide:0, speed:400}" [pagination]="false"
+          style="margin: 3% 0% 7% 0%;">
+          <ng-template swiperSlide *ngFor="let lng of languages; let i = index;">
+
+            <ion-badge class="badge" [ngClass]="{'selected': isSelected(i), 'unselected': !isSelected(i)}"
+              (click)="SelectLanguage(i)">
+              {{lng.languages.name}}
+
+            </ion-badge>
+
+          </ng-template>
+        </swiper>
+      </div>
+
+      <div class="box_styling" style="padding: 14px 14px 15px;">
+
+        <div class="box_heading" style="margin-right: 10px;">Car Specs</div>
+        <ion-row>
+          <ion-col size="6" *ngFor="let spec of specifications">
+            <div style="display: flex;">
+              <div>
+                <img src="{{api.imageUrlString}}{{spec.attributes.image}}" width="25">
+              </div>
+              <div class="box_description" style="margin-left:5px !important;">
+                {{ spec.attributes.name }}: {{ spec.attribute_value }}
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <div class="box_heading" style="margin-right: 10px;">Car Features</div>
+        <ion-row>
+          <ion-col size="6" *ngFor="let feature of features">
+            <div style="display: flex;">
+              <div>
+                <img src="{{api.imageUrlString}}{{feature.attributes.image}}" width="25">
+              </div>
+              <div class="box_description" style="margin-left:5px !important;">
+                {{ feature.attributes.name }}: {{ feature.attribute_value }}
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+      </div>
+
+      <ion-row>
+        <ion-col size="6" *ngFor="let uae of documentdata">
+          <div style="display: flex;">
+            <!-- <div>
+              <img src="{{api.imageUrlString}}{{spec.attributes.image}}" width="25">
+            </div> -->
+            <div *ngIf="uae.documents_requirements.name=='For UAE Residents'">
+              <div class="box_description" style="margin-left:5px !important;">
+                {{uae.name}}
+              </div>
+            </div>
+
+            <!-- <div *ngIf="uae.documents_requirements.name=='For Tourists'">
+              <div class="box_description" style="margin-left:5px !important;">
+                {{uae.name}}
+              </div>
+            </div> -->
+          </div>
+        </ion-col>
+      </ion-row>
+      <div class="box" (click)="faq()">
+        <div class="box_heading">Frequently Asked Questions</div>
+      </div>
+
+
+      <div class="box_heading2">Similar Cars</div>
+
+      <swiper [pagination]="true" [config]="{ intialSlide: 0, speed: 400, slidesPerView:1 }">
+        <ng-template swiperSlide *ngFor="let pickup of limitedData"
+          style="width: 100%; height: 100%;margin-bottom: 5%;">
+          <div>
+            <ion-card class="card">
+              <img class="car_img" src="{{api.imageUrlString}}{{pickup.image1}}" alt=""
+                (click)="gotoCarDetails(pickup.car_id)">
+              <div style="padding: 5px 7px 7.5px 8px; display: flex;
+                align-items: center;
+                justify-content: space-between;">
+                <div>
+                  <div class="card_title">{{pickup.vehical_name}}</div>
+                </div>
+
+              </div>
+              <div style="padding: 0px 7px 15px 7px; display: flex;
+              justify-content: space-between;">
+                <div>
+                  <span class="price_val">AED {{pickup.rent_cost_day}}</span>
+                  <span class="category_label"> /</span> <span class="category_label">
+                    day</span>
+                  <div style="display: flex;
+                    margin-top: 5%;align-items: center;">
+                    <img src="assets/images/sidewalk.png">
+                    <div class="limit_title">
+                      {{pickup.mileage_limit_day}} Km
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <span class="price_val">AED {{pickup.rent_cost_month}}</span>
+                  <span class="category_label"> /</span> <span class="category_label">
+                    month</span>
+                  <div style="display: flex;
+                   margin-top: 5%;;align-items: center;">
+                    <img src="assets/images/sidewalk.png">
+                    <div class="limit_title">
+                      {{pickup.mileage_limit_month}} Km
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div style="display: flex;">
+                <ion-badge class="cardbadge" style="padding: 9px 15px;
+                height: 32px;">
+                  {{pickup.cars_types.car_type}}
+                </ion-badge>
+                <div *ngFor="let item of pickup.cars_attributes">
+                  <div *ngIf="item.attributes.attribute_type=='Specification'">
+                    <ion-badge class="cardbadge">
+                      <div style="display: flex;align-items: center;">
+                        <div>
+                          <img src="{{api.imageUrlString}}{{item.attributes.image}}" style="width: 20px;height: 20px;">
+                        </div>
+                        <div>
+                          {{item.attribute_value}}
+                        </div>
+                      </div>
+
+                    </ion-badge>
+                  </div>
+
+                </div>
+              </div>
+
+              <ion-row style="margin: 2% 0% 0% 4%;">
+                <ion-col size="5">
+                  <img src="{{api.imageUrlString}}{{pickup.users_company.company_logo}}" width="120">
+                </ion-col>
+                <ion-col size="7">
+                  <div class="flex-c2" *ngIf="pickup.rent_duration">
+                    <ion-icon name="information-circle" class="icon-cls"></ion-icon>
+                    <div class="txt">{{pickup.rent_duration}} day rental available</div>
+                  </div>
+                  <div class="flex-c2" *ngIf="pickup.security_deposit">
+                    <ion-icon name="information-circle" class="icon-cls"></ion-icon>
+                    <div class="txt">Deposit: AED {{pickup.security_deposit}}</div>
+                  </div>
+                  <div class="flex-c2" *ngIf="pickup.insurance">
+                    <ion-icon name="checkmark-circle" class="icon-cls1"></ion-icon>
+                    <div class="txt">1 day rental available</div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </div>
+        </ng-template>
+      </swiper>
+
+
+      <!-- <div class="box_styling" style="padding: 14px 14px 15px;" (click)="gotoRatings()">
         <div class="inner_box">
           <div>
             <span class="box_heading" style="margin-right: 10px;">Ratings</span>
@@ -252,7 +539,7 @@
             <img src="assets/images/icons/next.svg" alt="">
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
 

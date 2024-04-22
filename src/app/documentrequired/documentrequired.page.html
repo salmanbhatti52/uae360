@@ -14,24 +14,37 @@
       You are eligible to rent a car across the UAE provided you have the below mentioned documents valid with you:
     </p>
 
-    <div class="main">
+    <div *ngIf="errorshow==true" style="background: #dedede;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 5%">{{msgshow}}</div>
+    <div *ngIf="uaeResidentsDocs.length > 0" class="main">
       <div class="htext">For UAE Residents</div>
       <div class="inner-main">
-
         <img src="assets/images/uaevisa.png">
-
-        <div class="icon-text-wrapper">
+        <!-- Loop for UAE Residents Documents -->
+        <div class="icon-text-wrapper" *ngFor="let doc of uaeResidentsDocs">
           <img src="assets/images/check.png" class="tick-icon">
-          <span class="text-after-icon">UAE Driving License</span>
-        </div>
-        <div class="icon-text-wrapper">
-          <img src="assets/images/check.png" class="tick-icon">
-          <span class="text-after-icon">Emirates ID (Residential Visa may be acceptable)</span>
+          <span class="text-after-icon">{{ doc.name }}</span>
         </div>
       </div>
     </div>
 
-    <div class="main">
+    <!-- Dynamic Section for Tourists -->
+    <div *ngIf="touristDocs.length > 0" class="main">
+      <div class="htext">For Tourists visiting the UAE</div>
+      <div class="inner-main">
+        <img src="assets/images/visiting.png">
+        <!-- Loop for Tourists Documents -->
+        <div class="icon-text-wrapper" *ngFor="let doc of touristDocs">
+          <img src="assets/images/check.png" class="tick-icon">
+          <span class="text-after-icon">{{ doc.name }}</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="main">
       <div class="htext">For Tourists visiting the UAE</div>
       <div class="inner-main">
 
@@ -57,7 +70,7 @@
           <span class="text-after-icon">International Driving Permit (IDP)</span>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="para2">
       Visitors form the GCC,US,UK,Canada,Europe and certain other countries can drive with their home country driving

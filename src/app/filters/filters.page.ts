@@ -7,9 +7,11 @@ import { RangeValue } from '@ionic/core';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
 import { IonicSlides } from '@ionic/angular';
-import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
+// import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
 
-SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
+// SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
+import Swiper, { Pagination } from 'swiper';
+Swiper.use([Pagination]);
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.page.html',
@@ -17,9 +19,9 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 })
 export class FiltersPage implements OnInit {
   lastEmittedValue: RangeValue;
-  rentCostDayStart: any;
+  rentCostDayStart: any = 10;
   rentCostDayEnd: any;
-  rentCostMonthStart: any;
+  rentCostMonthStart: any = 10;
   rentCostMonthEnd: any;
   result = [];
   cars = [
@@ -34,8 +36,14 @@ export class FiltersPage implements OnInit {
   selectedYearIndex = null;
   selectedSeatIndex = null;
   selectedAgeIndex = null;
-  years = [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 1971]
-  seats = ["2", "4 - 5", "6 - 7", "8 - 12", "13+"];
+  selecteddurationIndex = null;
+  selectedBrandCarIndex = null;
+  brandcars = false;
+  modalcars: any;
+  years: any;
+  seats = [
+    "2", "4 - 5", "6 - 7", "8 - 12", "13+"
+  ];
   agerequired = ["18", "19", "20", "21", "22", "23", "24", "25+"];
 
   selectedOption: any;
@@ -54,7 +62,25 @@ export class FiltersPage implements OnInit {
   carTypeTwoId = '';
   carTypeThreeId = '';
   carTypeFourId = '';
-
+  paymentmodes: any;
+  selectedIndices: any = [];
+  colorsmodes: any;
+  clrselectedIndices: any = [];
+  rentduration: any;
+  public items: string[] = [' AUDI-RS-6-AVANT-WAGON', 'Badge 2', 'Badge 3', 'Badge 4', 'Badge 5'];
+  public swiperConfig = {
+    slidesPerView: 'auto',
+    spaceBetween: 5,
+    // Add more Swiper configurations as needed
+  };
+  selectedItem: any;
+  originalData = {
+    cars: [],
+    years: [],
+    seats: [], // seats and agerequired are static, may not need to store originals
+    carTypes: [],
+  };
+  carDetails: any = {};
   constructor(public location: Location,
     public navCtrlr: NavController,
     public checkUser: CheckUserService,
@@ -63,11 +89,19 @@ export class FiltersPage implements OnInit {
 
   ngOnInit() {
     this.getCarTypes();
-    this.getmodal()
+    this.getmodal();
+    this.getModelyears();
+    this.getPaymentmethod();
+    this.getColors();
+    this.rentalPeriod()
   }
   ionViewWillEnter() {
 
+
+
+
   }
+
   goBack() {
     this.location.back();
   }
@@ -77,6 +111,97 @@ export class FiltersPage implements OnInit {
       console.log('get_cars_brands Response: ', res);
       if (res.status == 'success') {
         this.cars = res.data
+        this.originalData.cars = [...this.cars];
+      } else if (res.status == 'error') {
+
+      }
+
+    }, (err) => {
+
+      console.log('Error', err);
+
+    });
+  }
+  getModelyears() {
+    this.api.getData('get_models_years').subscribe((res: any) => {
+
+      console.log('year Response: ', res);
+      if (res.status == 'success') {
+        this.years = res.data
+        this.originalData.years = [...this.years];
+        this.getnoOfseats()
+      } else if (res.status == 'error') {
+
+      }
+
+    }, (err) => {
+
+      console.log('Error', err);
+
+    });
+  }
+  getnoOfseats() {
+    this.api.getData('get_no_of_seats').subscribe((res: any) => {
+
+      console.log('get_no_of_seats Response: ', res);
+      if (res.status == 'success') {
+        this.seats = res.data
+        this.originalData.seats = [...this.seats];
+      } else if (res.status == 'error') {
+
+      }
+
+    }, (err) => {
+
+      console.log('Error', err);
+
+    });
+  }
+  getPaymentmethod() {
+    this.api.getData('get_payment_gateways').subscribe((res: any) => {
+
+      // console.log('get_payment_gateways Response: ', res);
+      if (res.status == 'success') {
+        this.paymentmodes = res.data
+      } else if (res.status == 'error') {
+
+      }
+
+    }, (err) => {
+
+      console.log('Error', err);
+
+    });
+  }
+  rentalPeriod() {
+    this.api.getData('get_rent_durations').subscribe((res: any) => {
+
+      // console.log('get_rent_durations Response: ', res);
+      if (res.status == 'success') {
+        this.rentduration = res.data
+      } else if (res.status == 'error') {
+
+      }
+
+    }, (err) => {
+
+      console.log('Error', err);
+
+    });
+  }
+  selectduration(index: any) {
+    if (this.selecteddurationIndex === index) {
+      this.selecteddurationIndex = null; // Unselect
+    } else {
+      this.selecteddurationIndex = index; // Select
+    }
+  }
+  getColors() {
+    this.api.getData('get_cars_colors').subscribe((res: any) => {
+
+      // console.log('get_cars_colors Response: ', res);
+      if (res.status == 'success') {
+        this.colorsmodes = res.data
       } else if (res.status == 'error') {
 
       }
@@ -90,16 +215,88 @@ export class FiltersPage implements OnInit {
   selectCar(index: any, modal: any) {
     if (this.selectedCarIndex === index) {
       this.selectedCarIndex = null; // Unselect
+      this.brandcars = false;
+      this.cars = [...this.originalData.cars];
+      this.years = [...this.originalData.years];
+      this.carTypes = [...this.originalData.carTypes];
+      this.seats = this.originalData.seats
     } else {
+      this.carDetails.cars_brands_id = modal.cars_brands_id;
+      this.brandvechile(modal.cars_brands_id)
       console.log(modal.cars_brands_id);
 
       this.selectedCarIndex = index; // Select
     }
   }
-  selectYear(index: any) {
+
+  selectBrandCar(index: any, val: any) {
+    console.log(val);
+
+    if (this.selectedBrandCarIndex === index) {
+      this.selectedBrandCarIndex = null; // Unselect
+    } else {
+      this.databyCar(val.car_id)
+      this.selectedBrandCarIndex = index; // Select
+    }
+  }
+
+
+
+  brandvechile(cars_brands_id: any) {
+    this.modalcars = [];
+    this.api.sendRequest('get_data_by_brand', { "cars_brands_id": cars_brands_id }).subscribe((res: any) => {
+
+      console.log(res);
+      if (res.status == 'success') {
+        this.selectedBrandCarIndex = null;
+        this.modalcars = res.data.cars
+        this.years = res.data.models_years
+        this.seats = res.data.seats
+        this.carTypes = res.data.cars_types
+        this.brandcars = true
+      } else if (res.status == 'error') {
+
+
+      } else {
+
+      }
+    }, (err) => {
+
+      console.log(err);
+
+    })
+  }
+  databyCar(carId) {
+    this.years = []
+    this.seats = []
+    this.carTypes = []
+    this.api.sendRequest('get_data_by_car', { "car_id": carId }).subscribe((res: any) => {
+
+      console.log(res);
+      if (res.status == 'success') {
+        this.years = res.data.models_years
+        this.seats = res.data.seats
+        this.carTypes = res.data.cars_types
+      } else if (res.status == 'error') {
+
+
+      } else {
+
+      }
+    }, (err) => {
+
+      console.log(err);
+
+    })
+  }
+  selectYear(index: any, year: any) {
+    console.log('year', year);
+
     if (this.selectedYearIndex === index) {
       this.selectedYearIndex = null; // Unselect
+      this.carDetails.year = '';
     } else {
+      this.carDetails.year = year.model_year
       this.selectedYearIndex = index; // Select
     }
 
@@ -111,6 +308,33 @@ export class FiltersPage implements OnInit {
       this.selectedSeatIndex = index; // Select
     }
 
+  }
+  isSelected(index: any): boolean {
+    return this.selectedIndices.includes(index);
+  }
+  SelectPayemt(index: any) {
+    console.log('index', index);
+
+    const selectedIndex = this.selectedIndices.indexOf(index);
+    if (selectedIndex > -1) {
+      this.selectedIndices.splice(selectedIndex, 1); // Remove index if already selected
+    } else {
+      this.selectedIndices.push(index); // Add index if not already selected
+    }
+  }
+
+
+
+  clrSelected(index: any): boolean {
+    return this.clrselectedIndices.includes(index);
+  }
+  SelectColor(index: any) {
+    const selectedIndex = this.clrselectedIndices.indexOf(index);
+    if (selectedIndex > -1) {
+      this.clrselectedIndices.splice(selectedIndex, 1); // Remove index if already selected
+    } else {
+      this.clrselectedIndices.push(index); // Add index if not already selected
+    }
   }
   selectOption(option: any) {
     console.log(option);
@@ -145,40 +369,38 @@ export class FiltersPage implements OnInit {
   }
   applyFilter() {
     this.result = [];
+    console.log("cardetails", this.carDetails);
 
-    console.log("rent_cost_day_start", this.rentCostDayStart);
-    console.log("rent_cost_day_end", this.rentCostDayEnd);
-    console.log("rent_cost_month_start", this.rentCostMonthStart);
-    console.log("rent_cost_month_end", this.rentCostMonthEnd);
+    this.api.filterResult = this.carDetails
+    this.router.navigate(['/filterresult']);
+    // if (this.rentCostDayStart !== undefined || this.rentCostMonthStart !== undefined) {
+    //   let data = {
+    //     users_customers_id: this.checkUser.appUserId,
+    //     rent_cost_day_start: this.rentCostDayStart,
+    //     rent_cost_day_end: this.rentCostDayEnd,
+    //     rent_cost_month_start: this.rentCostMonthStart,
+    //     rent_cost_month_end: this.rentCostMonthEnd
+    //   };
+    //   this.api.showLoading();
+    //   this.api.sendRequest('getCarsByFilters', data).subscribe((res: any) => {
+    //     this.api.hideLoading();
+    //     console.log('Response: ', res);
+    //     if (res.status == 'success') {
+    //       this.result = res.data;
+    //     } else if (res.status == 'error') {
+    //       if (res.message == 'Cars are empty.') {
+    //         this.api.presentToast('No car found in this range.')
+    //       }
 
-    if (this.rentCostDayStart !== undefined || this.rentCostMonthStart !== undefined) {
-      let data = {
-        users_customers_id: this.checkUser.appUserId,
-        rent_cost_day_start: this.rentCostDayStart,
-        rent_cost_day_end: this.rentCostDayEnd,
-        rent_cost_month_start: this.rentCostMonthStart,
-        rent_cost_month_end: this.rentCostMonthEnd
-      };
-      this.api.showLoading();
-      this.api.sendRequest('getCarsByFilters', data).subscribe((res: any) => {
-        this.api.hideLoading();
-        console.log('Response: ', res);
-        if (res.status == 'success') {
-          this.result = res.data;
-        } else if (res.status == 'error') {
-          if (res.message == 'Cars are empty.') {
-            this.api.presentToast('No car found in this range.')
-          }
+    //     }
+    //   }, (err) => {
+    //     this.api.hideLoading();
+    //     console.log("API call Error: ", err);
 
-        }
-      }, (err) => {
-        this.api.hideLoading();
-        console.log("API call Error: ", err);
-
-      })
-    } else {
-      this.api.presentToast("Plz specify your range for day or month");
-    }
+    //   })
+    // } else {
+    //   this.api.presentToast("Plz specify your range for day or month");
+    // }
   }
   gotoCarDetails(car_id) {
 
@@ -212,15 +434,27 @@ export class FiltersPage implements OnInit {
       if (res.status == 'success') {
 
         this.carTypes = res.data;
-        this.carTypeOne = this.carTypes[0].car_type;
-        this.carTypeTwo = this.carTypes[1].car_type;
-        this.carTypeThree = this.carTypes[2].car_type;
-        this.carTypeFour = this.carTypes[3].car_type;
+        // const allCarsObject = {
+        //   car_type_id: 0, // You can use any identifier that makes sense for your application
+        //   car_type: "All",
+        //   image: "assets/images/icons/car_grey.svg", // Optionally, specify an image for the "All" type
+        //   date_added: null,
+        //   date_modified: null,
+        //   status: "Active"
+        // };
 
-        this.carTypeOneId = this.carTypes[0].car_type_id;
-        this.carTypeTwoId = this.carTypes[1].car_type_id;
-        this.carTypeThreeId = this.carTypes[2].car_type_id;
-        this.carTypeFourId = this.carTypes[3].car_type_id;
+        // this.carTypes.unshift(allCarsObject);
+        // this.originalData.carTypes = [...this.carTypes];
+
+        // this.carTypeOne = this.carTypes[0].car_type;
+        // this.carTypeTwo = this.carTypes[1].car_type;
+        // this.carTypeThree = this.carTypes[2].car_type;
+        // this.carTypeFour = this.carTypes[3].car_type;
+
+        // this.carTypeOneId = this.carTypes[0].car_type_id;
+        // this.carTypeTwoId = this.carTypes[1].car_type_id;
+        // this.carTypeThreeId = this.carTypes[2].car_type_id;
+        // this.carTypeFourId = this.carTypes[3].car_type_id;
 
       }
 
@@ -230,49 +464,11 @@ export class FiltersPage implements OnInit {
     })
   }
 
-  selectItem(itemVal) {
-    if (itemVal == 'all') {
-      this.item1 = true;
-      this.item2 = false;
-      this.item3 = false;
-      this.item4 = false;
-      this.item5 = false;
-
-    } else if (itemVal == 'Sports') {
-
-      this.item1 = false;
-      this.item2 = true;
-      this.item3 = false;
-      this.item4 = false;
-      this.item5 = false;
+  selectItem(itemVal, index) {
+    this.selectedItem = index;
+    console.log(itemVal);
 
 
 
-    } else if (itemVal == 'Luxury') {
-
-      this.item1 = false;
-      this.item2 = false;
-      this.item3 = true;
-      this.item4 = false;
-      this.item5 = false;
-
-    } else if (itemVal == 'Pickup') {
-
-      this.item1 = false;
-      this.item2 = false;
-      this.item3 = false;
-      this.item4 = true;
-      this.item5 = false;
-
-    } else if (itemVal == 'SUV') {
-      this.item1 = false;
-      this.item2 = false;
-      this.item3 = false;
-      this.item4 = false;
-      this.item5 = true;
-
-    } else {
-
-    }
   }
 }

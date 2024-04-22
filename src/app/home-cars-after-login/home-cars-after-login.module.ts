@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { HomeCarsAfterLoginPageRoutingModule } from './home-cars-after-login-routing.module';
 
 import { HomeCarsAfterLoginPage } from './home-cars-after-login.page';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -14,8 +15,9 @@ import { HomeCarsAfterLoginPage } from './home-cars-after-login.page';
     FormsModule,
     IonicModule,
     SwiperModule,
-    HomeCarsAfterLoginPageRoutingModule
+    HomeCarsAfterLoginPageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [HomeCarsAfterLoginPage]
 })
-export class HomeCarsAfterLoginPageModule {}
+export class HomeCarsAfterLoginPageModule { }

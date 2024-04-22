@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { HomeBeforeLoginPageRoutingModule } from './home-before-login-routing.module';
 
 import { HomeBeforeLoginPage } from './home-before-login.page';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -14,8 +15,9 @@ import { HomeBeforeLoginPage } from './home-before-login.page';
     FormsModule,
     IonicModule,
     SwiperModule,
-    HomeBeforeLoginPageRoutingModule
+    HomeBeforeLoginPageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [HomeBeforeLoginPage]
 })
-export class HomeBeforeLoginPageModule {}
+export class HomeBeforeLoginPageModule { }

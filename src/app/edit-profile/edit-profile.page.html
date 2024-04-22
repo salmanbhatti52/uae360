@@ -62,7 +62,7 @@
 
       <div style="padding-top: 12.5px;">
         <div class="input_label">Date of Birth</div>
-        <ion-input type="tel" formControlName="dob" placeholder="Select date" [class.active_input]="date == true"
+        <ion-input type="tel" formControlName="dob" placeholder="Select date" [class.active_input]="birthdate == true"
           (ionInput)="activate('birthdate')" [(ngModel)]="dateofbirth" readonly
           (click)="showPicker = !showPicker"></ion-input>
       </div>

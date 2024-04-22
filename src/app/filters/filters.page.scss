@@ -179,6 +179,10 @@ hr{
 .selected {
   background-color: rgba(251, 197, 5, 0.5) !important;
 }
+.isselected{
+  border:2px solid #FBC505 !important;
+  color: #FBC505;
+}
 .bg img{
   width: 20px;
 }
@@ -190,6 +194,46 @@ hr{
   padding: 10px 20px;
   margin-right: 10%;
 }
+.carbadge{
+  --background: white;
+  color: #191919;
+  border-color: #191919;
+  border-radius: 20px;
+  border: 1.5px solid #FBC505;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "Urbanist", sans-serif;
+  transition:background-color 0.3s ease;
+  font-size: clamp(12px, 2.5vw, 14px);
+}
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 10px;
+
+  .scroll-item {
+    display: inline-block;
+    margin-right: 16px; /* Space between items */
+    --background: white;
+    color: #191919;
+    border-color: #191919;
+    border-radius: 20px;
+    border: 1.5px solid #FBC505;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: "Urbanist", sans-serif;
+    padding: 8px 15px;
+  }
+
+  /* Optional: Hide scrollbar but still allow scrolling */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none; /* For Firefox */
+}
+
 .badge{
   --background: white;
   color: #191919;
@@ -202,7 +246,15 @@ hr{
   padding: 12px 0px;
   width: 100%;
   transition:background-color 0.3s ease;
-
+  font-size: clamp(12px, 2.5vw, 14px);
+}
+.py-badge{
+  font-size: 12px;
+  border: 1px solid #000;
+  padding: 8px 15px;
+  font-family: "Urbanist", sans-serif;
+  border-radius: 20px;
+  font-weight: 500;
 }
 .txt{
   font-size: 14px;margin-left: 5px;
@@ -257,4 +309,10 @@ hr{
     color: white;
     font-family: 'Poppins', sans-serif;
     text-transform: capitalize;
+}
+.clrcls{
+    height: 45px;
+    background-color: rgb(255, 0, 0);
+    margin: 5px 0px 0px 8px;
+    border-radius: 25px;
 }

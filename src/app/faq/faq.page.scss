@@ -1,0 +1,75 @@
+ion-header{
+  font-family: 'Poppins', sans-serif;
+  background-color: #FCF6FF !important;
+}
+ion-content{
+  font-family: 'Poppins', sans-serif;
+  --background:#FCF6FF !important;
+}
+ion-footer{
+  font-family: 'Poppins', sans-serif;
+  background-color: #FCF6FF !important;
+}
+
+.header_footer_bg{
+  background-color: #FBFBFB !important;
+}
+.content_background{
+  --background: #FBFBFB !important;
+}
+.header{
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 30px 16px 0px;
+}
+.bgtoolbar{
+  --background: #FCF6FF;
+}
+.title{
+  font-size: 18px;
+  font-weight: 700;
+  color: #0F172A;
+  font-family: 'Poppins', sans-serif;
+  margin: 0px auto;
+}
+.apply_label{
+  font-size: 14px;
+  font-weight: 600;
+  color: #0F172A;
+  font-family: 'Poppins', sans-serif;
+  margin-right: 5px;
+}
+.wrapper{
+  padding:12px 16px 16px;
+}
+.ion-accordion.accordion-animated > [slot=header] .ion-accordion-toggle-icon {
+   margin: 0px !important;
+   font-size: 20px !important;
+}
+.custom-label{
+  font-size: 15px !important;
+  color: #0F172A;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+.desc{
+  font-size: 14px;
+  font-weight: 400;
+  color: #0F172A;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px 5px;
+}
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5%;
+}
+
+.custom-header ion-icon {
+  margin-left: auto; /* Ensures the icon is always on the right */
+}
+.active-label {
+  color: #FBC505 !important; /* Example active color - Blue */
+}

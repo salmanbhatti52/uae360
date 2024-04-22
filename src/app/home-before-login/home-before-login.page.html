@@ -13,8 +13,8 @@
       </div>
     </div>
     <div style="margin: 16px;">
-      <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)" type="text" show-clear-button="always"
-        class="input_field" placeholder="Search for Cars" (ionClear)="clearResult()">
+      <ion-searchbar [debounce]="1000" [(ngModel)]="term" type="text" show-clear-button="always" class="input_field"
+        placeholder="Search for Cars">
       </ion-searchbar>
     </div>
   </ion-toolbar>
@@ -27,7 +27,18 @@
   <div>
     <div class="items_label">What are you looking for?</div>
     <div style="padding-left: 11px;">
-      <swiper [config]="{slidesPerView:4.4, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false"
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" *ngFor="let car of carTypes; let i = index" (click)="selectItem(car,i)">
+            <div class="carItem_box" [class.selected_item]="selectedItem === i">
+              <img [src]="selectedItem === i ? 'assets/images/icons/car_grey.svg' : 'assets/images/icons/car_grey.svg'"
+                alt="">
+              <div class="cars_label" [class.fontActive]="selectedItem === i">{{car.car_type}}</div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- <swiper [config]="{slidesPerView:4.4, spaceBetween:9, initialSlide:0, speed:400}" [pagination]="false"
         style="padding: 8px;">
         <ng-template swiperSlide class="categories">
           <div class="carItem_box" [class.selected_item]="item1 == true" (click)="selectItem('all')">
@@ -65,14 +76,14 @@
             <div class="cars_label" [class.fontActive]="item5 == true">{{carTypeFour}}</div>
           </div>
         </ng-template>
-      </swiper>
+      </swiper> -->
     </div>
 
     <div class="items_wrapper">
       <div class="items_label" style="margin-top: 5px;padding-left: 3px;">Top Rented</div>
       <div *ngIf="pickupsData == false" class="no_cars">No car listed</div>
 
-      <div *ngFor="let pickup of pickups;" style="width: 100%; height: 100%;margin-bottom: 5%;">
+      <div *ngFor="let pickup of pickups | filter:term;" style="width: 100%; height: 100%;margin-bottom: 5%;">
         <ion-card class="card" (click)="gotoSignIn()">
           <img class="car_img" src="{{api.imageUrlString}}{{pickup.image1}}" alt="">
           <div style="padding: 8px 10px 10px 10px;">

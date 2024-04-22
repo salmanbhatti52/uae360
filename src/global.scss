@@ -20,6 +20,8 @@
 @import 'swiper/scss/zoom';
 @import '@ionic/angular/css/ionic-swiper';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;700&family=Urbanist:wght@300;400;500;700&display=swap');
+// global.scss
+@import '~swiper/swiper-bundle.min.css';
 
   ion-input,ion-textarea,ion-label{
     font-family: 'Poppins', sans-serif;
@@ -33,7 +35,7 @@
   // ion-refresher.ios{
   //   background: #FBFBFB;
   // }
-  
+
   ion-datetime{
 
     --ion-color-base: none !important;
@@ -43,7 +45,10 @@
     --ion-color-shade: none !important;
     --ion-color-tint: none !important;
   }
-
+  .ion-accordion.accordion-animated > [slot=header] .ion-accordion-toggle-icon {
+    margin: 0px !important;
+    font-size: 20px !important;
+ }
   .searchbar-input.sc-ion-searchbar-md {
     // font-family: inherit;
     // font-size: inherit;
@@ -60,7 +65,7 @@
      border-radius: none !important;
     display: block;
     /* width: 100%; */
-     border: none !important; 
+     border: none !important;
     outline: none;
      background: none !important;
     font-family: inherit;
@@ -204,76 +209,76 @@
       background: rgba(15, 23, 42, 0.5);
     }
   }
-//   @media only screen 
-//   and (min-device-height: 667px) 
-//   and (max-device-height: 700px) 
-//    { 
-//     
+//   @media only screen
+//   and (min-device-height: 667px)
+//   and (max-device-height: 700px)
+//    {
+//
 //   }
-//   @media only screen 
-//   and (min-device-height: 720px) 
-//   and (max-device-height: 736px) 
-//    { 
-//     
+//   @media only screen
+//   and (min-device-height: 720px)
+//   and (max-device-height: 736px)
+//    {
+//
 //   }
-//   @media only screen 
-//   and (min-device-height: 737px) 
+//   @media only screen
+//   and (min-device-height: 737px)
 //   and (max-device-height: 742px) {
-//     
+//
 //   }
-//   @media only screen 
-//   and (min-device-height: 780px) 
-//   and (max-device-height: 812px) 
-//    { 
-//     
+//   @media only screen
+//   and (min-device-height: 780px)
+//   and (max-device-height: 812px)
+//    {
+//
 //   }
-//   @media only screen 
-//   and (min-device-height: 830px) 
-//   and (max-device-height: 852px) 
-//    { 
-//     
+//   @media only screen
+//   and (min-device-height: 830px)
+//   and (max-device-height: 852px)
+//    {
+//
 //   }
-//   @media only screen 
-//   and (min-device-height: 870px) 
-//   and (max-device-height: 902px) 
-//    { 
-//     
+//   @media only screen
+//   and (min-device-height: 870px)
+//   and (max-device-height: 902px)
+//    {
+//
 //   }
-//   @media only screen 
-//   and (min-device-height: 903px) 
-//   and (max-device-height: 916px) 
-//    { 
-//     
+//   @media only screen
+//   and (min-device-height: 903px)
+//   and (max-device-height: 916px)
+//    {
+//
 //   }
 //   // ====================ipad media query===============
-//   @media only screen 
-//   and (min-device-width: 768px) 
-//   and (max-device-width: 1024px) 
+//   @media only screen
+//   and (min-device-width: 768px)
+//   and (max-device-width: 1024px)
 //   and (-webkit-min-device-pixel-ratio: 1) {
-//     
+//
 // }
-// @media only screen 
-//   and (min-device-width: 1024px) 
+// @media only screen
+//   and (min-device-width: 1024px)
 //   and (max-device-width: 1366px)
 //   and (-webkit-min-device-pixel-ratio: 2) {
-//     
+//
 // }
-// @media only screen 
-//   and (min-device-width: 820px) 
+// @media only screen
+//   and (min-device-width: 820px)
 //   and (max-device-width: 1180px)
 //   and (-webkit-min-device-pixel-ratio: 2) {
-//     
+//
 // }
 
-// @media only screen 
+// @media only screen
 // and (min-device-width: 912px)
 // and (max-device-height: 1368px){
-//   
+//
 // }
-// @media only screen 
+// @media only screen
 // and (min-device-width: 540px)
 // and (max-device-height: 720px){
-//   
+//
 // }
 // ================international phone input scss=======================
   input:focus{
@@ -356,7 +361,7 @@ button, input, optgroup, select, textarea {
   //   font-family: 'BebasAR-Regular';
   //   src: url(assets/fonts/BebasAR-Regular.otf);
   // }
-  
+
 @import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */

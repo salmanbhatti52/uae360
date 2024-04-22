@@ -1,0 +1,117 @@
+ion-header{
+  font-family: 'Poppins', sans-serif;
+  background-color: #FCF6FF !important;
+}
+ion-content{
+  font-family: 'Poppins', sans-serif;
+  --background:#FCF6FF !important;
+}
+ion-footer{
+  font-family: 'Poppins', sans-serif;
+  background-color: #FCF6FF !important;
+}
+
+.header_footer_bg{
+  background-color: #FBFBFB !important;
+}
+.content_background{
+  --background: #FBFBFB !important;
+}
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 16px 15px;
+}
+.bgtoolbar{
+  --background: #FCF6FF;
+}
+.title{
+  font-size: 18px;
+  font-weight: 700;
+  color: #0F172A;
+  font-family: 'Poppins', sans-serif;
+}
+.wrapper{
+  padding:5px 16px 20px;
+}
+
+.card{
+  width: 100%;
+  margin: 9.5px 0px 0px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 9%);
+  padding-bottom: 5%;
+}
+.car_img{
+  width: 100% !important;
+  height: 160px !important;
+  object-fit: cover;
+}
+.card_title{
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+  text-align: left;
+  text-transform: uppercase;
+}
+.limit_title{
+  margin-left: 1%;
+  font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+}
+.cardbadge{
+  --background: white;
+    color: #191919;
+    border-color: #191919;
+    border-radius: 50px;
+    border: 1.5px solid #191919;
+    font-weight: 500;
+    font-size: 13px;
+    font-family: "Urbanist", sans-serif;
+    transition: background-color 0.3s ease;
+    margin-left: 10px
+}
+.flex-c2{
+  display: flex;
+  align-items: center;
+  color: #191919;
+  font-size: 13px;
+}
+.flex-c2 .txt{
+  margin-left: 2%;
+  padding: 1.1%;
+}
+.icon-cls{
+  color:#FBC505;
+    font-size: 17px;
+}
+.iconcls{
+  font-size: 22px;
+  color: #FCF6FF;
+}
+.bg{
+  background: #FBC505;
+  padding: 12px 10px 7px;
+  width: 100%;
+  text-align: center;
+  border-radius: 0px 0px 0px 25px;
+}
+.bg2{
+  background: #5CB85C;
+  padding: 12px 10px 7px;
+  width: 100%;
+  text-align: center;
+  margin: 0px 3px;
+}
+.bg3{
+  background: #4D4D4D;
+  padding: 12px 10px 7px;
+  width: 100%;
+  text-align: center;
+  border-radius: 0px 0px 25px 0px;
+}

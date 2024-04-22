@@ -10,7 +10,7 @@ import { IonicSlides } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
 import { AwesomeCordovaNativePlugin } from '@awesome-cordova-plugins/core';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
-import { Share } from '@capacitor/share';
+// import { Share } from '@capacitor/share';
 // import { Browser } from '@capacitor/browser';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
@@ -27,7 +27,8 @@ export class HomeCarsAfterLoginPage implements OnInit {
   item3 = false;
   item4 = false;
   item5 = false;
-  carTypes = [];
+  carTypes: any
+  selectedItem: number = 0;
   carTypeOne = '';
   carTypeTwo = '';
   carTypeThree = '';
@@ -50,6 +51,16 @@ export class HomeCarsAfterLoginPage implements OnInit {
   showContent = true;
   pickups = [];
   pickupsData = true;
+  term: any;
+  cars = [];
+  selectedCarIndex = null;
+  showCategories = false;
+  rentCategories = [{ category: 'Day' }, { category: 'Month' }]
+  categoryVal = 'Day';
+  clickedCarIds: any = [];
+  clickCount: any = 0;
+  viewCount: any = 0;
+  clickedCardetails: any = [];
   constructor(public router: Router,
     public navCtrlr: NavController,
     public checkUser: CheckUserService,
@@ -78,6 +89,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
     this.fetchLocation();
   }
 
+
   handleRefresh(event) {
     setTimeout(() => {
       // Any calls to load data go here
@@ -93,6 +105,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
   };
 
   ionViewWillEnter() {
+    this.selectedCarIndex = null;
     // ================notifications status check===================
     // console.log('notificationVal: ',localStorage.getItem('notificationVal'));
     let toggleVal = localStorage.getItem('notificationVal');
@@ -113,8 +126,24 @@ export class HomeCarsAfterLoginPage implements OnInit {
       this.showContent = true;
     }
 
+    if (localStorage.getItem('viewedCount') == null) {
+      this.viewCount = 0;
+    } else {
+      this.viewCount = parseInt(localStorage.getItem('viewedCount'), 10);
+      console.log('count----', this.viewCount);
+
+    }
+    if (localStorage.getItem('contactedCount') == null) {
+      this.clickCount = 0;
+    } else {
+      this.clickCount = parseInt(localStorage.getItem('contactedCount'), 10);
+      console.log('clickCount count----', this.clickCount);
+
+    }
+
     this.getNotifications();
     this.getCars();
+    this.getmodal();
   }
 
   getNotifications() {
@@ -138,6 +167,73 @@ export class HomeCarsAfterLoginPage implements OnInit {
       console.log("Api Error: ", err);
 
     })
+  }
+  getmodal() {
+    this.api.getData('get_cars_brands').subscribe((res: any) => {
+
+      console.log('get_cars_brands Response: ', res);
+      if (res.status == 'success') {
+        this.cars = res.data
+      } else if (res.status == 'error') {
+
+      }
+
+    }, (err) => {
+
+      console.log('Error', err);
+
+    });
+  }
+  selectCar(index: any, modal: any) {
+    if (this.selectedCarIndex === index) {
+      this.selectedCarIndex = null; // Unselect
+    } else {
+      this.item1 = false;
+      this.item2 = false;
+      this.item3 = false;
+      this.item4 = false;
+      this.item5 = false;
+      console.log(modal.cars_brands_id);
+      this.selectedCarIndex = index; // Select
+      this.getbrandCars(modal.cars_brands_id)
+    }
+  }
+
+  getbrandCars(carId) {
+    this.api.showLoading();
+    this.api.sendRequest('get_cars_by_brand', { cars_brands_id: carId }).subscribe((res: any) => {
+      this.api.hideLoading();
+      console.log(res);
+      if (res.status == 'success') {
+        this.api.hideLoading();
+        this.pickupsData = true;
+        this.pickups = res.data;
+
+      } else if (res.status == 'error') {
+        this.api.hideLoading();
+        this.pickups = [];
+        this.pickupsData = false
+
+      } else {
+
+      }
+    }, (err) => {
+      this.api.hideLoading();
+      console.log(err);
+
+    })
+  }
+  displayCategories() {
+    if (this.showCategories == false) {
+      this.showCategories = true;
+    }
+    else {
+      this.showCategories = false;
+    }
+  }
+  selectedCategory(val) {
+    console.log(val);
+    this.categoryVal = val;
   }
   handleChange(event) {
     this.result = []
@@ -164,6 +260,7 @@ export class HomeCarsAfterLoginPage implements OnInit {
           this.result = res.data;
 
         } else if (res.status == 'error') {
+          this.pickups = [];
           if (res.message != 'Keyword Required') {
             this.api.presentToast(res.message);
           }
@@ -181,7 +278,8 @@ export class HomeCarsAfterLoginPage implements OnInit {
   }
 
   clearResult() {
-    this.result = []
+    this.result = [];
+    // this.getCars()
     this.showContent = true;
   }
 
@@ -220,15 +318,25 @@ export class HomeCarsAfterLoginPage implements OnInit {
       if (res.status == 'success') {
 
         this.carTypes = res.data;
-        this.carTypeOne = this.carTypes[0].car_type;
-        this.carTypeTwo = this.carTypes[1].car_type;
-        this.carTypeThree = this.carTypes[2].car_type;
-        this.carTypeFour = this.carTypes[3].car_type;
+        const allCarsObject = {
+          car_type_id: 0, // You can use any identifier that makes sense for your application
+          car_type: "All",
+          image: "assets/images/icons/car_grey.svg", // Optionally, specify an image for the "All" type
+          date_added: null,
+          date_modified: null,
+          status: "Active"
+        };
 
-        this.carTypeOneId = this.carTypes[0].car_type_id;
-        this.carTypeTwoId = this.carTypes[1].car_type_id;
-        this.carTypeThreeId = this.carTypes[2].car_type_id;
-        this.carTypeFourId = this.carTypes[3].car_type_id;
+        this.carTypes.unshift(allCarsObject);
+        // this.carTypeOne = this.carTypes[0].car_type;
+        // this.carTypeTwo = this.carTypes[1].car_type;
+        // this.carTypeThree = this.carTypes[2].car_type;
+        // this.carTypeFour = this.carTypes[3].car_type;
+
+        // this.carTypeOneId = this.carTypes[0].car_type_id;
+        // this.carTypeTwoId = this.carTypes[1].car_type_id;
+        // this.carTypeThreeId = this.carTypes[2].car_type_id;
+        // this.carTypeFourId = this.carTypes[3].car_type_id;
 
       }
 
@@ -288,6 +396,13 @@ export class HomeCarsAfterLoginPage implements OnInit {
         this.api.carDataById = res.data;
         console.log('carDataById:', this.api.carDataById);
         this.router.navigate(['/car-details']);
+        if (!this.clickedCardetails.includes(car_id)) {
+          this.clickedCardetails.push(car_id);
+          this.viewCount += 1;
+          console.log('view count addding', this.viewCount);
+
+          localStorage.setItem('viewedCount', this.viewCount);
+        }
       }
 
     }, (err) => {
@@ -297,153 +412,110 @@ export class HomeCarsAfterLoginPage implements OnInit {
     })
   }
 
-  selectItem(itemVal) {
-    if (itemVal == 'all') {
-      this.item1 = true;
-      this.item2 = false;
-      this.item3 = false;
-      this.item4 = false;
-      this.item5 = false;
+  selectItem(itemVal, index) {
+    this.selectedItem = index;
+    console.log(itemVal);
+
+    this.selectedCarIndex = null;
+    if (itemVal.car_type == 'All') {
+      this.pickupsData = true
+      this.pickups = [];
       this.getCars();
-    } else if (itemVal == 'Sports') {
-      this.pickupsData = true
-      this.pickups = [];
-      this.item1 = false;
-      this.item2 = true;
-      this.item3 = false;
-      this.item4 = false;
-      this.item5 = false;
-
-      let data = {
-        car_type_id: this.carTypeOneId
-      }
-      this.api.showLoading();
-      this.api.sendRequest('getCarsByCarType', data).subscribe((res: any) => {
-        this.api.hideLoading();
-        console.log(res);
-        if (res.status == 'success') {
-          this.api.hideLoading()
-          this.pickups = res.data;
-
-        } else if (res.status == 'error') {
-          this.api.hideLoading()
-          if (this.pickups.length == 0) {
-            this.pickupsData = false
-          }
-        } else {
-
-        }
-      }, (err) => {
-        this.api.hideLoading();
-        console.log(err);
-
-      })
-    } else if (itemVal == 'Luxury') {
-      this.pickupsData = true
-      this.pickups = [];
-      this.item1 = false;
-      this.item2 = false;
-      this.item3 = true;
-      this.item4 = false;
-      this.item5 = false;
-
-
-      let data = {
-        car_type_id: this.carTypeTwoId
-      }
-      this.api.showLoading();
-      this.api.sendRequest('getCarsByCarType', data).subscribe((res: any) => {
-        this.api.hideLoading();
-        console.log(res);
-        if (res.status == 'success') {
-          this.api.hideLoading()
-          this.pickups = res.data;
-
-        } else if (res.status == 'error') {
-          this.api.hideLoading()
-          if (this.pickups.length == 0) {
-            this.pickupsData = false
-          }
-        } else {
-
-        }
-      }, (err) => {
-        this.api.hideLoading();
-        console.log(err);
-
-      })
-    } else if (itemVal == 'Pickup') {
-      this.pickupsData = true
-      this.pickups = [];
-      this.item1 = false;
-      this.item2 = false;
-      this.item3 = false;
-      this.item4 = true;
-      this.item5 = false;
-
-
-      let data = {
-        car_type_id: this.carTypeThreeId
-      }
-      this.api.showLoading();
-      this.api.sendRequest('getCarsByCarType', data).subscribe((res: any) => {
-
-        console.log(res);
-        if (res.status == 'success') {
-          this.api.hideLoading();
-          this.pickups = res.data;
-
-        } else if (res.status == 'error') {
-          this.api.hideLoading();
-          if (this.pickups.length == 0) {
-            this.pickupsData = false
-          }
-        } else {
-
-        }
-      }, (err) => {
-        this.api.hideLoading();
-        console.log(err);
-
-      })
-    } else if (itemVal == 'SUV') {
-      this.pickupsData = true
-      this.pickups = [];
-      this.item1 = false;
-      this.item2 = false;
-      this.item3 = false;
-      this.item4 = false;
-      this.item5 = true;
-
-      let data = {
-        car_type_id: this.carTypeFourId
-      }
-      this.api.showLoading();
-      this.api.sendRequest('getCarsByCarType', data).subscribe((res: any) => {
-        this.api.hideLoading();
-        console.log(res);
-        if (res.status == 'success') {
-          this.api.hideLoading();
-          this.pickups = res.data;
-
-        } else if (res.status == 'error') {
-          this.api.hideLoading();
-          if (this.pickups.length == 0) {
-            this.pickupsData = false
-          }
-        } else {
-
-        }
-      }, (err) => {
-        this.api.hideLoading();
-        console.log(err);
-
-      })
     } else {
-
+      this.pickupsData = true
+      this.pickups = [];
+      this.getcarsbyId(itemVal.car_type_id)
     }
+    // if (itemVal== 'All') {
+    //   this.item1 = true;
+    //   this.item2 = false;
+    //   this.item3 = false;
+    //   this.item4 = false;
+    //   this.item5 = false;
+    //   this.getCars();
+    // } else if (itemVal == 'Sports') {
+    //   this.pickupsData = true
+    //   this.pickups = [];
+    //   this.item1 = false;
+    //   this.item2 = true;
+    //   this.item3 = false;
+    //   this.item4 = false;
+    //   this.item5 = false;
+
+    //   this.getcarsbyId(this.carTypeOneId)
+
+    // } else if (itemVal == 'Luxury') {
+    //   this.pickupsData = true
+    //   this.pickups = [];
+    //   this.item1 = false;
+    //   this.item2 = false;
+    //   this.item3 = true;
+    //   this.item4 = false;
+    //   this.item5 = false;
+
+    //   this.getcarsbyId(this.carTypeTwoId)
+    // } else if (itemVal == 'Pickup') {
+    //   this.pickupsData = true
+    //   this.pickups = [];
+    //   this.item1 = false;
+    //   this.item2 = false;
+    //   this.item3 = false;
+    //   this.item4 = true;
+    //   this.item5 = false;
+
+    //   this.getcarsbyId(this.carTypeThreeId)
+    // } else if (itemVal == 'SUV') {
+    //   this.pickupsData = true
+    //   this.pickups = [];
+    //   this.item1 = false;
+    //   this.item2 = false;
+    //   this.item3 = false;
+    //   this.item4 = false;
+    //   this.item5 = true;
+
+
+    //   this.getcarsbyId(this.carTypeFourId)
+    // } else {
+
+    // }
   }
 
+  // getCarsByCarType old api endpoint
+  getcarsbyId(carId) {
+    this.api.showLoading();
+    this.api.sendRequest('get_cars_by_type', { car_type_id: carId }).subscribe((res: any) => {
+      this.api.hideLoading();
+      console.log(res);
+      if (res.status == 'success') {
+        this.api.hideLoading();
+        this.pickups = res.data;
+
+      } else if (res.status == 'error') {
+        this.api.hideLoading();
+        if (this.pickups.length == 0) {
+          this.pickupsData = false
+        }
+      } else {
+
+      }
+    }, (err) => {
+      this.api.hideLoading();
+      console.log(err);
+
+    })
+  }
+
+  onCarClick(carId: any) {
+
+    if (!this.clickedCarIds.includes(carId)) {
+      this.clickedCarIds.push(carId);
+      this.clickCount += 1;
+      console.log(this.clickCount);
+
+      localStorage.setItem('contactedCount', this.clickCount);
+    }
+
+  }
   async sendEmail() {
     // const email = 'example@example.com'; // Specify the recipient's email address
     // const subject = encodeURIComponent('Your Subject Here'); // URL encode the subject
@@ -455,12 +527,12 @@ export class HomeCarsAfterLoginPage implements OnInit {
   }
 
   async inviteOthers() {
-    await Share.share({
-      title: 'Book Cars Online at 360UAE',
-      text: 'Really awesome cars you can book',
-      url: 'https://dubai360.com/',
-      dialogTitle: 'Share with buddies',
-    })
+    // await Share.share({
+    //   title: 'Book Cars Online at 360UAE',
+    //   text: 'Really awesome cars you can book',
+    //   url: 'https://dubai360.com/',
+    //   dialogTitle: 'Share with buddies',
+    // })
   }
 
   gotoNotifications() {

@@ -15,8 +15,8 @@
       <ng-template swiperSlide *ngFor="let car of cars; let i = index;">
         <div>
 
-          <div class="bg" [ngClass]="{'selected-car': isSelected(i), 'bg': !isSelected(i)}" (click)="selectCar(i)">
-            <img [src]="car.image">
+          <div class="bg" [ngClass]="{'selected-car': isSelected(i), 'bg': !isSelected(i)}" (click)="selectCar(i,car)">
+            <img [src]="api.imageUrlString+car.image">
           </div>
           <div class="para"> {{ car.name }}</div>
 

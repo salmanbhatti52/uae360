@@ -6,81 +6,83 @@ import { LoadingController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class ApiService {
-  carDataById:any;
+  carDataById: any;
   // imageUrlString = 'https://360uae.eigix.net/public/';
   // baseURL:any = 'https://360uae.eigix.net/api';
   imageUrlString = 'https://360uae.net/public/';
-  baseURL:any = 'https://360uae.net/api';
+  baseURL: any = 'https://360uae.net/api';
   datesToDisable = [];
   bookedDates = [];
-  bookingResponse:any;
-  googleSignInResponse:any;
-  localUserData:any;
-  fetchLocation:any;
-  oneSignalUserId:any;
+  bookingResponse: any;
+  googleSignInResponse: any;
+  localUserData: any;
+  fetchLocation: any;
+  oneSignalUserId: any;
   companyId: any;
-  toggleVal:any;
+  toggleVal: any;
   allCars: any;
   showNewBookings: string;
-  socialLoginStaus:any;
-  constructor(private http:HttpClient, 
-  public toastController:ToastController,
-  public loadingCtrl:LoadingController) { }
+  socialLoginStaus: any;
+  clickcount: any = 0;
+  filterResult: any;
+  constructor(private http: HttpClient,
+    public toastController: ToastController,
+    public loadingCtrl: LoadingController) { }
 
-  sendRequest(action, data?){
+  sendRequest(action, data?) {
     let header;
-    
+
     header = new HttpHeaders({
-      "Content-Type" : "application/json",
+      "Content-Type": "application/json",
     });
 
-    return this.http.post(`${this.baseURL}/${action}`,JSON.stringify(data), {
-      headers:header,
+    return this.http.post(`${this.baseURL}/${action}`, JSON.stringify(data), {
+      headers: header,
     });
 
   }
 
-  getData(action){
+  getData(action) {
     let header;
-    
+
     header = new HttpHeaders({
-      "Content-Type" : "application/json"
+      "Content-Type": "application/json"
     });
 
     return this.http.get(`${this.baseURL}/${action}`, {
-      headers:header,
+      headers: header,
     });
   }
 
-  
-  async presentToast(toastMsg){
+
+  async presentToast(toastMsg) {
     const toast = await this.toastController.create({
-      message:toastMsg,
-      duration:2000,
+      message: toastMsg,
+      duration: 2000,
     });
     toast.present();
   }
 
-  async showLoading(){
+  async showLoading() {
     const loading = await this.loadingCtrl.create({
-      duration:3000,
-      message:'Please wait...',
+      duration: 3000,
+      message: 'Please wait...',
       cssClass: 'custom-loading',
     });
-    loading.present(); 
+    loading.present();
   }
 
-  async showLoadWd(){
+  async showLoadWd() {
     const loading = await this.loadingCtrl.create({
-      message:'Please wait...',
+      message: 'Please wait...',
       cssClass: 'custom-loading',
     });
-    loading.present(); 
+    loading.present();
   }
 
-  hideLoading(){
+  hideLoading() {
     this.loadingCtrl.dismiss();
   }
 
-  
+
 }

@@ -6,7 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { loadScript } from "@paypal/paypal-js";
 import { ApiService } from '../services/api.service';
 // import { Stripe } from '@awesome-cordova-plugins/stripe/ngx';
-import { PaymentSheetEventsEnum, Stripe } from '@capacitor-community/stripe';
+// import { PaymentSheetEventsEnum, Stripe } from '@capacitor-community/stripe';
 import { CheckUserService } from '../check-user.service';
 import * as creditCardType from 'credit-card-type';
 import Cleave from 'node_modules/cleave.js/dist/cleave-esm.min.js';
@@ -21,78 +21,78 @@ export class PaymentDetailsPage implements OnInit {
   visa = false;
   paypal = false;
   paymentMethodsData = true;
-  paymentAmount:any = this.api.bookingResponse.total_cost;
-  amount:any = 0;
+  paymentAmount: any = this.api.bookingResponse.total_cost;
+  amount: any = 0;
   customerId: any;
   ephemeralKey: any;
   paymentIntent: any;
   // paymentAmount: string = '10';
   currency: string = 'USD';
-  paid_username:any;
+  paid_username: any;
   card: any;
   cardType = '';
   cardNumber = '';
-  cardsList:any = [];
+  cardsList: any = [];
   selected = 0;
   payPalPaymentDetails: any;
-  bookingId:any;
-  tokenId:any;
+  bookingId: any;
+  tokenId: any;
   txnsId: any;
-  selectedCard:any;
+  selectedCard: any;
   errorMessage = 'Transaction for this booking already exists.';
-  constructor(public location:Location,
-    public modalCtrlr:ModalController,
-    public api:ApiService,
+  constructor(public location: Location,
+    public modalCtrlr: ModalController,
+    public api: ApiService,
     // private stripe: Stripe,
-    public checkUser:CheckUserService
-    ) {
-      // client_test_key: pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4
-      // My_test_key: pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1
-      // this.stripe.setPublishableKey('pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4');
-      Stripe.initialize({
-        publishableKey: 'pk_test_51NLjiSCq21ty1Wx6S2nBXtuBtmDqGwwAbCPA4rt1oXxlr9sTRamGNjF5KpTZfrWbDsVwPDhqaNwAJDOA9pKz80cF00IgQ0c5Yn',
-      }); 
-    }
+    public checkUser: CheckUserService
+  ) {
+    // client_test_key: pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4
+    // My_test_key: pk_test_51MQ37qDFPlDlGxkdw91wUybcouQFM0EOUev6HlGRi86QjYCu3tITcy1KzcDJGrSncQ8G2rHYxPmiDAm4Y027ff6g00Es0yT7y1
+    // this.stripe.setPublishableKey('pk_test_51N01szFT2B9ZAxHdS85H9SlFpWmvVlFLiBT35BvQMUKZvkx70Km2wmVJxqH7rhwCIZE4rbzgZam2MwMBtSkmtrzd00JJtLMnv4');
+    // Stripe.initialize({
+    //   publishableKey: 'pk_test_51NLjiSCq21ty1Wx6S2nBXtuBtmDqGwwAbCPA4rt1oXxlr9sTRamGNjF5KpTZfrWbDsVwPDhqaNwAJDOA9pKz80cF00IgQ0c5Yn',
+    // });
+  }
 
   ngOnInit() {
     this.paid_username = undefined
     this.renderPayWithPaypal();
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.getCardsList();
     console.log(this.api.bookingResponse);
-    
+
     this.bookingId = this.api.bookingResponse.booking_id;
-    console.log('Booking Id: ',this.bookingId);
-    
+    console.log('Booking Id: ', this.bookingId);
+
   }
-  
-  goBack(){
+
+  goBack() {
     this.location.back();
   }
 
-  getCardsList(){
+  getCardsList() {
     this.paymentMethodsData = true
     let data = {
-      appuser_id:this.checkUser.appUserId
+      appuser_id: this.checkUser.appUserId
     }
     this.api.showLoading();
-    this.api.sendRequest('get_cards_list',data).subscribe((res:any)=>{
-      console.log("Response: ",res);
-      if(res.status == 'success'){
+    this.api.sendRequest('get_cards_list', data).subscribe((res: any) => {
+      console.log("Response: ", res);
+      if (res.status == 'success') {
         this.cardsList = res.data;
         // console.log("card list: ",this.cardsList);
-        
+
         // var creditCardType = require("credit-card-type");
-       
-        for(let data of this.cardsList){
-          data.sm_card_number = data.card_number.substring(0,4)
+
+        for (let data of this.cardsList) {
+          data.sm_card_number = data.card_number.substring(0, 4)
           let visaCards = creditCardType(data.card_number);
           // console.log(visaCards);
-          if(visaCards.length != 0){
+          if (visaCards.length != 0) {
             data.card_type = visaCards[0].type;
-          }else{
+          } else {
             data.card_type = 'unknown'
           }
         }
@@ -100,17 +100,17 @@ export class PaymentDetailsPage implements OnInit {
         this.selectedCard = this.cardsList[0];
         // this.getToken();
         this.api.hideLoading();
-        if(this.cardsList.length == 0){
+        if (this.cardsList.length == 0) {
           this.paymentMethodsData = false
         }
       }
-      
-    },(err)=>{
+
+    }, (err) => {
       this.api.hideLoading();
-      console.log("Api error",err);
-      
+      console.log("Api error", err);
+
     })
-     
+
   }
 
   //  getToken(){
@@ -126,7 +126,7 @@ export class PaymentDetailsPage implements OnInit {
   //     cvc: this.selectedCard.cvv
   //   }
   //    console.log("selected Card: ", card );
-     
+
   //   // //  this.stripe.createCardToken(card).then(token => {
   //   // //   // console.log("token.id: ",token.id);
   //   // //   this.tokenId = token.id
@@ -138,37 +138,37 @@ export class PaymentDetailsPage implements OnInit {
   //   // });
   // }
 
-  httpPost(){
+  httpPost() {
     // let amount = String(this.rest.billDetails.total_bill * 100)
     console.log("Amount before multiply by 100: ", this.paymentAmount);
     this.amount = this.paymentAmount * 100
     this.amount = this.convertInDecimal(this.amount);
     console.log("Amount after multiply by 100: ", this.amount);
-   
+
     let data = {
-      name:this.api.localUserData.username,
-      email:this.api.localUserData.email,
-      amount:this.amount,
-      currency:"USD"
+      name: this.api.localUserData.username,
+      email: this.api.localUserData.email,
+      amount: this.amount,
+      currency: "USD"
     }
-    console.log("payload for payment sheet api: ",data);
-    
-    this.api.sendRequest('payment_sheet',data).subscribe((res:any)=>{
-      console.log("Ress: ",res);
+    console.log("payload for payment sheet api: ", data);
+
+    this.api.sendRequest('payment_sheet', data).subscribe((res: any) => {
+      console.log("Ress: ", res);
       this.customerId = res.customer;
       this.ephemeralKey = res.ephemeralkey?.secret;
       this.paymentIntent = res.paymentintent?.client_secret;
-      console.log("customerId: ",this.customerId);
-      console.log("ephemeralKey: ",this.ephemeralKey);
-      console.log("paymentIntent: ",this.paymentIntent);
-      
+      console.log("customerId: ", this.customerId);
+      console.log("ephemeralKey: ", this.ephemeralKey);
+      console.log("paymentIntent: ", this.paymentIntent);
+
     })
-  
-    
+
+
   }
 
-  convertInDecimal(x:any) {
-    let decimalString =  Number.parseFloat(x).toFixed(2);
+  convertInDecimal(x: any) {
+    let decimalString = Number.parseFloat(x).toFixed(2);
     console.log("dec str: ", decimalString);
     return Number.parseFloat(decimalString);
   }
@@ -215,172 +215,172 @@ export class PaymentDetailsPage implements OnInit {
   //       this.rest.presentToast('Success');
   //       this.paynow();
   //     }
-      
+
   //   }
   //   // ,(err)=>{
   //   //   this.rest.dismissLoader();
   //   //   console.log("Errr: ",err );
-      
+
   //   // }
   //   )
-    
+
   // }
 
   async paymentSheet() {
-    if(this.api.localUserData.username != ''){
-      try {
-        this.paymentIntent = undefined;
-        this.customerId = undefined;
-        this.ephemeralKey = undefined;
-        // be able to get event of PaymentSheet
-        this.api.showLoading();
-        this.httpPost();
-        
-        Stripe.addListener(PaymentSheetEventsEnum.Completed, () => {
-          console.log('PaymentSheetEventsEnum.Completed');
-        });
-        
-        // Connect to your backend endpoint, and get every key.
-  
-        setTimeout(async () => {
-          console.log("If PaymentIntent: ",this.paymentIntent);
-          // prepare PaymentSheet with CreatePaymentSheetOption.
-          await Stripe.createPaymentSheet({
-            // enableGooglePay:true,
-            // enableApplePay:true,
-            paymentIntentClientSecret: this.paymentIntent,
-            customerId: this.customerId,
-            customerEphemeralKeySecret: this.ephemeralKey,
-            merchantDisplayName: 'Getbootstrap'
-          });
-          this.api.hideLoading();
-          console.log("createPaymentSheet");
-        }, 3000);
-        
-        setTimeout(async () => {
-          // present PaymentSheet and get result.
-          const result = await Stripe.presentPaymentSheet();
-          console.log('Result: ',result);
-          
-          if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
-            this.splitAndJoin(this.paymentIntent);
-            console.log("paymentIntent",this.paymentIntent);
-            this.pay();
-            // Happy path
-          }
-        }, 3000);
-        
-        
-          
-      } catch (error) {
-        console.log("Error catched: ",error);
-        
-      }
-    }else{
-      this.api.presentToast("Plz add your name in Profile section.");
-    }
-   
-    
+    // if(this.api.localUserData.username != ''){
+    //   try {
+    //     this.paymentIntent = undefined;
+    //     this.customerId = undefined;
+    //     this.ephemeralKey = undefined;
+    //     // be able to get event of PaymentSheet
+    //     this.api.showLoading();
+    //     this.httpPost();
+
+    //     Stripe.addListener(PaymentSheetEventsEnum.Completed, () => {
+    //       console.log('PaymentSheetEventsEnum.Completed');
+    //     });
+
+    //     // Connect to your backend endpoint, and get every key.
+
+    //     setTimeout(async () => {
+    //       console.log("If PaymentIntent: ",this.paymentIntent);
+    //       // prepare PaymentSheet with CreatePaymentSheetOption.
+    //       await Stripe.createPaymentSheet({
+    //         // enableGooglePay:true,
+    //         // enableApplePay:true,
+    //         paymentIntentClientSecret: this.paymentIntent,
+    //         customerId: this.customerId,
+    //         customerEphemeralKeySecret: this.ephemeralKey,
+    //         merchantDisplayName: 'Getbootstrap'
+    //       });
+    //       this.api.hideLoading();
+    //       console.log("createPaymentSheet");
+    //     }, 3000);
+
+    //     setTimeout(async () => {
+    //       // present PaymentSheet and get result.
+    //       const result = await Stripe.presentPaymentSheet();
+    //       console.log('Result: ',result);
+
+    //       if (result.paymentResult === PaymentSheetEventsEnum.Completed) {
+    //         this.splitAndJoin(this.paymentIntent);
+    //         console.log("paymentIntent",this.paymentIntent);
+    //         this.pay();
+    //         // Happy path
+    //       }
+    //     }, 3000);
+
+
+
+    //   } catch (error) {
+    //     console.log("Error catched: ",error);
+
+    //   }
+    // }else{
+    //   this.api.presentToast("Plz add your name in Profile section.");
+    // }
+
+
 
   }
 
-  splitAndJoin(paymentIntent:any){
-    const result = paymentIntent.split('_').slice(0,2).join('_');
+  splitAndJoin(paymentIntent: any) {
+    const result = paymentIntent.split('_').slice(0, 2).join('_');
     this.txnsId = result;
-    console.log("txnsId: ",this.txnsId);
-    console.log("Result: ",result);
+    console.log("txnsId: ", this.txnsId);
+    console.log("Result: ", result);
     return result;
-    
+
   }
 
-  selectMethod(val,cardData){
+  selectMethod(val, cardData) {
     this.selectedCard = cardData;
     // this.getToken();
     console.log(val);
     this.selected = val;
   }
 
-  
 
-  pay(){
+
+  pay() {
     this.api.showLoadWd();
     setTimeout(() => {
       this.makePayment();
     }, 2000);
   }
 
-  makePayment(){
-    console.log("Payment Amount: ",this.paymentAmount);
-    
-    if(this.paymentAmount != '0'){
+  makePayment() {
+    console.log("Payment Amount: ", this.paymentAmount);
+
+    if (this.paymentAmount != '0') {
       let data = {
-        booking_id:this.bookingId,
-        payment_gateways:"Credit Card",
-        payer_name:this.selectedCard.holder_name,
-        paid_amount:this.paymentAmount,
-        token_id:this.txnsId, 
-        currency:"USD",
+        booking_id: this.bookingId,
+        payment_gateways: "Credit Card",
+        payer_name: this.selectedCard.holder_name,
+        paid_amount: this.paymentAmount,
+        token_id: this.txnsId,
+        currency: "USD",
         // gateway_status:"Pending",
-        transactions_status:"Paid"
+        transactions_status: "Paid"
       }
-      console.log("Make Payment Data: ",data);
-      
-      this.api.sendRequest("storeCarsBookingTransactions",data).subscribe((res:any)=>{
+      console.log("Make Payment Data: ", data);
+
+      this.api.sendRequest("storeCarsBookingTransactions", data).subscribe((res: any) => {
         this.api.hideLoading();
-        console.log("Response: ",res);
-        if(res.status == 'success'){
+        console.log("Response: ", res);
+        if (res.status == 'success') {
           this.api.presentToast(`Transaction Status: ${res.data.bookings_txns.transactions_status}`);
           this.paymentAmount = '0';
           this.openBookedModal();
-        }else if(res.status == 'error'){
+        } else if (res.status == 'error') {
           this.api.presentToast(res.message)
           this.paymentAmount = '0';
           this.openBookedModal();
-        }else{
-          
+        } else {
+
         }
-      },(err)=>{
+      }, (err) => {
         this.api.hideLoading();
-        console.log("Api Error: ",err);
+        console.log("Api Error: ", err);
         this.api.presentToast(`Error is: ${err}`);
       })
-    }else{
+    } else {
       this.api.hideLoading();
       this.api.presentToast(this.errorMessage);
       this.openBookedModal();
     }
-   
-    
+
+
   }
- 
-  async openBookedModal(){
-    
-    const modal  = await this.modalCtrlr.create({
-      component:BookedPage,
-      showBackdrop:true,
-      cssClass:'booked_modal'
+
+  async openBookedModal() {
+
+    const modal = await this.modalCtrlr.create({
+      component: BookedPage,
+      showBackdrop: true,
+      cssClass: 'booked_modal'
     });
     modal.present();
     // else{
     //   this.api.presentToast('Hmm! You forgot to pay the amount.')
     // }
-    
+
     //   "client-id": 'ARQ1XpBx7JkSr3FZEhw7dnUGMS_gmTuDq-oHta6H3S89qx23gtBpaWGSYqw7ql6BpUseTIKD58dS40Wz',
     //   "data-page-type": "checkout",
     //   currency: "USD",
     //   components: "buttons,marks,messages"
   }
 
-  async renderPayWithPaypal(){
+  async renderPayWithPaypal() {
     let _this = this;
     setTimeout(async () => {
-      
+
       // Render the PayPal button into #paypal-button-container
       <any>window['paypal'].Buttons({
 
         // Set up the transaction
         createOrder: function (data, actions) {
-          if(_this.paymentAmount == '0'){
+          if (_this.paymentAmount == '0') {
             _this.api.presentToast(_this.errorMessage);
             _this.openBookedModal();
           }
@@ -399,13 +399,13 @@ export class PaymentDetailsPage implements OnInit {
             .then(function (details) {
               // console.log("PayPal Payment Details: ",details);
               _this.payPalPaymentDetails = details;
-             
+
               // if(_this.paymentAmount != '0'){
-                // Show a success message to the buyer
-                alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                // console.log('amount: ',_this.paymentAmount);
-                _this.paymentAmount = '0'
-                // console.log('amount: ',_this.paymentAmount);
+              // Show a success message to the buyer
+              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+              // console.log('amount: ',_this.paymentAmount);
+              _this.paymentAmount = '0'
+              // console.log('amount: ',_this.paymentAmount);
               // }
               // else{
               //   this.api.presentToast(_this.errorMessage);
@@ -417,64 +417,64 @@ export class PaymentDetailsPage implements OnInit {
             })
         }
       }).render('#your-container-element');
-      
-      
+
+
     }, 500)
-   
+
     // this.api.presentToast(_this.errorMessage);
   }
 
-  sendPayPalDetails(){
-      
+  sendPayPalDetails() {
+
     let data = {
-      booking_id:this.bookingId,
-      payment_gateways:"Paypal",
-      payer_paypal_email:this.payPalPaymentDetails.payer.eamil_address,
-      payer_name:this.payPalPaymentDetails.payer.name.given_name,
-      paid_amount:this.payPalPaymentDetails.purchase_units[0].amount.value,
-      payee_paypal_email:this.payPalPaymentDetails.purchase_units[0].payee.email_address,
-      gateway_status:this.payPalPaymentDetails.purchase_units[0].payments.captures[0].status,
-      transactions_status:this.payPalPaymentDetails.status
+      booking_id: this.bookingId,
+      payment_gateways: "Paypal",
+      payer_paypal_email: this.payPalPaymentDetails.payer.eamil_address,
+      payer_name: this.payPalPaymentDetails.payer.name.given_name,
+      paid_amount: this.payPalPaymentDetails.purchase_units[0].amount.value,
+      payee_paypal_email: this.payPalPaymentDetails.purchase_units[0].payee.email_address,
+      gateway_status: this.payPalPaymentDetails.purchase_units[0].payments.captures[0].status,
+      transactions_status: this.payPalPaymentDetails.status
     }
     // console.log("Data: ",data);
     this.api.showLoading();
-    this.api.sendRequest("storeCarsBookingTransactions",data).subscribe((res:any)=>{
+    this.api.sendRequest("storeCarsBookingTransactions", data).subscribe((res: any) => {
       // console.log("Response: ",res);
       this.api.hideLoading();
-      if(res.status == 'success'){
+      if (res.status == 'success') {
         this.openBookedModal();
-      }else if(res.status == 'error'){
+      } else if (res.status == 'error') {
         this.openBookedModal();
         this.api.presentToast(res.message)
-      }else{
+      } else {
 
       }
-    },(err)=>{
+    }, (err) => {
       this.api.hideLoading();
-      console.log("Api Error: ",err);
-      
+      console.log("Api Error: ", err);
+
     })
   }
-  
 
-  
-  async addPaymentMethod(){
+
+
+  async addPaymentMethod() {
     const modal = await this.modalCtrlr.create({
-      component:NewPaymentMethodPage,
-      showBackdrop:true,
-      cssClass:'add_payment_method'
+      component: NewPaymentMethodPage,
+      showBackdrop: true,
+      cssClass: 'add_payment_method'
     });
     modal.present();
-    const {data,role} = await modal.onWillDismiss();
-    if(role == 'status'){
+    const { data, role } = await modal.onWillDismiss();
+    if (role == 'status') {
       const status = data;
       // console.log(status);
       this.getCardsList();
-      
+
     }
   }
 
-  ionViewWillLeave(){
+  ionViewWillLeave() {
     console.log('leave view');
     this.paid_username = '';
   }

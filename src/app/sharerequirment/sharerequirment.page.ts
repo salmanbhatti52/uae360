@@ -11,11 +11,11 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 })
 export class SharerequirmentPage implements OnInit {
   cars = [
-    { name: 'Car 1', image: 'assets/images/car2.png' },
-    { name: 'Car 2', image: 'assets/images/car2.png' },
-    { name: 'Car 3', image: 'assets/images/car2.png' },
-    { name: 'Car 4', image: 'assets/images/car2.png' },
-    { name: 'Car 5', image: 'assets/images/car2.png' }
+    // { name: 'Car 1', image: 'assets/images/car2.png' },
+    // { name: 'Car 2', image: 'assets/images/car2.png' },
+    // { name: 'Car 3', image: 'assets/images/car2.png' },
+    // { name: 'Car 4', image: 'assets/images/car2.png' },
+    // { name: 'Car 5', image: 'assets/images/car2.png' }
     // Add more cars as needed
   ];
   item1 = true;
@@ -38,21 +38,39 @@ export class SharerequirmentPage implements OnInit {
   passengersarray = [];
   passengers = [{ value: '2', status: 'unchecked' }, { value: '4', status: 'unchecked' }, { value: '6', status: 'unchecked' }, { value: 'Other', status: 'unchecked' }
   ]
+  carbrand: any;
 
   constructor(public location: Location,
     public api: ApiService,
     public navCtrl: NavController) { }
 
   ngOnInit() {
+    this.getcarmodals()
     this.getCarTypes();
   }
 
+  getcarmodals() {
+    this.api.getData('get_cars_brands').subscribe((res: any) => {
+
+      console.log('get_cars_brands Response: ', res);
+      if (res.status == 'success') {
+        this.cars = res.data
+      } else if (res.status == 'error') {
+
+      }
+
+    }, (err) => {
+
+      console.log('Error', err);
+
+    });
+  }
 
   goBack() {
     this.location.back();
   }
 
-  selectCar(index: any) {
+  selectCar(index: any, car: any) {
     console.log('index', index);
 
     const selectedIndex = this.selectedIndices.indexOf(index);
@@ -60,6 +78,7 @@ export class SharerequirmentPage implements OnInit {
       this.selectedIndices.splice(selectedIndex, 1); // Remove index if already selected
     } else {
       this.selectedIndices.push(index); // Add index if not already selected
+      this.carbrand = car.name
     }
   }
 
