@@ -20,6 +20,7 @@ dependencies {
     implementation project(':capacitor-splash-screen')
     implementation project(':capacitor-status-bar')
     implementation project(':codetrix-studio-capacitor-google-auth')
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "com.onesignal:OneSignal:4.8.2"
 }
 apply from: "../../node_modules/onesignal-cordova-plugin/build-extras-onesignal.gradle"

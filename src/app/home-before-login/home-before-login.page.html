@@ -93,7 +93,7 @@
             <div class="card_content">
               <div class="row_div">
                 <div>
-                  <span *ngIf="pickup.rating == 0 ">
+                  <!-- <span *ngIf="pickup.rating == 0 ">
                     <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                     <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
                     <img class="star_margin" src="assets/images/icons/empty_star.svg" alt="">
@@ -134,12 +134,11 @@
                     <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                     <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
                     <img class="star_margin" src="assets/images/icons/rated_star.svg" alt="">
-                  </span>
+                  </span> -->
                 </div>
                 <div style="line-height: 1.2;">
                   <span class="price_span" style="font-size: 11px;">$</span>
-                  <span class="price_span" style="font-size: 32px;line-height: 0.8;"
-                    *ngIf="categoryVal=='Day'">{{pickup.rent_cost_day}}</span>
+                  <span class="price_span" style="font-size: 32px;line-height: 0.8;">{{pickup.rent_cost_day}}</span>
                 </div>
 
               </div>

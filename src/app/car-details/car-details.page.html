@@ -307,7 +307,7 @@
               <div>
                 <img src="{{api.imageUrlString}}{{py.payment_gateways.image}}" style="width:20px;height: 20px;">
               </div>
-              <div>
+              <div style="margin-left: 5px;">
                 {{py.payment_gateways.name}}
               </div>
             </div>
@@ -366,26 +366,7 @@
 
       </div>
 
-      <ion-row>
-        <ion-col size="6" *ngFor="let uae of documentdata">
-          <div style="display: flex;">
-            <!-- <div>
-              <img src="{{api.imageUrlString}}{{spec.attributes.image}}" width="25">
-            </div> -->
-            <div *ngIf="uae.documents_requirements.name=='For UAE Residents'">
-              <div class="box_description" style="margin-left:5px !important;">
-                {{uae.name}}
-              </div>
-            </div>
 
-            <!-- <div *ngIf="uae.documents_requirements.name=='For Tourists'">
-              <div class="box_description" style="margin-left:5px !important;">
-                {{uae.name}}
-              </div>
-            </div> -->
-          </div>
-        </ion-col>
-      </ion-row>
       <div class="box" (click)="faq()">
         <div class="box_heading">Frequently Asked Questions</div>
       </div>
@@ -560,13 +541,13 @@
     </div>
   </div> -->
   <div style="display: flex;justify-content: space-evenly;align-items: center;margin: 5% 0% 5%;;">
-    <a class="bg" href="tel:923366277746">
+    <a class="bg" href="tel:923366277746" (click)=onCarClick()>
       <ion-icon name="call" class="iconcls"></ion-icon>
     </a>
-    <a class="bg2" href="https://wa.me/+923057819889?text=Hello%20World">
+    <a class="bg2" href="https://wa.me/+923057819889?text=Hello%20World" (click)=onCarClick()>
       <ion-icon name="logo-whatsapp" class="iconcls"></ion-icon>
     </a>
-    <a class="bg3" href="mailto:ali.gharsheen1072@gmail.com">
+    <a class="bg3" href="mailto:ali.gharsheen1072@gmail.com" (click)=onCarClick()>
       <ion-icon name="paper-plane" class="iconcls"></ion-icon>
     </a>
   </div>

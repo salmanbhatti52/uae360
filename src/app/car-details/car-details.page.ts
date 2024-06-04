@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
 // import { Share } from '@capacitor/share';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 
@@ -53,12 +54,16 @@ export class CarDetailsPage implements OnInit {
   pickups = [];
   limitedData = [];
   carsbrandId: any;
+  clickCount: any = 0;
+  viewCount: any = 0;
+  clickedCarIds: any = [];
   constructor(public location: Location,
     public navCtrlr: NavController,
     public modalController: ModalController,
     public checkUser: CheckUserService,
     public api: ApiService,
     public router: Router,
+    private socialSharing: SocialSharing,
     private popoverCtrl: PopoverController) { }
 
   presentModal(service: 'branchPickup' | 'deliveryToYou' | 'airportDelivery') {
@@ -139,6 +144,20 @@ export class CarDetailsPage implements OnInit {
     this.getdocument();
     this.getbrandCars(this.carsbrandId);
 
+    if (localStorage.getItem('viewedCount') == null) {
+      this.viewCount = 0;
+    } else {
+      this.viewCount = parseInt(localStorage.getItem('viewedCount'), 10);
+      console.log('count----', this.viewCount);
+
+    }
+    if (localStorage.getItem('contactedCount') == null) {
+      this.clickCount = 0;
+    } else {
+      this.clickCount = parseInt(localStorage.getItem('contactedCount'), 10);
+      console.log('clickCount count----', this.clickCount);
+
+    }
   }
   ngOnInit() {
 
@@ -230,6 +249,14 @@ export class CarDetailsPage implements OnInit {
     })
   }
   async share() {
+    var options = {
+      message: 'Hey, Download the App from tha \nApple App store https://apps.apple.com/pk/app \nand From the Google PlayStore https://play.google.com/store/apps',
+      subject: "",
+      files: ["", ""],
+      // url: url,
+      chooserTitle: "",
+    };
+    this.socialSharing.shareWithOptions(options);
     // await Share.share({
     //   title: 'See cool stuff',
     //   text: 'Really awesome thing you need to see right meow',
@@ -377,6 +404,18 @@ export class CarDetailsPage implements OnInit {
 
     } else {
 
+    }
+
+  }
+
+  onCarClick() {
+
+    if (!this.clickedCarIds.includes(this.carId)) {
+      this.clickedCarIds.push(this.carId);
+      this.clickCount += 1;
+      console.log(this.clickCount);
+
+      localStorage.setItem('contactedCount', this.clickCount);
     }
 
   }

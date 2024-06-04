@@ -25,9 +25,12 @@ export class ProfilePage implements OnInit {
   ionViewWillEnter() {
     this.getFavoriteCars();
 
-    this.userProfile = this.api.localUserData.profile_pic;
     if (this.api.localUserData.account_type == 'SignupWithApp') {
-      this.userProfile = `${this.api.imageUrlString}${this.userProfile}`
+      this.userProfile = `${this.api.imageUrlString}${this.api.localUserData.profile_pic}`
+      console.log('adasdsad', this.userProfile);
+
+    } else {
+      this.userProfile = this.api.localUserData.profile_pic;
     }
     this.username = this.api.localUserData.username
 

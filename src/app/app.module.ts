@@ -12,6 +12,7 @@ import { CalendarModule } from 'ion2-calendar';
 // import { PayPal} from '@ionic-native/paypal/ngx'
 import { OneSignal } from "@awesome-cordova-plugins/onesignal/ngx";
 // import { Stripe } from '@awesome-cordova-plugins/stripe/ngx';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 @NgModule({
 
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { OneSignal } from "@awesome-cordova-plugins/onesignal/ngx";
     },
     NativeGeocoder,
     OneSignal,
+    SocialSharing
     // PayPal
     // Stripe
   ],

@@ -89,29 +89,34 @@ export class EditProfilePage implements OnInit {
     this.userEmail = this.api.localUserData.email;
     this.userAbout = this.api.localUserData.about;
     this.userLocation = this.api.localUserData.location;
-    if (this.phoneNumber == undefined) {
+    if (this.userLocation == null) {
+      this.userLocation = '';
+    } else {
+      this.userLocation = this.api.localUserData.location;
+    }
+    if (this.phoneNumber == undefined || this.phoneNumber == '') {
       this.phoneNumber = '';
     } else {
       this.phoneNumber = this.api.localUserData.number;
     }
-    if (this.dateofbirth == undefined) {
+    if (this.dateofbirth == undefined || this.dateofbirth == '') {
       this.dateofbirth = '';
     } else {
       this.dateofbirth = this.api.localUserData.dob
     }
-    if (this.userNationality == undefined) {
+    if (this.userNationality == undefined || this.userNationality == '') {
       this.userNationality = '';
     }
     else {
       this.userNationality = this.api.localUserData.nationality
     }
-    if (this.userAbout == null) {
+    if (this.userAbout == null || this.userAbout == '') {
       this.userAbout = '';
     }
     else {
       this.userAbout = this.api.localUserData.about
     }
-    if (this.userLocation == null) {
+    if (this.userLocation == null || this.userLocation == '') {
       this.userLocation == this.api.fetchLocation;
     }
 
